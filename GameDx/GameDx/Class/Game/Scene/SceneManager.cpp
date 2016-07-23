@@ -28,7 +28,7 @@ void CSceneManager::initDevice(LPDIRECT3DDEVICE9 device)
 
 void CSceneManager::init()
 {
-	m_ListScene.push(new CSelectStageScene());
+	m_ListScene.push(new CPlayScene());
 }
 
 std::stack<CBaseScene*>& CSceneManager::getScene()
