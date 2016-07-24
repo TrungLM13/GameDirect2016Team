@@ -5,7 +5,8 @@
 Test::Test(LPDIRECT3DDEVICE9 device)
 {
 	m_SpriteTest	= new CSprite(L"Resource//Test//BOX_OPENED.png", 1, 3, 3, 0);
-	m_position = D3DXVECTOR3(50.0f, 0, 0.0f);
+	m_StaticSprite	= new CSprite(L"Resource//Test//BOX_CLOSED.png", 1, 1, 1, 0);
+	m_position	= D3DXVECTOR3(10.0, 20.0, 0.0f);
 
 
 	RECT rect		= {	
@@ -16,6 +17,7 @@ Test::Test(LPDIRECT3DDEVICE9 device)
 					  };
 
 	m_Bounding		= new CBox2D(device, rect, vector2dZero);
+	m_Text			= new CText();
 
 	//m_StaticObject->m_Bounding = new CBox2D(m_StaticObject->getBounding());
 }
@@ -45,7 +47,9 @@ void Test::Update(CKeyBoard* device)
 
 		this->m_position.y -= 5;
 
+	if (m_position.x <= 0) m_position.x = 0;
 
+	if (m_position.y <= 20) m_position.y = 20;
 
 	m_Bounding->update(CTimer::getInstance()->getElapedTime(), vector2d(m_position.x, m_position.y));
 
@@ -53,7 +57,15 @@ void Test::Update(CKeyBoard* device)
 
 void Test::Render()
 {
+	
 	m_SpriteTest->Render(CCamera::setPositionEntity(m_position), vector2d(1.0f, 1.0f), 0.0f, DRAWCENTER_LEFT_TOP);
+	m_StaticSprite->Render(CCamera::setPositionEntity(vector3d(200, 150, 0)), vector2d(1.0f, 1.0f), 0.0f, DRAWCENTER_LEFT_TOP);
+	OutputDebugString(L"Pos x: ");
+	OutputDebugString(_itow(m_position.x, new WCHAR[1], 10));
+	OutputDebugString(L"\n");
+	OutputDebugString(L"Pos y: ");
+	OutputDebugString(_itow(m_position.y, new WCHAR[1], 10));
+	OutputDebugString(L"\n");
 }
 
 D3DXVECTOR3 Test::getPosision()

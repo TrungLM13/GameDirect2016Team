@@ -27,6 +27,7 @@ private:
 	CMovable*	MovableObject;
 
 	CSprite*		m_StaticSprite;
+
 	CStaticEntity*	m_StaticObject;
 	D3DXVECTOR3		m_positionStatic;
 };

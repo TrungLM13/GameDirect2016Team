@@ -31,6 +31,7 @@ void CGame::updateGame(double deltaTime)
 {
 	m_Keyboard->Update();
 	m_Test->Update(m_Keyboard);
+	CCamera::getInstance()->Update(m_Test->getPosision());
 
 	if (m_Keyboard->KeyDown(DIK_ESCAPE))
 		PostQuitMessage(0);
