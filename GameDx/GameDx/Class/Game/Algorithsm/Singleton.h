@@ -11,7 +11,7 @@ public:
 	{
 		if (!s_Instance)
 			s_Instance = new T();
-		return s_Instace;
+		return s_Instance;
 	}
 
 	static	void	release()

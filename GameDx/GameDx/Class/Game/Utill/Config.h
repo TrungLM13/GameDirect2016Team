@@ -119,21 +119,6 @@ enum BULLETSTATE
 	BULLET_STATE_DIE
 };
 
-enum PLAYSTATE
-{
-	START					= 0,
-	STAND,
-	STAND_SHOOT,
-	RUN,
-	RUN_SHOOT,
-	JUMP,
-	JUMP_SHOOT,
-	CLIMB,
-	CLIMB_SHOOT,
-	CLIMB_END,
-	HIT
-};
-
 
 enum STAGESELECTED
 {
@@ -173,17 +158,12 @@ struct KeyState
 
 enum PLAYERSTATES
 {
-	STATE_START				= 0,
-	STATE_STAND				= 1,
-	STATE_STAND_SHOOT		= 2,
-	STATE_MOVE				= 3,
-	STATE_MOVE_SHOOT		= 4,
-	STATE_JUMP				= 5,
-	STATE_JUMP_SHOOT		= 6,
-	STATE_CLIMB				= 7,
-	STATE_CLIMB_SHOOT		= 8,
-	STATE_CLIMB_END			= 9,
-	STATE_HIT				= 10
+	START = 0,
+	STAND = 1,
+	RUN = 2,
+	JUMP = 3,
+	CLIMB = 4,
+	DIE = 5
 };
 /******************************/
 

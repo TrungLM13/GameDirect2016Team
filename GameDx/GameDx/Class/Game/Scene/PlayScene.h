@@ -3,6 +3,7 @@
 
 #include "BaseScene.h"
 #include "Class\Game\Test\Test.h"
+#include "Class\Game\Entity\Player\Player.h"
 
 class CPlayScene :
 	public CBaseScene
