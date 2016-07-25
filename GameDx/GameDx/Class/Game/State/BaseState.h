@@ -11,6 +11,7 @@ public:
 	virtual void enter(CPlayer& player) {};
 	virtual CBaseState* handleInput(CPlayer& player, CKeyBoard* device){ return nullptr;};
 	virtual void update(CPlayer& player, double deltaTime){};
+	void exitCurrentState(CPlayer& player, CBaseState* newState);
 private:
 
 };

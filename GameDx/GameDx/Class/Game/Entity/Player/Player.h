@@ -27,7 +27,8 @@ public:
 	void setPosition(vector3d position);
 	void setState(PLAYERSTATES state);
 	void setVelocity(vector2d velocity);
-
+	void setState(CBaseState* state);
+	CBaseState* getState();
 
 protected:
 

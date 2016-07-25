@@ -37,7 +37,7 @@ bool CPlayer::loadSprite()
 {
 	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 2, 2, 0, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStart, 1, 3, 3, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 1, 2, 2, 0));
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 2, 2, 4, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRun, 1, 3, 3, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJump, 1, 1, 1, 0));
 
@@ -56,7 +56,13 @@ bool CPlayer::loadSprite()
 
 void CPlayer::updateEntity(float deltaTime)
 {
-	m_PlayerState->update(*this, deltaTime);
+	if (deltaTime > 10) {
+		m_PlayerState->exitCurrentState(*this, new CRunState());
+		m_PlayerState->enter(*this);
+	}
+
+	if (m_PlayerState)
+		m_PlayerState->update(*this, deltaTime);
 
 }
 
@@ -66,14 +72,17 @@ void CPlayer::updateEntity(RECT* camera) {
 
 void CPlayer::updateEntity(CKeyBoard* input)
 {
-	CBaseState* state = m_PlayerState->handleInput(*this, input);
+	if (m_PlayerState){
+		CBaseState* state = m_PlayerState->handleInput(*this, input);
 
-	if (state != nullptr)
-	{
-		//	delete m_PlayerState;
-		m_PlayerState = state;
+		if (state != nullptr)
+		{
+			if (m_PlayerState != state)
+				delete m_PlayerState;
+			m_PlayerState = state;
+		}
+		m_PlayerState->enter(*this);
 	}
-	m_PlayerState->enter(*this);
 }
 
 void CPlayer::drawEntity()
@@ -97,4 +106,12 @@ void CPlayer::setPosition(vector3d position) {
 
 void CPlayer::setVelocity(vector2d velocity) {
 	m_Velocity = velocity;
+}
+
+CBaseState* CPlayer::getState(){
+	return m_PlayerState;
+}
+
+void CPlayer::setState(CBaseState* state) {
+	m_PlayerState = state;
 }

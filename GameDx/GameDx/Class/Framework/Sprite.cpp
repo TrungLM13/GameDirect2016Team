@@ -17,9 +17,9 @@ CSprite::CSprite(wstring filePath, int nRows, int nColumns, int nFrame, int Inde
 	
 	HRESULT hr;
 	hr = D3DXGetImageInfoFromFile(filePath.c_str(), &this->m_Info);
-	if (hr != D3D_OK)	
+	if (hr != D3D_OK)
 		return;
-
+	
 	hr = D3DXCreateTextureFromFileEx(
 										m_d3dDevice,
 										filePath.c_str(),
@@ -43,6 +43,9 @@ CSprite::CSprite(wstring filePath, int nRows, int nColumns, int nFrame, int Inde
 	this->m_FrameInfo.Height	= (int)((float)this->m_Info.Height / (float)this->m_nRow);
 	this->m_isCompleted = false;
 
+}
+
+CSprite::CSprite(const CSprite& source){
 }
 
 CSprite::~CSprite()
