@@ -7,6 +7,7 @@
 #define __CONFIG_H__
 
 #include <tchar.h>
+#include <iostream>
 
 /*DEFINE*/
 #define FPS							60
@@ -45,8 +46,8 @@
 #define DIRECT_COORDINATE(A)		{-(A)}
 #define SAFE_RELEASE(A)				{if (A) {delete A; A = 0;}}
 
-#define BACKBUFFER_WIDTH			510
-#define	BACKBUFFER_HEIGHT			480
+#define BACKBUFFER_WIDTH			256
+#define	BACKBUFFER_HEIGHT			240
 
 #define SCREEN_SIZE					CBox2D()
 #define deltaBoundingBox			vector2d(5.0f, 5.0f)
@@ -150,6 +151,16 @@ enum COLDIRECTION
 /******************/
 
 /*STRUCT*/
+
+struct MapIntro
+{
+	std::string		m_mapName;
+	int				m_point;
+	int				m_timer;
+	int				m_coin;
+	int				m_helths;
+};
+
 struct KeyState
 {
 	int KeyCode;
