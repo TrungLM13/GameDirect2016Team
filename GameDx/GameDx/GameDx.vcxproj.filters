@@ -20,9 +20,6 @@
     <ClCompile Include="Class\Game\Scene\GameOverScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Scene\IntroStageScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Framework\KeyBoard.cpp">
       <Filter>Framework\KeyBoard</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
       <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Class\Game\Scene\PlayScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Game\Scene\PopUpScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Class\Game\Scene\SceneManager.cpp">
@@ -104,6 +98,12 @@
     <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp">
       <Filter>Game\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Scene\IntroMap.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Scene\PopupInfo.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -131,9 +131,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Scene\GameOverScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\Scene\IntroStageScene.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Class\Framework\KeyBoard.h">
@@ -173,9 +170,6 @@
       <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Scene\PlayScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\Scene\PopUpScene.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Scene\SceneManager.h">
@@ -225,6 +219,12 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\Coin.h">
       <Filter>Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Scene\IntroMap.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Scene\PopupInfo.h">
+      <Filter>Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
