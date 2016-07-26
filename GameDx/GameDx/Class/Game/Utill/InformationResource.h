@@ -45,7 +45,8 @@ public:
 	/************RESOURCE FOR POPUPSCENE*******/
 	static const wchar_t*	popUp;
 	static const wchar_t*	itemLife;
-	/*************************************************/
+	/************RESOURCE FOR COIN **************/
+	static const wchar_t*   coin;
 };
 
 #endif

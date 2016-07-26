@@ -37,7 +37,7 @@ bool CPlayer::loadSprite()
 {
 	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 2, 2, 0, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStart, 1, 3, 3, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 2, 2, 4, 0));
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 1, 2, 2, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRun, 1, 3, 3, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJump, 1, 1, 1, 0));
 
@@ -57,8 +57,8 @@ bool CPlayer::loadSprite()
 void CPlayer::updateEntity(float deltaTime)
 {
 	if (deltaTime > 10) {
-		m_PlayerState->exitCurrentState(*this, new CRunState());
-		m_PlayerState->enter(*this);
+		/*m_PlayerState->exitCurrentState(*this, new CRunState());
+		m_PlayerState->enter(*this);*/
 	}
 
 	if (m_PlayerState)

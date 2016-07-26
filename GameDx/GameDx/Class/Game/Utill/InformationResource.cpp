@@ -38,4 +38,5 @@ const wchar_t*		CInfomationResource::backgroundIntroStage		= L"Resource//Image//
 /************RESOURCE FOR POPUPSCENE*******/
 const wchar_t*	CInfomationResource::popUp							= L"Resource//Image//PopupScene//popup.png";
 const wchar_t*	CInfomationResource::itemLife						= L"Resource//Image//PopupScene//Item_life.png";
-/*************************************************/
+/************RESOURCE FOR COIN **************/
+const wchar_t*		CInfomationResource::coin						= L"Resource//Image//Background//background_2.png";

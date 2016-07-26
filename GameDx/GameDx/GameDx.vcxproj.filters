@@ -101,6 +101,9 @@
     <ClCompile Include="Class\Game\State\StandState.cpp">
       <Filter>Game\State</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp">
+      <Filter>Game\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -219,6 +222,9 @@
     </ClInclude>
     <ClInclude Include="Class\Game\State\StandState.h">
       <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\Coin.h">
+      <Filter>Game\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
