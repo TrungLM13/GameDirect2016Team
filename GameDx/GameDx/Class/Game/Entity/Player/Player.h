@@ -1,42 +1,40 @@
-/*********************************************************/
-/* Create by Michael Le*/
-/* 08/07/2015 */
-/*********************************************************/
-
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Framework\Camera.h"
+#include "Class\Game\State\BaseState.h"
+#include "Class\Game\Algorithsm\Singleton.h"
 
 #ifndef __CPLAYER_H__
 #define __CPLAYER_H__
 
+class CBaseState;
 
-class CPlayer : public CMovable
+class CPlayer : public CMovable, public CSingleton<CPlayer>
 {
 public:
 	CPlayer();
-	CPlayer(LPDIRECT3DDEVICE9);
+	CPlayer(directDevice);
 	~CPlayer();
 
 	virtual bool			initEntity()											override;
 	virtual void			updateEntity(float deltaTime)							override;
+	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
 	virtual void			drawEntity()											override;
 	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
 
 public:
+	void setPosition(vector3d position);
+	void setState(PLAYERSTATES state);
+	void setVelocity(vector2d velocity);
+	void setState(CBaseState* state);
+	CBaseState* getState();
 
-			void 			logicMovePlayer(float deltaTime);
-			void 			logicJumpPlayer(float deltaTime);
-			void 			logicStandPlayer(float deltaTime);
-			
 protected:
-	
+
 	vector2d				m_Acceleration;
-	bool					m_isJump;
 
 private:
-
+	CBaseState*				m_PlayerState;
 };
-
 #endif

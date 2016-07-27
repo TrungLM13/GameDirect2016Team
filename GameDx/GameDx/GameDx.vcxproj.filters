@@ -20,9 +20,6 @@
     <ClCompile Include="Class\Game\Scene\GameOverScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Scene\IntroStageScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Framework\KeyBoard.cpp">
       <Filter>Framework\KeyBoard</Filter>
     </ClCompile>
@@ -53,9 +50,6 @@
     <ClCompile Include="Class\Game\Scene\PlayScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Scene\PopUpScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Scene\SceneManager.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
@@ -82,6 +76,33 @@
     </ClCompile>
     <ClCompile Include="Class\Game\Entity\Player\Player.cpp">
       <Filter>Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\BaseState.cpp">
+      <Filter>Game\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\ClimbState.cpp">
+      <Filter>Game\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\DieState.cpp">
+      <Filter>Game\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\JumpState.cpp">
+      <Filter>Game\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\RunState.cpp">
+      <Filter>Game\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\StandState.cpp">
+      <Filter>Game\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp">
+      <Filter>Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Scene\IntroMap.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Scene\PopupInfo.cpp">
+      <Filter>Game\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +131,6 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Scene\GameOverScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\Scene\IntroStageScene.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Class\Framework\KeyBoard.h">
@@ -154,9 +172,6 @@
     <ClInclude Include="Class\Game\Scene\PlayScene.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Scene\PopUpScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Scene\SceneManager.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
@@ -183,6 +198,33 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Player\Player.h">
       <Filter>Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\BaseState.h">
+      <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\ClimbState.h">
+      <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\DieState.h">
+      <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\JumpState.h">
+      <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\RunState.h">
+      <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\StandState.h">
+      <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\Coin.h">
+      <Filter>Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Scene\IntroMap.h">
+      <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Scene\PopupInfo.h">
+      <Filter>Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +272,9 @@
     </Filter>
     <Filter Include="Game\Entity">
       <UniqueIdentifier>{b25879bc-1928-46de-9c60-3d555f33ea4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\State">
+      <UniqueIdentifier>{0ea1d36d-f5bd-43c5-95b1-36bf76b30619}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

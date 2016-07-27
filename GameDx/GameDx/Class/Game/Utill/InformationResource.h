@@ -33,19 +33,19 @@ public:
 
 	/************RESOURCE FOR MENU*******/
 	static const wchar_t*	backgroundMenu;
-	static const wchar_t*	megaManBackground;
-	static const wchar_t*	rulerBackground;
+	static const wchar_t*	selectArrow;
 	/*************************************************/
 
 	/************RESOURCE FOR INTROSCENE*******/
-	static const wchar_t*	sprite;
+	static const wchar_t*	marioIcon;
 	static const wchar_t*	backgroundIntroStage;
 	/*************************************************/
 
 	/************RESOURCE FOR POPUPSCENE*******/
 	static const wchar_t*	popUp;
 	static const wchar_t*	itemLife;
-	/*************************************************/
+	/************RESOURCE FOR COIN **************/
+	static const wchar_t*   coin;
 };
 
 #endif

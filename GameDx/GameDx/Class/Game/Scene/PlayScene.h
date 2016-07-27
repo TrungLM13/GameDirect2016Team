@@ -3,7 +3,8 @@
 
 #include "BaseScene.h"
 #include "Class\Game\Test\Test.h"
-
+#include "Class\Game\Entity\Player\Player.h"
+#include "Class\Game\Entity\Bonus\Coin.h"
 class CPlayScene :
 	public CBaseScene
 {
@@ -17,6 +18,7 @@ public:
 	virtual void renderScene()						override;
 
 private:
+	vector<CCoin*> listCoin;
 };
 
 #endif

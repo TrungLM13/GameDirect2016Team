@@ -2,7 +2,7 @@
 #include "Class\Game\Utill\Config.h"
 #include "Class\Framework\Text.h"
 #include "Class\Game\Scene\SceneManager.h"
-#include "Class\Game\Scene\IntroStageScene.h"
+#include "Class\Game\Scene\IntroMap.h"
 
 bool m_Particle = false;
 int CSelectStageScene::m_IndexSelect = STAGESELECTED::CUTMAN;

@@ -1,0 +1,52 @@
+#include "Coin.h"
+#include "Class\Game\Utill\InformationResource.h"
+#include "Class\Mathematics\SweptAABB.h"
+#include "Class\Mathematics\Collision.h"
+
+CCoin::CCoin()
+{
+	this->initEntity();
+}
+
+CCoin::CCoin(LPDIRECT3DDEVICE9)
+{
+	this->initEntity();
+}
+
+CCoin:: ~CCoin()
+{
+	
+}
+ 
+bool CCoin::loadSprite()
+{
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::coin, 1, 1, 1, 0));
+	return true;
+}
+
+bool CCoin::initEntity()
+{ 
+	m_Position = vector3d(400, 200, 0.5);	
+	this->loadSprite();
+	this->m_Bounding = new CBox2D(0,0,0,0);
+	return true;
+}
+
+void CCoin::updateEntity(CKeyBoard* device)
+{
+
+}
+void CCoin::updateEntity(float deltaTime)
+{
+}
+void CCoin::drawEntity()
+{
+	for (int i = 0; i < m_listSprite.size(); i++)
+	this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x) * 2, SIGN(m_Position.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+}
+
+void CCoin::updateEntity(RECT* camera)
+{
+
+}
+

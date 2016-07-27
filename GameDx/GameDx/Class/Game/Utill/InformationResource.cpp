@@ -25,17 +25,17 @@ const wchar_t*		CInfomationResource::buttonMenuState			= L"Resource//Image//Sele
 /******************************************/
 
 /************RESOURCE FOR MENU*******/
-const wchar_t*		CInfomationResource::backgroundMenu				= L"Resource//Image//SceneMenu//background.png";
-const wchar_t*		CInfomationResource::megaManBackground			= L"Resource//Image//SceneMenu//backgroundRockMan.png";
-const wchar_t*		CInfomationResource::rulerBackground			= L"Resource//Image//SceneMenu//bar.png";
+const wchar_t*		CInfomationResource::backgroundMenu				= L"Resource//Image//SceneMenu//supper-mario-bros-title.png";
+const wchar_t*		CInfomationResource::selectArrow				= L"Resource//Image//SceneMenu//select-arrow.png";
 /*************************************************/
 
 /************RESOURCE FOR INTROSCENE*******/
-const wchar_t*		CInfomationResource::sprite						= L"Resource//Image//IntroScene//cutManIntro.png";
-const wchar_t*		CInfomationResource::backgroundIntroStage		= L"Resource//Image//Background//background_3.png";
+const wchar_t*		CInfomationResource::marioIcon						= L"Resource//Image//IntroScene//marioIcon.png";
+const wchar_t*		CInfomationResource::backgroundIntroStage			= L"Resource//Image//IntroScene//intro.png";
 /*************************************************/
 
 /************RESOURCE FOR POPUPSCENE*******/
 const wchar_t*	CInfomationResource::popUp							= L"Resource//Image//PopupScene//popup.png";
 const wchar_t*	CInfomationResource::itemLife						= L"Resource//Image//PopupScene//Item_life.png";
-/*************************************************/
+/************RESOURCE FOR COIN **************/
+const wchar_t*		CInfomationResource::coin						= L"Resource//Image//Background//background_2.png";

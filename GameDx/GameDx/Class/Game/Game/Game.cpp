@@ -29,6 +29,7 @@ CGame::~CGame()
 void CGame::initGame()
 {
 	m_Test			= new Test(m_Windows->getDevice());
+	CSceneManager::getInstance()->init();
 }
 void CGame::updateGame(double deltaTime)
 {
@@ -47,7 +48,7 @@ void CGame::renderGame()
 {
 	if (this->m_Windows->startDraw()) {
 		CSceneManager::getInstance()->getScene().top()->renderScene();
-		m_Test->Render();
+		//m_Test->Render();
 	}
 	this->m_Windows->stopDraw();
 }
