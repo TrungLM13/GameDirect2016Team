@@ -9,9 +9,12 @@ CGame::CGame(HINSTANCE hInstance)
 
 	CSprite::initSpriteHandler(m_Windows->getSpriteHandler());
 	CText::InitDevice(m_Windows->getDevice(), m_Windows->getSpriteHandler());
+	
 	m_Keyboard	= new CKeyBoard(hInstance, m_Windows->getWindowHandler());
+	CAudio::getInstance()->Init_DirectSound(m_Windows->getWindowHandler());
 
 	CSceneManager::initDevice(m_Windows->getDevice());
+
 	this->initGame();
 }
 
