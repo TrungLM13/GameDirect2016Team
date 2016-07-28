@@ -104,6 +104,15 @@
     <ClCompile Include="Class\Game\Scene\PopupInfo.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Framework\CAudio.cpp">
+      <Filter>Framework\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Framework\DSutil.cpp">
+      <Filter>Framework\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Framework\dxutil.cpp">
+      <Filter>Framework\Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -226,6 +235,15 @@
     <ClInclude Include="Class\Game\Scene\PopupInfo.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Class\Framework\CAudio.h">
+      <Filter>Framework\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Framework\DSutil.h">
+      <Filter>Framework\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Framework\dxutil.h">
+      <Filter>Framework\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
@@ -275,6 +293,9 @@
     </Filter>
     <Filter Include="Game\State">
       <UniqueIdentifier>{0ea1d36d-f5bd-43c5-95b1-36bf76b30619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Sound">
+      <UniqueIdentifier>{21f853fc-d926-40d4-9a24-263c3070c9a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
