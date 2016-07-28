@@ -1,3 +1,5 @@
+// Sound for game
+
 #ifndef _CAUDIO_H
 #define _CAUDIO_H
 
