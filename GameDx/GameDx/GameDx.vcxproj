@@ -121,6 +121,7 @@
     <ClInclude Include="Class\Game\State\DieState.h" />
     <ClInclude Include="Class\Game\State\JumpState.h" />
     <ClInclude Include="Class\Game\State\RunState.h" />
+    <ClInclude Include="Class\Game\State\SitState.h" />
     <ClInclude Include="Class\Game\State\StandState.h" />
     <ClInclude Include="Class\Game\Test\Test.h" />
     <ClInclude Include="Class\Game\Utill\Config.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Class\Game\State\DieState.cpp" />
     <ClCompile Include="Class\Game\State\JumpState.cpp" />
     <ClCompile Include="Class\Game\State\RunState.cpp" />
+    <ClCompile Include="Class\Game\State\SitState.cpp" />
     <ClCompile Include="Class\Game\State\StandState.cpp" />
     <ClCompile Include="Class\Game\Test\Test.cpp" />
     <ClCompile Include="Class\Game\Utill\InformationResource.cpp" />

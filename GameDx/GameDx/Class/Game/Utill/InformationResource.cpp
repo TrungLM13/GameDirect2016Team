@@ -14,6 +14,19 @@ const wchar_t*		CInfomationResource::rockmanStand				= L"Resource//Image//Game//
 const wchar_t*		CInfomationResource::rockmanStandShoot			= L"Resource//Image//Game//Sprites//RockMan//RockManNormal//rockman_stand_fire.png";
 const wchar_t*		CInfomationResource::rockmanStart				= L"Resource//Image//Game//Sprites//RockMan//RockManNormal//rockman_start.png";
 
+const wchar_t*		CInfomationResource::rockmanHit1					= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_collide.png";
+const wchar_t*		CInfomationResource::rockmanDie1					= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_die.png";
+const wchar_t*		CInfomationResource::rockmanJump1				= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_jump.png";
+const wchar_t*		CInfomationResource::rockmanJumpShoot1			= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_jump_fire.png";
+const wchar_t*		CInfomationResource::rockmanRun1					= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_run.png";
+const wchar_t*		CInfomationResource::rockmanRunShoot1			= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_run_fire_.png";
+const wchar_t*		CInfomationResource::rockmanClimb1				= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_stair.png";
+const wchar_t*		CInfomationResource::rockmanClimbEnd1			= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_stair_end.png";
+const wchar_t*		CInfomationResource::rockmanClimbShoot1			= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_stair_fire.png";
+const wchar_t*		CInfomationResource::rockmanStand1				= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_stand.png";
+const wchar_t*		CInfomationResource::rockmanStandShoot1			= L"Resource//Image//Game//Sprites//RockMan//RockManNormal//rockman_stand_fire.png";
+const wchar_t*		CInfomationResource::rockmanStart1				= L"Resource//Image//Game//Sprites//RockMan//RockManGuts//rockman_guts_start.png";
+
 /*******************************************/
 
 /************BULLET RESOURCE*****************/
