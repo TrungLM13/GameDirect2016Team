@@ -70,9 +70,6 @@
     <ClCompile Include="Class\Game\Entity\StaticEntity.cpp">
       <Filter>Game\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Entity\Map\Tile.cpp">
-      <Filter>Game\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\State\BaseState.cpp">
       <Filter>Game\State</Filter>
     </ClCompile>
@@ -220,9 +217,6 @@
     <ClInclude Include="Class\Game\Entity\StaticEntity.h">
       <Filter>Game\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Map\Tile.h">
-      <Filter>Game\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\State\BaseState.h">
       <Filter>Game\State</Filter>
     </ClInclude>
@@ -282,6 +276,11 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\GiftBox.h">
       <Filter>Game\Entity\Bonus</Filter>
+    <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h">
+      <Filter>Game\Entity\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Tile.h">
+      <Filter>Game\Entity\Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +340,12 @@
     </Filter>
     <Filter Include="Game\Entity\Bonus">
       <UniqueIdentifier>{67731370-e0c2-4958-8c2e-e3835d11797f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Enemies">
+      <UniqueIdentifier>{8b072a27-5120-44ce-8885-e1ac119b2978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Tile">
+      <UniqueIdentifier>{24b99daa-9648-4c3b-b57d-f2d2cbcca4b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
