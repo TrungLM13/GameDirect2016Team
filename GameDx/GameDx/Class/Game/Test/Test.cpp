@@ -2,6 +2,7 @@
 #include "Class\Framework\Camera.h"
 #include "Class\Framework\Timer.h"
 
+
 Test::Test(LPDIRECT3DDEVICE9 device)
 {
 	m_SpriteTest	= new CSprite(L"Resource//Test//BOX_OPENED.png", 1, 3, 3, 0);
@@ -20,6 +21,9 @@ Test::Test(LPDIRECT3DDEVICE9 device)
 	m_Text			= new CText();
 
 	//m_StaticObject->m_Bounding = new CBox2D(m_StaticObject->getBounding());
+	backgroundMussic = CAudio::getInstance()->LoadSound(L"sound1.wav");
+
+	
 }
 
 Test::~Test()
@@ -41,18 +45,23 @@ void Test::Update(CKeyBoard* device)
 		this->m_position.x -= 5;
 
 	if (device->KeyDown(DIK_UP))
+	{
+		CAudio::getInstance()->StopSound(backgroundMussic);
 		this->m_position.y += 5;
+	}
 
 	if (device->KeyDown(DIK_DOWN))
-
+	{
+		CAudio::getInstance()->LoopSound(backgroundMussic);
 		this->m_position.y -= 5;
+	}
 
 	if (m_position.x <= 0) m_position.x = 0;
 
 	if (m_position.y <= 20) m_position.y = 20;
 
 	m_Bounding->update(CTimer::getInstance()->getElapedTime(), vector2d(m_position.x, m_position.y));
-
+	
 }
 
 void Test::Render()

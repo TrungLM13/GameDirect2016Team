@@ -74,9 +74,6 @@
     <ClCompile Include="Class\Game\Entity\Map\Tile.cpp">
       <Filter>Game\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Entity\Player\Player.cpp">
-      <Filter>Game\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\State\BaseState.cpp">
       <Filter>Game\State</Filter>
     </ClCompile>
@@ -109,6 +106,20 @@
     </ClCompile>
     <ClCompile Include="Class\Game\Entity\Bonus\Brick.cpp">
       <Filter>Game\Entity\Bonus</Filter>
+    <ClCompile Include="Class\Game\Entity\Player\Player.cpp">
+      <Filter>Game\Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\SitState.cpp">
+      <Filter>Game\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Framework\CAudio.cpp">
+      <Filter>Framework\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Framework\DSutil.cpp">
+      <Filter>Framework\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Framework\dxutil.cpp">
+      <Filter>Framework\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,9 +213,6 @@
     <ClInclude Include="Class\Game\Entity\Map\Tile.h">
       <Filter>Game\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Player\Player.h">
-      <Filter>Game\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\State\BaseState.h">
       <Filter>Game\State</Filter>
     </ClInclude>
@@ -237,6 +245,20 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\Brick.h">
       <Filter>Game\Entity\Bonus</Filter>
+    <ClInclude Include="Class\Game\Entity\Player\Player.h">
+      <Filter>Game\Entity\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\SitState.h">
+      <Filter>Game\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Framework\CAudio.h">
+      <Filter>Framework\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Framework\DSutil.h">
+      <Filter>Framework\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Framework\dxutil.h">
+      <Filter>Framework\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +312,11 @@
     </Filter>
     <Filter Include="Game\Entity\Bonus">
       <UniqueIdentifier>{6accccb5-43b9-4468-a1e8-11d2f34f30be}</UniqueIdentifier>
+    <Filter Include="Game\Entity\Player">
+      <UniqueIdentifier>{30b8faf2-890e-4d24-a347-b60440497df4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Sound">
+      <UniqueIdentifier>{50757281-7ff3-4f54-80e4-fde3a12a80a4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

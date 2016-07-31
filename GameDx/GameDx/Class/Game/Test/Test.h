@@ -5,6 +5,7 @@
 #include "Class\Framework\Sprite.h"
 #include "Class\Framework\KeyBoard.h"
 #include "Class\Framework\Text.h"
+#include "Class\Framework\CAudio.h"
 #include "Class\Mathematics\Box2D.h"
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\StaticEntity.h"
@@ -30,6 +31,9 @@ private:
 
 	CStaticEntity*	m_StaticObject;
 	D3DXVECTOR3		m_positionStatic;
+
+	CAudio* testSound;
+	CSound* backgroundMussic;
 };
 
 #endif

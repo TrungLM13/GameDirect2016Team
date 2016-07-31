@@ -172,8 +172,20 @@ enum PLAYERSTATES
 	STAND = 1,
 	RUN = 2,
 	JUMP = 3,
-	CLIMB = 4,
-	DIE = 5
+	STAND_SHOOT = 4,
+	MOVE_SHOOT = 5,
+	JUMP_SHOOT = 6,
+	CLIMB = 7,
+	SIT = 8,
+	DIE = 9
+};
+
+enum PLAYERTAGS
+{
+	SMALL = 0,
+	BIG = 1,
+	FIRE = 2,
+	UNDYING = 3
 };
 /******************************/
 

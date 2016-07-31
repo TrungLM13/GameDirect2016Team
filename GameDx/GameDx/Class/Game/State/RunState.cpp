@@ -2,6 +2,7 @@
 #include "StandState.h"
 
 CRunState::CRunState() {
+	m_IsShoot = false;
 }
 
 CRunState::~CRunState() {
@@ -9,7 +10,12 @@ CRunState::~CRunState() {
 }
 
 void CRunState::enter(CPlayer& player) {
-	player.setState(PLAYERSTATES::RUN);
+	if (m_IsShoot) {
+		player.setState(PLAYERSTATES::MOVE_SHOOT);
+	}
+	else {
+		player.setState(PLAYERSTATES::RUN);
+	}
 }
 
 CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
@@ -17,11 +23,18 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 		if (player.getVelocity().x < 0)
 			player.setVelocity(vector2d(player.getVelocity().x * (-1), player.getVelocity().y));
 
-		if (input->KeyDown(DIK_UP)){
+		if (input->KeyDown(DIK_UP) || input->KeyDown(DIK_SPACE)){
 			if (player.getVelocity().y < 0)
 				player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y * (-1)));
 			return new CJumpState();
 		}
+
+		if (input->KeyDown(DIK_P)){
+			m_IsShoot = true;
+		}
+		else
+			m_IsShoot = false;
+
 		return this;
 	}
 	if (input->KeyDown(DIK_LEFT)) {
@@ -34,6 +47,18 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 				player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y * (-1)));
 			return new CJumpState();
 		}
+
+		if (input->KeyDown(DIK_SPACE)){
+			if (player.getVelocity().y < 0)
+				player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y * (-1)));
+			return new CJumpState();
+		}
+
+		if (input->KeyDown(DIK_P)){
+			m_IsShoot = true;
+		}
+		else
+			m_IsShoot = false;
 
 		return this;
 	}

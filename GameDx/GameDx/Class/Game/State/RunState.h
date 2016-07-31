@@ -12,6 +12,7 @@ public:
 	CBaseState* handleInput(CPlayer& player, CKeyBoard* device);
 	void update(CPlayer& player, double deltaTime);
 private:
+	bool m_IsShoot;
 };
 
 #endif

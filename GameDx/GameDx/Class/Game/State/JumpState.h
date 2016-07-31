@@ -13,6 +13,8 @@ public:
 	void update(CPlayer& player, double deltaTime);
 private:
 	bool m_IsMoveX;
+	bool m_IsJumpHigh;
+	bool m_IsShoot;
 };
 
 

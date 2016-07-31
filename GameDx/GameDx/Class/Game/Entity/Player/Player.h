@@ -29,12 +29,14 @@ public:
 	void setVelocity(vector2d velocity);
 	void setState(CBaseState* state);
 	CBaseState* getState();
+	void setPlayerTag(int playerTag);
+	int getPlayerTag();
 
 protected:
-
 	vector2d				m_Acceleration;
+	int						m_PlayerTag;
+	CBaseState*				m_PlayerState;
 
 private:
-	CBaseState*				m_PlayerState;
 };
 #endif
