@@ -29,6 +29,7 @@ bool	CPlayScene::initScene()
 	listBrick.push_back(new CBrick());
 	listRedMushroom.push_back(new CRedMushroom());
 	listGiftBox.push_back(new CGiftBox());
+	listMushroom.push_back(new CMushroom());
 	return true;
 }
 
@@ -36,6 +37,10 @@ void	CPlayScene::updateScene(double deltaTime)
 {
 	static int temp = 0;
 	CPlayer::getInstance()->updateEntity(deltaTime);
+
+	for (int i = 0; i < listMushroom.size(); ++i) {
+		listMushroom.at(i)->updateEntity(deltaTime);
+	}
 
 	for (int i = 0; i < listBrick.size(); ++i) {
 		listBrick.at(i)->updateEntity(deltaTime);
@@ -96,6 +101,11 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 		return;
 
 	CPlayer::getInstance()->updateEntity(keyboard);
+	
+	for (int i = 0; i < listMushroom.size(); i++)
+	{
+		this->listMushroom.at(i)->updateEntity(keyboard);
+	}
 
 }
 
@@ -127,5 +137,9 @@ void	CPlayScene::renderScene()
 	for (int i = 0; i < listGiftBox.size(); i++)
 	{
 		this->listGiftBox.at(i)->drawEntity();
+	}
+	for (int i = 0; i < listMushroom.size(); i++)
+	{
+		this->listMushroom.at(i)->drawEntity();
 	}
 }

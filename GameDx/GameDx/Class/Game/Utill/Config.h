@@ -187,6 +187,12 @@ enum PLAYERTAGS
 	FIRE = 2,
 	UNDYING = 3
 };
+
+enum MUSHROOM_STATE
+{
+	MUSH_RUN = 0,
+	MUSH_DIE = 1
+};
 /******************************/
 
 /*CONST*/

@@ -74,6 +74,10 @@ public:
 	static const wchar_t*   giftbox;
 	/************RESOURCE FOR BOUDING *************/
 	static const wchar_t*	boundingsprite;
+
+	/************RESOURCE FOR ENEMY****************/
+	static const wchar_t*	mushroomenemy_run;
+	static const wchar_t*	mushroomenemy_die;
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include "Class\Game\Entity\Bonus\Brick.h"
 #include "Class\Game\Entity\Bonus\RedMushroom.h"
 #include "Class\Game\Entity\Bonus\GiftBox.h"
+#include "Class\Game\Entity\Enemy\Mushroom.h"
 class CPlayScene :
 	public CBaseScene
 {
@@ -27,6 +28,7 @@ private:
 	vector<CBrick*>			listBrick;
 	vector<CRedMushroom*>	listRedMushroom;
 	vector<CGiftBox*>		listGiftBox;
+	vector<CMushroom*>		listMushroom;
 };
 
 #endif
