@@ -32,6 +32,7 @@ public:
 	void setPlayerTag(int playerTag);
 	int getPlayerTag();
 
+
 protected:
 	vector2d				m_Acceleration;
 	int						m_PlayerTag;
