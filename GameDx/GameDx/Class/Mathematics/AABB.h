@@ -14,7 +14,7 @@ static CBox2D GetSweptBroadPhaseBox(CBox2D b)
 
 	b.getVelocityX() > 0 ? broadphasebox.setX(b.getX()) : broadphasebox.setX(b.getX() + b.getVelocityX());
 	b.getVelocityY() > 0 ? broadphasebox.setY(b.getY() + b.getVelocityY()) : broadphasebox.setY(b.getY()); // Because of changing axis to decac
-	b.getVelocityX() > 0 ? broadphasebox.setWidth ( abs(b.getWidth() + b.getVelocityX())) : broadphasebox.setWidth(abs(b.getWidth() - b.getVelocityX()));
+	b.getVelocityX() > 0 ? broadphasebox.setWidth(abs(b.getWidth() + b.getVelocityX())) : broadphasebox.setWidth(abs(b.getWidth() - b.getVelocityX()));
 	b.getVelocityY() > 0 ? broadphasebox.setHeight(abs(b.getHeight() + b.getVelocityY())) : broadphasebox.setWidth(abs(b.getHeight() - b.getVelocityY()));
 	return broadphasebox;
 }
@@ -44,8 +44,8 @@ static COLDIRECTION CheckAABB(CBox2D box1, CBox2D box2)
 			if (box1.getY() > box2.getY()) return COLDIRECTION::COLDIRECTION_BOTTOM;
 		}
 	}
-		
-	return COLDIRECTION::COLDIRECTION_NONE; 
+
+	return COLDIRECTION::COLDIRECTION_NONE;
 
 }
 inline float SweptAABB(CBox2D box1, CBox2D box2, float& normalx, float& normaly)
@@ -60,22 +60,23 @@ inline float SweptAABB(CBox2D box1, CBox2D box2, float& normalx, float& normaly)
 	}
 	else
 	{
-		xInvEntry = (box2.getX() + box2.getWidth())- box1.getX();
+		xInvEntry = (box2.getX() + box2.getWidth()) - box1.getX();
 		xInvExit = box2.getX() - (box1.getX() + box1.getWidth());
 	}
 
-	if (box1.getVelocityY() > 0.0f)
+	/*if (box1.getVelocityY() > 0.0f)
 	{
-		yInvEntry = box2.getY() - (box1.getY() + box1.getHeight());
-		yInExit = (box2.getY() + box2.getHeight()) - box1.getY();
+	yInvEntry = box2.getY() - (box1.getY() + box1.getHeight());
+	yInExit = (box2.getY() + box2.getHeight()) - box1.getY();
 	}
 	else
 	{
-		yInvEntry = (box2.getY() + box2.getHeight()) - box1.getY();
-		yInExit = box2.getY() - (box1.getY() + box1.getHeight());
-	}
+	yInvEntry = (box2.getY() + box2.getHeight()) - box1.getY();
+	yInExit = box2.getY() - (box1.getY() + box1.getHeight());
+	}*/
 
-	/*if (box1.getVelocityY() > 0.0f)
+
+	if (box1.getVelocityY() > 0.0f)
 	{
 		yInvEntry = (box2.getY() - box2.getHeight()) - box1.getY();
 		yInExit = box2.getY() - (box1.getY() - box1.getHeight());
@@ -84,8 +85,8 @@ inline float SweptAABB(CBox2D box1, CBox2D box2, float& normalx, float& normaly)
 	{
 		yInvEntry = box2.getY() - (box1.getY() - box1.getHeight());
 		yInExit = (box2.getY() - box2.getHeight()) - box1.getY();
-	}*/
-	
+	}
+
 
 	// xác định thời gian va chạm
 	float xEntry, yEntry;
