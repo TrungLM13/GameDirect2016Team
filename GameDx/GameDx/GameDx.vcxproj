@@ -105,6 +105,7 @@
     <ClInclude Include="Class\Game\Entity\Bonus\Brick.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Coin.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Star.h" />
+    <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tile.h" />
     <ClInclude Include="Class\Game\Entity\MovableEntity.h" />
     <ClInclude Include="Class\Game\Entity\Player\Player.h" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Class\Game\Entity\Bonus\Brick.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Star.cpp" />
+    <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tile.cpp" />
     <ClCompile Include="Class\Game\Entity\MovableEntity.cpp" />
     <ClCompile Include="Class\Game\Entity\Player\Player.cpp" />
