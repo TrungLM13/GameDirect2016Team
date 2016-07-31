@@ -68,6 +68,10 @@ public:
 	static const wchar_t*   star;
 	/************RESOURCE FOR BRICK **************/
 	static const wchar_t*   brick;
+	/************RESOURCE FOR REDMUSHROOM **************/
+	static const wchar_t*   redmushroom;
+	/************RESOURCE FOR GIFTBOX **************/
+	static const wchar_t*   giftbox;
 };
 
 #endif

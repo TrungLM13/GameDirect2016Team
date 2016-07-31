@@ -122,11 +122,15 @@
       <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
     <ClCompile Include="Class\Game\WinMain.cpp" />
-	
     <ClCompile Include="Class\Mathematics\T_Collision.cpp">
       <Filter>Mathermatic</Filter>
     </ClCompile>
-    
+    <ClCompile Include="Class\Game\Entity\RedMushroom.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\GiftBox.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -266,12 +270,18 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\Star.h">
       <Filter>Game\Entity\Bonus</Filter>
-     </ClInclude>
+    </ClInclude>
     <ClInclude Include="Class\Mathematics\AABB.h">
       <Filter>Mathermatic</Filter>
     </ClInclude>
     <ClInclude Include="Class\Mathematics\T_Collision.h">
       <Filter>Mathermatic</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\RedMushroom.h">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\GiftBox.h">
+      <Filter>Game\Entity\Bonus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

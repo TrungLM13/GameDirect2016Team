@@ -7,6 +7,8 @@
 #include "Class\Game\Entity\Bonus\Coin.h"
 #include "Class\Game\Entity\Bonus\Star.h"
 #include "Class\Game\Entity\Bonus\Brick.h"
+#include "Class\Game\Entity\RedMushroom.h"
+#include "Class\Game\Entity\Bonus\GiftBox.h"
 class CPlayScene :
 	public CBaseScene
 {
@@ -20,9 +22,11 @@ public:
 	virtual void renderScene()						override;
 
 private:
-	vector<CCoin*> listCoin;
-	vector<CStar*> listStar;
-	vector<CBrick*> listBrick;
+	vector<CCoin*>			listCoin;
+	vector<CStar*>			listStar;
+	vector<CBrick*>			listBrick;
+	vector<CRedMushroom*>	listRedMushroom;
+	vector<CGiftBox*>		listGiftBox;
 };
 
 #endif

@@ -47,8 +47,8 @@ const wchar_t*		CInfomationResource::selectArrow				= L"Resource//Image//SceneMe
 /*************************************************/
 
 /************RESOURCE FOR INTROSCENE*******/
-const wchar_t*		CInfomationResource::marioIcon						= L"Resource//Image//IntroScene//marioIcon.png";
-const wchar_t*		CInfomationResource::backgroundIntroStage			= L"Resource//Image//IntroScene//intro.png";
+const wchar_t*		CInfomationResource::marioIcon					= L"Resource//Image//IntroScene//marioIcon.png";
+const wchar_t*		CInfomationResource::backgroundIntroStage		= L"Resource//Image//IntroScene//intro.png";
 /*************************************************/
 
 /************RESOURCE FOR POPUPSCENE*******/
@@ -59,4 +59,10 @@ const wchar_t*		CInfomationResource::coin						= L"Resource//Image//Game//Sprite
 /************RESOURCE FOR STAR **************/
 const wchar_t*		CInfomationResource::star						= L"Resource//Image//Game//Sprites//Mario//Bonus//star.png";
 /************RESOURCE FOR BRICK **************/
-const wchar_t*		CInfomationResource::brick						= L"Resource//Image//Background//background_2.png";
+const wchar_t*		CInfomationResource::brick						= L"Resource//Image//Game//Sprites//Mario//Bonus//gach.png";
+/************RESOURCE FOR REDMUSHROOM **************/
+const wchar_t*		CInfomationResource::redmushroom				= L"Resource//Image//Game//Sprites//Mario//Bonus//nam_do_nho.png";
+/************RESOURCE FOR GIFTBOX **************/
+const wchar_t*		CInfomationResource::giftbox					= L"Resource//Image//Game//Sprites//Mario//Bonus//chamhoi.png";
+
+

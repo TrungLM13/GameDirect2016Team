@@ -1,6 +1,7 @@
 #include "PlayScene.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Scene\PopupInfo.h"
+#include "Class\Mathematics\T_Collision.h"
 
 
 CPlayScene::CPlayScene()
@@ -26,6 +27,8 @@ bool	CPlayScene::initScene()
 	listCoin.push_back(new CCoin());
 	listStar.push_back(new CStar());
 	listBrick.push_back(new CBrick());
+	listRedMushroom.push_back(new CRedMushroom());
+	listGiftBox.push_back(new CGiftBox());
 	return true;
 }
 
@@ -35,7 +38,7 @@ void	CPlayScene::updateScene(double deltaTime)
 	CPlayer::getInstance()->updateEntity(deltaTime);
 	for (int i = 0; i < listCoin.size(); i++)
 	{
-		if (CCollision::CheckCollision(CPlayer::getInstance(), this->listCoin.at(i)) != COLDIRECTION ::COLDIRECTION_NONE)
+		if (Collision::getInstance()->isCollision(CPlayer::getInstance()->getBounding(), this->listCoin.at(i)->getBounding()))
 		{
 			temp++;
 			this->listCoin.erase(this->listCoin.begin() + i);
@@ -47,6 +50,10 @@ void	CPlayScene::updateScene(double deltaTime)
 	for (int i = 0; i < listStar.size(); i++)
 	{
 		this->listStar.at(i)->updateEntity(deltaTime);
+		if (Collision::getInstance()->isCollision(CPlayer::getInstance()->getBounding(), this->listStar.at(i)->getBounding()))
+		{
+			this->listStar.erase(this->listStar.begin() + i);
+		}
 	}
 	for (int i = 0; i < listBrick.size(); i++)
 	{
@@ -81,5 +88,12 @@ void	CPlayScene::renderScene()
 	{
 		this->listBrick.at(i)->drawEntity();
 	}
-	
+	for (int i = 0; i < listRedMushroom.size(); i++)
+	{
+		this->listRedMushroom.at(i)->drawEntity();
+	}
+	for (int i = 0; i < listGiftBox.size(); i++)
+	{
+		this->listGiftBox.at(i)->drawEntity();
+	}
 }
