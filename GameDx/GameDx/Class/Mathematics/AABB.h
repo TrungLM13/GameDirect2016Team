@@ -75,6 +75,16 @@ inline float SweptAABB(CBox2D box1, CBox2D box2, float& normalx, float& normaly)
 		yInExit = box2.getY() - (box1.getY() + box1.getHeight());
 	}
 
+	/*if (box1.getVelocityY() > 0.0f)
+	{
+		yInvEntry = (box2.getY() - box2.getHeight()) - box1.getY();
+		yInExit = box2.getY() - (box1.getY() - box1.getHeight());
+	}
+	else
+	{
+		yInvEntry = box2.getY() - (box1.getY() - box1.getHeight());
+		yInExit = (box2.getY() - box2.getHeight()) - box1.getY();
+	}*/
 	
 
 	// xác định thời gian va chạm

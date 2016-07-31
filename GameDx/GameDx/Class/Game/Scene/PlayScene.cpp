@@ -52,6 +52,10 @@ void	CPlayScene::updateScene(double deltaTime)
 		this->listStar.at(i)->updateEntity(deltaTime);
 		if (Collision::getInstance()->isCollision(CPlayer::getInstance()->getBounding(), this->listStar.at(i)->getBounding()))
 		{
+		if (Collision::getInstance()->isCollision(CPlayer::getInstance()->getBounding(), listStar.at(i)->getBounding()))
+		{
+			CPlayer::getInstance()->setPlayerTag(PLAYERTAGS::UNDYING);
+			CPlayer::getInstance()->loadSprite();
 			this->listStar.erase(this->listStar.begin() + i);
 		}
 	}
