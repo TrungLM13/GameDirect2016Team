@@ -22,7 +22,7 @@ void CJumpState::enter(CPlayer& player) {
 }
 
 CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
-	if (player.getPosition().y <= 50)
+	if (player.getPosition().y < 50)
 		return new CStandState();
 
 	if (input->KeyDown(DIK_SPACE)) {
@@ -58,8 +58,6 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 		deltaX = player.getVelocity().x * deltaTime / 100;
 	}
 
-	if (player.getPosition().y >= 150)
-		player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y *(-1)));
 	if (m_IsJumpHigh) {
 		if (player.getPosition().y >= 190)
 			player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y *(-1)));

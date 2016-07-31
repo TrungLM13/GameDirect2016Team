@@ -38,21 +38,12 @@ bool CPlayer::initEntity()
 
 bool CPlayer::loadSprite()
 {
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 2, 2, 0, 0));
+	
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_run, 1, 3, 3, 0));
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_jum, 1, 1, 1, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStart,				1, 3, 3, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStandShoot,		1, 1, 1, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRun,				1, 3, 3, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRunShoot,			1, 3, 3, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJump,				1, 1, 1, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJumpShoot,			1, 1, 1, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanClimb,				1, 2, 2, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanClimbShoot,		1, 1, 1, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanClimbEnd,			1, 1, 1, 0));
-	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanHit,				1, 3, 3, 0));
+	
 	if (m_listSprite.size() > 0) {
 		m_listSprite.clear();
 	}
@@ -60,22 +51,20 @@ bool CPlayer::loadSprite()
 	switch (m_PlayerTag)
 	{
 	case PLAYERTAGS::SMALL:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStart, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 1, 2, 2, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRun, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJump, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStandShoot, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRunShoot, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJumpShoot, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_cdir, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_jum, 1, 1, 1, 0));
+
 		break;
 	case PLAYERTAGS::BIG:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStart1, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand1, 1, 2, 2, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRun1, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJump1, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStandShoot1, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRunShoot1, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJumpShoot1, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jum, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));
 		break;
 	default:
 		break;
