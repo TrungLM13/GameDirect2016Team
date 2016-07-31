@@ -48,7 +48,7 @@ void CGame::renderGame()
 {
 	if (this->m_Windows->startDraw()) {
 		CSceneManager::getInstance()->getScene().top()->renderScene();
-		//m_Test->Render();
+		m_Test->Render();
 	}
 	this->m_Windows->stopDraw();
 }

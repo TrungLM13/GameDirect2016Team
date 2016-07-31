@@ -7,6 +7,8 @@
 /* WARING : TOO MANY GET/SET FUNCTION. FIX BOX2D*/
 /*********************************************/
 
+//Gio push ê file do len ha?
+//unm, khoan run xem có loi k
 #ifndef __SWEPTAABB_H__
 #define __SWEPTAABB_H__
 
@@ -102,7 +104,6 @@ inline float SweptAABB(CBox2D box1, CBox2D box2, float &normalX, float &normalY)
 {
 	float xInvEntry, yInvEntry;
 	float xInvExit, yInvExit;
-
 	if (box1.getVelocityX() > 0.0f)
 	{
 		xInvEntry		= box2.getX()	- (box1.getX()		+ box1.getWidth());

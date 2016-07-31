@@ -9,6 +9,7 @@
 #include "Class\Mathematics\Box2D.h"
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\StaticEntity.h"
+#include "Class\Mathematics\T_Collision.h"
 
 class Test
 {
@@ -25,6 +26,7 @@ private:
 	D3DXVECTOR3	m_position;
 	CText*		m_Text;
 	CBox2D*		m_Bounding;
+	CBox2D*		m_Bounding1;
 	CMovable*	MovableObject;
 
 	CSprite*		m_StaticSprite;
@@ -34,6 +36,12 @@ private:
 
 	CAudio* testSound;
 	CSound* backgroundMussic;
+
+	vector2d *vx;
+	CBox2D *moveBox;
+	CBox2D *dynamicBox;
+	Collision  *checkCollision;
+
 };
 
 #endif
