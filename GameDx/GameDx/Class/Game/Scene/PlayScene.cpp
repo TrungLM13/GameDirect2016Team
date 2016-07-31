@@ -1,6 +1,7 @@
 #include "PlayScene.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Scene\PopupInfo.h"
+#include "Class\Mathematics\T_Collision.h"
 
 
 CPlayScene::CPlayScene()
@@ -35,7 +36,7 @@ void	CPlayScene::updateScene(double deltaTime)
 	CPlayer::getInstance()->updateEntity(deltaTime);
 	for (int i = 0; i < listCoin.size(); i++)
 	{
-		if (CCollision::CheckCollision(CPlayer::getInstance(), this->listCoin.at(i)) != COLDIRECTION ::COLDIRECTION_NONE)
+		if (Collision::getInstance()->isCollision(CPlayer::getInstance()->getBounding(), listCoin.at(0)->getBounding()))
 		{
 			temp++;
 			this->listCoin.erase(this->listCoin.begin() + i);
@@ -47,12 +48,18 @@ void	CPlayScene::updateScene(double deltaTime)
 	for (int i = 0; i < listStar.size(); i++)
 	{
 		this->listStar.at(i)->updateEntity(deltaTime);
+
+		if (Collision::getInstance()->isCollision(CPlayer::getInstance()->getBounding(), listStar.at(i)->getBounding()))
+		{
+			CPlayer::getInstance()->setPlayerTag(PLAYERTAGS::UNDYING);
+			CPlayer::getInstance()->loadSprite();
+			this->listStar.erase(this->listStar.begin() + i);
+		}
 	}
 	for (int i = 0; i < listBrick.size(); i++)
 	{
 		this->listBrick.at(i)->updateEntity(deltaTime);
 	}
-
 
 }
 

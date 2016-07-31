@@ -1,10 +1,14 @@
+#ifndef __T_COLLISION_H__
+#define __T_COLLISION_H__
+
 #include "AABB.h"
 #include "Box2D.h"
 #include "Class\Game\Utill\stdafx.h"
 #include "Class\Framework\Sprite.h"
 #include "Class\Game\Entity\MovableEntity.h"
+#include "Class\Game\Algorithsm\Singleton.h"
 
-class Collision
+class Collision: public CSingleton<Collision>
 {
 	
 public:
@@ -17,4 +21,6 @@ public:
 	 
 
 };
+
+#endif
 
