@@ -64,5 +64,5 @@ const wchar_t*		CInfomationResource::brick						= L"Resource//Image//Game//Sprit
 const wchar_t*		CInfomationResource::redmushroom				= L"Resource//Image//Game//Sprites//Mario//Bonus//nam_do_nho.png";
 /************RESOURCE FOR GIFTBOX **************/
 const wchar_t*		CInfomationResource::giftbox					= L"Resource//Image//Game//Sprites//Mario//Bonus//chamhoi.png";
-
-
+/************RESOURCE FOR BOUDING *************/
+const wchar_t*		CInfomationResource::boundingsprite				= L"Resource//Image//Game//Other//bean.png";

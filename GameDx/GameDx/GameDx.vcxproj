@@ -131,6 +131,7 @@
     <ClInclude Include="Class\Game\Test\Test.h" />
     <ClInclude Include="Class\Game\Utill\Config.h" />
     <ClInclude Include="Class\Game\Utill\InformationResource.h" />
+    <ClInclude Include="Class\Game\Utill\ShowBouding.h" />
     <ClInclude Include="Class\Game\Utill\stdafx.h" />
     <ClInclude Include="Class\MapManager.h" />
     <ClInclude Include="Class\Mathematics\AABB.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Class\Game\State\StandState.cpp" />
     <ClCompile Include="Class\Game\Test\Test.cpp" />
     <ClCompile Include="Class\Game\Utill\InformationResource.cpp" />
+    <ClCompile Include="Class\Game\Utill\ShowBouding.cpp" />
     <ClCompile Include="Class\Game\WinMain.cpp" />
     <ClCompile Include="Class\MapManager.cpp" />
     <ClCompile Include="Class\Mathematics\Box2D.cpp" />

@@ -102,6 +102,9 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 void	CPlayScene::renderScene()
 {
 	CPlayer::getInstance()->drawEntity();
+
+	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
+
 	for (int i = 0; i < listCoin.size(); i++)
 	{
 		this->listCoin.at(i)->drawEntity();
@@ -114,6 +117,7 @@ void	CPlayScene::renderScene()
 	for (int i = 0; i < listBrick.size(); i++)
 	{
 		this->listBrick.at(i)->drawEntity();
+		CShowBouding::getInstance()->drawBouding(this->listBrick.at(i));
 	}
 	
 	for (int i = 0; i < listRedMushroom.size(); i++)

@@ -2,6 +2,7 @@
 #include "Class\Framework\Camera.h"
 #include "Class\Game\State\BaseState.h"
 #include "Class\Game\Algorithsm\Singleton.h"
+#include "Class\Game\Utill\ShowBouding.h"
 
 #ifndef __CPLAYER_H__
 #define __CPLAYER_H__
