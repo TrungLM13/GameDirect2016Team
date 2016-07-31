@@ -13,7 +13,6 @@
 #define FPS							60
 #define GAME_RATE					(1000.0f/60.0f)
 #define WINDOWS_NAME				L"Oishi"
-
 #define DRAWCENTER_LEFT_TOP			1					
 #define DRAWCENTER_LEFT_MIDDLE		2			
 #define DRAWCENTER_LEFT_BOTTOM		3					

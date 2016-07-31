@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Game\State\StandState.h"
+
 CPlayer::CPlayer()
 {
 	this->initEntity();
@@ -19,7 +20,7 @@ CPlayer::CPlayer(directDevice device)
 
 bool CPlayer::initEntity()
 {
-	m_Position = vector3d(200, 150, 0.5);
+	m_Position = vector3d(200, 50, 0.5);
 
 	m_State = PLAYERSTATES::STAND;
 	m_PlayerState = new CStandState();
@@ -36,11 +37,10 @@ bool CPlayer::initEntity()
 bool CPlayer::loadSprite()
 {
 	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 2, 2, 0, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStart, 1, 3, 3, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStand, 1, 2, 2, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRun, 1, 3, 3, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanJump, 1, 1, 1, 0));
-
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_run, 1, 3, 3, 0));
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_jum, 1, 1, 1, 0));
 	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStart,				1, 3, 3, 0));
 	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanStandShoot,		1, 1, 1, 0));
 	//this->m_listSprite.push_back(new CSprite(CInfomationResource::rockmanRun,				1, 3, 3, 0));
@@ -63,7 +63,6 @@ void CPlayer::updateEntity(float deltaTime)
 
 	if (m_PlayerState)
 		m_PlayerState->update(*this, deltaTime);
-
 }
 
 void CPlayer::updateEntity(RECT* camera) {

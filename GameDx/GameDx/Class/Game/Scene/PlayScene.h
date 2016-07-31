@@ -5,6 +5,8 @@
 #include "Class\Game\Test\Test.h"
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\Entity\Bonus\Coin.h"
+#include "Class\Game\Entity\Bonus\Star.h"
+#include "Class\Game\Entity\Bonus\Brick.h"
 class CPlayScene :
 	public CBaseScene
 {
@@ -19,6 +21,8 @@ public:
 
 private:
 	vector<CCoin*> listCoin;
+	vector<CStar*> listStar;
+	vector<CBrick*> listBrick;
 };
 
 #endif

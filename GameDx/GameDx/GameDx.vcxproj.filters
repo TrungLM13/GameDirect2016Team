@@ -95,14 +95,20 @@
     <ClCompile Include="Class\Game\State\StandState.cpp">
       <Filter>Game\State</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp">
-      <Filter>Game\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Scene\IntroMap.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Class\Game\Scene\PopupInfo.cpp">
       <Filter>Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\Star.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\Brick.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,14 +223,20 @@
     <ClInclude Include="Class\Game\State\StandState.h">
       <Filter>Game\State</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Bonus\Coin.h">
-      <Filter>Game\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Scene\IntroMap.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Scene\PopupInfo.h">
       <Filter>Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\Coin.h">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\Star.h">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\Brick.h">
+      <Filter>Game\Entity\Bonus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -275,6 +287,9 @@
     </Filter>
     <Filter Include="Game\State">
       <UniqueIdentifier>{0ea1d36d-f5bd-43c5-95b1-36bf76b30619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Bonus">
+      <UniqueIdentifier>{6accccb5-43b9-4468-a1e8-11d2f34f30be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
