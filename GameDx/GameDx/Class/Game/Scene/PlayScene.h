@@ -7,7 +7,7 @@
 #include "Class\Game\Entity\Bonus\Coin.h"
 #include "Class\Game\Entity\Bonus\Star.h"
 #include "Class\Game\Entity\Bonus\Brick.h"
-#include "Class\Game\Entity\RedMushroom.h"
+#include "Class\Game\Entity\Bonus\RedMushroom.h"
 #include "Class\Game\Entity\Bonus\GiftBox.h"
 class CPlayScene :
 	public CBaseScene

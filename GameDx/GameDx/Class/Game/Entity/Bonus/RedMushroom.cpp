@@ -15,7 +15,7 @@ CRedMushroom:: ~CRedMushroom()
 
 bool CRedMushroom::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::mushroom, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::redmushroom, 1, 1, 1, 0));
 	return true;
 }
 

@@ -3,11 +3,11 @@
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\Player\Player.h"
 
-class CMushroom : public CMovable
+class CRedMushroom : public CMovable
 {
 public:
-	CMushroom();
-	~CMushroom();
+	CRedMushroom();
+	~CRedMushroom();
 	virtual bool			loadSprite()									override;
 	virtual	bool			initEntity()									override;
 	virtual void			updateEntity(float deltaTime)					override;
