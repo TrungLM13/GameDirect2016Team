@@ -29,6 +29,7 @@ void	CPlayScene::updateScene(double deltaTime)
 {
 	CPlayer::getInstance()->updateEntity(deltaTime);
 
+
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
 		CMapManager::getInstance()->getListEnemy().at(i)->updateEntity(deltaTime);
@@ -50,7 +51,7 @@ void	CPlayScene::renderScene()
 		CMapManager::getInstance()->getListBackground().at(i)->drawEntity();
 	}
 	CPlayer::getInstance()->drawEntity();
-	
+
 
 	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
 

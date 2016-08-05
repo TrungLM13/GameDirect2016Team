@@ -2,7 +2,7 @@
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Game\State\StandState.h"
 #include "Class\Game\State\ClimbState.h"
-#include "Class\Mathematics\T_Collision.h"
+#include "Class\Mathematics\Collision.h"
 
 CPlayer::CPlayer()
 {

@@ -319,7 +319,7 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Map\MapManager.h">
       <Filter>Game\MapManager</Filter>
- 	</ClCompile>
+ 	</ClInclude>
     <ClInclude Include="Class\Game\Entity\Tile\Flag.h">
       <Filter>Game\Entity\Tile\Flag</Filter>
     </ClInclude>
