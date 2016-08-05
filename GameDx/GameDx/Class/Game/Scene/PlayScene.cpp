@@ -1,7 +1,12 @@
 #include "PlayScene.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Scene\PopupInfo.h"
+
 #include "Class\Game\Entity\Map\MapManager.h"
+
+#include "Class\Game\State\StandState.h"
+#include "Class\Mathematics\Collision.h"
+
 
 CPlayScene::CPlayScene()
 {
@@ -16,15 +21,14 @@ CPlayScene::~CPlayScene()
 
 bool	CPlayScene::initScene()
 {
-	CPlayer::getInstance();
 	CMapManager::getInstance();
 	return true;
 }
 
 void	CPlayScene::updateScene(double deltaTime)
 {
-	static int temp = 0;
 	CPlayer::getInstance()->updateEntity(deltaTime);
+
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
 		CMapManager::getInstance()->getListEnemy().at(i)->updateEntity(deltaTime);
@@ -46,6 +50,7 @@ void	CPlayScene::renderScene()
 		CMapManager::getInstance()->getListBackground().at(i)->drawEntity();
 	}
 	CPlayer::getInstance()->drawEntity();
+	
 
 	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
 
@@ -53,4 +58,5 @@ void	CPlayScene::renderScene()
 	{
 		CMapManager::getInstance()->getListEnemy().at(i)->drawEntity();
 	}
+
 }

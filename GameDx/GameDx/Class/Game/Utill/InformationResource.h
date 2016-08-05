@@ -37,6 +37,28 @@ public:
 	static const wchar_t*	smallfiremario_run;
 	/*************************************************/
 
+	/************FLAG RESOURCE*******/
+	static const wchar_t*	greenFlag;
+	static const wchar_t*	flagPole;
+	static const wchar_t*	flagPoleHead;
+	static const wchar_t*	flagPoleTail;
+
+
+	/*************************************************/
+
+	/************ENERMY RESOURCE*******/
+	static const wchar_t*	greenCarnivorousPlants;
+	static const wchar_t*	blueCarnivorousPlants;
+	static const wchar_t*	redCarnivorousPlants;
+
+	/*************************************************/
+
+	/************ENERMY TILE*******/
+	static const wchar_t*	castle;
+	static const wchar_t*	flagCastle;
+
+	/*************************************************/
+
 	/************BULLET RESOURCE*******/
 	static const wchar_t*	rockmanBullet;
 

@@ -44,7 +44,7 @@ void CBrick::updateEntity(CKeyBoard* device)
 }
 void CBrick::updateEntity(float deltaTime)
 {
-	if (this->m_Position.y <= 150)
+	if (this->m_Position.y < 150)
 	{
 		m_Position = vector3d(150, 150, 0);
 	}

@@ -20,6 +20,7 @@ public:
 	virtual void			updateEntity(float deltaTime)							override;
 	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
+			void			updateEntity(CBaseEntity* entity,float deltaTime);
 	virtual void			drawEntity()											override;
 	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
@@ -32,6 +33,8 @@ public:
 	CBaseState* getState();
 	void setPlayerTag(int playerTag);
 	int getPlayerTag();
+
+	void updateCollision(CBaseEntity* entity);
 
 
 protected:

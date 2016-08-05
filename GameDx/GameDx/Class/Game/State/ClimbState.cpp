@@ -14,7 +14,7 @@ void CClimbState::enter(CPlayer& player) {
 }
 
 CBaseState* CClimbState::handleInput(CPlayer& player, CKeyBoard* input) {
-	return nullptr;
+	return this;
 }
 
 void CClimbState::update(CPlayer& player, double deltaTime) {

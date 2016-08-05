@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Game\State\StandState.h"
+#include "Class\Game\State\ClimbState.h"
+#include "Class\Mathematics\T_Collision.h"
 
 CPlayer::CPlayer()
 {
@@ -27,7 +29,7 @@ bool CPlayer::initEntity()
 	m_PlayerState	= new CStandState();
 
 	m_Acceleration = vector2d(0.5f, 0);
-	m_Velocity = vector2d(9.8, 9.8);
+	m_Velocity = vector2d(0, 9.8);
 
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
@@ -97,7 +99,7 @@ void CPlayer::updateEntity(CKeyBoard* input)
 		m_PlayerTag = PLAYERTAGS::BIG;
 		this->loadSprite();
 	}
-	else if (input->KeyDown(DIK_X)) 
+	else if (input->KeyDown(DIK_X))
 	{
 		m_PlayerTag = PLAYERTAGS::SMALL;
 		this->loadSprite();
@@ -118,8 +120,8 @@ void CPlayer::updateEntity(CKeyBoard* input)
 
 void CPlayer::drawEntity()
 {
-	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Velocity.x) * 2, abs(m_Velocity.y / m_Velocity.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-	//m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(this->getBounding().getX(), this->getBounding().getY(), 0.5f)), vector2d(SIGN(m_Velocity.x) * 2, SIGN(m_Velocity.y) * 2), 0, DRAWCENTER_LEFT_TOP, true, 10);
+//	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(this->m_Bounding->getX(), m_Bounding->getY(), 0)), vector2d(SIGN(m_Velocity.x), abs(m_Velocity.y / m_Velocity.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(m_Position)), vector2d(SIGN(m_Velocity.x), abs(m_Velocity.y / m_Velocity.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CPlayer::setState(PLAYERSTATES state) {

@@ -10,6 +10,17 @@
 #include "Class\Game\Entity\Bonus\RedMushroom.h"
 #include "Class\Game\Entity\Bonus\GiftBox.h"
 #include "Class\Game\Entity\Enemy\Mushroom.h"
+
+#include "Class\Game\Entity\Tile\Flag.h"
+
+#include "Class\Game\Entity\Map\Tile.h"
+#include "Class\Game\Entity\Tile\FlagPole.h"
+#include "Class\Game\Entity\Tile\FlagPoleHead.h"
+#include "Class\Game\Entity\Tile\FlagPoleTail.h"
+#include "Class\Game\Entity\Tile\Castle.h"
+#include "Class\Game\Entity\Tile\FlagCastle.h"
+
+#include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
 class CPlayScene :
 	public CBaseScene
 {
@@ -21,7 +32,6 @@ public:
 	virtual void updateScene(double deltaTime)		override;
 	virtual void updateScene(CKeyBoard* keyboard)	override;
 	virtual void renderScene()						override;
-
 };
 
 #endif

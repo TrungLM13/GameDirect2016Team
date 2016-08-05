@@ -33,6 +33,26 @@ const wchar_t*		CInfomationResource::smallfiremario_run			= L"Resource//Image//G
 
 /*******************************************/
 
+/************ENERMY RESOURCE*******/
+const wchar_t*	CInfomationResource::greenCarnivorousPlants			= L"Resource//Image//Game//Enemies//cay_xanh.png";
+const wchar_t*	CInfomationResource::blueCarnivorousPlants			= L"Resource//Image//Game//Enemies//cay_lam.png";
+const wchar_t*	CInfomationResource::redCarnivorousPlants			= L"Resource//Image//Game//Enemies//cay_do.png";
+
+/*************************************************/
+
+/************ENERMY TILE*******/
+const wchar_t*	CInfomationResource::castle							= L"Resource//Image//Game//Sprites//Items//lau_dai.png";
+const wchar_t*	CInfomationResource::flagCastle						= L"Resource//Image//Game//Sprites//Items//co_sao.png";
+
+/*************************************************/
+
+/************FLAG RESOURCE*******/
+const wchar_t*	CInfomationResource::greenFlag						= L"Resource//Image//Game//Sprites//Items//green_flag.png";
+const wchar_t*	CInfomationResource::flagPole						= L"Resource//Image//Game//Sprites//Items//flag_pole.png";
+const wchar_t*	CInfomationResource::flagPoleHead					= L"Resource//Image//Game//Sprites//Items//flag_pole_head.png";
+const wchar_t*	CInfomationResource::flagPoleTail					= L"Resource//Image//Game//Sprites//Items//flag_pole_tail.png";
+/*************************************************/
+
 /************BULLET RESOURCE*****************/
 const wchar_t*		CInfomationResource::rockmanBullet				= L"Resource//Image//Game//Sprites//RockMan//Bullet//bullet_rockman.png";
 

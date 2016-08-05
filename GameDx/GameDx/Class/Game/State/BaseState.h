@@ -9,9 +9,9 @@ class CBaseState
 public:
 	virtual ~CBaseState(){};
 	virtual void enter(CPlayer& player) {};
-	virtual void enter(CPlayer& player, PLAYERSTATES state) { player.setState(state); }
 	virtual CBaseState* handleInput(CPlayer& player, CKeyBoard* device){ return nullptr;};
 	virtual void update(CPlayer& player, double deltaTime){};
+	virtual void update(CPlayer& player, CBaseEntity* entity) {};
 	void exitCurrentState(CPlayer& player, CBaseState* newState);
 private:
 
