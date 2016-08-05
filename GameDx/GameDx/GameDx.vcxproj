@@ -108,6 +108,7 @@
     <ClInclude Include="Class\Game\Entity\Bonus\RedMushroom.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Star.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h" />
+    <ClInclude Include="Class\Game\Entity\Map\MapManager.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tile.h" />
     <ClInclude Include="Class\Game\Entity\MovableEntity.h" />
     <ClInclude Include="Class\Game\Entity\Player\Player.h" />
@@ -138,7 +139,6 @@
     <ClInclude Include="Class\Mathematics\Collision.h" />
     <ClInclude Include="Class\Mathematics\Polygon.h" />
     <ClInclude Include="Class\Mathematics\SweptAABB.h" />
-    <ClInclude Include="MapManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Framework\Camera.cpp" />
@@ -159,6 +159,7 @@
     <ClCompile Include="Class\Game\Entity\Bonus\RedMushroom.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Star.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
+    <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tile.cpp" />
     <ClCompile Include="Class\Game\Entity\MovableEntity.cpp" />
     <ClCompile Include="Class\Game\Entity\Player\Player.cpp" />
@@ -182,7 +183,6 @@
     <ClCompile Include="Class\Game\Utill\InformationResource.cpp" />
     <ClCompile Include="Class\Game\Utill\ShowBouding.cpp" />
     <ClCompile Include="Class\Game\WinMain.cpp" />
-    <ClCompile Include="Class\MapManager.cpp" />
     <ClCompile Include="Class\Mathematics\Box2D.cpp" />
     <ClCompile Include="Class\Mathematics\Collision.cpp" />
     <ClCompile Include="Class\Mathematics\Polygon.cpp" />

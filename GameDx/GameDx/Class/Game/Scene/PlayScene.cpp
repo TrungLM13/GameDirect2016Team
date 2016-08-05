@@ -1,7 +1,7 @@
 #include "PlayScene.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Scene\PopupInfo.h"
-
+#include "Class\Game\Entity\Map\MapManager.h"
 
 CPlayScene::CPlayScene()
 {
@@ -11,24 +11,12 @@ CPlayScene::CPlayScene()
 
 CPlayScene::~CPlayScene()
 {
-	for (int i = 0; i < 100; i++)
-	{
-		SAFE_RELEASE(this->listCoin.at(i));
-		SAFE_RELEASE(this->listStar.at(i));
-		SAFE_RELEASE(this->listBrick.at(i));
-	}
-
 }
 
 bool	CPlayScene::initScene()
 {
 	CPlayer::getInstance()->initEntity();
-	listCoin.push_back(new CCoin());
-	listStar.push_back(new CStar());
-	listBrick.push_back(new CBrick());
-	listRedMushroom.push_back(new CRedMushroom());
-	listGiftBox.push_back(new CGiftBox());
-	listMushroom.push_back(new CMushroom());
+	CMapManager::getInstance();
 	return true;
 }
 
@@ -36,65 +24,10 @@ void	CPlayScene::updateScene(double deltaTime)
 {
 	static int temp = 0;
 	CPlayer::getInstance()->updateEntity(deltaTime);
-
-	for (int i = 0; i < listMushroom.size(); ++i) {
-		listMushroom.at(i)->updateEntity(deltaTime);
-	}
-
-	for (int i = 0; i < listBrick.size(); ++i) {
-		listBrick.at(i)->updateEntity(deltaTime);
-	}
-
-	for (int i = 0; i < listCoin.size(); i++)
+	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
-		if (CCollision::CheckCollision(CPlayer::getInstance(), listCoin.at(i)))
-		{
-			temp++;
-			this->listCoin.erase(this->listCoin.begin() + i);
-		}
+		CMapManager::getInstance()->getListEnemy().at(i)->updateEntity(deltaTime);
 	}
-	OutputDebugString(L"PlayerVel.Y: ");
-	OutputDebugString(_itow(CPlayer::getInstance()->getVelocity().y, new WCHAR[1], 10));
-	OutputDebugString(L"\n");
-	for (int i = 0; i < listStar.size(); i++)
-	{
-		this->listStar.at(i)->updateEntity(deltaTime);	
-
-		if (CCollision::CheckCollision(CPlayer::getInstance(), listStar.at(i)))
-		{
-			CPlayer::getInstance()->setPlayerTag(PLAYERTAGS::UNDYING);
-			CPlayer::getInstance()->loadSprite();
-			temp++;
-			this->listStar.erase(this->listStar.begin() + i);
-		}
-	}
-
-	for (int i = 0; i < listBrick.size(); i++)
-	{
-		static bool isCollision = false;
-
-		if (CCollision::CheckCollision(CPlayer::getInstance(), listBrick.at(i))) {
-
-			// Update Player
-			if (CPlayer::getInstance()->getVelocity().y > 0) {
-				CPlayer::getInstance()->setVelocity(vector2d(CPlayer::getInstance()->getVelocity().x, CPlayer::getInstance()->getVelocity().y * (-1)));
-			}
-
-			// Update Brick
-			if (listBrick.at(i)->getVelocity().y < 0) {
-				listBrick.at(i)->setVelocity(vector2d(listBrick.at(i)->getVelocity().x, listBrick.at(i)->getVelocity().y * (-1)));
-			}
-
-			isCollision = true;
-		}
-		if (isCollision) {
-			if (listBrick.at(i)->getPosition().y > 200) {
-				listBrick.at(i)->setVelocity(vector2d(listBrick.at(i)->getVelocity().x, listBrick.at(i)->getVelocity().y * (-1)));
-			}
-			listBrick.at(i)->setPosition(vector3d(this->listBrick.at(i)->getPosition().x, this->listBrick.at(i)->getPosition().y + this->listBrick.at(i)->getVelocity().y *deltaTime / 50, 0));
-		}
-	}
-
 }
 
 void	CPlayScene::updateScene(CKeyBoard* keyboard)
@@ -103,11 +36,6 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 		return;
 
 	CPlayer::getInstance()->updateEntity(keyboard);
-	
-	for (int i = 0; i < listMushroom.size(); i++)
-	{
-		this->listMushroom.at(i)->updateEntity(keyboard);
-	}
 
 }
 
@@ -117,31 +45,9 @@ void	CPlayScene::renderScene()
 
 	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
 
-	for (int i = 0; i < listCoin.size(); i++)
+	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
-		this->listCoin.at(i)->drawEntity();
-	}
-	for (int i = 0; i < listStar.size(); i++)
-	{
-		this->listStar.at(i)->drawEntity();
+		CMapManager::getInstance()->getListEnemy().at(i)->drawEntity();
 	}
 
-	for (int i = 0; i < listBrick.size(); i++)
-	{
-		this->listBrick.at(i)->drawEntity();
-		CShowBouding::getInstance()->drawBouding(this->listBrick.at(i));
-	}
-	
-	for (int i = 0; i < listRedMushroom.size(); i++)
-	{
-		this->listRedMushroom.at(i)->drawEntity();
-	}
-	for (int i = 0; i < listGiftBox.size(); i++)
-	{
-		this->listGiftBox.at(i)->drawEntity();
-	}
-	for (int i = 0; i < listMushroom.size(); i++)
-	{
-		this->listMushroom.at(i)->drawEntity();
-	}
 }

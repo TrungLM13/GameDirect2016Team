@@ -22,13 +22,6 @@ public:
 	virtual void updateScene(CKeyBoard* keyboard)	override;
 	virtual void renderScene()						override;
 
-private:
-	vector<CCoin*>			listCoin;
-	vector<CStar*>			listStar;
-	vector<CBrick*>			listBrick;
-	vector<CRedMushroom*>	listRedMushroom;
-	vector<CGiftBox*>		listGiftBox;
-	vector<CMushroom*>		listMushroom;
 };
 
 #endif

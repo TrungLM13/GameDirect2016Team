@@ -160,6 +160,19 @@ struct MapIntro
 	int				m_helths;
 };
 
+struct MapInfo
+{
+	std::string		m_mapName;
+	std::string		m_pathData;
+	MapInfo(){
+		m_mapName		= "NOPE";
+		m_pathData		= "NOPE";
+	}
+	MapInfo(std::string mapName, std::string pathData){
+		m_mapName		= mapName;
+		m_pathData		= pathData;
+	}
+};
 struct KeyState
 {
 	int KeyCode;

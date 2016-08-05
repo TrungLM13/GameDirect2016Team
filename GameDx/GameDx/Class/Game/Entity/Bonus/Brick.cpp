@@ -11,6 +11,12 @@ CBrick::CBrick()
 	this->initEntity();
 }
 
+CBrick::CBrick(vector2d pos)
+{
+	this->initEntity();
+	m_Position.x = pos.x;
+	m_Position.y = pos.y;
+}
 
 CBrick:: ~CBrick()
 {

@@ -7,6 +7,7 @@ class CBrick : public CMovable
 {
 public:
 	CBrick();
+	CBrick(vector2d pos);
 	~CBrick();
 	virtual	bool			loadSprite()											override;
 	virtual	bool			initEntity()											override;

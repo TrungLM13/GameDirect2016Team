@@ -55,9 +55,6 @@
     <ClCompile Include="Class\Game\Scene\SelectStageScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Class\MapManager.cpp">
-      <Filter>Game\MapManager</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Test\Test.cpp">
       <Filter>Game\Test</Filter>
     </ClCompile>
@@ -133,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="Class\Game\Utill\ShowBouding.cpp">
       <Filter>Game\Utill</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp">
+      <Filter>Game\MapManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,7 +286,7 @@
     <ClInclude Include="Class\Game\Utill\ShowBouding.h">
       <Filter>Game\Utill</Filter>
     </ClInclude>
-    <ClInclude Include="MapManager.h">
+    <ClInclude Include="Class\Game\Entity\Map\MapManager.h">
       <Filter>Game\MapManager</Filter>
     </ClInclude>
   </ItemGroup>
