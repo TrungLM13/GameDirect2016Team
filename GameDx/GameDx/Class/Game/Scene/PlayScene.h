@@ -18,8 +18,8 @@ public:
 	~CPlayScene();
 
 	virtual bool initScene()						override;
-	virtual void updateScene(CKeyBoard*)			override;
 	virtual void updateScene(double deltaTime)		override;
+	virtual void updateScene(CKeyBoard* keyboard)	override;
 	virtual void renderScene()						override;
 
 private:

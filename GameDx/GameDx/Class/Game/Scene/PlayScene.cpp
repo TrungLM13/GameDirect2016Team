@@ -1,7 +1,6 @@
 #include "PlayScene.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Scene\PopupInfo.h"
-#include "Class\Mathematics\T_Collision.h"
 
 
 CPlayScene::CPlayScene()
@@ -48,20 +47,20 @@ void	CPlayScene::updateScene(double deltaTime)
 
 	for (int i = 0; i < listCoin.size(); i++)
 	{
-		if (Collision::getInstance()->isCollision(CPlayer::getInstance(), listCoin.at(i)))
+		if (CCollision::CheckCollision(CPlayer::getInstance(), listCoin.at(i)))
 		{
 			temp++;
 			this->listCoin.erase(this->listCoin.begin() + i);
 		}
 	}
-	OutputDebugString(L"SCORE: ");
-	OutputDebugString(_itow(temp, new WCHAR[1], 10));
+	OutputDebugString(L"PlayerVel.Y: ");
+	OutputDebugString(_itow(CPlayer::getInstance()->getVelocity().y, new WCHAR[1], 10));
 	OutputDebugString(L"\n");
 	for (int i = 0; i < listStar.size(); i++)
 	{
-		this->listStar.at(i)->updateEntity(deltaTime);
+		this->listStar.at(i)->updateEntity(deltaTime);	
 
-		if (Collision::getInstance()->isCollision(CPlayer::getInstance(), listStar.at(i)))
+		if (CCollision::CheckCollision(CPlayer::getInstance(), listStar.at(i)))
 		{
 			CPlayer::getInstance()->setPlayerTag(PLAYERTAGS::UNDYING);
 			CPlayer::getInstance()->loadSprite();
@@ -74,15 +73,18 @@ void	CPlayScene::updateScene(double deltaTime)
 	{
 		static bool isCollision = false;
 
-		if (Collision::getInstance()->isCollision(CPlayer::getInstance(), listBrick.at(i))) {
+		if (CCollision::CheckCollision(CPlayer::getInstance(), listBrick.at(i))) {
+
 			// Update Player
 			if (CPlayer::getInstance()->getVelocity().y > 0) {
 				CPlayer::getInstance()->setVelocity(vector2d(CPlayer::getInstance()->getVelocity().x, CPlayer::getInstance()->getVelocity().y * (-1)));
 			}
+
 			// Update Brick
 			if (listBrick.at(i)->getVelocity().y < 0) {
 				listBrick.at(i)->setVelocity(vector2d(listBrick.at(i)->getVelocity().x, listBrick.at(i)->getVelocity().y * (-1)));
 			}
+
 			isCollision = true;
 		}
 		if (isCollision) {

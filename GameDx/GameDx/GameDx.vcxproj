@@ -133,13 +133,12 @@
     <ClInclude Include="Class\Game\Utill\InformationResource.h" />
     <ClInclude Include="Class\Game\Utill\ShowBouding.h" />
     <ClInclude Include="Class\Game\Utill\stdafx.h" />
-    <ClInclude Include="Class\MapManager.h" />
     <ClInclude Include="Class\Mathematics\AABB.h" />
     <ClInclude Include="Class\Mathematics\Box2D.h" />
     <ClInclude Include="Class\Mathematics\Collision.h" />
     <ClInclude Include="Class\Mathematics\Polygon.h" />
     <ClInclude Include="Class\Mathematics\SweptAABB.h" />
-    <ClInclude Include="Class\Mathematics\T_Collision.h" />
+    <ClInclude Include="MapManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Framework\Camera.cpp" />
@@ -187,7 +186,6 @@
     <ClCompile Include="Class\Mathematics\Box2D.cpp" />
     <ClCompile Include="Class\Mathematics\Collision.cpp" />
     <ClCompile Include="Class\Mathematics\Polygon.cpp" />
-    <ClCompile Include="Class\Mathematics\T_Collision.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

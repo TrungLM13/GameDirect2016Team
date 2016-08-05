@@ -67,6 +67,11 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 }
 
 void CRunState::update(CPlayer& player, double deltaTime) {
+	if (player.getVelocity().x == 0)
+	{
+		player.setVelocity(vector2d(9.8, player.getVelocity().y));
+	}
+
 	if (player.getPosition().x <= BACKBUFFER_WIDTH || player.getPosition().x >= 0)
 		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 100, player.getPosition().y, 0));
 }

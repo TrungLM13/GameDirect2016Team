@@ -62,7 +62,6 @@ Test::Test(LPDIRECT3DDEVICE9 device)
 	dynamicBox->setX(m_positionStatic.x);
 	dynamicBox->setY(m_positionStatic.y);
 
-	checkCollision = new Collision();
 
 	//m_StaticObject->m_Bounding = new CBox2D(m_StaticObject->getBounding(), vector2dZero);
 }
@@ -111,74 +110,7 @@ void Test::Update(CKeyBoard* device)
 	this->moveBox->setVelocityY(vx->y);
 	this->moveBox->setX(this->m_position.x);
 	this->moveBox->setY(this->m_position.y);
-COLDIRECTION col = checkCollision->isCollision(*moveBox, *dynamicBox);
-	if (col != COLDIRECTION::COLDIRECTION_NONE)
-	{
-		if (col == COLDIRECTION::COLDIRECTION_BOTTOM)
-		{
-			OutputDebugString(L"COLLISION - bottom : ");
-			OutputDebugString(L"\n");
-		}
-		if (col == COLDIRECTION::COLDIRECTION_RIGHT)
-		{
-			OutputDebugString(L"COLLISION - right: ");
-			OutputDebugString(L"\n");
-		}
-		if (col == COLDIRECTION::COLDIRECTION_LEFT)
-		{
-			OutputDebugString(L"COLLISION - left : ");
-			OutputDebugString(L"\n");
-		}
-		if (col == COLDIRECTION::COLDIRECTION_TOP)
-		{
-			OutputDebugString(L"COLLISION - top : ");
-			OutputDebugString(L"\n");
-		}
-		vx->x = abs(vx->x);
-		vx->y = abs(vx->y);
-	}
-else
-{
-	OutputDebugString(L"NONECOLLISION  : ");
-	OutputDebugString(L"\n");
-	vx->x = abs(vx->x);
-	vx->y = abs(vx->y);
-}
 
-//COLDIRECTION col = checkCollision->isCollision(*moveBox, *dynamicBox);
-//	if (col != COLDIRECTION::COLDIRECTION_NONE)
-//		{
-//			if (col == COLDIRECTION::COLDIRECTION_BOTTOM)
-//			{
-//				OutputDebugString(L"COLLISION - BOTTOM : ");
-//				OutputDebugString(L"\n");
-//			}
-//			else if (col == COLDIRECTION::COLDIRECTION_TOP)
-//			{
-//				OutputDebugString(L"COLLISION - TOP: ");
-//				OutputDebugString(L"\n");
-//			}
-//			if (col == COLDIRECTION::COLDIRECTION_RIGHT)
-//			{
-//				OutputDebugString(L"COLLISION - RIGHT : ");
-//				OutputDebugString(L"\n");
-//			}
-//			if (col == COLDIRECTION::COLDIRECTION_LEFT)
-//			{
-//				OutputDebugString(L"COLLISION - LEFT : ");
-//				OutputDebugString(L"\n");
-//			}
-//			OutputDebugString(L"Pos x: ");
-//			OutputDebugString(_itow(moveBox->getX(), new WCHAR[1], 10));
-//			OutputDebugString(L"\n");
-//			OutputDebugString(L"Pos y: ");
-//			OutputDebugString(_itow(moveBox->getY(), new WCHAR[1], 10));
-//			OutputDebugString(L"\n");
-//			OutputDebugString(L"VEC y: ");
-//			OutputDebugString(_itow(moveBox->getVelocityY(), new WCHAR[1], 10));
-//			OutputDebugString(L"\n");
-//		
-//	}
 	m_Bounding->update(CTimer::getInstance()->getElapedTime(), vector2d(m_position.x, m_position.y));
 
 

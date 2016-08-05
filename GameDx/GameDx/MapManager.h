@@ -2,8 +2,8 @@
 #define _MAP_H_
 
 #include <vector>
-#include "Game\Entity\Map\Tile.h"
-#include "Game\Entity\StaticEntity.h"
+#include "Class\Game\Entity\Map\Tile.h"
+#include "Class\Game\Entity\StaticEntity.h"
 
 using namespace std;
 
@@ -12,7 +12,7 @@ class Map
 public:
 	Map();
 	~Map();
-	
+
 	vector<CTile *> listTile;
 
 	vector<CSprite *> m_listSprite;
@@ -21,7 +21,7 @@ public:
 	void drawEntity();
 	//void Update(float);
 public:
-	
+
 };
 
 

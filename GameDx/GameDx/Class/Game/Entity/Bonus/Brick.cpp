@@ -4,7 +4,6 @@
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\State\StandState.h"
-#include "Class\Mathematics\T_Collision.h"
 
 
 CBrick::CBrick()

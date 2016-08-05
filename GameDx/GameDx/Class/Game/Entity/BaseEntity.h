@@ -29,6 +29,7 @@ public:
 	virtual void			drawEntity()										= 0;
 	virtual	CBox2D			getBounding()										= 0;
 	virtual const char*		getTagNode()										= 0;
+	virtual vector2d		getVelocity()										= 0;
 
 protected:
 	int						m_State;
@@ -36,6 +37,10 @@ protected:
 	CBox2D*					m_Bounding;
 	vector3d				m_Position;
 	vector<CSprite*>		m_listSprite;
+
+
+protected:
+	vector2d				m_Velocity;
 
 };
 

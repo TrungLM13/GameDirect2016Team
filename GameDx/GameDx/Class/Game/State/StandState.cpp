@@ -59,4 +59,5 @@ CBaseState* CStandState::handleInput(CPlayer& player, CKeyBoard* input){
 }
 
 void CStandState::update(CPlayer& player, double deltaTime) {
+		player.setVelocity(vector2d(0, player.getVelocity().y));
 }

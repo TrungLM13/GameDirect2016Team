@@ -55,6 +55,10 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 	double deltaX = 0;
 
 	if (m_IsMoveX) {
+		if (player.getVelocity().x == 0)
+		{
+			player.setVelocity(vector2d(9.8, 9.8));
+		}
 		deltaX = player.getVelocity().x * deltaTime / 100;
 	}
 
@@ -66,7 +70,6 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 		if (player.getPosition().y >= 150)
 			player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y *(-1)));
 	}
-
 
 	player.setPosition(vector3d(player.getPosition().x + deltaX, player.getPosition().y + player.getVelocity().y *deltaTime / 40, 0));
 }

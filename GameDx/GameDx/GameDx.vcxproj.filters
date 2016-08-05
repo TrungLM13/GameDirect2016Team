@@ -119,9 +119,6 @@
       <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
     <ClCompile Include="Class\Game\WinMain.cpp" />
-    <ClCompile Include="Class\Mathematics\T_Collision.cpp">
-      <Filter>Mathermatic</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Entity\Bonus\GiftBox.cpp">
       <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
@@ -211,9 +208,6 @@
     <ClInclude Include="Class\Game\Scene\SelectStageScene.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Class\MapManager.h">
-      <Filter>Game\MapManager</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Test\Test.h">
       <Filter>Game\Test</Filter>
     </ClInclude>
@@ -277,9 +271,6 @@
     <ClInclude Include="Class\Mathematics\AABB.h">
       <Filter>Mathermatic</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Mathematics\T_Collision.h">
-      <Filter>Mathermatic</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\GiftBox.h">
       <Filter>Game\Entity\Bonus</Filter>
     </ClInclude>
@@ -294,6 +285,9 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Utill\ShowBouding.h">
       <Filter>Game\Utill</Filter>
+    </ClInclude>
+    <ClInclude Include="MapManager.h">
+      <Filter>Game\MapManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

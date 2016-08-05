@@ -168,9 +168,18 @@ float	CBox2D::getVelocityY()
 	return m_Velocity.y;
 }
 
+vector2d CBox2D::getVelocity(){
+	return m_Velocity;
+}
+
 void CBox2D::setVelocityY(float param1)
 {
 	m_Velocity.y = param1;
+}
+
+void CBox2D::setVelocity(vector2d newVel){
+	m_Velocity.x = newVel.x;
+	m_Velocity.y = newVel.y;
 }
 
 bool CBox2D::Intersect(CBox2D box1, CBox2D box2)

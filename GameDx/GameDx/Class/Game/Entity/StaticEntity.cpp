@@ -39,3 +39,8 @@ const char* CStaticEntity::getTagNode()
 {
 	return this->m_TagNode;
 }
+
+vector2d CStaticEntity::getVelocity()
+{
+	return m_Velocity;
+}
