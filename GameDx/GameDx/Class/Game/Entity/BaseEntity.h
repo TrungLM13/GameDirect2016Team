@@ -45,6 +45,7 @@ protected:
 protected:
 	vector2d				m_Velocity;
 
+
 };
 
 

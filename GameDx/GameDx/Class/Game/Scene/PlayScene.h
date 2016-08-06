@@ -11,6 +11,7 @@
 #include "Class\Game\Entity\Bonus\GiftBox.h"
 #include "Class\Game\Entity\Enemy\Mushroom.h"
 
+
 #include "Class\Game\Entity\Tile\Flag.h"
 
 #include "Class\Game\Entity\Map\Tile.h"
@@ -21,6 +22,9 @@
 #include "Class\Game\Entity\Tile\FlagCastle.h"
 
 #include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
+
+#include "Class\Game\Entity\Enemy\Turtle.h"
+
 class CPlayScene :
 	public CBaseScene
 {

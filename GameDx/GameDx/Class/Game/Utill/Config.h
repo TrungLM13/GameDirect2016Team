@@ -8,7 +8,6 @@
 
 #include <tchar.h>
 #include <iostream>
-#include <map>
 
 /*DEFINE*/
 #define FPS							60
@@ -222,6 +221,7 @@ enum MUSHROOM_STATE
 	MUSH_DIE = 1
 };
 
+
 enum TAGNODE
 {
 	NONE = 0,
@@ -239,6 +239,27 @@ enum TAGNODE
 	FLAG_POLE = 12,
 	FLAG_POLE_TAIL = 13,
 	MUSHROOM = 14
+};
+
+
+enum TURTLE_STATE
+{
+	TURTLE_RUN = 0,
+	TURTLE_ENSCONSE =1,
+	TURTLE_DIE = 1,
+	TURTLE_SURGING = 1,
+	TURTLE_FLY = 3,
+	TURTLE_INDENT = 2
+
+};
+
+enum TURTLE_TAG
+{
+	GREEN = 0,
+	RED = 1,
+	NAVI = 2,
+	THORN = 3
+
 };
 
 /******************************/

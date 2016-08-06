@@ -22,7 +22,7 @@ bool	CPlayScene::initScene()
 {
 	CMapManager::getInstance();
 
-	CPlayer::getInstance()->initEntity();
+	CPlayer::getInstance();
 
 	m_ListEntity.push_back(new CStar());
 	m_ListEntity.push_back(new CRedMushroom());
@@ -30,6 +30,8 @@ bool	CPlayScene::initScene()
 	m_ListEntity.push_back(new CFlagPole());
 	m_ListEntity.push_back(new CFlagPoleTail());
 	m_ListEntity.push_back(new CTile());
+	Turtle::getInstance()->initEntity();
+
 
 	return true;
 }
@@ -37,6 +39,7 @@ bool	CPlayScene::initScene()
 void	CPlayScene::updateScene(double deltaTime)
 {
 	CPlayer::getInstance()->updateEntity(deltaTime);
+	Turtle::getInstance()->updateEntity(deltaTime);
 
 
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
@@ -58,6 +61,14 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 		return;
 
 	CPlayer::getInstance()->updateEntity(keyboard);
+
+	Turtle::getInstance()->updateEntity(keyboard);
+	
+	for (int i = 0; i < listMushroom.size(); i++)
+	{
+		this->listMushroom.at(i)->updateEntity(keyboard);
+	}
+
 }
 
 void	CPlayScene::renderScene()
@@ -70,6 +81,12 @@ void	CPlayScene::renderScene()
 
 
 	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
+
+	//CPlayer::getInstance()->drawEntity();
+	Turtle::getInstance()->drawEntity();
+	//CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
+	//CShowBouding::getInstance()->drawBouding(Turtle::getInstance());
+
 
 
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)

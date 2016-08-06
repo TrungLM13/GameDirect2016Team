@@ -109,6 +109,23 @@ public:
 	static const wchar_t*	grass_middle_map3;
 	static const wchar_t*	grass_right_map3;
 
+	/************RESOURCE FOR TURTLE****************/
+	static const wchar_t*	greenturtle_fly;
+	static const wchar_t*	greenturtle_run;
+	static const wchar_t*	greenturtle_ensconse;
+	static const wchar_t*	greenturtle_indent;
+	static const wchar_t*	redturtle_fly;
+	static const wchar_t*	redturtle_run;
+	static const wchar_t*	redturtle_ensconse;
+	static const wchar_t*	redturtle_indent;
+	static const wchar_t*	thornturtle_run;
+	static const wchar_t*	thornturtle_ensconse;
+	static const wchar_t*	thornturtle_indent;
+	static const wchar_t*	naviturtle_run;
+	static const wchar_t*	naviturtle_fly;
+	static const wchar_t*	naviturtle_ensconse;
+	static const wchar_t*	naviturtle_indent;
+
 };
 
 #endif
