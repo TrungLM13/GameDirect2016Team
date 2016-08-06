@@ -31,6 +31,8 @@ bool	CPlayScene::initScene()
 	m_ListEntity.push_back(new CFlagPoleTail());
 	m_ListEntity.push_back(new CTile());
 	Turtle::getInstance()->initEntity();
+	Elevator::getInstance()->initEntity();
+
 
 
 	return true;
@@ -40,6 +42,7 @@ void	CPlayScene::updateScene(double deltaTime)
 {
 	CPlayer::getInstance()->updateEntity(deltaTime);
 	Turtle::getInstance()->updateEntity(deltaTime);
+	Elevator::getInstance()->updateEntity(deltaTime);
 
 
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
@@ -63,6 +66,7 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 	CPlayer::getInstance()->updateEntity(keyboard);
 
 	Turtle::getInstance()->updateEntity(keyboard);
+	Elevator::getInstance()->updateEntity(keyboard);
 }
 
 void	CPlayScene::renderScene()
@@ -78,6 +82,7 @@ void	CPlayScene::renderScene()
 
 	//CPlayer::getInstance()->drawEntity();
 	Turtle::getInstance()->drawEntity();
+	Elevator::getInstance()->drawEntity();
 	//CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
 	//CShowBouding::getInstance()->drawBouding(Turtle::getInstance());
 

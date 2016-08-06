@@ -259,9 +259,15 @@ enum TURTLE_TAG
 	RED = 1,
 	NAVI = 2,
 	THORN = 3
-
 };
 
+enum ELEVATOR_STATE
+{
+	UP = 1,
+	DOWN = 2,
+	RIGHT = 3,
+	LEFT = 4
+};
 /******************************/
 
 /*CONST*/

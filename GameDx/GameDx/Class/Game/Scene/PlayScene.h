@@ -24,6 +24,7 @@
 #include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
 
 #include "Class\Game\Entity\Enemy\Turtle.h"
+#include "Class\Game\Entity\Tile\Elevator.h"
 
 class CPlayScene :
 	public CBaseScene

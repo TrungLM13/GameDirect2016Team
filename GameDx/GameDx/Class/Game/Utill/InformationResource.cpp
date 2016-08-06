@@ -98,7 +98,8 @@ const wchar_t*		CInfomationResource::grass_normal_map1			= L"Resource//Image//Ga
 const wchar_t*		CInfomationResource::grass_big_map1				= L"Resource//Image//Game//Tile//map-1//1_cay_co.png";
 const wchar_t*		CInfomationResource::grass_left_map3			= L"Resource//Image//Game//Tile//map-3//grass_first.png";
 const wchar_t*		CInfomationResource::grass_middle_map3			= L"Resource//Image//Game//Tile//map-3//grass_mid.png";
-const wchar_t*		CInfomationResource::grass_right_map3			= L"Resource//Image//Game//Tile//map-3//grass_last.png";
+const wchar_t*		CInfomationResource::grass_right_map3			= L"Resource//Image//Game//Tile//map-3//grass_last.png"; 
+const wchar_t*		CInfomationResource::elevator					= L"Resource//Image//Game//Tile//map-2//thang_may.png";
 
 /************RESOURCE FOR TURTLE *************/
 
@@ -112,7 +113,6 @@ const wchar_t*		CInfomationResource::redturtle_ensconse         = L"Resource//Im
 const wchar_t*		CInfomationResource::redturtle_indent           = L"Resource//Image//Game//Enemies//rua_do_loi_chan.png";
 const wchar_t*		CInfomationResource::thornturtle_run            = L"Resource//Image//Game//Enemies//rua_gai_run.png";
 const wchar_t*		CInfomationResource::thornturtle_ensconse       = L"Resource//Image//Game//Enemies//rua_gai_tron.png";
-const wchar_t*		CInfomationResource::thornturtle_indent         = L"Resource//Image//Game//Enemies//rua_gai_tron.png";
 const wchar_t*		CInfomationResource::naviturtle_fly             = L"Resource//Image//Game//Enemies//rua_lam_bay.png";
 const wchar_t*		CInfomationResource::naviturtle_run             = L"Resource//Image//Game//Enemies//rua_lam_run.png";
 const wchar_t*		CInfomationResource::naviturtle_ensconse        = L"Resource//Image//Game//Enemies//rua_lam_thut_dau.png";

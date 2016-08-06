@@ -108,6 +108,8 @@ public:
 	static const wchar_t*	grass_left_map3;
 	static const wchar_t*	grass_middle_map3;
 	static const wchar_t*	grass_right_map3;
+	static const wchar_t*	elevator;
+
 
 	/************RESOURCE FOR TURTLE****************/
 	static const wchar_t*	greenturtle_fly;

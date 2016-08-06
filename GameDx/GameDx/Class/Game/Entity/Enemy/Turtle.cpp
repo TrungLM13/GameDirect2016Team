@@ -29,7 +29,7 @@ bool Turtle::initEntity()
 
 	m_State = TURTLE_STATE::TURTLE_RUN;
 	m_Turtle_State = new TRunState();
-	m_Turtle_Tag = TURTLE_TAG::RED;
+	m_Turtle_Tag = TURTLE_TAG::NAVI;
 	m_TagNode = "Turtle";
 
 	m_Acceleration = vector2d(0.5f, 0);
@@ -70,8 +70,7 @@ bool Turtle::loadSprite()
 		break;
 	case TURTLE_TAG::THORN:
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::thornturtle_run, 1, 2, 2, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::thornturtle_ensconse, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::thornturtle_indent, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::thornturtle_ensconse, 1, 2, 2, 0));
 		break;
 	default:
 		break;

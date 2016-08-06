@@ -130,7 +130,7 @@
     </ClCompile>
     <ClCompile Include="Class\Game\Utill\ShowBouding.cpp">
       <Filter>Game\Utill</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\RedMushroom.cpp">
       <Filter>Game\Entity\Bonus</Filter>
@@ -188,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="Class\Game\State\TurtleState\TurtleSurfingState.cpp">
       <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\Elevator.cpp">
+      <Filter>Game\Entity\Tile\Elevator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,7 +346,7 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Map\MapManager.h">
       <Filter>Game\MapManager</Filter>
- 	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Class\Game\Entity\Tile\Flag.h">
       <Filter>Game\Entity\Tile\Flag</Filter>
     </ClInclude>
@@ -367,7 +370,7 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Map\Grass.h">
       <Filter>Game\Entity\Tile</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h">
       <Filter>Game\Entity\Enemies</Filter>
     </ClInclude>
@@ -391,6 +394,10 @@
     </ClInclude>
     <ClInclude Include="Class\Game\State\TurtleState\TurtleSurfingState.h">
       <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\MapManager.h" />
+    <ClInclude Include="Class\Game\Entity\Tile\Elevator.h">
+      <Filter>Game\Entity\Tile\Elevator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -465,6 +472,9 @@
     </Filter>
     <Filter Include="Game\State\TurtleState">
       <UniqueIdentifier>{91b2aec1-54b9-49dc-88c7-4ce444db3e4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Tile\Elevator">
+      <UniqueIdentifier>{7f40330b-c2c8-452b-be80-c8d5cb90322a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

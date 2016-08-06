@@ -117,6 +117,7 @@
     <ClInclude Include="Class\Game\Entity\Player\Player.h" />
     <ClInclude Include="Class\Game\Entity\StaticEntity.h" />
     <ClInclude Include="Class\Game\Entity\Tile\Castle.h" />
+    <ClInclude Include="Class\Game\Entity\Tile\Elevator.h" />
     <ClInclude Include="Class\Game\Entity\Tile\Flag.h" />
     <ClInclude Include="Class\Game\Entity\Tile\FlagCastle.h" />
     <ClInclude Include="Class\Game\Entity\Tile\FlagPole.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Class\Game\Entity\Player\Player.cpp" />
     <ClCompile Include="Class\Game\Entity\StaticEntity.cpp" />
     <ClCompile Include="Class\Game\Entity\Tile\Castle.cpp" />
+    <ClCompile Include="Class\Game\Entity\Tile\Elevator.cpp" />
     <ClCompile Include="Class\Game\Entity\Tile\Flag.cpp" />
     <ClCompile Include="Class\Game\Entity\Tile\FlagCastle.cpp" />
     <ClCompile Include="Class\Game\Entity\Tile\FlagPole.cpp" />
