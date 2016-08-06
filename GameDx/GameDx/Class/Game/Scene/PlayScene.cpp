@@ -63,12 +63,6 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 	CPlayer::getInstance()->updateEntity(keyboard);
 
 	Turtle::getInstance()->updateEntity(keyboard);
-	
-	for (int i = 0; i < listMushroom.size(); i++)
-	{
-		this->listMushroom.at(i)->updateEntity(keyboard);
-	}
-
 }
 
 void	CPlayScene::renderScene()
