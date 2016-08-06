@@ -24,9 +24,13 @@ CGrass::CGrass(vector2d newPos, int type)
 
 bool	CGrass::loadSprite()
 {
-	m_listSprite.push_back(new CSprite(CInfomationResource::grass_left,		1, 1));
-	m_listSprite.push_back(new CSprite(CInfomationResource::grass_middle,	1, 1));
-	m_listSprite.push_back(new CSprite(CInfomationResource::grass_right,	1, 1));
+	m_listSprite.push_back(new CSprite(CInfomationResource::grass_small_map1,		1, 1));
+	m_listSprite.push_back(new CSprite(CInfomationResource::grass_normal_map1,		1, 1));
+	m_listSprite.push_back(new CSprite(CInfomationResource::grass_big_map1,			1, 1));
+
+	m_listSprite.push_back(new CSprite(CInfomationResource::grass_left_map3,		1, 1));
+	m_listSprite.push_back(new CSprite(CInfomationResource::grass_middle_map3,		1, 1));
+	m_listSprite.push_back(new CSprite(CInfomationResource::grass_right_map3,		1, 1));
 	
 	return true;
 }

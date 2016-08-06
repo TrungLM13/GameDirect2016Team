@@ -93,6 +93,9 @@ const wchar_t*		CInfomationResource::mushroomenemy_die			= L"Resource//Image//Ga
 
 /************RESOURCE FOR TILE****************/
 
-const wchar_t*		CInfomationResource::grass_left					= L"Resource//Image//Game//Tile//map-3//grass_first.png";
-const wchar_t*		CInfomationResource::grass_middle				= L"Resource//Image//Game//Tile//map-3//grass_mid.png";
-const wchar_t*		CInfomationResource::grass_right				= L"Resource//Image//Game//Tile//map-3//grass_last.png";
+const wchar_t*		CInfomationResource::grass_small_map1			= L"Resource//Image//Game//Tile//map-1//1_cay_co.png";
+const wchar_t*		CInfomationResource::grass_normal_map1			= L"Resource//Image//Game//Tile//map-1//1_cay_co.png";
+const wchar_t*		CInfomationResource::grass_big_map1				= L"Resource//Image//Game//Tile//map-1//1_cay_co.png";
+const wchar_t*		CInfomationResource::grass_left_map3			= L"Resource//Image//Game//Tile//map-3//grass_first.png";
+const wchar_t*		CInfomationResource::grass_middle_map3			= L"Resource//Image//Game//Tile//map-3//grass_mid.png";
+const wchar_t*		CInfomationResource::grass_right_map3			= L"Resource//Image//Game//Tile//map-3//grass_last.png";

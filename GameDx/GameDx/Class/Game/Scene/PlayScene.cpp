@@ -13,7 +13,6 @@ CPlayScene::CPlayScene()
 	this->initScene();
 }
 
-
 CPlayScene::~CPlayScene()
 {
 	m_ListEntity.clear();

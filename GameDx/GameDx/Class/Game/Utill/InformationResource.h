@@ -102,9 +102,12 @@ public:
 	static const wchar_t*	mushroomenemy_die;
 
 	/************RESOURCE FOR TILE*****************/
-	static const wchar_t*	grass_left;
-	static const wchar_t*	grass_middle;
-	static const wchar_t*	grass_right;
+	static const wchar_t*	grass_small_map1;
+	static const wchar_t*	grass_normal_map1;
+	static const wchar_t*	grass_big_map1;
+	static const wchar_t*	grass_left_map3;
+	static const wchar_t*	grass_middle_map3;
+	static const wchar_t*	grass_right_map3;
 
 };
 

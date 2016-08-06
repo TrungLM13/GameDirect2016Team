@@ -14,7 +14,7 @@ public:
 	virtual void updateEntity(CKeyBoard* device)	;
 	virtual void updateEntity(RECT* rectCamera)		;
 	virtual void drawEntity()						override;
-	virtual bool loadSprite()					override;
+	virtual bool loadSprite()						override;
 
 private:
 	int		m_TypeGrass;
