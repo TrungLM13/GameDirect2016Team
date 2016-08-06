@@ -18,7 +18,7 @@ CBaseState* CDieState::handleInput(CPlayer& player, CKeyBoard* input){
 }
 
 void CDieState::update(CPlayer& player, double deltaTime) {
-	if (player.getPosition().y >= 120)
+	if (player.getVelocity().y >= 0)
 	{
 		player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y * (-1)));
 	}

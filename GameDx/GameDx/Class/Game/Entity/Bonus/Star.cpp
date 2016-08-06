@@ -22,7 +22,7 @@ bool CStar::loadSprite()
 
 bool CStar::initEntity()
 {
-	m_Position = vector3d(50, 200, 0);
+	m_Position = vector3d(100, 200, 0);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(9.8, 9.8);
@@ -57,5 +57,9 @@ void CStar::drawEntity()
 void CStar::updateEntity(RECT* camera)
 {
 
+}
+
+int	CStar::getTagNodeId(){
+	return TAGNODE::STAR;
 }
 

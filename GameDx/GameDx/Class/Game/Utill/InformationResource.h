@@ -16,10 +16,10 @@ public:
 
 	/************RESOURCE FOR SMALLMARIO************/
 	static const wchar_t*	smallmario_cdir;
-	static const wchar_t*	smallmario_die;
-	static const wchar_t*	smallmario_jum;
-	static const wchar_t*	smallmario_run;
 	static const wchar_t*	smallmario_stand;
+	static const wchar_t*	smallmario_run;
+	static const wchar_t*	smallmario_jum;
+	static const wchar_t*	smallmario_die;
 
 	/************RESOURCE FOR BIGFIREMARIO************/
 	static const wchar_t*	bigfiremario_cdir;
@@ -36,6 +36,17 @@ public:
 	static const wchar_t*	smallfiremario_jum;
 	static const wchar_t*	smallfiremario_run;
 	/*************************************************/
+
+	/************RESOURCE FOR SMALLUNDYINGMARIO************/
+	static const wchar_t*	smallmario_undying_stand;
+	static const wchar_t*	smallmario_undying_run;
+	static const wchar_t*	smallmario_undying_jum;
+
+	/************RESOURCE FOR UNDYINGMARIO************/
+	static const wchar_t*	bigmario_undying_stand;
+	static const wchar_t*	bigmario_undying_run;
+	static const wchar_t*	bigmario_undying_jum;
+
 
 	/************FLAG RESOURCE*******/
 	static const wchar_t*	greenFlag;

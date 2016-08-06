@@ -33,6 +33,17 @@ const wchar_t*		CInfomationResource::smallfiremario_run			= L"Resource//Image//G
 
 /*******************************************/
 
+/************RESOURCE FOR SMALLUNDYINGMARIO************/
+ const wchar_t*	CInfomationResource::smallmario_undying_stand		= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_be_dung.png";
+ const wchar_t*	CInfomationResource::smallmario_undying_run			= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_be_run.png";
+ const wchar_t*	CInfomationResource::smallmario_undying_jum			= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_be_jum.png";
+																											  
+ /***********RESOURCE FOR UNDYINGMARIO************/															  
+ const wchar_t*	CInfomationResource::bigmario_undying_stand			= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_lon_dung.png";
+ const wchar_t*	CInfomationResource::bigmario_undying_run			= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_lon_run.png";
+ const wchar_t*	CInfomationResource::bigmario_undying_jum		= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_lon_jum.png";
+
+
 /************ENERMY RESOURCE*******/
 const wchar_t*	CInfomationResource::greenCarnivorousPlants			= L"Resource//Image//Game//Enemies//cay_xanh.png";
 const wchar_t*	CInfomationResource::blueCarnivorousPlants			= L"Resource//Image//Game//Enemies//cay_lam.png";

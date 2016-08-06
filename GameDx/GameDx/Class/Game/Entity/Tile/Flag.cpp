@@ -2,6 +2,7 @@
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
+#include "Class\Game\Entity\Player\Player.h"
 
 CFlag::CFlag()
 {
@@ -35,16 +36,18 @@ void CFlag::updateEntity(CKeyBoard* device)
 }
 void CFlag::updateEntity(float deltaTime)
 {
-	if (m_Position.y < 10)
-	{
-		m_Velocity.y = 0;
+	if (CPlayer::getInstance()->getStateInt() == PLAYERSTATES::CLIMB) {
+		if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_BOTTOM) {
+			m_Velocity.y = CPlayer::getInstance()->getVelocity().y;
+		}
+		else if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_NONE) {
+			m_Velocity.y = CPlayer::getInstance()->getVelocity().y * 1.5;
+		}
+		m_Position.y += m_Velocity.y * deltaTime / 30;
 	}
-	m_Position = vector3d(m_Position.x, m_Position.y + m_Velocity.y * deltaTime / 100, 0);
+
 }
 
-void updateEntity(CMovable* movable, float deltaTime) {
-	
-}
 void CFlag::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)

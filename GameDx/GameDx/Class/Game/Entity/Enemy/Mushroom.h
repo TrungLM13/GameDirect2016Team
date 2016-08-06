@@ -16,6 +16,7 @@ public:
 	void updateEntity(CKeyBoard *device);
 	void updateEntity(RECT* rectCamera);
 	void drawEntity();
+	int getTagNodeId();
 
 	bool loadSprite();
 

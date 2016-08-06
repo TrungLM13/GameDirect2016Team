@@ -29,14 +29,17 @@ public:
 	virtual int				getTagNodeId()											override;
 
 public:
-	void setPosition(vector3d position);
-	void setState(PLAYERSTATES state);
-	void setVelocity(vector2d velocity);
-	void setState(CBaseState* state);
-	CBaseState* getState();
-	void setPlayerTag(int playerTag);
-	int getPlayerTag();
+	void					setPosition(vector3d position);
+	void					setState(PLAYERSTATES state);
+	void					setVelocity(vector2d velocity);
+	void					setState(CBaseState* state);
+	CBaseState*				getState();
+	int						getStateInt();
+	void					setPlayerTag(int playerTag);
+	int						getPlayerTag();
+
 	bool					m_IsCollision;
+	vector<int>				m_Direction;
 
 protected:
 	vector2d				m_Acceleration;

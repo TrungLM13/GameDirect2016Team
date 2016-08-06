@@ -63,3 +63,7 @@ void	CMushroom::drawEntity()
 {
 	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(1, 1), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 5);
 }
+
+int CMushroom::getTagNodeId(){
+	return TAGNODE::MUSHROOM;
+}

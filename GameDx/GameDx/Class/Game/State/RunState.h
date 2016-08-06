@@ -11,11 +11,9 @@ public:
 	void enter(CPlayer& player);
 	CBaseState* handleInput(CPlayer& player, CKeyBoard* device);
 	void update(CPlayer& player, double deltaTime);
-	int  getMoveDirection();
-	void setMoveDirection(DIRECTION direction);
+	
 private:
 	bool m_IsShoot;
-	int m_MoveDirection;
 };
 
 #endif

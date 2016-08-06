@@ -3,7 +3,6 @@
 
 CRunState::CRunState() {
 	m_IsShoot = false;
-	m_MoveDirection = 0;
 }
 
 CRunState::~CRunState() {
@@ -21,8 +20,8 @@ void CRunState::enter(CPlayer& player) {
 
 CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 	if (input->KeyDown(DIK_RIGHT)) {
-		m_MoveDirection = DIRECTION::DIRECTION_RIGHT;
-		player.setVelocity(vector2d(9.8 * m_MoveDirection, player.getVelocity().y));
+		player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
+		player.setVelocity(vector2d(9.8 * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
 
 		if (player.getVelocity().x <= 0)
 		{
@@ -44,8 +43,8 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 		return this;
 	}
 	if (input->KeyDown(DIK_LEFT)) {
-		m_MoveDirection = DIRECTION::DIRECTION_LEFT;
-		player.setVelocity(vector2d(9.8 * m_MoveDirection, player.getVelocity().y));
+		player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_LEFT;
+		player.setVelocity(vector2d(9.8 * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
 
 		if (player.getVelocity().x >= 0)
 			player.setVelocity(vector2d(player.getVelocity().x * (-1), player.getVelocity().y));
@@ -79,12 +78,4 @@ void CRunState::update(CPlayer& player, double deltaTime) {
 	if (!player.m_IsCollision) {
 		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 100, player.getPosition().y, 0));
 	}
-}
-
-int  CRunState::getMoveDirection() {
-	return m_MoveDirection;
-}
-
-void CRunState::setMoveDirection(DIRECTION direction) {
-	m_MoveDirection = direction;
 }

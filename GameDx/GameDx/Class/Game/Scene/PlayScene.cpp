@@ -30,6 +30,9 @@ bool	CPlayScene::initScene()
 	m_ListEntity.push_back(new CFlagPole());
 	m_ListEntity.push_back(new CFlagPoleTail());
 	m_ListEntity.push_back(new CTile());
+	m_ListEntity.push_back(new CBrick());
+	m_ListEntity.push_back(new CMushroom());
+
 	Turtle::getInstance()->initEntity();
 	Elevator::getInstance()->initEntity();
 
@@ -53,6 +56,7 @@ void	CPlayScene::updateScene(double deltaTime)
 	CCamera::getInstance()->Update(CPlayer::getInstance()->getPosition());
 
 	for (int i = 0; i < m_ListEntity.size(); ++i) {
+	//	m_ListEntity.at(i)->updateEntity(deltaTime);
 		CPlayer::getInstance()->handleCollision(m_ListEntity.at(i), deltaTime);
 	}
 

@@ -11,7 +11,6 @@ public:
 	~CFlag();
 	virtual bool			initEntity()											override;
 	virtual void			updateEntity(float deltaTime)							override;
-			void			updateEntity(CMovable* movable, float deltaTime);
 	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
 	virtual void			drawEntity()											override;

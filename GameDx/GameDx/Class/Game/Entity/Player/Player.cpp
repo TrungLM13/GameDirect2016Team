@@ -24,11 +24,14 @@ CPlayer::CPlayer(directDevice device)
 bool CPlayer::initEntity()
 {
 	m_IsCollision = false;
+	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
+	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
+
 	m_UndyingTime = 0;
 	m_Position = vector3d(50, 70, 0.5);
 
 	m_State = PLAYERSTATES::STAND;
-	m_PlayerState = new CStandState();
+	m_PlayerState = new CJumpState();
 	m_PlayerTag = PLAYERTAGS::SMALL;
 
 	m_Acceleration = vector2d(0.5f, 0);
@@ -57,27 +60,41 @@ bool CPlayer::loadSprite()
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_run, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_jum, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
 
 		break;
 	case PLAYERTAGS::BIG:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_run, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jum, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_stand, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_stand, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_jum, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		break;
+	case PLAYERTAGS::SMALL_UNDYING:
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_jum, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
 		break;
 	case PLAYERTAGS::UNDYING:
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_jum, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		break;
+	case PLAYERTAGS::FIRE:
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_run, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jum, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		/*this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));
-		break;
-	case PLAYERTAGS::FIRE:
+
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));*/
 		break;
 	default:
 		break;
@@ -91,20 +108,22 @@ void CPlayer::updateEntity(float deltaTime)
 	if (this->m_PlayerTag == PLAYERTAGS::UNDYING)
 	{
 		if (m_UndyingTime >= 0)
-			m_UndyingTime--;
+			m_UndyingTime -= deltaTime;
 		else
 		{
 			this->m_PlayerTag = PLAYERTAGS::BIG;
+			this->loadSprite();
 		}
 	}
 
-	if (this->m_PlayerTag == PLAYERTAGS::UNDYING_SMALL)
+	else if (this->m_PlayerTag == PLAYERTAGS::SMALL_UNDYING)
 	{
 		if (m_UndyingTime >= 0)
-			m_UndyingTime--;
+			m_UndyingTime -= deltaTime;
 		else
 		{
 			this->m_PlayerTag = PLAYERTAGS::SMALL;
+			this->loadSprite();
 		}
 	}
 
@@ -146,6 +165,8 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		if (CCollision::CheckCollision(this, entity)) {
 			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
 				m_PlayerTag = PLAYERTAGS::UNDYING;
+				this->loadSprite();
+				this->m_UndyingTime = PLAYER_UNDYING_TIME;
 			}
 		}
 		break;
@@ -168,43 +189,64 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		}
 		break;
 	case TAGNODE::TILE:
-		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP)
-		{
-			this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-			this->m_PlayerState->exitCurrentState(*this, new CStandState());
+		if (this->m_State != PLAYERSTATES::DIE) {
+			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP)
+			{
+				this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+				this->m_PlayerState->exitCurrentState(*this, new CStandState());
+				this->m_PlayerState->enter(*this);
+			}
+
+		}
+		else {
+			if (this->m_Velocity.y >= 0)
+			{
+				this->m_Velocity.y *= -1;
+			}
 		}
 		break;
 	case TAGNODE::FLAG:
+		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
+		{
+
+		}
 		break;
 	case TAGNODE::FLAG_POLE:
+
+		break;
+	case TAGNODE::FLAG_POLE_TAIL:
 		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
 		{
 			m_IsCollision = true;
+
 			if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
 				this->m_PlayerState->exitCurrentState(*this, new CClimbState());
 			}
-			if (this->m_PlayerState->getMoveDirection() == COLDIRECTION::COLDIRECTION_RIGHT)
+			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
+			{
 				m_Velocity.x = 0;
-			//m_Position.x = entity->getPosition().x - entity->getBounding().getWidth() / 2 - this->getBounding().getWidth() / 2;
-			else if (this->m_PlayerState->getMoveDirection() == COLDIRECTION::COLDIRECTION_LEFT) {
-				this->m_Velocity.x = 9.8 * this->m_PlayerState->getMoveDirection();
+				//m_Position.x = entity->getPosition().x - entity->getBounding().getWidth() / 2 - this->getBounding().getWidth() / 2;
+			}
+			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+				m_IsCollision = false;
+				this->m_Velocity.x = 9.8 * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
 			}
 
 		}
 		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE)
 			m_IsCollision = false;
 		break;
-	case TAGNODE::FLAG_POLE_TAIL:
-		break;
 	case TAGNODE::MUSHROOM:
 		if (CCollision::CheckCollision(this, entity)) {
 			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
 				this->m_PlayerState->exitCurrentState(*this, new CDieState());
+				this->m_PlayerState->enter(*this);
 			}
 			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
 			{
 				//undying but small and exists in 5s
-				this->m_PlayerTag = PLAYERTAGS::UNDYING_SMALL;
+				this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+				this->loadSprite();
 				this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
 			}
 		}
@@ -246,6 +288,9 @@ CBaseState* CPlayer::getState(){
 	return m_PlayerState;
 }
 
+int	CPlayer::getStateInt() {
+	return m_State;
+}
 void CPlayer::setState(CBaseState* state) {
 	m_PlayerState = state;
 }
