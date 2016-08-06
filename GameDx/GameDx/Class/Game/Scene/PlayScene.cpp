@@ -41,6 +41,10 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 
 void	CPlayScene::renderScene()
 {
+	for (int i = 0; i < CMapManager::getInstance()->getListBackground().size(); ++i)
+	{
+		CMapManager::getInstance()->getListBackground().at(i)->drawEntity();
+	}
 	CPlayer::getInstance()->drawEntity();
 
 	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());

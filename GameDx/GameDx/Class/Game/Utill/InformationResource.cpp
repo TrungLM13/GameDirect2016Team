@@ -70,3 +70,9 @@ const wchar_t*		CInfomationResource::boundingsprite				= L"Resource//Image//Game
 /************RESOURCE FOR ENEMIES *************/
 const wchar_t*		CInfomationResource::mushroomenemy_run			= L"Resource//Image//Game//Enemies//nam_run.png";
 const wchar_t*		CInfomationResource::mushroomenemy_die			= L"Resource//Image//Game//Enemies//nam_die.png";
+
+/************RESOURCE FOR TILE****************/
+
+const wchar_t*		CInfomationResource::grass_left					= L"Resource//Image//Game//Tile//map-3//grass_first.png";
+const wchar_t*		CInfomationResource::grass_middle				= L"Resource//Image//Game//Tile//map-3//grass_mid.png";
+const wchar_t*		CInfomationResource::grass_right				= L"Resource//Image//Game//Tile//map-3//grass_last.png";

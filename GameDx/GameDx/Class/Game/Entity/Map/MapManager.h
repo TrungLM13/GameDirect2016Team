@@ -4,6 +4,7 @@
 #include <vector>
 #include "Class\Game\Entity\Map\Tile.h"
 #include "Class\Game\Entity\StaticEntity.h"
+#include "Class\Game\Entity\Map\Grass.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ public:
 
 public:
 	vector<CBaseEntity*>	getListEnemy();
+	vector<CBaseEntity*>	getListBackground();
 	static CMapManager*		getInstance();
 
 private:
@@ -26,7 +28,7 @@ private:
 	vector<MapInfo*>		m_listAllMapInGame;
 	std::string				m_currentMapName;
 
-	vector<CTile *>			m_listBackground;
+	vector<CBaseEntity*>			m_listBackground;
 	vector<CBaseEntity*>	m_listEnemy;
 	vector<CBaseEntity*>	m_listBonus;
 };

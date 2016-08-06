@@ -78,6 +78,12 @@ public:
 	/************RESOURCE FOR ENEMY****************/
 	static const wchar_t*	mushroomenemy_run;
 	static const wchar_t*	mushroomenemy_die;
+
+	/************RESOURCE FOR TILE*****************/
+	static const wchar_t*	grass_left;
+	static const wchar_t*	grass_middle;
+	static const wchar_t*	grass_right;
+
 };
 
 #endif

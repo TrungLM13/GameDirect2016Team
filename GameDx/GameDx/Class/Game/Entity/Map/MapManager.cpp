@@ -29,6 +29,11 @@ vector<CBaseEntity*> CMapManager::getListEnemy()
 	return m_listEnemy;
 }
 
+vector<CBaseEntity*> CMapManager::getListBackground()
+{
+	return m_listBackground;
+}
+
 bool CMapManager::initMapInfo()
 {
 	m_listAllMapInGame.push_back(new MapInfo("1-1", "Resource//Data//1-1.txt"));
@@ -60,6 +65,8 @@ bool CMapManager::loadEntityInMap()
 			m_listEnemy.push_back(new CBrick(positionEntity));
 		if (type == "1B")
 			m_listBonus.push_back(new CBrick(positionEntity));
+		if (type == "3G")
+			m_listBackground.push_back(new CGrass(positionEntity, GRASSSTRUCT::GRASS_MIDDLE));
 	}
 	return true;
 }
