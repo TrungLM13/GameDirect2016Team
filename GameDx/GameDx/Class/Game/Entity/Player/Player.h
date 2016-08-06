@@ -4,6 +4,8 @@
 #include "Class\Game\Algorithsm\Singleton.h"
 #include "Class\Game\Utill\ShowBouding.h"
 
+class CBaseState;
+
 #ifndef __CPLAYER_H__
 #define __CPLAYER_H__
 
@@ -20,10 +22,11 @@ public:
 	virtual void			updateEntity(float deltaTime)							override;
 	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
-			void			updateEntity(CBaseEntity* entity,float deltaTime);
+			void			handleCollision(CBaseEntity* entity,float deltaTime);
 	virtual void			drawEntity()											override;
 	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
+	virtual int				getTagNodeId()											override;
 
 public:
 	void setPosition(vector3d position);
@@ -33,15 +36,15 @@ public:
 	CBaseState* getState();
 	void setPlayerTag(int playerTag);
 	int getPlayerTag();
-
-	void updateCollision(CBaseEntity* entity);
-
+	bool					m_IsCollision;
 
 protected:
 	vector2d				m_Acceleration;
 	int						m_PlayerTag;
 	CBaseState*				m_PlayerState;
-
+	int						m_UndyingTime;
 private:
 };
 #endif
+
+

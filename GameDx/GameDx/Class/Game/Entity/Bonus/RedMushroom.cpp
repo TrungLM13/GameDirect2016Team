@@ -21,7 +21,7 @@ bool CRedMushroom::loadSprite()
 
 bool CRedMushroom::initEntity()
 {
-	m_Position = vector3d(50, 200, 0);
+	m_Position = vector3d(50, 160, 0);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(9.8, 9.8);
@@ -40,7 +40,7 @@ void CRedMushroom::updateEntity(float deltaTime)
 void CRedMushroom::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)
-		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x) * 2, SIGN(m_Position.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CRedMushroom::updateEntity(RECT* camera)
@@ -52,5 +52,9 @@ void CRedMushroom::setVelocity(vector2d velocity)
 {
 	this->m_Velocity.x = velocity.x;
 	this->m_Velocity.y = velocity.y;
+}
+
+int	CRedMushroom::getTagNodeId(){
+	return TAGNODE::RED_MUSHROOM;
 }
 

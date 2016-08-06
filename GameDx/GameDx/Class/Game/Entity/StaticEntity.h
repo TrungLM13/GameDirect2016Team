@@ -22,7 +22,8 @@ public:
 	virtual		CBox2D					getBounding()			override;
 	virtual		bool					initEntity()			override;
 	virtual		const char*				getTagNode()			override;
-				vector2d				getPosition();
+	virtual		int						getTagNodeId()			override { return 0; };
+	virtual		vector3d				getPosition()			override;
 	virtual		vector2d				getVelocity();
 
 protected:

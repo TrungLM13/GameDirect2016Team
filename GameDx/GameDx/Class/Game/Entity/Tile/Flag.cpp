@@ -56,3 +56,6 @@ void CFlag::updateEntity(RECT* camera)
 
 }
 
+int	CFlag::getTagNodeId() {
+	return TAGNODE::FLAG;
+}

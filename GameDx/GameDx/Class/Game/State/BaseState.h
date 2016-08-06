@@ -13,6 +13,9 @@ public:
 	virtual void update(CPlayer& player, double deltaTime){};
 	virtual void update(CPlayer& player, CBaseEntity* entity) {};
 	void exitCurrentState(CPlayer& player, CBaseState* newState);
+
+	int  getMoveDirection() { return 0; };
+	void setMoveDirection(DIRECTION direction){};
 private:
 
 };

@@ -8,6 +8,7 @@
 
 #include <tchar.h>
 #include <iostream>
+#include <map>
 
 /*DEFINE*/
 #define FPS							60
@@ -75,10 +76,13 @@
 #define BOMBMAN_STAGE_INFO_STRING	L"BOMBMAN\n\nCLEAR POINT"
 #define FIREMAN_STAGE_INFO_STRING	L"FIREMAN\n\nCLEAR POINT"
 
-#define VEL_PLAYER_X 4
-#define VEL_PLAYER_Y 19
+#define VEL_PLAYER_X 9.8
+#define VEL_PLAYER_Y 9.8
 #define ACCEL_PLAYER_X 0.5f
 #define ACCEL_PLAYER_Y 1
+
+#define PLAYER_UNDYING_TIME	30
+#define SMALL_PLAYER_UNDYING_TIME 15
 
 #define POOLSIZE					5
 #define LEVELPOOL(A)				(A*POOLSIZE)		
@@ -205,7 +209,8 @@ enum PLAYERTAGS
 	SMALL = 0,
 	BIG = 1,
 	FIRE = 2,
-	UNDYING = 3
+	UNDYING = 3,
+	UNDYING_SMALL = 4
 };
 
 enum MUSHROOM_STATE
@@ -213,6 +218,26 @@ enum MUSHROOM_STATE
 	MUSH_RUN = 0,
 	MUSH_DIE = 1
 };
+
+enum TAGNODE
+{
+	NONE = 0,
+	PLAYER = 1,
+	RED_MUSHROOM = 2,
+	GREEN_MUSHROOM = 3,
+	STAR = 4,
+	FLOWER = 5,
+	COIN = 6,
+	BRICK = 7,
+	GIFT_BOX = 8,
+	TILE = 9,
+	PIPE = 10,
+	FLAG = 11,
+	FLAG_POLE = 12,
+	FLAG_POLE_TAIL = 13,
+	MUSHROOM = 14
+};
+
 /******************************/
 
 /*CONST*/

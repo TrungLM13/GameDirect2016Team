@@ -30,9 +30,6 @@ CBox2D		CMovable::getBounding()
 		m_Bounding->setY		(m_Position.y + m_listSprite.at(m_State)->getFrameInfo().Height / 2  * std::abs(m_listSprite.at(m_State)->getScale().y));
 		m_Bounding->setWidth	(m_listSprite.at(m_State)->getFrameInfo().Width					 	 * std::abs(m_listSprite.at(m_State)->getScale().x));
 		m_Bounding->setHeight	(m_listSprite.at(m_State)->getFrameInfo().Height					 * std::abs(m_listSprite.at(m_State)->getScale().y));
-	
-		//m_Bounding->setWidth	(0);
-		//m_Bounding->setHeight	(0);
 
 	}
 

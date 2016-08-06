@@ -14,6 +14,7 @@ public:
 	virtual void			updateEntity(RECT* camera)                      override;
 	virtual void			updateEntity(CKeyBoard *device)					override;
 	virtual void			drawEntity()									override;
+	virtual int				getTagNodeId()									override;
 public:
 	void setVelocity(vector2d velocity);
 

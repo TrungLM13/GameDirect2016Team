@@ -22,9 +22,6 @@ void CJumpState::enter(CPlayer& player) {
 }
 
 CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
-	/*if (player.getPosition().y < 50)
-		return new CStandState();*/
-
 	if (input->KeyDown(DIK_SPACE)) {
 		m_IsJumpHigh = true;
 	}
@@ -75,5 +72,4 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 }
 
 void CJumpState::update(CPlayer& player, CBaseEntity* entity) {
-	//if ()
 }

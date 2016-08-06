@@ -21,7 +21,7 @@ bool CFlagPoleTail::loadSprite()
 
 bool CFlagPoleTail::initEntity()
 {
-	m_Position = vector3d(128, 48, 0);
+	m_Position = vector3d(250, 48, 0);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	m_TagNode = "FlagPoleTail";
@@ -46,3 +46,6 @@ void CFlagPoleTail::updateEntity(RECT* camera)
 
 }
 
+int	CFlagPoleTail::getTagNodeId() {
+	return TAGNODE::FLAG_POLE_TAIL;
+}

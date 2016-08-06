@@ -21,7 +21,7 @@ bool CFlagPoleHead::loadSprite()
 
 bool CFlagPoleHead::initEntity()
 {
-	m_Position = vector3d(128, 200, 0);
+	m_Position = vector3d(250, 200, 0);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	m_TagNode = "FlagPoleHead";

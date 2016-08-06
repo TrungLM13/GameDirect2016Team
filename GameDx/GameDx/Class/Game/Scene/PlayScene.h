@@ -32,6 +32,9 @@ public:
 	virtual void updateScene(double deltaTime)		override;
 	virtual void updateScene(CKeyBoard* keyboard)	override;
 	virtual void renderScene()						override;
+
+private:
+	vector<CBaseEntity*>	m_ListEntity;
 };
 
 #endif

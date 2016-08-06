@@ -19,6 +19,7 @@ public:
 	virtual void updateEntity(RECT* rectCamera)		override;
 	virtual void drawEntity()						override;
 	virtual bool loadSprite()						override;
+	virtual	int	 getTagNodeId()						override;
 
 	int				m_Index;
 	vector3d		m_Pos;

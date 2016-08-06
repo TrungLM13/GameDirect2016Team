@@ -16,12 +16,22 @@ CPlayScene::CPlayScene()
 
 CPlayScene::~CPlayScene()
 {
-
+	m_ListEntity.clear();
 }
 
 bool	CPlayScene::initScene()
 {
 	CMapManager::getInstance();
+
+	CPlayer::getInstance()->initEntity();
+
+	m_ListEntity.push_back(new CStar());
+	m_ListEntity.push_back(new CRedMushroom());
+	m_ListEntity.push_back(new CFlag());
+	m_ListEntity.push_back(new CFlagPole());
+	m_ListEntity.push_back(new CFlagPoleTail());
+	m_ListEntity.push_back(new CTile());
+
 	return true;
 }
 
@@ -34,6 +44,13 @@ void	CPlayScene::updateScene(double deltaTime)
 	{
 		CMapManager::getInstance()->getListEnemy().at(i)->updateEntity(deltaTime);
 	}
+
+	CCamera::getInstance()->Update(CPlayer::getInstance()->getPosition());
+
+	for (int i = 0; i < m_ListEntity.size(); ++i) {
+		CPlayer::getInstance()->handleCollision(m_ListEntity.at(i), deltaTime);
+	}
+
 }
 
 void	CPlayScene::updateScene(CKeyBoard* keyboard)
@@ -55,9 +72,17 @@ void	CPlayScene::renderScene()
 
 	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
 
+
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
 		CMapManager::getInstance()->getListEnemy().at(i)->drawEntity();
 	}
+
+	for (int i = 0; i < m_ListEntity.size(); ++i)
+	{
+		m_ListEntity.at(i)->drawEntity();
+		CShowBouding::getInstance()->drawBouding(m_ListEntity.at(i));
+	}
+
 
 }

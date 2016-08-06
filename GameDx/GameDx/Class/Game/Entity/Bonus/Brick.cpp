@@ -70,3 +70,8 @@ void CBrick::setPosition(vector3d position) {
 void CBrick::setVelocity(vector2d velocity) {
 	m_Velocity = velocity;
 }
+
+int	CBrick::getTagNodeId()
+{
+	return TAGNODE::BRICK;
+}

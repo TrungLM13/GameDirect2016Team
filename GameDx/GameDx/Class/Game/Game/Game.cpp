@@ -22,20 +22,17 @@ CGame::~CGame()
 {
 	SAFE_RELEASE(m_Windows);
 	SAFE_RELEASE(m_Keyboard);
-	SAFE_RELEASE(m_Test);
 }
 
 
 void CGame::initGame()
 {
-	m_Test			= new Test(m_Windows->getDevice());
 	CSceneManager::getInstance()->init();
 }
 void CGame::updateGame(double deltaTime)
 {
 	m_Keyboard->Update();
-	m_Test->Update(m_Keyboard);
-	CCamera::getInstance()->Update(m_Test->getPosision());
+
 
 	if (m_Keyboard->KeyDown(DIK_ESCAPE))
 		PostQuitMessage(0);
@@ -48,7 +45,6 @@ void CGame::renderGame()
 {
 	if (this->m_Windows->startDraw()) {
 		CSceneManager::getInstance()->getScene().top()->renderScene();
-		m_Test->Render();
 	}
 	this->m_Windows->stopDraw();
 }
