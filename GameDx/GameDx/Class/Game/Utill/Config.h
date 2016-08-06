@@ -165,6 +165,13 @@ enum GRASSSTRUCT
 	GRASS_MIDDLE,
 	GRASS_RIGHT
 };
+
+enum CLOUNDSTRUCT
+{
+	ONE_CLOUND   = 0,
+	TWO_CLOUND,
+	THREE_CLOUND
+};
 /******************/
 
 /*STRUCT*/

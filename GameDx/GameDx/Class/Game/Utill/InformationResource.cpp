@@ -129,3 +129,8 @@ const wchar_t*		CInfomationResource::naviturtle_run             = L"Resource//Im
 const wchar_t*		CInfomationResource::naviturtle_ensconse        = L"Resource//Image//Game//Enemies//rua_lam_thut_dau.png";
 const wchar_t*		CInfomationResource::naviturtle_indent   		= L"Resource//Image//Game//Enemies//rua_lam_loi_chan.png";
 
+
+/***********RESOURCE FOR CLOUND***************/
+const wchar_t*		CInfomationResource::clound_small				= L"Resource//Image//Game//Tile//map-1//1_dam_may.png";
+const wchar_t*		CInfomationResource::clound_normal				= L"Resource//Image//Game//Tile//map-1//2_dam_may.png";
+const wchar_t*		CInfomationResource::clound_big					= L"Resource//Image//Game//Tile//map-1//3_dam_may.png";

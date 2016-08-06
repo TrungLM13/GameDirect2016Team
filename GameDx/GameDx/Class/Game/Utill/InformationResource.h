@@ -139,6 +139,10 @@ public:
 	static const wchar_t*	naviturtle_ensconse;
 	static const wchar_t*	naviturtle_indent;
 
+	/************RESOURCE FOR CLOUND**************/
+	static const wchar_t*	clound_small;
+	static const wchar_t*	clound_normal;
+	static const wchar_t*	clound_big;
 };
 
 #endif
