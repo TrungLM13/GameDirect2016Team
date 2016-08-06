@@ -134,6 +134,9 @@
     <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp">
       <Filter>Game\MapManager</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Grass.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -288,6 +291,9 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Map\MapManager.h">
       <Filter>Game\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Grass.h">
+      <Filter>Game\Entity\Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

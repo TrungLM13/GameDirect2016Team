@@ -66,3 +66,8 @@ vector2d CMovable::getVelocity()
 {
 	return m_Velocity;
 }
+
+void	CMovable::setVelocity(vector2d newVel)
+{
+	m_Velocity = newVel;
+}

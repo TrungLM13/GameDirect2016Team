@@ -11,11 +11,12 @@ CPlayScene::CPlayScene()
 
 CPlayScene::~CPlayScene()
 {
+
 }
 
 bool	CPlayScene::initScene()
 {
-	CPlayer::getInstance()->initEntity();
+	CPlayer::getInstance();
 	CMapManager::getInstance();
 	return true;
 }
@@ -36,7 +37,6 @@ void	CPlayScene::updateScene(CKeyBoard* keyboard)
 		return;
 
 	CPlayer::getInstance()->updateEntity(keyboard);
-
 }
 
 void	CPlayScene::renderScene()
@@ -49,5 +49,4 @@ void	CPlayScene::renderScene()
 	{
 		CMapManager::getInstance()->getListEnemy().at(i)->drawEntity();
 	}
-
 }

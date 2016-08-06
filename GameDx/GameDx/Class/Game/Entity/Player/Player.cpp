@@ -20,12 +20,11 @@ CPlayer::CPlayer(directDevice device)
 
 bool CPlayer::initEntity()
 {
-	m_Position = vector3d(200, 50, 0.5);
-	m_Position = vector3d(50, 50, 0.5);
+	m_Position		= vector3d(50, 50, 0.5);
 
-	m_State = PLAYERSTATES::STAND;
-	m_PlayerState = new CStandState();
-	m_PlayerTag = PLAYERTAGS::SMALL;
+	m_State			= PLAYERSTATES::STAND;
+	m_PlayerTag		= PLAYERTAGS::SMALL;
+	m_PlayerState	= new CStandState();
 
 	m_Acceleration = vector2d(0.5f, 0);
 	m_Velocity = vector2d(9.8, 9.8);

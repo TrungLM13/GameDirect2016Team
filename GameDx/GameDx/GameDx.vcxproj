@@ -108,6 +108,7 @@
     <ClInclude Include="Class\Game\Entity\Bonus\RedMushroom.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Star.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h" />
+    <ClInclude Include="Class\Game\Entity\Map\Grass.h" />
     <ClInclude Include="Class\Game\Entity\Map\MapManager.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tile.h" />
     <ClInclude Include="Class\Game\Entity\MovableEntity.h" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Class\Game\Entity\Bonus\RedMushroom.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Star.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
+    <ClCompile Include="Class\Game\Entity\Map\Grass.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tile.cpp" />
     <ClCompile Include="Class\Game\Entity\MovableEntity.cpp" />

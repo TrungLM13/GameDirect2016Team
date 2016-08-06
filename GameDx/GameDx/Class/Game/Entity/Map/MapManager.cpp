@@ -58,6 +58,8 @@ bool CMapManager::loadEntityInMap()
 	{
 		if (type == "1E")
 			m_listEnemy.push_back(new CBrick(positionEntity));
+		if (type == "1B")
+			m_listBonus.push_back(new CBrick(positionEntity));
 	}
 	return true;
 }

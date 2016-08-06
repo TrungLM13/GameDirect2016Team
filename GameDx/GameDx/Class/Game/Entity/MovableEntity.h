@@ -23,6 +23,7 @@ public:
 	virtual		bool					initEntity()			override;
 	virtual		const char*				getTagNode()			override;
 	virtual		vector2d				getVelocity()					;
+	virtual		void					setVelocity(vector2d)			;
 
 protected:
 				vector2d				m_Velocity;
