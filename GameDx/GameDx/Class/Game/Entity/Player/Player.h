@@ -39,6 +39,7 @@ public:
 	int						getPlayerTag();
 
 	bool					m_IsCollision;
+	bool					m_IsAutoMove; // Signal for Flag auto run
 	vector<int>				m_Direction;
 
 protected:

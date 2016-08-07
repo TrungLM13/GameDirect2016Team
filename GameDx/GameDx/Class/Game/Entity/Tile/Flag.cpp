@@ -22,7 +22,7 @@ bool CFlag::loadSprite()
 
 bool CFlag::initEntity()
 {
-	m_Position = vector3d(120, 184, 0);
+	m_Position = vector3d(242, 184, 0);
 	m_Velocity = vector2d(0, -9.8);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
@@ -34,16 +34,25 @@ void CFlag::updateEntity(CKeyBoard* device)
 {
 
 }
+
+void CFlag::handleCollision(CBaseEntity* entity, float deltaTime) {
+	if (entity->getTagNodeId() == TAGNODE::FLAG_POLE_TAIL){
+		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
+			m_IsEnable = true;
+			m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+		}
+	}
+}
+
 void CFlag::updateEntity(float deltaTime)
 {
-	if (CPlayer::getInstance()->getStateInt() == PLAYERSTATES::CLIMB) {
+	if ( CPlayer::getInstance()->m_IsAutoMove == true) {
 		if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_BOTTOM) {
 			m_Velocity.y = CPlayer::getInstance()->getVelocity().y;
 		}
-		else if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_NONE) {
-			m_Velocity.y = CPlayer::getInstance()->getVelocity().y * 1.5;
+		else if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_NONE && m_IsEnable == false) {
+			m_Position.y += m_Velocity.y * deltaTime / 60;
 		}
-		m_Position.y += m_Velocity.y * deltaTime / 30;
 	}
 
 }

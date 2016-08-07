@@ -175,6 +175,10 @@ void Turtle::setVelocity(vector2d velocity) {
 	m_Velocity = velocity;
 }
 
+int	Turtle::getTagNodeId() {
+	return TAGNODE::TURTLE;
+}
+
 TBaseState* Turtle::getState(){
 	return m_Turtle_State;
 }

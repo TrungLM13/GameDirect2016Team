@@ -25,6 +25,7 @@ public:
 	virtual		int						getTagNodeId()			override { return 0; };
 	virtual		vector2d				getVelocity()					;
 	virtual		void					setVelocity(vector2d)			;
+				void					handleCollision(CBaseEntity*entity, float deltaTime) {};
 
 protected:
 				vector2d				m_Velocity;

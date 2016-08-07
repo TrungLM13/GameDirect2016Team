@@ -7,7 +7,8 @@ const wchar_t*		CInfomationResource::bigmario_bigsmallstand		= L"Resource//Image
 const wchar_t*		CInfomationResource::bigmario_jum				= L"Resource//Image//Game//Sprites//Mario//BigMario//bigmario_jum.png";
 const wchar_t*		CInfomationResource::bigmario_sit				= L"Resource//Image//Game//Sprites//Mario//BigMario//bigmario_sit.png";
 const wchar_t*		CInfomationResource::bigmario_stand				= L"Resource//Image//Game//Sprites//Mario//BigMario//bigmario_stand.png";
-const wchar_t*		CInfomationResource::bigmario_run				=L"Resource//Image//Game//Sprites//Mario//BigMario//bigmario_run.png";
+const wchar_t*		CInfomationResource::bigmario_run				= L"Resource//Image//Game//Sprites//Mario//BigMario//bigmario_run.png";
+const wchar_t*		CInfomationResource::bigmario_climb				= L"Resource//Image//Game//Sprites//Mario//BigMario//bigmario_ducot.png";
 
 /************RESOURCE FOR SMALLMARIO************/
 const wchar_t*		CInfomationResource::smallmario_cdir			= L"Resource//Image//Game//Sprites//Mario//SmallMario//smallmario_cdir.png";
@@ -15,6 +16,7 @@ const wchar_t*		CInfomationResource::smallmario_die				= L"Resource//Image//Game
 const wchar_t*		CInfomationResource::smallmario_jum				= L"Resource//Image//Game//Sprites//Mario//SmallMario//smallmario_jum.png";
 const wchar_t*		CInfomationResource::smallmario_run				= L"Resource//Image//Game//Sprites//Mario//SmallMario//smallmario_run.png";
 const wchar_t*		CInfomationResource::smallmario_stand			= L"Resource//Image//Game//Sprites//Mario//SmallMario//smallmario_stand.png";
+const wchar_t*		CInfomationResource::smallmario_climb			= L"Resource//Image//Game//Sprites//Mario//SmallMario//smallmario_ducot.png";
 
 /************RESOURCE FOR BIGFIREMARIO************/
 const wchar_t*		CInfomationResource::bigfiremario_cdir			= L"Resource//Image//Game//Sprites//Mario//BigFireMario//bigfiremario_cdir.png";

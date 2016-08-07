@@ -13,6 +13,7 @@ public:
 	static const wchar_t*	bigmario_sit;
 	static const wchar_t*	bigmario_stand;
 	static const wchar_t*	bigmario_run;
+	static const wchar_t*	bigmario_climb;
 
 	/************RESOURCE FOR SMALLMARIO************/
 	static const wchar_t*	smallmario_cdir;
@@ -20,6 +21,7 @@ public:
 	static const wchar_t*	smallmario_run;
 	static const wchar_t*	smallmario_jum;
 	static const wchar_t*	smallmario_die;
+	static const wchar_t*	smallmario_climb;
 
 	/************RESOURCE FOR BIGFIREMARIO************/
 	static const wchar_t*	bigfiremario_cdir;

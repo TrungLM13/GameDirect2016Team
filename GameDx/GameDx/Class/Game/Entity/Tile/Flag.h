@@ -13,9 +13,11 @@ public:
 	virtual void			updateEntity(float deltaTime)							override;
 	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
+			void			handleCollision(CBaseEntity* entity, float deltaTime);
 	virtual void			drawEntity()											override;
 	virtual int				getTagNodeId()											override;
 	virtual bool			loadSprite()											override;
+private:
 };
 
 #endif
