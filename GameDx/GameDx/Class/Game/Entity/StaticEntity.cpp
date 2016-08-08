@@ -39,3 +39,7 @@ const char* CStaticEntity::getTagNode()
 {
 	return this->m_TagNode;
 }
+void CStaticEntity::updateCollision(CBaseEntity*,float deltaTime)
+{
+
+}

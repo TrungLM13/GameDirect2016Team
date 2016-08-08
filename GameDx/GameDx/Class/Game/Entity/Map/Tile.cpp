@@ -35,7 +35,10 @@ void CTile::updateEntity(RECT* rectCamera)
 {
 
 }
+void CTile::updateCollision(CBaseEntity*, float deltaTime)
+{
 
+}
 void CTile::drawEntity()
 {
 

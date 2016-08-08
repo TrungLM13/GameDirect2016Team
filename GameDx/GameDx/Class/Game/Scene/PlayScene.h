@@ -7,9 +7,11 @@
 #include "Class\Game\Entity\Bonus\Coin.h"
 #include "Class\Game\Entity\Bonus\Star.h"
 #include "Class\Game\Entity\Bonus\Brick.h"
-#include "Class\Game\Entity\Bonus\RedMushroom.h"
 #include "Class\Game\Entity\Bonus\GiftBox.h"
 #include "Class\Game\Entity\Enemy\Mushroom.h"
+#include "Class\Game\Entity\MovableEntity.h"
+#include "Class\Game\Entity\Bonus\Iteminbox.h"
+#include "Class\Game\Entity\Bonus\CoinInBox.h"
 class CPlayScene :
 	public CBaseScene
 {
@@ -26,9 +28,11 @@ private:
 	vector<CCoin*>			listCoin;
 	vector<CStar*>			listStar;
 	vector<CBrick*>			listBrick;
-	vector<CRedMushroom*>	listRedMushroom;
+	vector<CIteminbox*>		listIteminbox;
 	vector<CGiftBox*>		listGiftBox;
 	vector<CMushroom*>		listMushroom;
+	vector<CMovable *>		listMovable;
+	vector<CCoinInBox*>		listCoinInBox;
 };
 
 #endif

@@ -18,10 +18,11 @@ public:
 	CStaticEntity();
 	~CStaticEntity();
 
-	virtual		bool					loadSprite()			= 0;
-	virtual		CBox2D					getBounding()			override;
-	virtual		bool					initEntity()			override;
-	virtual		const char*				getTagNode()			override;
+	virtual		bool					loadSprite()										= 0;
+	virtual		CBox2D					getBounding()										override;
+	virtual		bool					initEntity()										override;
+	virtual		const char*				getTagNode()										override;
+	virtual		void					updateCollision(CBaseEntity*, float deltaTime)		override;
 				vector2d				getPosition();
 
 protected:

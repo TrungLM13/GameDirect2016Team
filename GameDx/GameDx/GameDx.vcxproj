@@ -104,8 +104,10 @@
     <ClInclude Include="Class\Game\Entity\BaseEntity.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Brick.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Coin.h" />
+    <ClInclude Include="Class\Game\Entity\Bonus\CoinInBox.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\GiftBox.h" />
-    <ClInclude Include="Class\Game\Entity\Bonus\RedMushroom.h" />
+    <ClInclude Include="Class\Game\Entity\Bonus\GreenMushroom.h" />
+    <ClInclude Include="Class\Game\Entity\Bonus\Iteminbox.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Star.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tile.h" />
@@ -156,8 +158,10 @@
     <ClCompile Include="Class\Game\Entity\BaseEntity.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Brick.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp" />
+    <ClCompile Include="Class\Game\Entity\Bonus\CoinInBox.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\GiftBox.cpp" />
-    <ClCompile Include="Class\Game\Entity\Bonus\RedMushroom.cpp" />
+    <ClCompile Include="Class\Game\Entity\Bonus\GreenMushroom.cpp" />
+    <ClCompile Include="Class\Game\Entity\Bonus\Iteminbox.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Star.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tile.cpp" />

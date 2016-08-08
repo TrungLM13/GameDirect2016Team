@@ -26,7 +26,7 @@ bool CShowBouding::initEntity(){
 }
 
 void CShowBouding::drawBouding(CBaseEntity* entity){
-	this->m_listSprite.at(0)->Render(CCamera::getInstance()->setPositionEntity(vector3d(entity->getBounding().getX(), entity->getBounding().getY(), 0)), 
+	this->m_listSprite.at(0)->Render(CCamera::getInstance()->setPositionEntity(vector3d(entity->getBounding().getX() , entity->getBounding().getY(), 0)), 
 																							vector2d(1, 1), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 	this->m_listSprite.at(0)->Render(CCamera::getInstance()->setPositionEntity(vector3d(entity->getBounding().getX() + entity->getBounding().getWidth(), entity->getBounding().getY(), 0)), 
 																							vector2d(1, 1), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);

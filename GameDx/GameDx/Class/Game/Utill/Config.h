@@ -193,6 +193,12 @@ enum MUSHROOM_STATE
 	MUSH_RUN = 0,
 	MUSH_DIE = 1
 };
+
+enum ITEMINBOX_TYPE
+{
+	REDMUSHROOM = 0,
+	FLOWER      = 1
+};
 /******************************/
 
 /*CONST*/

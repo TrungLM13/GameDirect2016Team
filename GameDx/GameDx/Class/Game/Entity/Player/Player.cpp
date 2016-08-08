@@ -21,8 +21,6 @@ CPlayer::CPlayer(directDevice device)
 bool CPlayer::initEntity()
 {
 	m_Position = vector3d(200, 50, 0.5);
-	m_Position = vector3d(50, 50, 0.5);
-
 	m_State = PLAYERSTATES::STAND;
 	m_PlayerState = new CStandState();
 	m_PlayerTag = PLAYERTAGS::SMALL;
@@ -120,7 +118,7 @@ void CPlayer::updateEntity(CKeyBoard* input)
 void CPlayer::drawEntity()
 {
 	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Velocity.x) * 2, abs(m_Velocity.y / m_Velocity.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-	//m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(this->getBounding().getX(), this->getBounding().getY(), 0.5f)), vector2d(SIGN(m_Velocity.x) * 2, SIGN(m_Velocity.y) * 2), 0, DRAWCENTER_LEFT_TOP, true, 10);
+	//m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(this->getBounding().getX(), this->getBounding().getY(), 0.0)), vector2d(SIGN(m_Velocity.x) * 2, SIGN(m_Velocity.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CPlayer::setState(PLAYERSTATES state) {

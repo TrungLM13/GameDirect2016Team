@@ -1,19 +1,28 @@
-#ifndef __CSTAR_H__
-#define __CSTAR_H__
+#ifndef __CITEMINBOX_H__
+#define __CITEMINBOX_H__
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\Player\Player.h"
 
-class CStar : public CMovable
+class CIteminbox : public CMovable
 {
 public:
-	CStar();
-	~CStar();
-	virtual	bool			loadSprite()									override;
+	CIteminbox();
+	~CIteminbox();
+	virtual bool			loadSprite()									override;
 	virtual	bool			initEntity()									override;
 	virtual void			updateEntity(float deltaTime)					override;
 	virtual void			updateEntity(RECT* camera)                      override;
 	virtual void			updateEntity(CKeyBoard *device)					override;
 	virtual void			drawEntity()									override;
+
+public:
+	void chkShowItem(CPlayer*);
+	void setVelocity(vector2d velocity);
+	void setPosition(vector3d position);
+	void chkCollision(CPlayer*,float deltaTime);
+	ITEMINBOX_TYPE getitemtype();
+
 private:
+	ITEMINBOX_TYPE        m_itemtype;
 };
 #endif

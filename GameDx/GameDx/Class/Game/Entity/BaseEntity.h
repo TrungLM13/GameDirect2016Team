@@ -26,6 +26,7 @@ public:
 	virtual void			updateEntity(CKeyBoard* deivce)						= 0;
 	virtual void			updateEntity(RECT* camera)							= 0;
 	virtual void			updateEntity(float deltaTime)						= 0;
+	virtual void			updateCollision(CBaseEntity*, float deltaTime)		= 0;
 	virtual void			drawEntity()										= 0;
 	virtual	CBox2D			getBounding()										= 0;
 	virtual const char*		getTagNode()										= 0;
@@ -36,6 +37,7 @@ protected:
 	CBox2D*					m_Bounding;
 	vector3d				m_Position;
 	vector<CSprite*>		m_listSprite;
+	
 
 };
 
