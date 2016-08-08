@@ -43,6 +43,7 @@
 
 #define SIGN(A)						(A >= 0 ? 1 : -1)
 #define DIRECT_COORDINATE(A)		{-(A)}
+#define CHANGE_DIRECTION(A)			{-(A)}
 #define SAFE_RELEASE(A)				{if (A) {delete A; A = 0;}}
 
 #define BACKBUFFER_WIDTH			256
@@ -75,10 +76,15 @@
 #define BOMBMAN_STAGE_INFO_STRING	L"BOMBMAN\n\nCLEAR POINT"
 #define FIREMAN_STAGE_INFO_STRING	L"FIREMAN\n\nCLEAR POINT"
 
-#define VEL_PLAYER_X 9.8
+#define VEL_PLAYER_X 5.8
 #define VEL_PLAYER_Y 9.8
+#define VEL_PLAYER_X_MIN 0
+#define VEL_PLAYER_Y_MIN 0
 #define ACCEL_PLAYER_X 0.5f
 #define ACCEL_PLAYER_Y 1
+
+#define PLAYER_JUMP_LIMIT 120
+#define PLAYER_JUMP_HIGH_LIMIT 150
 
 #define PLAYER_UNDYING_TIME	10000
 #define SMALL_PLAYER_UNDYING_TIME 5000

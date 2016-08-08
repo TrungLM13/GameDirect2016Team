@@ -19,19 +19,19 @@ void CRunState::enter(CPlayer& player) {
 }
 
 CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
-	if (player.m_IsAutoMove == false){
+	if (!player.m_IsAutoMove){
 		if (input->KeyDown(DIK_RIGHT)) {
 			player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
-			player.setVelocity(vector2d(9.8 * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
+			player.setVelocity(vector2d(VEL_PLAYER_X * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
 
-			if (player.getVelocity().x <= 0)
+			if (player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT)
 			{
-				player.setVelocity(vector2d(player.getVelocity().x * (-1), player.getVelocity().y));
+				player.setVelocity(vector2d(CHANGE_DIRECTION(player.getVelocity().x), player.getVelocity().y));
 			}
 
 			if (input->KeyDown(DIK_UP) || input->KeyDown(DIK_SPACE)){
 				if (player.getVelocity().y < 0)
-					player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y * (-1)));
+					player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 				return new CJumpState();
 			}
 
@@ -45,21 +45,15 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 		}
 		if (input->KeyDown(DIK_LEFT)) {
 			player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_LEFT;
-			player.setVelocity(vector2d(9.8 * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
+			player.setVelocity(vector2d(VEL_PLAYER_X * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
 
-			if (player.getVelocity().x >= 0)
-				player.setVelocity(vector2d(player.getVelocity().x * (-1), player.getVelocity().y));
+			if (player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
+				player.setVelocity(vector2d(CHANGE_DIRECTION(player.getVelocity().x), player.getVelocity().y));
 
 
-			if (input->KeyDown(DIK_UP)){
+			if (input->KeyDown(DIK_UP) || input->KeyDown(DIK_SPACE)){
 				if (player.getVelocity().y < 0)
-					player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y * (-1)));
-				return new CJumpState();
-			}
-
-			if (input->KeyDown(DIK_SPACE)){
-				if (player.getVelocity().y < 0)
-					player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y * (-1)));
+					player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 				return new CJumpState();
 			}
 
@@ -74,13 +68,17 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 
 		return new CStandState();
 	}
-	else
+	else {
+		/*if (player.getVelocity().x == 0) {
+			player.setVelocity(vector2d(VEL_PLAYER_X, player.getVelocity().y));
+		}*/
 		return this;
+	}
 }
 
 void CRunState::update(CPlayer& player, double deltaTime) {
 	if (!player.m_IsCollision) {
-		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 100, player.getPosition().y, 0));
+		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y, 0));
 	}
 
 	if (player.m_IsAutoMove) {
@@ -88,6 +86,6 @@ void CRunState::update(CPlayer& player, double deltaTime) {
 		if (player.getPosition().x > 350) {
 			player.m_IsAutoMove = false;
 		}
-		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 1000, player.getPosition().y, 0));
+		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + player.getVelocity().y * deltaTime / 100, 0));
 	}
 }

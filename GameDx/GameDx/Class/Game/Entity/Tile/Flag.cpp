@@ -46,7 +46,7 @@ void CFlag::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 void CFlag::updateEntity(float deltaTime)
 {
-	if ( CPlayer::getInstance()->m_IsAutoMove == true) {
+	if ( CPlayer::getInstance()->m_IsEnable == true) {
 		if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_BOTTOM) {
 			m_Velocity.y = CPlayer::getInstance()->getVelocity().y;
 		}

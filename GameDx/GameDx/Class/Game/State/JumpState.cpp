@@ -34,15 +34,15 @@ CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
 
 	if (input->KeyDown(DIK_RIGHT)) {
 		m_IsMoveX = true;
-		if (player.getVelocity().x < 0)
-			player.setVelocity(vector2d(player.getVelocity().x * (-1), player.getVelocity().y));
+		if (player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT)
+			player.setVelocity(vector2d(CHANGE_DIRECTION(player.getVelocity().x), player.getVelocity().y));
 
 		return this;
 	}
 	else if (input->KeyDown(DIK_LEFT)) {
 		m_IsMoveX = true;
-		if (player.getVelocity().x > 0)
-			player.setVelocity(vector2d(player.getVelocity().x * (-1), player.getVelocity().y));
+		if (player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
+			player.setVelocity(vector2d(CHANGE_DIRECTION(player.getVelocity().x), player.getVelocity().y));
 		return this;
 	}
 	return this;
@@ -52,20 +52,20 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 	double deltaX = 0;
 
 	if (m_IsMoveX) {
-		if (player.getVelocity().x == 0)
+		if (player.getVelocity().x == VEL_PLAYER_X_MIN)
 		{
-			player.setVelocity(vector2d(9.8, 9.8));
+			player.setVelocity(vector2d(VEL_PLAYER_X, VEL_PLAYER_Y));
 		}
 		deltaX = player.getVelocity().x * deltaTime / 100;
 	}
 
 	if (m_IsJumpHigh) {
-		if (player.getPosition().y >= 190)
-			player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y *(-1)));
+		if (player.getPosition().y >= PLAYER_JUMP_HIGH_LIMIT)
+			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 	}
 	else {
-		if (player.getPosition().y >= 150)
-			player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y *(-1)));
+		if (player.getPosition().y >= PLAYER_JUMP_LIMIT)
+			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 	}
 
 	player.setPosition(vector3d(player.getPosition().x + deltaX, player.getPosition().y + player.getVelocity().y *deltaTime / 40, 0));

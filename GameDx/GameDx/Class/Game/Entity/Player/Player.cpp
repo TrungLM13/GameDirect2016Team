@@ -36,7 +36,10 @@ bool CPlayer::initEntity()
 	m_PlayerTag = PLAYERTAGS::SMALL;
 
 	m_Acceleration = vector2d(0.5f, 0);
-	m_Velocity = vector2d(0, 9.8);
+	m_Velocity = vector2d(VEL_PLAYER_X_MIN, VEL_PLAYER_Y);
+
+	m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
+	m_Direction.at(DIRECTIONINDEX::DIRECTION_Y) = DIRECTION::DIRECTION_UP;
 
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
@@ -190,7 +193,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		{
 			if (this->m_Velocity.y > 0)
 			{
-				this->m_Velocity.y *= -1;
+				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
 			}
 		}
 		break;
@@ -198,16 +201,23 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		if (this->m_State != PLAYERSTATES::DIE) {
 			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP)
 			{
-				this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-				this->m_PlayerState->exitCurrentState(*this, new CStandState());
-				this->m_PlayerState->enter(*this);
+				if (!m_IsAutoMove) {
+					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+					this->m_PlayerState->exitCurrentState(*this, new CStandState());
+					this->m_PlayerState->enter(*this);
+				}
+				else {
+					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+					this->m_PlayerState->exitCurrentState(*this, new CRunState());
+					this->m_PlayerState->enter(*this);
+				}
 			}
 
 		}
 		else {
 			if (this->m_Velocity.y >= 0)
 			{
-				this->m_Velocity.y *= -1;
+				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
 			}
 		}
 		break;
@@ -215,15 +225,15 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
 		{
 			// Only if after collision top with flag pole tail and bottom with flag, player change into run state
-			if (m_IsAutoMove) {
-				m_IsEnable = true;
+			if (m_IsEnable) {
+				m_IsAutoMove = true;
 				if (m_Velocity.x <= 0) {
-					m_Velocity.x = 9.8;
+					m_Velocity.x = VEL_PLAYER_X;
 				}
 				this->m_PlayerState->exitCurrentState(*this, new CRunState());
 				this->m_PlayerState->enter(*this);
 			}
-			else m_IsEnable = false;
+			//else m_IsAutoMove = false;
 
 		}
 		break;
@@ -234,7 +244,6 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 				if (m_Position.y > 100){
 					m_Position.x = entity->getPosition().x;
 					this->m_PlayerState->exitCurrentState(*this, new CClimbState());
-					//this->m_PlayerState->enter(*this);
 				}
 				else
 				{
@@ -249,23 +258,20 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		{
 			m_IsCollision = true;
 
-			if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
-				this->m_PlayerState->exitCurrentState(*this, new CClimbState());
-				this->m_PlayerState->enter(*this);
-			}
 			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
 			{
-				m_Velocity.x = 0;
-				//m_Position.x = entity->getPosition().x - entity->getBounding().getWidth() / 2 - this->getBounding().getWidth() / 2;
+				m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
 			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
 				m_IsCollision = false;
-				this->m_Velocity.x = 9.8 * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
+				this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
 			}
+
+			m_Velocity.y = VEL_PLAYER_Y;
 
 		}
 		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
-			m_IsAutoMove = true; // Signal for flag auto run
+			m_IsEnable = true; // Signal for flag auto run
 			if (this->m_State == PLAYERSTATES::CLIMB) {
 				m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
 				m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
@@ -305,7 +311,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 void CPlayer::drawEntity()
 {
-	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(m_Position)), vector2d(SIGN(m_Velocity.x), abs(m_Velocity.y / m_Velocity.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(m_Position)), vector2d(m_Direction.at(DIRECTIONINDEX::DIRECTION_X), m_Direction.at(DIRECTIONINDEX::DIRECTION_Y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CPlayer::setState(PLAYERSTATES state) {
