@@ -9,12 +9,12 @@ public:
 	CGrass(vector2d position, int type);
 	virtual ~CGrass();
 
-	virtual bool initEntity()						override;
+	virtual bool initEntity()						;
 	virtual void updateEntity(float deltaTime)		;
 	virtual void updateEntity(CKeyBoard* device)	;
 	virtual void updateEntity(RECT* rectCamera)		;
-	virtual void drawEntity()						override;
-	virtual bool loadSprite()						override;
+	virtual void drawEntity()						;
+	virtual bool loadSprite()						;
 
 private:
 	int		m_TypeGrass;

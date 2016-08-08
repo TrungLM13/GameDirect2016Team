@@ -13,13 +13,13 @@ public:
 	~CTile();
 
 public:
-	virtual bool initEntity()						override;
-	virtual void updateEntity(float deltaTime)		override;
-	virtual void updateEntity(CKeyBoard* device)	override;
-	virtual void updateEntity(RECT* rectCamera)		override;
-	virtual void drawEntity()						override;
-	virtual bool loadSprite()						override;
-	virtual	int	 getTagNodeId()						override;
+	virtual bool initEntity()						;
+	virtual void updateEntity(float deltaTime);
+	virtual void updateEntity(CKeyBoard* device);
+	virtual void updateEntity(RECT* rectCamera);
+	virtual void drawEntity()						;
+	virtual bool loadSprite()						;
+	virtual	int	 getTagNodeId()						;
 
 	int				m_Index;
 	vector3d		m_Pos;

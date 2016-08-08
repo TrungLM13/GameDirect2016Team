@@ -10,12 +10,12 @@ public:
 	CClound(vector2d newPos, int type);
 	virtual ~CClound();
 
-	virtual bool initEntity()						override;
+	virtual bool initEntity()						= 0;
 	virtual void updateEntity(float deltaTime);
 	virtual void updateEntity(CKeyBoard* device);
 	virtual void updateEntity(RECT* rectCamera);
-	virtual void drawEntity()						override;
-	virtual bool loadSprite()						override;
+	virtual void drawEntity()						= 0;
+	virtual bool loadSprite()						= 0;
 
 private:
 	int			m_TypeClound;

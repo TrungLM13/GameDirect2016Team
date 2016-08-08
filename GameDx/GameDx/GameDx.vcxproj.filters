@@ -195,6 +195,15 @@
     <ClCompile Include="Class\Game\Entity\Map\Clound.cpp">
       <Filter>Game\Entity\Tile</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Pipe.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Tiless.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Objectss.cpp">
+      <Filter>Game\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -403,6 +412,15 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Map\Clound.h">
       <Filter>Game\Entity\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Pipe.h">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Tiless.h">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Objectss.h">
+      <Filter>Game\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
