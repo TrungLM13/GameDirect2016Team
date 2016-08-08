@@ -4,6 +4,7 @@
 #include "Class\Game\State\DieState.h"
 #include "Class\Game\State\ClimbState.h"
 #include "Class\Mathematics\Collision.h"
+#include "Class\Game\State\DieState.h"
 
 CPlayer::CPlayer()
 {
@@ -23,7 +24,6 @@ CPlayer::CPlayer(directDevice device)
 
 bool CPlayer::initEntity()
 {
-	m_Position = vector3d(200, 50, 0.5);
 	m_IsCollision = false;
 	m_IsAutoMove = false;
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
@@ -299,6 +299,14 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			}
 		}
 		break;
+	case TAGNODE::CARNIVOROUS_PLANT:
+		if (this->m_PlayerTag != PLAYERTAGS::UNDYING && this->m_PlayerTag != PLAYERTAGS::SMALL_UNDYING) {
+			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
+				this->m_PlayerState->exitCurrentState(*this, new CDieState());
+				this->m_PlayerState->enter(*this);
+			}
+		}
+		break;
 	case TAGNODE::NONE:
 		if (this->m_State == PLAYERSTATES::STAND || PLAYERSTATES::RUN)
 		{
@@ -312,8 +320,6 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 void CPlayer::drawEntity()
 {
-	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Velocity.x) * 2, abs(m_Velocity.y / m_Velocity.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-	//m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(this->getBounding().getX(), this->getBounding().getY(), 0.0)), vector2d(SIGN(m_Velocity.x) * 2, SIGN(m_Velocity.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(m_Position)), vector2d(m_Direction.at(DIRECTIONINDEX::DIRECTION_X), m_Direction.at(DIRECTIONINDEX::DIRECTION_Y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
@@ -338,6 +344,9 @@ CBaseState* CPlayer::getState(){
 	return m_PlayerState;
 }
 
+int	CPlayer::getStateInt() {
+	return m_State;
+}
 void CPlayer::setState(CBaseState* state) {
 	m_PlayerState = state;
 }

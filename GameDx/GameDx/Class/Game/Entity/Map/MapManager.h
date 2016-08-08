@@ -28,7 +28,7 @@ private:
 	vector<MapInfo*>		m_listAllMapInGame;
 	std::string				m_currentMapName;
 
-	vector<CBaseEntity*>			m_listBackground;
+	vector<CBaseEntity*>	m_listBackground;
 	vector<CBaseEntity*>	m_listEnemy;
 	vector<CBaseEntity*>	m_listBonus;
 };

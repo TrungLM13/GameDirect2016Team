@@ -1,7 +1,7 @@
 #include "Iteminbox.h"
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Mathematics\SweptAABB.h"
-#include "Class\Mathematics\T_Collision.h"
+
 
 CIteminbox::CIteminbox()
 {
@@ -84,13 +84,6 @@ void CIteminbox::setVelocity(vector2d velocity)
 	this->m_Velocity.y = velocity.y;
 }
 
-void CIteminbox::chkCollision(CPlayer* player, float deltaTime)
-{
-	if (Collision::getInstance()->isCollision(player, this))
-	{
-		
-	}
-}
 
 ITEMINBOX_TYPE CIteminbox::getitemtype()
 {
@@ -102,11 +95,11 @@ void CIteminbox::chkShowItem(CPlayer* player)
 	if (player->getPlayerTag() == PLAYERTAGS::SMALL)
 	{
 		this->m_itemtype = ITEMINBOX_TYPE::REDMUSHROOM;
-		this->m_TagNode = "redmushroom";
+		this->m_TagNode = "RedMushroom";
 	}
 	if (player->getPlayerTag() == PLAYERTAGS::BIG)
 	{
-		this->m_itemtype = ITEMINBOX_TYPE::FLOWER;
-		this->m_TagNode = "flower";
+		this->m_itemtype = ITEMINBOX_TYPE::ITEM_FLOWER;
+		this->m_TagNode = "Flower";
 	}
 }

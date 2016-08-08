@@ -55,3 +55,6 @@ void CGreenMushroom::setVelocity(vector2d velocity)
 	this->m_Velocity.y = velocity.y;
 }
 
+int CGreenMushroom::getTagNodeId() {
+	return TAGNODE::GREEN_MUSHROOM;
+}

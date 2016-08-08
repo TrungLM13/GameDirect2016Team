@@ -239,13 +239,13 @@ enum MUSHROOM_STATE
 	MUSH_DIE = 1
 };
 
-<<<<<<< HEAD
+
 enum ITEMINBOX_TYPE
 {
 	REDMUSHROOM = 0,
-	FLOWER      = 1
-=======
+	ITEM_FLOWER = 1
 
+};
 enum TAGNODE
 {
 	NONE = 0,
@@ -263,7 +263,8 @@ enum TAGNODE
 	FLAG_POLE = 12,
 	FLAG_POLE_TAIL = 13,
 	MUSHROOM = 14,
-	TURTLE = 15
+	TURTLE = 15,
+	CARNIVOROUS_PLANT =16
 };
 
 
@@ -292,7 +293,6 @@ enum ELEVATOR_STATE
 	DOWN = 2,
 	RIGHT = 3,
 	LEFT = 4
->>>>>>> 4d6f5cdd83ea65c268a28a021b18f92ba14adb11
 };
 /******************************/
 

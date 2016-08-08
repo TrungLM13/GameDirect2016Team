@@ -4,6 +4,7 @@
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\Entity\Bonus\CoinInBox.h"
 
+
 CBrick::CBrick()
 {
 	this->initEntity();
@@ -12,6 +13,7 @@ CBrick::CBrick(int isGift)
 {
 	this->isGiftBox = isGift;
 	this->initEntity();
+}
 CBrick::CBrick(vector2d pos)
 {
 	this->initEntity();
@@ -36,7 +38,7 @@ bool CBrick::initEntity()
 	this->stateBrick = 1;
 	isDraw = false;
 	checkShowItem();
-	m_Position = vector3d(150, 150, 0);
+	m_Position = vector3d(150, 100, 0);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(5.8, 5.8);
@@ -159,7 +161,7 @@ void CBrick::checkShowItem()
 			this->stateBrick = 1;
 		}
 	}
-}}
+}
 int	CBrick::getTagNodeId()
 {
 	return TAGNODE::BRICK;

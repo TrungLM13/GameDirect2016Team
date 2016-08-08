@@ -27,7 +27,7 @@ bool CTile::initEntity()
 
 void CTile::updateEntity(float deltaTime)
 {
-	
+
 }
 
 void CTile::updateEntity(CKeyBoard* device)
@@ -39,10 +39,7 @@ void CTile::updateEntity(RECT* rectCamera)
 {
 
 }
-void CTile::updateCollision(CBaseEntity*, float deltaTime)
-{
 
-}
 void CTile::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++){
@@ -58,6 +55,6 @@ bool CTile::loadSprite()
 	return true;
 }
 
-int	CTile::getTagNodeId() {
+int CTile::getTagNodeId() {
 	return TAGNODE::TILE;
 }

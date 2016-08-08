@@ -19,7 +19,6 @@ public:
 	void chkShowItem(CPlayer*);
 	void setVelocity(vector2d velocity);
 	void setPosition(vector3d position);
-	void chkCollision(CPlayer*,float deltaTime);
 	ITEMINBOX_TYPE getitemtype();
 
 private:
