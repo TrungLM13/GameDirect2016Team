@@ -14,9 +14,11 @@ void CClimbState::enter(CPlayer& player) {
 }
 
 CBaseState* CClimbState::handleInput(CPlayer& player, CKeyBoard* input) {
-	return nullptr;
+	return this;
 }
 
 void CClimbState::update(CPlayer& player, double deltaTime) {
+	player.setVelocity(vector2d((float)VEL_PLAYER_X, (float)(-VEL_PLAYER_Y)));
 
+	player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + player.getVelocity().y * deltaTime / 240, 0));
 }

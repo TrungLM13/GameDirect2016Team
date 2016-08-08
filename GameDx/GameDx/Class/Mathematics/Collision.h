@@ -5,8 +5,9 @@
 #include "Class\Mathematics\Box2D.h"
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Mathematics\SweptAABB.h"
+#include "Class\Game\Algorithsm\Singleton.h"
 
-class CCollision
+class CCollision: public CSingleton<CCollision>
 {
 public:
 	CCollision();

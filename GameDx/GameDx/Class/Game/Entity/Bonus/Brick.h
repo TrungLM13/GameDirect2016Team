@@ -10,6 +10,7 @@ class CBrick : public CMovable
 public:
 	CBrick();
 	CBrick(int isGift);
+	CBrick(vector2d pos);
 	~CBrick();
 	virtual	bool			loadSprite()											override;
 	virtual	bool			initEntity()											override;
@@ -18,6 +19,8 @@ public:
 	virtual void			updateEntity(CKeyBoard *device)							override;
 	virtual void			drawEntity()											override;
 	virtual void			updateCollision(CBaseEntity*, float deltaTime)			override;
+	virtual int				getTagNodeId()											override;
+
 public:
 
 	void setPosition(vector3d position);

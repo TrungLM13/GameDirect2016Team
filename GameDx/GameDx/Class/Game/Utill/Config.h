@@ -43,6 +43,7 @@
 
 #define SIGN(A)						(A >= 0 ? 1 : -1)
 #define DIRECT_COORDINATE(A)		{-(A)}
+#define CHANGE_DIRECTION(A)			{-(A)}
 #define SAFE_RELEASE(A)				{if (A) {delete A; A = 0;}}
 
 #define BACKBUFFER_WIDTH			256
@@ -75,10 +76,18 @@
 #define BOMBMAN_STAGE_INFO_STRING	L"BOMBMAN\n\nCLEAR POINT"
 #define FIREMAN_STAGE_INFO_STRING	L"FIREMAN\n\nCLEAR POINT"
 
-#define VEL_PLAYER_X 4
-#define VEL_PLAYER_Y 19
+#define VEL_PLAYER_X 5.8
+#define VEL_PLAYER_Y 9.8
+#define VEL_PLAYER_X_MIN 0
+#define VEL_PLAYER_Y_MIN 0
 #define ACCEL_PLAYER_X 0.5f
 #define ACCEL_PLAYER_Y 1
+
+#define PLAYER_JUMP_LIMIT 120
+#define PLAYER_JUMP_HIGH_LIMIT 150
+
+#define PLAYER_UNDYING_TIME	10000
+#define SMALL_PLAYER_UNDYING_TIME 5000
 
 #define POOLSIZE					5
 #define LEVELPOOL(A)				(A*POOLSIZE)		
@@ -130,13 +139,18 @@ enum STAGESELECTED
 	ELECMAN
 };
 
+enum DIRECTIONINDEX {
+	DIRECTION_X = 0,
+	DIRECTION_Y = 1
+};
+
 enum DIRECTION
 {
 	DIRECTION_NONE	=  0,
 	DIRECTION_RIGHT =  1,
 	DIRECTION_UP	=  1,
-	DIRECTION_LEFT	= -1,
-	DIRECTION_DOWN	= -1
+	DIRECTION_DOWN	= -1,
+	DIRECTION_LEFT	= -1
 };
 
 enum COLDIRECTION
@@ -146,6 +160,23 @@ enum COLDIRECTION
 	COLDIRECTION_BOTTOM,
 	COLDIRECTION_LEFT,
 	COLDIRECTION_RIGHT
+};
+
+enum GRASSSTRUCT
+{
+	CRASS_SMALL = 0,
+	CRASS_NORMAL,
+	CRASS_BIG,
+	GRASS_LEFT,
+	GRASS_MIDDLE,
+	GRASS_RIGHT
+};
+
+enum CLOUNDSTRUCT
+{
+	ONE_CLOUND   = 0,
+	TWO_CLOUND,
+	THREE_CLOUND
 };
 /******************/
 
@@ -160,6 +191,19 @@ struct MapIntro
 	int				m_helths;
 };
 
+struct MapInfo
+{
+	std::string		m_mapName;
+	std::string		m_pathData;
+	MapInfo(){
+		m_mapName		= "NOPE";
+		m_pathData		= "NOPE";
+	}
+	MapInfo(std::string mapName, std::string pathData){
+		m_mapName		= mapName;
+		m_pathData		= pathData;
+	}
+};
 struct KeyState
 {
 	int KeyCode;
@@ -172,12 +216,12 @@ enum PLAYERSTATES
 	STAND = 1,
 	RUN = 2,
 	JUMP = 3,
-	STAND_SHOOT = 4,
-	MOVE_SHOOT = 5,
-	JUMP_SHOOT = 6,
-	CLIMB = 7,
-	SIT = 8,
-	DIE = 9
+	DIE = 4,
+	CLIMB = 5,
+	SIT = 6,
+	STAND_SHOOT = 7,
+	MOVE_SHOOT = 8,
+	JUMP_SHOOT = 9
 };
 
 enum PLAYERTAGS
@@ -185,7 +229,8 @@ enum PLAYERTAGS
 	SMALL = 0,
 	BIG = 1,
 	FIRE = 2,
-	UNDYING = 3
+	SMALL_UNDYING = 3,
+	UNDYING = 4,
 };
 
 enum MUSHROOM_STATE
@@ -194,10 +239,60 @@ enum MUSHROOM_STATE
 	MUSH_DIE = 1
 };
 
+<<<<<<< HEAD
 enum ITEMINBOX_TYPE
 {
 	REDMUSHROOM = 0,
 	FLOWER      = 1
+=======
+
+enum TAGNODE
+{
+	NONE = 0,
+	PLAYER = 1,
+	RED_MUSHROOM = 2,
+	GREEN_MUSHROOM = 3,
+	STAR = 4,
+	FLOWER = 5,
+	COIN = 6,
+	BRICK = 7,
+	GIFT_BOX = 8,
+	TILE = 9,
+	PIPE = 10,
+	FLAG = 11,
+	FLAG_POLE = 12,
+	FLAG_POLE_TAIL = 13,
+	MUSHROOM = 14,
+	TURTLE = 15
+};
+
+
+enum TURTLE_STATE
+{
+	TURTLE_RUN = 0,
+	TURTLE_ENSCONSE =1,
+	TURTLE_DIE = 1,
+	TURTLE_SURGING = 1,
+	TURTLE_FLY = 3,
+	TURTLE_INDENT = 2
+
+};
+
+enum TURTLE_TAG
+{
+	GREEN = 0,
+	RED = 1,
+	NAVI = 2,
+	THORN = 3
+};
+
+enum ELEVATOR_STATE
+{
+	UP = 1,
+	DOWN = 2,
+	RIGHT = 3,
+	LEFT = 4
+>>>>>>> 4d6f5cdd83ea65c268a28a021b18f92ba14adb11
 };
 /******************************/
 

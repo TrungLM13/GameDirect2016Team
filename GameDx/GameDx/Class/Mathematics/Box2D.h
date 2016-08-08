@@ -28,7 +28,8 @@ public:
 				float	getWidth();			void	setWidth(float);
 				float	getHeight();		void	setHeight(float);
 				float	getVelocityX();		void	setVelocityX(float);
-				float	getVelocityY();		void	setVelocityY(float);
+				float	getVelocityY();		void	setVelocityY(float); 
+				vector2d getVelocity();		void setVelocity(vector2d);
 
 private:
 	vector2d	m_Position;

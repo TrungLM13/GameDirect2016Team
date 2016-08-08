@@ -9,7 +9,6 @@
 #include "Class\Mathematics\Box2D.h"
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\StaticEntity.h"
-#include "Class\Mathematics\T_Collision.h"
 
 class Test
 {
@@ -40,7 +39,6 @@ private:
 	vector2d *vx;
 	CBox2D *moveBox;
 	CBox2D *dynamicBox;
-	Collision  *checkCollision;
 
 };
 

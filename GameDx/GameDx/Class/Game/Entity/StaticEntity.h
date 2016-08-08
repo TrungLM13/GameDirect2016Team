@@ -24,6 +24,14 @@ public:
 	virtual		const char*				getTagNode()										override;
 	virtual		void					updateCollision(CBaseEntity*, float deltaTime)		override;
 				vector2d				getPosition();
+	virtual		bool					loadSprite()			= 0;
+	virtual		CBox2D					getBounding()			override;
+	virtual		bool					initEntity()			;
+	virtual		const char*				getTagNode()			override;
+	virtual		int						getTagNodeId()			override { return 0; };
+	virtual		vector3d				getPosition()			override;
+	virtual		vector2d				getVelocity();
+				void					handleCollision(CBaseEntity*entity, float deltaTime) {};
 
 protected:
 				vector3d				m_Position;

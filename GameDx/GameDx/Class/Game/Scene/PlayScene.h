@@ -12,6 +12,22 @@
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\Bonus\Iteminbox.h"
 #include "Class\Game\Entity\Bonus\CoinInBox.h"
+
+
+#include "Class\Game\Entity\Tile\Flag.h"
+
+#include "Class\Game\Entity\Map\Tile.h"
+#include "Class\Game\Entity\Tile\FlagPole.h"
+#include "Class\Game\Entity\Tile\FlagPoleHead.h"
+#include "Class\Game\Entity\Tile\FlagPoleTail.h"
+#include "Class\Game\Entity\Tile\Castle.h"
+#include "Class\Game\Entity\Tile\FlagCastle.h"
+
+#include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
+
+#include "Class\Game\Entity\Enemy\Turtle.h"
+#include "Class\Game\Entity\Tile\Elevator.h"
+
 class CPlayScene :
 	public CBaseScene
 {
@@ -20,8 +36,8 @@ public:
 	~CPlayScene();
 
 	virtual bool initScene()						override;
-	virtual void updateScene(CKeyBoard*)			override;
 	virtual void updateScene(double deltaTime)		override;
+	virtual void updateScene(CKeyBoard* keyboard)	override;
 	virtual void renderScene()						override;
 
 private:
@@ -33,6 +49,7 @@ private:
 	vector<CMushroom*>		listMushroom;
 	vector<CMovable *>		listMovable;
 	vector<CCoinInBox*>		listCoinInBox;
+	vector<CBaseEntity*>	m_ListEntity;
 };
 
 #endif

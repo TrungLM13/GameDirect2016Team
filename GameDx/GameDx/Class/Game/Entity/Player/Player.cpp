@@ -1,6 +1,9 @@
 #include "Player.h"
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Game\State\StandState.h"
+#include "Class\Game\State\DieState.h"
+#include "Class\Game\State\ClimbState.h"
+#include "Class\Mathematics\Collision.h"
 
 CPlayer::CPlayer()
 {
@@ -21,17 +24,32 @@ CPlayer::CPlayer(directDevice device)
 bool CPlayer::initEntity()
 {
 	m_Position = vector3d(200, 50, 0.5);
+	m_IsCollision = false;
+	m_IsAutoMove = false;
+	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
+	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
+
+	m_UndyingTime = 0;
+	m_Position = vector3d(50, 70, 0.5);
+
 	m_State = PLAYERSTATES::STAND;
-	m_PlayerState = new CStandState();
+	m_PlayerState = new CJumpState();
 	m_PlayerTag = PLAYERTAGS::SMALL;
 
 	m_Acceleration = vector2d(0.5f, 0);
-	m_Velocity = vector2d(9.8, 9.8);
+	m_Velocity = vector2d(VEL_PLAYER_X_MIN, VEL_PLAYER_Y);
+
+	m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
+	m_Direction.at(DIRECTIONINDEX::DIRECTION_Y) = DIRECTION::DIRECTION_UP;
 
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 
 	return true;
+}
+
+int	CPlayer::getTagNodeId() {
+	return TAGNODE::PLAYER;
 }
 
 bool CPlayer::loadSprite()
@@ -47,25 +65,46 @@ bool CPlayer::loadSprite()
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_run, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_jum, 1, 1, 1, 0));
-
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_climb, 1, 2, 2, 0));
 		break;
 	case PLAYERTAGS::BIG:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_run, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jum, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_stand, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_stand, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_jum, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
+		break;
+	case PLAYERTAGS::SMALL_UNDYING:
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_jum, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_climb, 1, 2, 2, 0));
 		break;
 	case PLAYERTAGS::UNDYING:
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_stand, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_run, 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_jum, 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
+		break;
+	case PLAYERTAGS::FIRE:
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_run, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jum, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		/*this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));
+
+
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));*/
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
 		break;
 	default:
 		break;
@@ -76,9 +115,26 @@ bool CPlayer::loadSprite()
 
 void CPlayer::updateEntity(float deltaTime)
 {
-	if (deltaTime > 10) {
-		/*m_PlayerState->exitCurrentState(*this, new CRunState());
-		m_PlayerState->enter(*this);*/
+	if (this->m_PlayerTag == PLAYERTAGS::UNDYING)
+	{
+		if (m_UndyingTime >= 0)
+			m_UndyingTime -= deltaTime;
+		else
+		{
+			this->m_PlayerTag = PLAYERTAGS::BIG;
+			this->loadSprite();
+		}
+	}
+
+	else if (this->m_PlayerTag == PLAYERTAGS::SMALL_UNDYING)
+	{
+		if (m_UndyingTime >= 0)
+			m_UndyingTime -= deltaTime;
+		else
+		{
+			this->m_PlayerTag = PLAYERTAGS::SMALL;
+			this->loadSprite();
+		}
 	}
 
 	if (m_PlayerState)
@@ -91,17 +147,6 @@ void CPlayer::updateEntity(RECT* camera) {
 
 void CPlayer::updateEntity(CKeyBoard* input)
 {
-	if (input->KeyDown(DIK_Z))
-	{
-		m_PlayerTag = PLAYERTAGS::BIG;
-		this->loadSprite();
-	}
-	else if (input->KeyDown(DIK_X)) 
-	{
-		m_PlayerTag = PLAYERTAGS::SMALL;
-		this->loadSprite();
-	}
-
 	if (m_PlayerState){
 		CBaseState* state = m_PlayerState->handleInput(*this, input);
 
@@ -115,10 +160,161 @@ void CPlayer::updateEntity(CKeyBoard* input)
 	}
 }
 
+void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
+	switch (entity->getTagNodeId())
+	{
+	case TAGNODE::RED_MUSHROOM:
+		if (CCollision::CheckCollision(this, entity)) {
+			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+				m_PlayerTag = PLAYERTAGS::BIG;
+				this->loadSprite();
+			}
+		}
+		break;
+	case TAGNODE::STAR:
+		if (CCollision::CheckCollision(this, entity)) {
+			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
+				m_PlayerTag = PLAYERTAGS::UNDYING;
+				this->loadSprite();
+				this->m_UndyingTime = PLAYER_UNDYING_TIME;
+			}
+		}
+		break;
+	case TAGNODE::FLOWER:
+		if (CCollision::CheckCollision(this, entity)) {
+			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
+				m_PlayerTag = PLAYERTAGS::FIRE;
+			}
+		}
+		break;
+	case TAGNODE::COIN:
+		break;
+	case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
+		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
+		{
+			if (this->m_Velocity.y > 0)
+			{
+				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+			}
+		}
+		break;
+	case TAGNODE::TILE:
+		if (this->m_State != PLAYERSTATES::DIE) {
+			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP)
+			{
+				if (!m_IsAutoMove) {
+					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+					this->m_PlayerState->exitCurrentState(*this, new CStandState());
+					this->m_PlayerState->enter(*this);
+				}
+				else {
+					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+					this->m_PlayerState->exitCurrentState(*this, new CRunState());
+					this->m_PlayerState->enter(*this);
+				}
+			}
+
+		}
+		else {
+			if (this->m_Velocity.y >= 0)
+			{
+				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+			}
+		}
+		break;
+	case TAGNODE::FLAG:
+		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
+		{
+			// Only if after collision top with flag pole tail and bottom with flag, player change into run state
+			if (m_IsEnable) {
+				m_IsAutoMove = true;
+				if (m_Velocity.x <= 0) {
+					m_Velocity.x = VEL_PLAYER_X;
+				}
+				this->m_PlayerState->exitCurrentState(*this, new CRunState());
+				this->m_PlayerState->enter(*this);
+			}
+			//else m_IsAutoMove = false;
+
+		}
+		break;
+	case TAGNODE::FLAG_POLE:
+		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
+		{
+			if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
+				if (m_Position.y > 100){
+					m_Position.x = entity->getPosition().x;
+					this->m_PlayerState->exitCurrentState(*this, new CClimbState());
+				}
+				else
+				{
+					this->m_PlayerState->exitCurrentState(*this, new CJumpState());
+				}
+			}
+
+		}
+		break;
+	case TAGNODE::FLAG_POLE_TAIL:
+		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
+		{
+			m_IsCollision = true;
+
+			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
+			{
+				m_Velocity.x = VEL_PLAYER_X_MIN;
+			}
+			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+				m_IsCollision = false;
+				this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
+			}
+
+			m_Velocity.y = VEL_PLAYER_Y;
+
+		}
+		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
+			m_IsEnable = true; // Signal for flag auto run
+			if (this->m_State == PLAYERSTATES::CLIMB) {
+				m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+				m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
+
+				m_Velocity.x = abs(m_Velocity.x) * m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
+			}
+		}
+		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE) {
+			m_IsCollision = false;
+		}
+		break;
+	case TAGNODE::MUSHROOM: case TAGNODE::TURTLE:
+		if (CCollision::CheckCollision(this, entity)) {
+			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+				this->m_PlayerState->exitCurrentState(*this, new CDieState());
+				this->m_PlayerState->enter(*this);
+			}
+			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
+			{
+				//undying but small and exists in 5s
+				this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+				this->loadSprite();
+				this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
+			}
+		}
+		break;
+	case TAGNODE::NONE:
+		if (this->m_State == PLAYERSTATES::STAND || PLAYERSTATES::RUN)
+		{
+			//m_IsCollision = false;
+		}
+		break;
+	default:
+		break;
+	}
+}
+
 void CPlayer::drawEntity()
 {
 	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Velocity.x) * 2, abs(m_Velocity.y / m_Velocity.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 	//m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(this->getBounding().getX(), this->getBounding().getY(), 0.0)), vector2d(SIGN(m_Velocity.x) * 2, SIGN(m_Velocity.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	m_listSprite.at(m_State)->Render(CCamera::setPositionEntity(vector3d(m_Position)), vector2d(m_Direction.at(DIRECTIONINDEX::DIRECTION_X), m_Direction.at(DIRECTIONINDEX::DIRECTION_Y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CPlayer::setState(PLAYERSTATES state) {

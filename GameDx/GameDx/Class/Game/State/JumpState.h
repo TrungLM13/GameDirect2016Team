@@ -11,6 +11,7 @@ public:
 	void enter(CPlayer& player);
 	CBaseState* handleInput(CPlayer& player, CKeyBoard* device);
 	void update(CPlayer& player, double deltaTime);
+	void update(CPlayer& player, CBaseEntity* entity);
 private:
 	bool m_IsMoveX;
 	bool m_IsJumpHigh;

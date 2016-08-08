@@ -28,9 +28,15 @@ CBox2D		CMovable::getBounding()
 		m_Bounding->setY		(m_Position.y + m_listSprite.at(m_State)->getFrameInfo().Height / 2  * std::abs(m_listSprite.at(m_State)->getScale().y));
 		m_Bounding->setWidth	(m_listSprite.at(m_State)->getFrameInfo().Width					 	 * std::abs(m_listSprite.at(m_State)->getScale().x));
 		m_Bounding->setHeight	(m_listSprite.at(m_State)->getFrameInfo().Height					 * std::abs(m_listSprite.at(m_State)->getScale().y));
+
 	}
 
 	return *m_Bounding;
+}
+
+const char* CMovable::getTagNode()
+{
+	return this->m_TagNode;
 }
 
 vector2d CMovable::getVelocity()
@@ -38,7 +44,7 @@ vector2d CMovable::getVelocity()
 	return m_Velocity;
 }
 
-const char* CMovable::getTagNode()
+void	CMovable::setVelocity(vector2d newVel)
 {
 	return this->m_TagNode;
 }
@@ -50,4 +56,5 @@ void CMovable::updateCollision(CBaseEntity* entity, float deltaTime)
 void CMovable::setVelocity(vector2d vector)
 {
 	this->m_Velocity = vector;
+	m_Velocity = newVel;
 }

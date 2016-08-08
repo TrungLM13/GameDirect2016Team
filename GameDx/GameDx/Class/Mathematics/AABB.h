@@ -19,8 +19,6 @@ static CBox2D GetSweptBroadPhaseBox(CBox2D b)
 	return broadphasebox;
 }
 
-
-
 static COLDIRECTION CheckAABB(CBox2D box1, CBox2D box2)
 {
 	float _left = box1.getX() - (box2.getX() + box2.getWidth());

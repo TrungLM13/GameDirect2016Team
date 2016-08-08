@@ -55,9 +55,6 @@
     <ClCompile Include="Class\Game\Scene\SelectStageScene.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Class\MapManager.cpp">
-      <Filter>Game\MapManager</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Test\Test.cpp">
       <Filter>Game\Test</Filter>
     </ClCompile>
@@ -119,9 +116,6 @@
       <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
     <ClCompile Include="Class\Game\WinMain.cpp" />
-    <ClCompile Include="Class\Mathematics\T_Collision.cpp">
-      <Filter>Mathermatic</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Entity\Bonus\GiftBox.cpp">
       <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
@@ -134,6 +128,7 @@
     <ClCompile Include="Class\Game\Utill\ShowBouding.cpp">
       <Filter>Game\Utill</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Class\Game\Entity\Bonus\GreenMushroom.cpp">
       <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
@@ -142,6 +137,80 @@
     </ClCompile>
     <ClCompile Include="Class\Game\Entity\Bonus\CoinInBox.cpp">
       <Filter>Game\Entity\Bonus</Filter>
+=======
+    <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
+    <ClCompile Include="Class\Game\Entity\Bonus\RedMushroom.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Tile.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\Flag.cpp">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\FlagPole.cpp">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\FlagPoleHead.cpp">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\FlagPoleTail.cpp">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Enemy\CarnivorousPlants.cpp">
+      <Filter>Game\Entity\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\Castle.cpp">
+      <Filter>Game\Entity\Tile\Castle</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\FlagCastle.cpp">
+      <Filter>Game\Entity\Tile\Castle</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp">
+      <Filter>Game\MapManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Grass.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Enemy\Turtle.cpp">
+      <Filter>Game\Entity\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\TurtleState\TurtleBaseState.cpp">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\TurtleState\TurtleDieState.cpp">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\TurtleState\TurtleEnsconseState.cpp">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\TurtleState\TurtleFlyState.cpp">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\TurtleState\TurtleIndentState.cpp">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\TurtleState\TurtleRunState.cpp">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\State\TurtleState\TurtleSurfingState.cpp">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\Elevator.cpp">
+      <Filter>Game\Entity\Tile\Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Clound.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Pipe.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Tiless.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Objectss.cpp">
+      <Filter>Game\Entity</Filter>
+>>>>>>> 4d6f5cdd83ea65c268a28a021b18f92ba14adb11
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,9 +286,6 @@
     <ClInclude Include="Class\Game\Scene\SelectStageScene.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Class\MapManager.h">
-      <Filter>Game\MapManager</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Test\Test.h">
       <Filter>Game\Test</Filter>
     </ClInclude>
@@ -283,9 +349,6 @@
     <ClInclude Include="Class\Mathematics\AABB.h">
       <Filter>Mathermatic</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Mathematics\T_Collision.h">
-      <Filter>Mathermatic</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\GiftBox.h">
       <Filter>Game\Entity\Bonus</Filter>
     </ClInclude>
@@ -298,6 +361,7 @@
     <ClInclude Include="Class\Game\Utill\ShowBouding.h">
       <Filter>Game\Utill</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Class\Game\Entity\Bonus\GreenMushroom.h">
       <Filter>Game\Entity\Bonus</Filter>
     </ClInclude>
@@ -306,6 +370,73 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\CoinInBox.h">
       <Filter>Game\Entity\Bonus</Filter>
+=======
+    <ClInclude Include="Class\Game\Entity\Map\MapManager.h">
+      <Filter>Game\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Tile\Flag.h">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Tile\FlagPole.h">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Tile\FlagPoleHead.h">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Tile\FlagPoleTail.h">
+      <Filter>Game\Entity\Tile\Flag</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Enemy\CarnivorousPlants.h">
+      <Filter>Game\Entity\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Tile\Castle.h">
+      <Filter>Game\Entity\Tile\Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Tile\FlagCastle.h">
+      <Filter>Game\Entity\Tile\Castle</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Grass.h">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h">
+      <Filter>Game\Entity\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleBaseState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleDieState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleEnsconseState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleFlyState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleIndentState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleRunState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleSurfingState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Tile\Elevator.h">
+      <Filter>Game\Entity\Tile\Elevator</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Clound.h">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Pipe.h">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Map\Tiless.h">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Objectss.h">
+      <Filter>Game\Entity</Filter>
+>>>>>>> 4d6f5cdd83ea65c268a28a021b18f92ba14adb11
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -371,6 +502,18 @@
     </Filter>
     <Filter Include="Game\Entity\Tile">
       <UniqueIdentifier>{24b99daa-9648-4c3b-b57d-f2d2cbcca4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Tile\Flag">
+      <UniqueIdentifier>{d32302a2-45f5-449b-b063-e471e62f2d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Tile\Castle">
+      <UniqueIdentifier>{a20ebc3f-445d-40ae-b5b9-d0e6e766eb30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\State\TurtleState">
+      <UniqueIdentifier>{91b2aec1-54b9-49dc-88c7-4ce444db3e4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Entity\Tile\Elevator">
+      <UniqueIdentifier>{7f40330b-c2c8-452b-be80-c8d5cb90322a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

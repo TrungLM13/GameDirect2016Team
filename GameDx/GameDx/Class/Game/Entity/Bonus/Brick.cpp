@@ -12,6 +12,11 @@ CBrick::CBrick(int isGift)
 {
 	this->isGiftBox = isGift;
 	this->initEntity();
+CBrick::CBrick(vector2d pos)
+{
+	this->initEntity();
+	m_Position.x = pos.x;
+	m_Position.y = pos.y;
 }
 
 CBrick:: ~CBrick()
@@ -45,6 +50,10 @@ void CBrick::updateEntity(CKeyBoard* device)
 
 void CBrick::updateEntity(float deltaTime)
 {
+	if (this->m_Position.y < 150)
+	{
+		m_Position = vector3d(150, 150, 0);
+	}
 }
 
 void CBrick::drawEntity()
@@ -62,6 +71,8 @@ void CBrick::drawEntity()
 			ItemStar->drawEntity();
 		}
 	}
+	for (int i = 0; i < m_listSprite.size(); i++)
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CBrick::updateEntity(RECT* camera)
@@ -148,4 +159,8 @@ void CBrick::checkShowItem()
 			this->stateBrick = 1;
 		}
 	}
+}}
+int	CBrick::getTagNodeId()
+{
+	return TAGNODE::BRICK;
 }

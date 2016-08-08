@@ -13,8 +13,9 @@
 #include "Class\Mathematics\Box2D.h"
 #include "Class\Framework\Sprite.h"
 #include "Class\Framework\Camera.h"
+#include "Class\Game\Entity\Objectss.h"
 
-class CBaseEntity
+class CBaseEntity : public CObjectss
 {
 public:
 	
@@ -22,22 +23,30 @@ public:
 	CBaseEntity(directDevice);
 	~CBaseEntity();
 
-	virtual bool			initEntity()										= 0;
 	virtual void			updateEntity(CKeyBoard* deivce)						= 0;
 	virtual void			updateEntity(RECT* camera)							= 0;
 	virtual void			updateEntity(float deltaTime)						= 0;
 	virtual void			updateCollision(CBaseEntity*, float deltaTime)		= 0;
 	virtual void			drawEntity()										= 0;
+	virtual void			handleCollision(CBaseEntity*entity, float deltaTime)= 0;
 	virtual	CBox2D			getBounding()										= 0;
 	virtual const char*		getTagNode()										= 0;
+	virtual vector2d		getVelocity()										= 0;
+	virtual int				getTagNodeId()										{ return 0; };
+	virtual vector3d		getPosition()										= 0;
+
+	bool m_IsEnable;
 
 protected:
 	int						m_State;
-	const char*				m_TagNode;
 	CBox2D*					m_Bounding;
 	vector3d				m_Position;
 	vector<CSprite*>		m_listSprite;
 	
+
+protected:
+	vector2d				m_Velocity;
+
 
 };
 

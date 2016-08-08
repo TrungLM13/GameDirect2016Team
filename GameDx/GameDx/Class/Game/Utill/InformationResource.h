@@ -13,13 +13,15 @@ public:
 	static const wchar_t*	bigmario_sit;
 	static const wchar_t*	bigmario_stand;
 	static const wchar_t*	bigmario_run;
+	static const wchar_t*	bigmario_climb;
 
 	/************RESOURCE FOR SMALLMARIO************/
 	static const wchar_t*	smallmario_cdir;
-	static const wchar_t*	smallmario_die;
-	static const wchar_t*	smallmario_jum;
-	static const wchar_t*	smallmario_run;
 	static const wchar_t*	smallmario_stand;
+	static const wchar_t*	smallmario_run;
+	static const wchar_t*	smallmario_jum;
+	static const wchar_t*	smallmario_die;
+	static const wchar_t*	smallmario_climb;
 
 	/************RESOURCE FOR BIGFIREMARIO************/
 	static const wchar_t*	bigfiremario_cdir;
@@ -45,6 +47,39 @@ public:
 	static const wchar_t*	bigundyingmario_stand;
 	static const wchar_t*	bigundyingmario_jum;
 	static const wchar_t*	bigundyingmario_run;
+	/*************************************************/
+
+	/************RESOURCE FOR SMALLUNDYINGMARIO************/
+	static const wchar_t*	smallmario_undying_stand;
+	static const wchar_t*	smallmario_undying_run;
+	static const wchar_t*	smallmario_undying_jum;
+
+	/************RESOURCE FOR UNDYINGMARIO************/
+	static const wchar_t*	bigmario_undying_stand;
+	static const wchar_t*	bigmario_undying_run;
+	static const wchar_t*	bigmario_undying_jum;
+
+
+	/************FLAG RESOURCE*******/
+	static const wchar_t*	greenFlag;
+	static const wchar_t*	flagPole;
+	static const wchar_t*	flagPoleHead;
+	static const wchar_t*	flagPoleTail;
+
+
+	/*************************************************/
+
+	/************ENERMY RESOURCE*******/
+	static const wchar_t*	greenCarnivorousPlants;
+	static const wchar_t*	blueCarnivorousPlants;
+	static const wchar_t*	redCarnivorousPlants;
+
+	/*************************************************/
+
+	/************ENERMY TILE*******/
+	static const wchar_t*	castle;
+	static const wchar_t*	flagCastle;
+
 	/*************************************************/
 
 	/************BULLET RESOURCE*******/
@@ -89,6 +124,38 @@ public:
 	/************RESOURCE FOR ENEMY****************/
 	static const wchar_t*	mushroomenemy_run;
 	static const wchar_t*	mushroomenemy_die;
+
+	/************RESOURCE FOR TILE*****************/
+	static const wchar_t*	grass_small_map1;
+	static const wchar_t*	grass_normal_map1;
+	static const wchar_t*	grass_big_map1;
+	static const wchar_t*	grass_left_map3;
+	static const wchar_t*	grass_middle_map3;
+	static const wchar_t*	grass_right_map3;
+	static const wchar_t*	elevator;
+
+
+	/************RESOURCE FOR TURTLE****************/
+	static const wchar_t*	greenturtle_fly;
+	static const wchar_t*	greenturtle_run;
+	static const wchar_t*	greenturtle_ensconse;
+	static const wchar_t*	greenturtle_indent;
+	static const wchar_t*	redturtle_fly;
+	static const wchar_t*	redturtle_run;
+	static const wchar_t*	redturtle_ensconse;
+	static const wchar_t*	redturtle_indent;
+	static const wchar_t*	thornturtle_run;
+	static const wchar_t*	thornturtle_ensconse;
+	static const wchar_t*	thornturtle_indent;
+	static const wchar_t*	naviturtle_run;
+	static const wchar_t*	naviturtle_fly;
+	static const wchar_t*	naviturtle_ensconse;
+	static const wchar_t*	naviturtle_indent;
+
+	/************RESOURCE FOR CLOUND**************/
+	static const wchar_t*	clound_small;
+	static const wchar_t*	clound_normal;
+	static const wchar_t*	clound_big;
 };
 
 #endif
