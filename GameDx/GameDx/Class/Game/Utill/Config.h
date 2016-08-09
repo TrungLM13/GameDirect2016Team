@@ -178,6 +178,7 @@ enum CLOUNDSTRUCT
 	TWO_CLOUND,
 	THREE_CLOUND
 };
+
 /******************/
 
 /*STRUCT*/

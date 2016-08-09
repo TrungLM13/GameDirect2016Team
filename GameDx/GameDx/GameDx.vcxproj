@@ -112,10 +112,7 @@
     <ClInclude Include="Class\Game\Entity\Enemy\CarnivorousPlants.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h" />
-    <ClInclude Include="Class\Game\Entity\Map\Clound.h" />
-    <ClInclude Include="Class\Game\Entity\Map\Grass.h" />
     <ClInclude Include="Class\Game\Entity\Map\MapManager.h" />
-    <ClInclude Include="Class\Game\Entity\Map\Pipe.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tile.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tiless.h" />
     <ClInclude Include="Class\Game\Entity\MovableEntity.h" />
@@ -153,6 +150,7 @@
     <ClInclude Include="Class\Game\State\TurtleState\TurtleRunState.h" />
     <ClInclude Include="Class\Game\State\TurtleState\TurtleSurfingState.h" />
     <ClInclude Include="Class\Game\Test\Test.h" />
+    <ClInclude Include="Class\Game\Utill\ArchitectureEntity.h" />
     <ClInclude Include="Class\Game\Utill\Config.h" />
     <ClInclude Include="Class\Game\Utill\InformationResource.h" />
     <ClInclude Include="Class\Game\Utill\ShowBouding.h" />
@@ -186,10 +184,7 @@
     <ClCompile Include="Class\Game\Entity\Enemy\CarnivorousPlants.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Turtle.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
-    <ClCompile Include="Class\Game\Entity\Map\Clound.cpp" />
-    <ClCompile Include="Class\Game\Entity\Map\Grass.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp" />
-    <ClCompile Include="Class\Game\Entity\Map\Pipe.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tile.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tiless.cpp" />
     <ClCompile Include="Class\Game\Entity\MovableEntity.cpp" />

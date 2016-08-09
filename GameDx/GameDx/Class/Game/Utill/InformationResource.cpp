@@ -151,3 +151,21 @@ const wchar_t*		CInfomationResource::naviturtle_indent   		= L"Resource//Image//
 const wchar_t*		CInfomationResource::clound_small				= L"Resource//Image//Game//Tile//map-1//1_dam_may.png";
 const wchar_t*		CInfomationResource::clound_normal				= L"Resource//Image//Game//Tile//map-1//2_dam_may.png";
 const wchar_t*		CInfomationResource::clound_big					= L"Resource//Image//Game//Tile//map-1//3_dam_may.png";
+
+/***********RESOURCE FOR PIPE*****************/
+const wchar_t*		CInfomationResource::pipe_head_down				= L"Resource//Image//Game//Tile//map-1//mieng_ong.png";
+const wchar_t*		CInfomationResource::pipe_head_body_down		= L"Resource//Image//Game//Tile//map-1//dau_than_ong_cong.png";
+const wchar_t*		CInfomationResource::pipe_body_down				= L"Resource//Image//Game//Tile//map-1//than_ong_cong.png";
+const wchar_t*		CInfomationResource::pipe_head_right			= L"Resource//Image//Game//Tile//mpa-2//mieng_ong_ngang.png";
+const wchar_t*		CInfomationResource::pipe_body_right			= L"Resource//Image//Game//Tile//mpa-2//dau_than_ong_ngang.png";
+
+/************RESOURCE FOR CEMENT**************/
+const wchar_t*		CInfomationResource::cement_pipe				= L"Resource//Image//Game//Tile//map-3//dat_co.png";
+const wchar_t*		CInfomationResource::cement_barrier_blue		= L"Resource//Image//Game//Tile//map-2//chan_cot_co_xanh.png";
+const wchar_t*		CInfomationResource::cement_barrier_red			= L"Resource//Image//Game//Tile//map-2//chan_cot_co_xanh.png";
+const wchar_t*		CInfomationResource::cement_lane_red			= L"Resource//Image//Game//Tile//map-1//xi_mang_1";
+const wchar_t*		CInfomationResource::cement_lane_blue			= L"Resource//Image//Game//Tile//map-2//xi_mang_xanh_1";
+
+/************RESOURCE FOR MOUNTAIN**************/
+const wchar_t*		CInfomationResource::mountain_head				= L"Resource//Image//Game//Tile//map-1//dinh_nui.png";
+const wchar_t*		CInfomationResource::mountain_body				= L"Resource//Image//Game//Tile//map-1//chan_nui.png";

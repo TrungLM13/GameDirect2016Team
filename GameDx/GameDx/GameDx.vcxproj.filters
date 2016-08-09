@@ -168,9 +168,6 @@
     <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp">
       <Filter>Game\MapManager</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Entity\Map\Grass.cpp">
-      <Filter>Game\Entity\Tile</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Entity\Enemy\Turtle.cpp">
       <Filter>Game\Entity\Enemies</Filter>
     </ClCompile>
@@ -197,12 +194,6 @@
     </ClCompile>
     <ClCompile Include="Class\Game\Entity\Tile\Elevator.cpp">
       <Filter>Game\Entity\Tile\Elevator</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Game\Entity\Map\Clound.cpp">
-      <Filter>Game\Entity\Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="Class\Game\Entity\Map\Pipe.cpp">
-      <Filter>Game\Entity\Tile</Filter>
     </ClCompile>
     <ClCompile Include="Class\Game\Entity\Map\Tiless.cpp">
       <Filter>Game\Entity\Tile</Filter>
@@ -392,9 +383,6 @@
     <ClInclude Include="Class\Game\Entity\Tile\FlagCastle.h">
       <Filter>Game\Entity\Tile\Castle</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Map\Grass.h">
-      <Filter>Game\Entity\Tile</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h">
       <Filter>Game\Entity\Enemies</Filter>
     </ClInclude>
@@ -422,17 +410,14 @@
     <ClInclude Include="Class\Game\Entity\Tile\Elevator.h">
       <Filter>Game\Entity\Tile\Elevator</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Map\Clound.h">
-      <Filter>Game\Entity\Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Map\Pipe.h">
-      <Filter>Game\Entity\Tile</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Entity\Map\Tiless.h">
       <Filter>Game\Entity\Tile</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Objectss.h">
       <Filter>Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Utill\ArchitectureEntity.h">
+      <Filter>Game\Utill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

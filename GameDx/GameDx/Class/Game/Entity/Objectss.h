@@ -9,8 +9,10 @@ class CObjectss
 public:
 	CObjectss();
 	~CObjectss();
-	virtual bool			initEntity()		= 0;
-	virtual void			drawEntity()		= 0;
+
+	virtual bool			initEntity()		=0;
+	virtual bool			loadSprite()		=0;
+	virtual void			drawEntity()		=0;
 
 protected:
 	const char*				m_TagNode;

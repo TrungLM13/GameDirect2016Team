@@ -156,6 +156,24 @@ public:
 	static const wchar_t*	clound_small;
 	static const wchar_t*	clound_normal;
 	static const wchar_t*	clound_big;
+
+	/************RESOURCE FOR PIPE***************/
+	static const wchar_t*	pipe_head_down;
+	static const wchar_t*	pipe_head_body_down;
+	static const wchar_t*	pipe_body_down;
+	static const wchar_t*	pipe_head_right;
+	static const wchar_t*	pipe_body_right;
+
+	/************RESOURCE FOR CEMENT*************/
+	static const wchar_t*	cement_pipe;
+	static const wchar_t*	cement_barrier_red;
+	static const wchar_t*	cement_barrier_blue;
+	static const wchar_t*	cement_lane_red;
+	static const wchar_t*	cement_lane_blue;
+
+	/************RESOURCE FOR MOUNTAIN***********/
+	static const wchar_t*	mountain_head;
+	static const wchar_t*	mountain_body;
 };
 
 #endif

@@ -23,6 +23,8 @@
 
 #include "Class\Game\Utill\Config.h"
 #include "Class\Framework\Timer.h"
+#include "Class\Game\Utill\ArchitectureEntity.h"
+#include "Class\Game\Utill\InformationResource.h"
 
 using namespace std;
 
