@@ -41,6 +41,7 @@ COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CBaseEntity* Ob
 					return COLDIRECTION::COLDIRECTION_RIGHT;
 			else
 			{
+				// already changing axis Oy into dacac
 				if (movableBox.getY() - movableBox.getHeight() == baseBox.getY())
 					return COLDIRECTION::COLDIRECTION_TOP;
 				else if (movableBox.getY() == baseBox.getY() - baseBox.getHeight())

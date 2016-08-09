@@ -40,17 +40,16 @@ bool CPlayScene::initScene()
 	//Turtle::getInstance()->initEntity();
 	Elevator::getInstance()->initEntity();
 
-
-
 	return true;
 }
 
 void CPlayScene::updateScene(double deltaTime)
 {
-	CPlayer::getInstance()->updateEntity(deltaTime);
+	
 	Turtle::getInstance()->updateEntity(deltaTime);
 	Elevator::getInstance()->updateEntity(deltaTime);
 
+	CPlayer::getInstance()->updateEntity(deltaTime);
 
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
@@ -64,11 +63,11 @@ void CPlayScene::updateScene(double deltaTime)
 		m_ListEntity.at(i)->updateCollision(CPlayer::getInstance(), deltaTime);
 
 		CPlayer::getInstance()->handleCollision(m_ListEntity.at(i), deltaTime);
+
 		for (int j = 0; j < m_ListEntity.size(); ++j) {
 			m_ListEntity.at(i)->handleCollision(m_ListEntity.at(j), deltaTime);
 		}
 	}
-
 }
 
 void CPlayScene::updateScene(CKeyBoard* keyboard)

@@ -30,7 +30,7 @@ public:
 
 protected:
 	vector3d    m_Position;
-	CBox2D*     m_Bounding;
+	//CBox2D*     m_Bounding;
 	vector<CSprite*>  m_listSprite;
 };
 

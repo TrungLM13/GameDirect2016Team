@@ -26,6 +26,7 @@ bool CPlayer::initEntity()
 {
 	m_IsCollision = false;
 	m_IsAutoMove = false;
+	m_IsFreeFall = true;
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
@@ -202,10 +203,14 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		if (this->m_State != PLAYERSTATES::DIE) {
 			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP)
 			{
+				//m_IsFreeFall = false;
 				if (!m_IsAutoMove) {
-					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-					this->m_PlayerState->exitCurrentState(*this, new CStandState());
-					this->m_PlayerState->enter(*this);
+					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2 - 0.5;
+
+					if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
+						this->m_PlayerState->exitCurrentState(*this, new CStandState());
+						this->m_PlayerState->enter(*this);
+					}
 				}
 				else {
 					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
@@ -213,10 +218,21 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 					this->m_PlayerState->enter(*this);
 				}
 			}
+			else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE)
+			{
+				if (m_State == PLAYERSTATES::RUN || m_State == PLAYERSTATES::STAND ||
+					m_State == PLAYERSTATES::STAND_SHOOT || m_State == PLAYERSTATES::MOVE_SHOOT) {
+					if (!m_IsAutoMove){
+						m_Velocity.y = VEL_PLAYER_Y;
+						this->m_PlayerState->exitCurrentState(*this, new CDieState());
+						this->m_PlayerState->enter(*this);
+					}
+				}
+			}
 
 		}
 		else {
-			if (this->m_Velocity.y >= 0)
+			if (m_Position.y >= 100 && m_Velocity.y >= 0)
 			{
 				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
 			}
@@ -234,7 +250,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 				this->m_PlayerState->exitCurrentState(*this, new CRunState());
 				this->m_PlayerState->enter(*this);
 			}
-			//else m_IsAutoMove = false;
+			else m_IsAutoMove = false;
 
 		}
 		break;
@@ -279,6 +295,11 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 				m_Velocity.x = abs(m_Velocity.x) * m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
 			}
+			/*if (m_IsAutoMove)
+			{
+			this->m_PlayerState->exitCurrentState(*this, new CRunState());
+			this->m_PlayerState->enter(*this);
+			}*/
 		}
 		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE) {
 			m_IsCollision = false;

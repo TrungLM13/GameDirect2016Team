@@ -20,5 +20,6 @@ CBaseState* CClimbState::handleInput(CPlayer& player, CKeyBoard* input) {
 void CClimbState::update(CPlayer& player, double deltaTime) {
 	player.setVelocity(vector2d((float)VEL_PLAYER_X, (float)(-VEL_PLAYER_Y)));
 
-	player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + player.getVelocity().y * deltaTime / 240, 0));
+	if (player.m_IsAutoMove == false)
+		player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + player.getVelocity().y * deltaTime / 240, 0));
 }

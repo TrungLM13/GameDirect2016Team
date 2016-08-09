@@ -1,4 +1,5 @@
 #include "StandState.h"
+#include "DieState.h"
 
 CStandState::CStandState() {
 	m_IsShoot = false;
@@ -24,6 +25,9 @@ CBaseState* CStandState::handleInput(CPlayer& player, CKeyBoard* input){
 	if (input->KeyDown(DIK_RIGHT)) {
 		if (player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT)
 			player.setVelocity(vector2d(CHANGE_DIRECTION(player.getVelocity().x), player.getVelocity().y));
+		else
+			player.setVelocity(vector2d(VEL_PLAYER_X, player.getVelocity().y));
+
 		return new CRunState();
 	}
 
@@ -56,4 +60,8 @@ void CStandState::update(CPlayer& player, double deltaTime) {
 		this->exitCurrentState(player, new CRunState());
 		player.getState()->enter(player);
 	}
+
+
+
+	//player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + player.getVelocity().y * deltaTime / 60, 0));
 }

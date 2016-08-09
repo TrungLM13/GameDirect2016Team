@@ -38,8 +38,9 @@ public:
 	void					setPlayerTag(int playerTag);
 	int						getPlayerTag();
 
-	bool					m_IsCollision;
+	bool					m_IsCollision; // Use for collision with Flag Pole Tail
 	bool					m_IsAutoMove; // Signal for Flag auto run
+	bool					m_IsFreeFall;
 	vector<int>				m_Direction;
 
 protected:
