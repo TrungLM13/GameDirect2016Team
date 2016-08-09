@@ -1,8 +1,8 @@
 #ifndef __OBJECT_POOl_H__
 #define __OBJECT_POOl_H__
 
-#include "Game\Utill\stdafx.h"
-#include "Game\Entity\BaseEntity.h"
+#include "Class\Game\Utill\stdafx.h"
+#include "Class\Game\Entity\BaseEntity.h"
 
 template	<class T>	class CObjectPool
 {

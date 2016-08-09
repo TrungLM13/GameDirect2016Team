@@ -34,6 +34,11 @@ vector<CTiless*> CMapManager::getListBackground()
 	return m_listBackground;
 }
 
+vector<CBox2D*>	CMapManager::getListRect()
+{
+	return m_listRectangeForCollision;
+}
+
 bool CMapManager::initMapInfo()
 {
 	m_listAllMapInGame.push_back(new MapInfo("1-1", "Resource//Data//1-1.txt"));
@@ -57,14 +62,18 @@ bool CMapManager::loadEntityInMap()
 	data.open(wstr);
 
 	vector2d positionEntity;
+	vector2d size;
 	string type;
 
-	while (data >> type >> positionEntity.x >> positionEntity.y)
+	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
 		if (type == "1E")
 			m_listEnemy.push_back(new CBrick(positionEntity));
 		if (type == "1B")
 			m_listBonus.push_back(new CBrick(positionEntity));
+		if (type == "R")
+			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y, size.x, size.y));
 	}
+
 	return true;
 }

@@ -14,6 +14,8 @@ public:
 	~CCollision();
 	
 	static COLDIRECTION CheckCollision(CMovable* MovableObject, CBaseEntity* Object);
+
+	static COLDIRECTION CheckCollision(CBox2D movableBox, CBox2D baseBox);
 };
 
 #endif

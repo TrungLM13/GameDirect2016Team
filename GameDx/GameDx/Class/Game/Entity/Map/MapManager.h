@@ -20,6 +20,7 @@ public:
 public:
 	vector<CBaseEntity*>	getListEnemy();
 	vector<CTiless*>		getListBackground();
+	vector<CBox2D*>			getListRect();
 	static CMapManager*		getInstance();
 
 private:
@@ -31,6 +32,7 @@ private:
 	vector<CTiless*>		m_listBackground;
 	vector<CBaseEntity*>	m_listEnemy;
 	vector<CBaseEntity*>	m_listBonus;
+	vector<CBox2D*>			m_listRectangeForCollision;
 };
 
 
