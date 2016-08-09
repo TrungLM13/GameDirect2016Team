@@ -4,6 +4,7 @@
 #include "Class\Game\State\DieState.h"
 #include "Class\Game\State\ClimbState.h"
 #include "Class\Mathematics\Collision.h"
+#include "Class\Game\State\DieState.h"
 
 CPlayer::CPlayer()
 {
@@ -295,6 +296,14 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 				this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
 				this->loadSprite();
 				this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
+			}
+		}
+		break;
+	case TAGNODE::CARNIVOROUS_PLANT:
+		if (this->m_PlayerTag != PLAYERTAGS::UNDYING && this->m_PlayerTag != PLAYERTAGS::SMALL_UNDYING) {
+			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
+				this->m_PlayerState->exitCurrentState(*this, new CDieState());
+				this->m_PlayerState->enter(*this);
 			}
 		}
 		break;

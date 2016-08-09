@@ -178,6 +178,7 @@ enum CLOUNDSTRUCT
 	TWO_CLOUND,
 	THREE_CLOUND
 };
+
 /******************/
 
 /*STRUCT*/
@@ -240,6 +241,12 @@ enum MUSHROOM_STATE
 };
 
 
+enum ITEMINBOX_TYPE
+{
+	REDMUSHROOM = 0,
+	ITEM_FLOWER = 1
+
+};
 enum TAGNODE
 {
 	NONE = 0,
@@ -257,7 +264,8 @@ enum TAGNODE
 	FLAG_POLE = 12,
 	FLAG_POLE_TAIL = 13,
 	MUSHROOM = 14,
-	TURTLE = 15
+	TURTLE = 15,
+	CARNIVOROUS_PLANT = 16
 };
 
 

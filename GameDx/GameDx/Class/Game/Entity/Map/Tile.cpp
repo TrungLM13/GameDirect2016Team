@@ -27,7 +27,7 @@ bool CTile::initEntity()
 
 void CTile::updateEntity(float deltaTime)
 {
-	
+
 }
 
 void CTile::updateEntity(CKeyBoard* device)
@@ -55,6 +55,6 @@ bool CTile::loadSprite()
 	return true;
 }
 
-int	CTile::getTagNodeId() {
+int CTile::getTagNodeId() {
 	return TAGNODE::TILE;
 }

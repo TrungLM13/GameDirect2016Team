@@ -7,9 +7,11 @@
 #include "Class\Game\Entity\Bonus\Coin.h"
 #include "Class\Game\Entity\Bonus\Star.h"
 #include "Class\Game\Entity\Bonus\Brick.h"
-#include "Class\Game\Entity\Bonus\RedMushroom.h"
 #include "Class\Game\Entity\Bonus\GiftBox.h"
 #include "Class\Game\Entity\Enemy\Mushroom.h"
+#include "Class\Game\Entity\MovableEntity.h"
+#include "Class\Game\Entity\Bonus\Iteminbox.h"
+#include "Class\Game\Entity\Bonus\CoinInBox.h"
 
 
 #include "Class\Game\Entity\Tile\Flag.h"
@@ -25,6 +27,7 @@
 
 #include "Class\Game\Entity\Enemy\Turtle.h"
 #include "Class\Game\Entity\Tile\Elevator.h"
+#include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
 
 class CPlayScene :
 	public CBaseScene
@@ -39,6 +42,14 @@ public:
 	virtual void renderScene()						override;
 
 private:
+	vector<CCoin*>			listCoin;
+	vector<CStar*>			listStar;
+	vector<CBrick*>			listBrick;
+	vector<CIteminbox*>		listIteminbox;
+	vector<CGiftBox*>		listGiftBox;
+	vector<CMushroom*>		listMushroom;
+	vector<CMovable *>		listMovable;
+	vector<CCoinInBox*>		listCoinInBox;
 	vector<CBaseEntity*>	m_ListEntity;
 };
 

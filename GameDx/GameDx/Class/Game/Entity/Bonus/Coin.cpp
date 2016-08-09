@@ -20,7 +20,7 @@ CCoin:: ~CCoin()
 
 bool CCoin::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::coin, 2, 4, 8, 0));
+	this->m_listSprite.push_back(new CSprite(CInfomationResource::coin, 1, 4, 4, 0));
 	return true;
 }
 
@@ -36,13 +36,19 @@ void CCoin::updateEntity(CKeyBoard* device)
 {
 
 }
+
 void CCoin::updateEntity(float deltaTime)
 {
 }
+
+void CCoin::updateCollision(CBaseEntity*, float deltaTime)
+{
+}
+
 void CCoin::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)
-		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x) * 2, SIGN(m_Position.y) * 2), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CCoin::updateEntity(RECT* camera)

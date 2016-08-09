@@ -4,8 +4,8 @@
 /***************************************************************************/
 
 
-#ifndef __CBASEENTITY_H__
-#define __CBASEENTITY_H__
+#ifndef CBASEENTITY_H
+#define CBASEENTITY_H
 
 #include "Class\Game\Utill\stdafx.h"
 #include "Class\Game\Utill\Config.h"
@@ -18,29 +18,30 @@
 class CBaseEntity : public CObjectss
 {
 public:
-	
+
 	CBaseEntity();
 	CBaseEntity(directDevice);
 	~CBaseEntity();
 
-	virtual void			updateEntity(CKeyBoard* deivce)						= 0;
-	virtual void			updateEntity(RECT* camera)							= 0;
-	virtual void			updateEntity(float deltaTime)						= 0;
-	virtual void			handleCollision(CBaseEntity*entity, float deltaTime)= 0;
-	virtual	CBox2D			getBounding()										= 0;
-	virtual const char*		getTagNode()										= 0;
-	virtual vector2d		getVelocity()										= 0;
-	virtual int				getTagNodeId()										{ return 0; };
-	virtual vector3d		getPosition()										= 0;
+	virtual void   updateEntity(CKeyBoard* deivce) = 0;
+	virtual void   updateEntity(RECT* camera) = 0;
+	virtual void   updateEntity(float deltaTime) = 0;
+	virtual void   handleCollision(CBaseEntity*entity, float deltaTime) = 0;
+	virtual	void   updateCollision(CBaseEntity*, float deltaTime) = 0;
+	virtual CBox2D   getBounding() = 0;
+	virtual const char*  getTagNode() = 0;
+	virtual vector2d  getVelocity() = 0;
+	virtual int    getTagNodeId()          { return 0; };
+	virtual vector3d  getPosition() = 0;
 
 	bool m_IsEnable;
 
 protected:
-	int						m_State;
-	CBox2D*					m_Bounding;
+	int      m_State;
+	CBox2D*     m_Bounding;
 
 protected:
-	vector2d				m_Velocity;
+	vector2d    m_Velocity;
 
 
 };

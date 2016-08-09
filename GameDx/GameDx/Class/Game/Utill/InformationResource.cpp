@@ -32,6 +32,17 @@ const wchar_t*		CInfomationResource::smallfiremario_cdir		= L"Resource//Image//G
 const wchar_t*		CInfomationResource::smallfiremario_die			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//smallfiremario_die.png";
 const wchar_t*		CInfomationResource::smallfiremario_jum			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//smallfiremario_jum.png";
 const wchar_t*		CInfomationResource::smallfiremario_run			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//smallfiremario_run.png";
+/************RESOURCE FOR SMALLUNDYINGMARIO************/
+const wchar_t*	CInfomationResource::smallundyingmario_cdir			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_cdir.png";
+const wchar_t*	CInfomationResource::smallundyingmario_stand		= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_dung.png";
+const wchar_t*	CInfomationResource::smallundyingmario_jum			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_jum.png";
+const wchar_t*	CInfomationResource::smallundyingmario_run			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_run.png";
+/************RESOURCE FOR SMALLUNDYINGMARIO************/
+const wchar_t*	CInfomationResource::bigundyingmario_cdir			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_cdir.png";
+const wchar_t*	CInfomationResource::bigundyingmario_stand			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_dung.png";
+const wchar_t*	CInfomationResource::bigundyingmario_jum			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_jum.png";
+const wchar_t*	CInfomationResource::bigundyingmario_run			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_run.png";
+/*************************************************/
 
 /*******************************************/
 
@@ -87,16 +98,20 @@ const wchar_t*		CInfomationResource::backgroundIntroStage		= L"Resource//Image//
 /************RESOURCE FOR POPUPSCENE*******/
 const wchar_t*	CInfomationResource::popUp							= L"Resource//Image//PopupScene//popup.png";
 const wchar_t*	CInfomationResource::itemLife						= L"Resource//Image//PopupScene//Item_life.png";
-/************RESOURCE FOR COIN **************/
-const wchar_t*		CInfomationResource::coin						= L"Resource//Image//Game//Sprites//Mario//Bonus//coins.png";
-/************RESOURCE FOR STAR **************/
+/*************************************************/
+
+/************RESOURCE FOR BONUS **************/
+const wchar_t*		CInfomationResource::coin						= L"Resource//Image//Game//Sprites//Mario//Bonus//coin_dung.png";
+const wchar_t*		CInfomationResource::coinInBox					= L"Resource//Image//Game//Sprites//Mario//Bonus//coin_xoay.png";
 const wchar_t*		CInfomationResource::star						= L"Resource//Image//Game//Sprites//Mario//Bonus//star.png";
-/************RESOURCE FOR BRICK **************/
 const wchar_t*		CInfomationResource::brick						= L"Resource//Image//Game//Sprites//Mario//Bonus//gach.png";
-/************RESOURCE FOR REDMUSHROOM **************/
 const wchar_t*		CInfomationResource::redmushroom				= L"Resource//Image//Game//Sprites//Mario//Bonus//nam_do_nho.png";
-/************RESOURCE FOR GIFTBOX **************/
-const wchar_t*		CInfomationResource::giftbox					= L"Resource//Image//Game//Sprites//Mario//Bonus//chamhoi.png";
+const wchar_t*		CInfomationResource::greenmushroom				= L"Resource//Image//Game//Sprites//Mario//Bonus//nam_xanh_nho.png";
+const wchar_t*		CInfomationResource::giftbox					= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_cham_hoi.png";
+const wchar_t*		CInfomationResource::box						= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_mat_cham_hoi.png";
+const wchar_t*		CInfomationResource::flower						= L"Resource//Image//Game//Sprites//Mario//Bonus//hoa.png";
+/*************************************************/
+
 /************RESOURCE FOR BOUDING *************/
 const wchar_t*		CInfomationResource::boundingsprite				= L"Resource//Image//Game//Other//bean.png";
 
@@ -136,3 +151,21 @@ const wchar_t*		CInfomationResource::naviturtle_indent   		= L"Resource//Image//
 const wchar_t*		CInfomationResource::clound_small				= L"Resource//Image//Game//Tile//map-1//1_dam_may.png";
 const wchar_t*		CInfomationResource::clound_normal				= L"Resource//Image//Game//Tile//map-1//2_dam_may.png";
 const wchar_t*		CInfomationResource::clound_big					= L"Resource//Image//Game//Tile//map-1//3_dam_may.png";
+
+/***********RESOURCE FOR PIPE*****************/
+const wchar_t*		CInfomationResource::pipe_head_down				= L"Resource//Image//Game//Tile//map-1//mieng_ong.png";
+const wchar_t*		CInfomationResource::pipe_head_body_down		= L"Resource//Image//Game//Tile//map-1//dau_than_ong_cong.png";
+const wchar_t*		CInfomationResource::pipe_body_down				= L"Resource//Image//Game//Tile//map-1//than_ong_cong.png";
+const wchar_t*		CInfomationResource::pipe_head_right			= L"Resource//Image//Game//Tile//mpa-2//mieng_ong_ngang.png";
+const wchar_t*		CInfomationResource::pipe_body_right			= L"Resource//Image//Game//Tile//mpa-2//dau_than_ong_ngang.png";
+
+/************RESOURCE FOR CEMENT**************/
+const wchar_t*		CInfomationResource::cement_pipe				= L"Resource//Image//Game//Tile//map-3//dat_co.png";
+const wchar_t*		CInfomationResource::cement_barrier_blue		= L"Resource//Image//Game//Tile//map-2//chan_cot_co_xanh.png";
+const wchar_t*		CInfomationResource::cement_barrier_red			= L"Resource//Image//Game//Tile//map-2//chan_cot_co_xanh.png";
+const wchar_t*		CInfomationResource::cement_lane_red			= L"Resource//Image//Game//Tile//map-1//xi_mang_1";
+const wchar_t*		CInfomationResource::cement_lane_blue			= L"Resource//Image//Game//Tile//map-2//xi_mang_xanh_1";
+
+/************RESOURCE FOR MOUNTAIN**************/
+const wchar_t*		CInfomationResource::mountain_head				= L"Resource//Image//Game//Tile//map-1//dinh_nui.png";
+const wchar_t*		CInfomationResource::mountain_body				= L"Resource//Image//Game//Tile//map-1//chan_nui.png";

@@ -1,20 +1,22 @@
-//#ifndef __TILE_H__
-//#define __TILE_H__
-//#include "Class\Game\Utill\stdafx.h"
-//class CTiless
-//{
-//public:
-//	CTiless();
-//	CTiless(vector2d, string type);
-//	~CTiless();
-//
-//	bool	initEntity();
-//	bool	loadSprite();
-//	
-//	void	drawEntity();
-//
-//private:
-//	std::string		m_Type;
-//};
-//
-//#endif
+#ifndef __TILESS_H__
+#define __TILESS_H__
+#include "Class\Game\Utill\stdafx.h"
+#include "Class\Game\Entity\Objectss.h"
+#include "Class\Framework\Camera.h"
+
+class CTiless : public CObjectss
+{
+public:
+	CTiless();
+	CTiless(vector2d, int type);
+	~CTiless();
+
+	virtual		bool	initEntity();
+	virtual		void	drawEntity();
+	virtual		bool	loadSprite();
+
+private:
+	int				m_ID;
+};
+
+#endif

@@ -37,6 +37,16 @@ public:
 	static const wchar_t*	smallfiremario_die;
 	static const wchar_t*	smallfiremario_jum;
 	static const wchar_t*	smallfiremario_run;
+	/************RESOURCE FOR SMALLUNDYINGMARIO************/
+	static const wchar_t*	smallundyingmario_cdir;
+	static const wchar_t*	smallundyingmario_stand;
+	static const wchar_t*	smallundyingmario_jum;
+	static const wchar_t*	smallundyingmario_run;
+	/************RESOURCE FOR SMALLUNDYINGMARIO************/
+	static const wchar_t*	bigundyingmario_cdir;
+	static const wchar_t*	bigundyingmario_stand;
+	static const wchar_t*	bigundyingmario_jum;
+	static const wchar_t*	bigundyingmario_run;
 	/*************************************************/
 
 	/************RESOURCE FOR SMALLUNDYINGMARIO************/
@@ -97,19 +107,20 @@ public:
 	static const wchar_t*	itemLife;
 	/*************************************************/
 
-	/************RESOURCE FOR COIN **************/
+	/************RESOURCE FOR BONUS **************/
 	static const wchar_t*   coin;
-	/************RESOURCE FOR STAR **************/
+	static const wchar_t*   coinInBox;
 	static const wchar_t*   star;
-	/************RESOURCE FOR BRICK **************/
 	static const wchar_t*   brick;
-	/************RESOURCE FOR REDMUSHROOM **********/
 	static const wchar_t*   redmushroom;
-	/************RESOURCE FOR GIFTBOX **************/
+	static const wchar_t*   greenmushroom;
 	static const wchar_t*   giftbox;
+	static const wchar_t*   box;
+	static const wchar_t*	flower;
+	/*************************************************/
+
 	/************RESOURCE FOR BOUDING *************/
 	static const wchar_t*	boundingsprite;
-
 	/************RESOURCE FOR ENEMY****************/
 	static const wchar_t*	mushroomenemy_run;
 	static const wchar_t*	mushroomenemy_die;
@@ -145,6 +156,24 @@ public:
 	static const wchar_t*	clound_small;
 	static const wchar_t*	clound_normal;
 	static const wchar_t*	clound_big;
+
+	/************RESOURCE FOR PIPE***************/
+	static const wchar_t*	pipe_head_down;
+	static const wchar_t*	pipe_head_body_down;
+	static const wchar_t*	pipe_body_down;
+	static const wchar_t*	pipe_head_right;
+	static const wchar_t*	pipe_body_right;
+
+	/************RESOURCE FOR CEMENT*************/
+	static const wchar_t*	cement_pipe;
+	static const wchar_t*	cement_barrier_red;
+	static const wchar_t*	cement_barrier_blue;
+	static const wchar_t*	cement_lane_red;
+	static const wchar_t*	cement_lane_blue;
+
+	/************RESOURCE FOR MOUNTAIN***********/
+	static const wchar_t*	mountain_head;
+	static const wchar_t*	mountain_body;
 };
 
 #endif
