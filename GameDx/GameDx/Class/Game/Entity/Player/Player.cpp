@@ -5,6 +5,7 @@
 #include "Class\Game\State\ClimbState.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\State\DieState.h"
+#include "Class\\Game\Entity\Map\MapManager.h"
 
 CPlayer::CPlayer()
 {
@@ -31,10 +32,11 @@ bool CPlayer::initEntity()
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
 	m_UndyingTime = 0;
-	m_Position = vector3d(50, 70, 0.5);
+	m_Position = vector3d(50, 28, 0.5);
+	m_PreJumpPos = vector3d(0, 0, 0);
 
 	m_State = PLAYERSTATES::STAND;
-	m_PlayerState = new CJumpState();
+	m_PlayerState = new CStandState();
 	m_PlayerTag = PLAYERTAGS::SMALL;
 
 	m_Acceleration = vector2d(0.5f, 0);
@@ -162,6 +164,76 @@ void CPlayer::updateEntity(CKeyBoard* input)
 }
 
 void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
+
+	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); ++i) {
+		if (this->m_State != PLAYERSTATES::DIE) {
+			this->getBounding().setVelocity(this->getVelocity());
+			switch (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
+			{
+			case COLDIRECTION::COLDIRECTION_TOP:
+				//m_IsFreeFall = false;
+				if (!m_IsAutoMove) {
+					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+
+					if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
+						this->m_PlayerState->exitCurrentState(*this, new CStandState());
+						this->m_PlayerState->enter(*this);
+					}
+				}
+				else {
+					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+					this->m_PlayerState->exitCurrentState(*this, new CRunState());
+					this->m_PlayerState->enter(*this);
+				}
+				break;
+			case COLDIRECTION::COLDIRECTION_NONE:
+				if (m_State == PLAYERSTATES::RUN || m_State == PLAYERSTATES::STAND ||
+					m_State == PLAYERSTATES::STAND_SHOOT || m_State == PLAYERSTATES::MOVE_SHOOT) {
+					if (!m_IsAutoMove){
+						m_Velocity.y = VEL_PLAYER_Y;
+						this->m_PlayerState->exitCurrentState(*this, new CDieState());
+						this->m_PlayerState->enter(*this);
+					}
+				}
+				break;
+			case COLDIRECTION::COLDIRECTION_LEFT:
+				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+					m_Velocity.x = VEL_PLAYER_X_MIN;
+				}
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+					m_Velocity.x = VEL_PLAYER_X;
+				}
+				break;
+			case COLDIRECTION::COLDIRECTION_RIGHT:
+				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+					m_Velocity.x = VEL_PLAYER_X_MIN;
+				}
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+					m_Velocity.x = - VEL_PLAYER_X;
+				}
+				break;
+			default:
+				
+				break;
+			}
+
+		}
+
+		else
+		{
+			if (m_Position.y >= 100 && m_Velocity.y >= 0)
+			{
+				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+			}
+		}
+	}
+
+
+	//-----Handle Collision with enermy----//
+
+
+
+	//-----Handle Collision with Bonus----//
 	switch (entity->getTagNodeId())
 	{
 	case TAGNODE::RED_MUSHROOM:
@@ -200,43 +272,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		}
 		break;
 	case TAGNODE::TILE:
-		if (this->m_State != PLAYERSTATES::DIE) {
-			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP)
-			{
-				//m_IsFreeFall = false;
-				if (!m_IsAutoMove) {
-					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2 - 0.5;
 
-					if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
-						this->m_PlayerState->exitCurrentState(*this, new CStandState());
-						this->m_PlayerState->enter(*this);
-					}
-				}
-				else {
-					this->m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-					this->m_PlayerState->exitCurrentState(*this, new CRunState());
-					this->m_PlayerState->enter(*this);
-				}
-			}
-			else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE)
-			{
-				if (m_State == PLAYERSTATES::RUN || m_State == PLAYERSTATES::STAND ||
-					m_State == PLAYERSTATES::STAND_SHOOT || m_State == PLAYERSTATES::MOVE_SHOOT) {
-					if (!m_IsAutoMove){
-						m_Velocity.y = VEL_PLAYER_Y;
-						this->m_PlayerState->exitCurrentState(*this, new CDieState());
-						this->m_PlayerState->enter(*this);
-					}
-				}
-			}
-
-		}
-		else {
-			if (m_Position.y >= 100 && m_Velocity.y >= 0)
-			{
-				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
-			}
-		}
 		break;
 	case TAGNODE::FLAG:
 		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)

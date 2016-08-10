@@ -3,6 +3,7 @@
 #include "Class\Framework\Camera.h"
 #include "Class\Game\Scene\PopupInfo.h"
 
+
 CMapManager* CMapManager::m_instance = NULL;
 
 CMapManager::CMapManager()
@@ -68,7 +69,7 @@ bool CMapManager::loadEntityInMap()
 	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
 		if (type == "1E")
-			m_listEnemy.push_back(new CBrick(positionEntity));
+			m_listEnemy.push_back(new CMushroom(positionEntity, EnemyStyle::TOF_RED_MUSHROOM));
 		if (type == "1B")
 			m_listBonus.push_back(new CBrick(positionEntity));
 		if (type == "1T")

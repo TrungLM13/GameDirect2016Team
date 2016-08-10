@@ -115,5 +115,5 @@ bool	CTiless::initEntity()
 void	CTiless::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); ++i)
-		m_listSprite.at(i)->Render(CCamera::getInstance()->setPositionEntity(m_Position));
+		m_listSprite.at(i)->Render(CCamera::getInstance()->setPositionEntity(m_Position), vector2d(1, 1), 0, DRAWCENTER_LEFT_TOP, true, 10);
 }

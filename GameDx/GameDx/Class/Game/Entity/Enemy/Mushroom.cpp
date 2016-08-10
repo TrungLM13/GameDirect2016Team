@@ -1,30 +1,51 @@
 #include "Mushroom.h"
+#include "Class\Game\Entity\Map\MapManager.h"
+#include "Class\Mathematics\Collision.h"
 
 
 CMushroom::CMushroom()
 {
+	this->m_Bounding = new CBox2D(0, 0, 0, 0);
+	this->m_Velocity = vector2d(0.1, -0.98);
+	//this->m_Direction = ()
 	this->initEntity();
 }
 
+CMushroom::CMushroom(vector2d vect, int type){
+	m_Position.x	= vect.x;
+	m_Position.y	= vect.y;
+
+	m_Type			= type;
+
+	this->m_Bounding = new CBox2D(0, 0, 0, 0);
+	this->m_Velocity = vector2d(0, 9.8);
+
+	this->initEntity();
+}
 
 CMushroom::~CMushroom()
 {
 }
 
 bool	CMushroom::loadSprite(){
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::mushroomenemy_run, 1, 2));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::mushroomenemy_die, 1, 1));
-
+	switch (m_Type)
+	{
+	case EnemyStyle::TOF_RED_MUSHROOM:
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::mushroomenemy_run, 1, 2));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::mushroomenemy_die, 1, 1));
+		break;
+		
+	case EnemyStyle::TOF_BLUE_MUSHROOM:
+		break;
+	default:
+		return false;
+	}
 	return true;
 }
 
 bool	CMushroom::initEntity()
 {
 	this->loadSprite();
-
-	this->m_Position			= vector3d(100, 150, 0);
-	this->m_Bounding			= new CBox2D(0, 0, 0, 0);
-	this->m_Velocity			= vector2d(0.1, -0.98);
 	this->m_State				= MUSHROOM_STATE::MUSH_RUN;
 	return true;
 }
@@ -33,23 +54,32 @@ void	CMushroom::updateEntity(float deltaTime)
 {
 	if (m_State == MUSHROOM_STATE::MUSH_RUN)
 	{
-	m_Position.x += m_Velocity.x*deltaTime;
-	m_Position.y += m_Velocity.y*deltaTime;
+		m_Position.x += m_Velocity.x*deltaTime/1000;
+		m_Position.y -= m_Velocity.y*deltaTime/1000;
 
-	if (m_Position.y <= 20)
-		m_Position.y = 20;
 
-	if (m_Position.x <= 0 || m_Position.x >= 200)
-		m_Velocity.x *= -1;
+
+		if (m_Position.y <= 20)
+			m_Position.y = 20;
+
+		if (m_Position.x <= 0 || m_Position.x >= 200)
+			m_Velocity.x *= -1;
 	}
-}
 
+	if (m_State == MUSHROOM_STATE::MUSH_IS_ACTTACKED)
+	{
+
+	}
+
+	updateCollision(deltaTime);
+}
 
 void	CMushroom::updateEntity(CKeyBoard* device)
 {
 	if (device->KeyPress(DIK_DELETE))
-		if (m_State == MUSHROOM_STATE::MUSH_RUN)
-			m_State = MUSHROOM_STATE::MUSH_DIE;
+
+	if (m_State == MUSHROOM_STATE::MUSH_RUN)
+		m_State = MUSHROOM_STATE::MUSH_IS_ACTTACKED;	
 		else
 			m_State = MUSHROOM_STATE::MUSH_RUN;
 }
@@ -57,6 +87,53 @@ void	CMushroom::updateEntity(CKeyBoard* device)
 void	CMushroom::updateEntity(RECT* rectCamera)
 {
 
+}
+
+void	CMushroom::updateCollision(float deltaTime)
+{
+	/*this->getBounding().setVelocity(this->getVelocity());
+
+	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); ++i) {
+		if (this->m_State != MUSHROOM_STATE::MUSH_IS_ACTTACKED) {
+			this->getBounding().setVelocity(this->getVelocity());
+			switch (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
+			{
+			case COLDIRECTION::COLDIRECTION_TOP:
+				this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+				break;
+			case COLDIRECTION::COLDIRECTION_NONE:
+				break;
+			case COLDIRECTION::COLDIRECTION_LEFT:
+				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+					m_Velocity.x = VEL_PLAYER_X_MIN;
+				}
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+					m_Velocity.x = VEL_PLAYER_X;
+				}
+				break;
+			case COLDIRECTION::COLDIRECTION_RIGHT:
+				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+					m_Velocity.x = VEL_PLAYER_X_MIN;
+				}
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+					m_Velocity.x = -VEL_PLAYER_X;
+				}
+				break;
+			default:
+
+				break;
+			}
+
+		}
+
+		else
+		{
+			if (m_Position.y >= 100 && m_Velocity.y >= 0)
+			{
+				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+			}
+		}
+	}*/
 }
 
 void	CMushroom::drawEntity()
@@ -67,3 +144,5 @@ void	CMushroom::drawEntity()
 int CMushroom::getTagNodeId(){
 	return TAGNODE::MUSHROOM;
 }
+
+class CMapManager;

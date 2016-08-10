@@ -60,11 +60,11 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 	}
 
 	if (m_IsJumpHigh) {
-		if (player.getPosition().y >= PLAYER_JUMP_HIGH_LIMIT)
+		if (player.getPosition().y >= player.m_PreJumpPos.y + PLAYER_JUMP_HIGH_LIMIT)
 			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 	}
 	else {
-		if (player.getPosition().y >= PLAYER_JUMP_LIMIT)
+		if (player.getPosition().y >= player.m_PreJumpPos.y + PLAYER_JUMP_LIMIT)
 			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 	}
 

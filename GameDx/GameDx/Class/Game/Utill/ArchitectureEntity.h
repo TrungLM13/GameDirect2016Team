@@ -34,5 +34,11 @@ typedef enum TYPEOFTILE{
 	TOF_MOUNTAIN_BIG
 } TileStyle;
 
+typedef enum TYPEOFENEMY{
+
+	TOF_RED_MUSHROOM	=	0,
+	TOF_BLUE_MUSHROOM
+} EnemyStyle;
+
 
 #endif

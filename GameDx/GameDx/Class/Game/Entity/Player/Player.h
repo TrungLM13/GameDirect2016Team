@@ -43,6 +43,8 @@ public:
 	bool					m_IsFreeFall;
 	vector<int>				m_Direction;
 
+	vector3d				m_PreJumpPos;
+
 protected:
 	vector2d				m_Acceleration;
 	int						m_PlayerTag;

@@ -8,6 +8,7 @@ class CMushroom :
 {
 public:
 	CMushroom();
+	CMushroom(vector2d, int type);
 	virtual ~CMushroom();
 
 public:
@@ -15,12 +16,15 @@ public:
 	void updateEntity(float deltaTime);
 	void updateEntity(CKeyBoard *device);
 	void updateEntity(RECT* rectCamera);
+
+	void updateCollision(float deltaTime);
 	void drawEntity();
 	int getTagNodeId();
-
 	bool loadSprite();
 
 private:
+	vector2d	m_Direction;
+	int			m_Type;
 };
 #endif
 

@@ -38,6 +38,7 @@ CBaseState* CStandState::handleInput(CPlayer& player, CKeyBoard* input){
 	}
 
 	if (input->KeyPress(DIK_UP) || input->KeyDown(DIK_SPACE)){
+		player.m_PreJumpPos = player.getPosition();
 		if (player.getVelocity().y < 0)
 			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 

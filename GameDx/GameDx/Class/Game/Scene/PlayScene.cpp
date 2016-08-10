@@ -30,9 +30,8 @@ bool CPlayScene::initScene()
 	m_ListEntity.push_back(new CFlag());
 	m_ListEntity.push_back(new CFlagPole());
 	m_ListEntity.push_back(new CFlagPoleTail());
-	m_ListEntity.push_back(new CTile());
-//	m_ListEntity.push_back(new CBrick(1));
-	m_ListEntity.push_back(new CMushroom());
+	//m_ListEntity.push_back(new CTile());
+
 	//m_ListEntity.push_back(Turtle::getInstance());
 	m_ListEntity.push_back(new CCarnivorousPlants());
 
