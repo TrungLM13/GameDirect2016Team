@@ -163,8 +163,8 @@ const wchar_t*		CInfomationResource::pipe_body_right			= L"Resource//Image//Game
 const wchar_t*		CInfomationResource::cement_pipe				= L"Resource//Image//Game//Tile//map-3//dat_co.png";
 const wchar_t*		CInfomationResource::cement_barrier_blue		= L"Resource//Image//Game//Tile//map-2//chan_cot_co_xanh.png";
 const wchar_t*		CInfomationResource::cement_barrier_red			= L"Resource//Image//Game//Tile//map-2//chan_cot_co_xanh.png";
-const wchar_t*		CInfomationResource::cement_lane_red			= L"Resource//Image//Game//Tile//map-1//xi_mang_1";
-const wchar_t*		CInfomationResource::cement_lane_blue			= L"Resource//Image//Game//Tile//map-2//xi_mang_xanh_1";
+const wchar_t*		CInfomationResource::cement_lane_red			= L"Resource//Image//Game//Tile//map-1//xi_mang_1.png";
+const wchar_t*		CInfomationResource::cement_lane_blue			= L"Resource//Image//Game//Tile//map-2//xi_mang_xanh_1.png";
 
 /************RESOURCE FOR MOUNTAIN**************/
 const wchar_t*		CInfomationResource::mountain_head				= L"Resource//Image//Game//Tile//map-1//dinh_nui.png";

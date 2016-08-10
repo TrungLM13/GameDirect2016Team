@@ -83,7 +83,6 @@ bool	CTiless::loadSprite()
 	case TileStyle::TOF_CEMENT_LANE_BLE:
 		m_listSprite.push_back(new CSprite(CInfomationResource::cement_barrier_blue));
 		break;
-
 	case TileStyle::TOF_CLOUND_ONE_MEMBER:
 		m_listSprite.push_back(new CSprite(CInfomationResource::clound_small));
 		break;

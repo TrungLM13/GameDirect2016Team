@@ -71,6 +71,8 @@ bool CMapManager::loadEntityInMap()
 			m_listEnemy.push_back(new CBrick(positionEntity));
 		if (type == "1B")
 			m_listBonus.push_back(new CBrick(positionEntity));
+		if (type == "1T")
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
 		if (type == "R")
 			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y, size.x, size.y));
 	}

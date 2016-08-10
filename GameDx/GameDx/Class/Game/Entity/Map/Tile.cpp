@@ -18,7 +18,7 @@ CTile::~CTile()
 
 bool CTile::initEntity()
 {
-	m_Position = vector3d(50, 40, 0.5);
+	m_Position = vector3d(50, 100, 0.5);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 
