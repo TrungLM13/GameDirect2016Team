@@ -109,6 +109,8 @@
     <ClInclude Include="Class\Game\Entity\Bonus\GreenMushroom.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Iteminbox.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Star.h" />
+    <ClInclude Include="Class\Game\Entity\Bullet\BulletManager.h" />
+    <ClInclude Include="Class\Game\Entity\Bullet\BulletNormal.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\CarnivorousPlants.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h" />
@@ -181,6 +183,8 @@
     <ClCompile Include="Class\Game\Entity\Bonus\GreenMushroom.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Iteminbox.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Star.cpp" />
+    <ClCompile Include="Class\Game\Entity\Bullet\BulletManager.cpp" />
+    <ClCompile Include="Class\Game\Entity\Bullet\BulletNormal.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\CarnivorousPlants.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Turtle.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />

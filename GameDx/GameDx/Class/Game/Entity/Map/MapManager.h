@@ -19,6 +19,7 @@ public:
 
 public:
 	vector<CBaseEntity*>	getListEnemy();
+	vector<CBaseEntity*>	getListBonus();
 	vector<CTiless*>		getListBackground();
 	vector<CBox2D*>			getListRect();
 	static CMapManager*		getInstance();

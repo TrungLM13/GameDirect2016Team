@@ -78,7 +78,9 @@ const wchar_t*	CInfomationResource::flagPoleTail					= L"Resource//Image//Game//
 /*************************************************/
 
 /************BULLET RESOURCE*****************/
-const wchar_t*		CInfomationResource::rockmanBullet				= L"Resource//Image//Game//Sprites//RockMan//Bullet//bullet_rockman.png";
+const wchar_t*		CInfomationResource::fireMarioBullet			= L"Resource//Image//Game//Sprites//Items//dan.png";
+const wchar_t*		CInfomationResource::fireMarioBullet1			= L"Resource//Image//Game//Sprites//Items//dan1.png";
+const wchar_t*		CInfomationResource::fireMarioBullet2			= L"Resource//Image//Game//Sprites//Items//dan2.png";
 
 /************RESOURCE FOR SELECTSTAGE*******/
 const wchar_t*		CInfomationResource::backgroundSeletStage		= L"Resource//Image//SelectStage//selectStage.png";

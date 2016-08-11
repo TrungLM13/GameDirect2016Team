@@ -83,7 +83,10 @@ public:
 	/*************************************************/
 
 	/************BULLET RESOURCE*******/
-	static const wchar_t*	rockmanBullet;
+	static const wchar_t*	fireMarioBullet;
+	static const wchar_t*	fireMarioBullet1;
+	static const wchar_t*	fireMarioBullet2;
+
 
 	/*************************************************/
 

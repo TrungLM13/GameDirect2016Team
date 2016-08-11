@@ -51,6 +51,10 @@ CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
 void CJumpState::update(CPlayer& player, double deltaTime){
 	double deltaX = 0;
 
+	if (player.m_IsAutoJump) {
+		m_IsMoveX = true;
+	}
+
 	if (m_IsMoveX) {
 		if (player.getVelocity().x == VEL_PLAYER_X_MIN)
 		{
