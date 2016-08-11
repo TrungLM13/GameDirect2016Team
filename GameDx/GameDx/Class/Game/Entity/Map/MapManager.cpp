@@ -30,6 +30,11 @@ vector<CBaseEntity*> CMapManager::getListEnemy()
 	return m_listEnemy;
 }
 
+vector<CBaseEntity*>	CMapManager::getListBonus()
+{
+	return m_listBonus;
+}
+
 vector<CTiless*> CMapManager::getListBackground()
 {
 	return m_listBackground;

@@ -27,6 +27,7 @@ bool CPlayer::initEntity()
 {
 	m_IsCollision = false;
 	m_IsAutoMove = false;
+	m_IsAutoJump = false;
 	m_IsFreeFall = true;
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
@@ -37,7 +38,7 @@ bool CPlayer::initEntity()
 
 	m_State = PLAYERSTATES::STAND;
 	m_PlayerState = new CStandState();
-	m_PlayerTag = PLAYERTAGS::SMALL;
+	m_PlayerTag = PLAYERTAGS::FIRE;
 
 	m_Acceleration = vector2d(0.5f, 0);
 	m_Velocity = vector2d(VEL_PLAYER_X_MIN, VEL_PLAYER_Y);
@@ -167,34 +168,39 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); ++i) {
 		if (this->m_State != PLAYERSTATES::DIE) {
+
 			this->getBounding().setVelocity(this->getVelocity());
 			switch (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
 			{
 			case COLDIRECTION::COLDIRECTION_TOP:
-				//m_IsFreeFall = false;
-				if (!m_IsAutoMove) {
-					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+				m_IsAutoJump = false;
+				if (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))) == COLDIRECTION::COLDIRECTION_TOP)
+				{
+					if (!m_IsAutoMove) {
+						this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
 
-					if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
-						this->m_PlayerState->exitCurrentState(*this, new CStandState());
+						if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
+							this->m_PlayerState->exitCurrentState(*this, new CStandState());
+							this->m_PlayerState->enter(*this);
+						}
+					}
+					else {
+						this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+						this->m_PlayerState->exitCurrentState(*this, new CRunState());
 						this->m_PlayerState->enter(*this);
 					}
-				}
-				else {
-					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
-					this->m_PlayerState->exitCurrentState(*this, new CRunState());
-					this->m_PlayerState->enter(*this);
-				}
-				break;
+
+					break;
 			case COLDIRECTION::COLDIRECTION_NONE:
 				if (m_State == PLAYERSTATES::RUN || m_State == PLAYERSTATES::STAND ||
 					m_State == PLAYERSTATES::STAND_SHOOT || m_State == PLAYERSTATES::MOVE_SHOOT) {
-					if (!m_IsAutoMove){
+					if (!m_IsAutoMove && !m_IsAutoJump){
 						m_Velocity.y = VEL_PLAYER_Y;
 						this->m_PlayerState->exitCurrentState(*this, new CDieState());
 						this->m_PlayerState->enter(*this);
 					}
 				}
+
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
 				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
@@ -209,71 +215,121 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 					m_Velocity.x = VEL_PLAYER_X_MIN;
 				}
 				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-					m_Velocity.x = - VEL_PLAYER_X;
+					m_Velocity.x = -VEL_PLAYER_X;
 				}
 				break;
 			default:
-				
+
 				break;
+				}
+
 			}
-
 		}
-
 		else
 		{
-			if (m_Position.y >= 100 && m_Velocity.y >= 0)
-			{
-				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+			if (m_Position.y >= 100 && m_Velocity.y >= 0){
+				m_Velocity.y = CHANGE_DIRECTION(m_Velocity.y);
 			}
+
 		}
+
 	}
 
 
 	//-----Handle Collision with enermy----//
 
+	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i){
+		switch (CMapManager::getInstance()->getListEnemy().at(i)->getTagNodeId())
+		{
+		case TAGNODE::MUSHROOM: case TAGNODE::TURTLE:
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_LEFT ||
+				CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_RIGHT ||
+				CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
+			{
+				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+					m_Velocity.y = VEL_PLAYER_Y;
+					this->m_PlayerState->exitCurrentState(*this, new CDieState());
+					this->m_PlayerState->enter(*this);
+				}
+				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
+				{
+					//undying but small and exists in 5s
+					this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+					this->loadSprite();
+					this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
+				}
 
+				m_IsAutoJump = false;
+			}
+			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+			{
+				this->m_Position.y = CMapManager::getInstance()->getListEnemy().at(i)->getPosition().y + CMapManager::getInstance()->getListEnemy().at(i) ->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+				this->m_PlayerState->exitCurrentState(*this, new CStandState());
+				this->m_PlayerState->enter(*this);
+				m_IsAutoJump = true;
+			}
+
+			break;
+		case TAGNODE::CARNIVOROUS_PLANT:
+			if (this->m_PlayerTag != PLAYERTAGS::UNDYING && this->m_PlayerTag != PLAYERTAGS::SMALL_UNDYING) {
+				if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
+					this->m_PlayerState->exitCurrentState(*this, new CDieState());
+					this->m_PlayerState->enter(*this);
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
 
 	//-----Handle Collision with Bonus----//
+	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
+		switch (CMapManager::getInstance()->getListEnemy().at(i)->getTagNodeId())
+		{
+		case TAGNODE::RED_MUSHROOM:
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i))) {
+				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+					m_PlayerTag = PLAYERTAGS::BIG;
+					this->loadSprite();
+				}
+			}
+			break;
+		case TAGNODE::STAR:
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i))) {
+				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
+					m_PlayerTag = PLAYERTAGS::UNDYING;
+					this->loadSprite();
+					this->m_UndyingTime = PLAYER_UNDYING_TIME;
+				}
+			}
+			break;
+		case TAGNODE::FLOWER:
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i))) {
+				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
+					m_PlayerTag = PLAYERTAGS::FIRE;
+				}
+			}
+			break;
+		case TAGNODE::COIN:
+			break;
+		case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
+			{
+				if (this->m_Velocity.y > 0)
+				{
+					this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+
 	switch (entity->getTagNodeId())
 	{
-	case TAGNODE::RED_MUSHROOM:
-		if (CCollision::CheckCollision(this, entity)) {
-			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-				m_PlayerTag = PLAYERTAGS::BIG;
-				this->loadSprite();
-			}
-		}
-		break;
-	case TAGNODE::STAR:
-		if (CCollision::CheckCollision(this, entity)) {
-			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
-				m_PlayerTag = PLAYERTAGS::UNDYING;
-				this->loadSprite();
-				this->m_UndyingTime = PLAYER_UNDYING_TIME;
-			}
-		}
-		break;
-	case TAGNODE::FLOWER:
-		if (CCollision::CheckCollision(this, entity)) {
-			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
-				m_PlayerTag = PLAYERTAGS::FIRE;
-			}
-		}
-		break;
-	case TAGNODE::COIN:
-		break;
-	case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
-		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
-		{
-			if (this->m_Velocity.y > 0)
-			{
-				this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
-			}
-		}
-		break;
-	case TAGNODE::TILE:
-
-		break;
 	case TAGNODE::FLAG:
 		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
 		{
@@ -341,29 +397,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			m_IsCollision = false;
 		}
 		break;
-	case TAGNODE::MUSHROOM: case TAGNODE::TURTLE:
-		if (CCollision::CheckCollision(this, entity)) {
-			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-				this->m_PlayerState->exitCurrentState(*this, new CDieState());
-				this->m_PlayerState->enter(*this);
-			}
-			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
-			{
-				//undying but small and exists in 5s
-				this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
-				this->loadSprite();
-				this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
-			}
-		}
-		break;
-	case TAGNODE::CARNIVOROUS_PLANT:
-		if (this->m_PlayerTag != PLAYERTAGS::UNDYING && this->m_PlayerTag != PLAYERTAGS::SMALL_UNDYING) {
-			if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
-				this->m_PlayerState->exitCurrentState(*this, new CDieState());
-				this->m_PlayerState->enter(*this);
-			}
-		}
-		break;
+
 	case TAGNODE::NONE:
 		if (this->m_State == PLAYERSTATES::STAND || PLAYERSTATES::RUN)
 		{

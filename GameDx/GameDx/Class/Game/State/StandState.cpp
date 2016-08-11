@@ -37,7 +37,7 @@ CBaseState* CStandState::handleInput(CPlayer& player, CKeyBoard* input){
 		return new CRunState();
 	}
 
-	if (input->KeyPress(DIK_UP) || input->KeyDown(DIK_SPACE)){
+	if (input->KeyPress(DIK_UP) || input->KeyDown(DIK_SPACE) || player.m_IsAutoJump == true){
 		player.m_PreJumpPos = player.getPosition();
 		if (player.getVelocity().y < 0)
 			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
@@ -61,8 +61,4 @@ void CStandState::update(CPlayer& player, double deltaTime) {
 		this->exitCurrentState(player, new CRunState());
 		player.getState()->enter(player);
 	}
-
-
-
-	//player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + player.getVelocity().y * deltaTime / 60, 0));
 }

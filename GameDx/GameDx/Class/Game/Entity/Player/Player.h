@@ -40,11 +40,10 @@ public:
 
 	bool					m_IsCollision; // Use for collision with Flag Pole Tail
 	bool					m_IsAutoMove; // Signal for Flag auto run
+	bool					m_IsAutoJump; // In case collision top wirh enermies
 	bool					m_IsFreeFall;
 	vector<int>				m_Direction;
-
 	vector3d				m_PreJumpPos;
-
 protected:
 	vector2d				m_Acceleration;
 	int						m_PlayerTag;

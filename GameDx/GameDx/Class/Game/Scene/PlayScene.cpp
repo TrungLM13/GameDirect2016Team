@@ -6,8 +6,7 @@
 
 #include "Class\Game\State\StandState.h"
 #include "Class\Mathematics\Collision.h"
-
-
+#include "Class\Game\Entity\Bullet\BulletNormal.h"
 
 CPlayScene::CPlayScene()
 {
@@ -26,14 +25,11 @@ bool CPlayScene::initScene()
 	CPlayer::getInstance();
 
 	m_ListEntity.push_back(new CStar());
-//	m_ListEntity.push_back(new CRedMushroom());
 	m_ListEntity.push_back(new CFlag());
 	m_ListEntity.push_back(new CFlagPole());
 	m_ListEntity.push_back(new CFlagPoleTail());
-	//m_ListEntity.push_back(new CTile());
 
-	//m_ListEntity.push_back(Turtle::getInstance());
-	m_ListEntity.push_back(new CCarnivorousPlants());
+	m_ListEntity.push_back(new CBulletNormal());
 
 
 	//Turtle::getInstance()->initEntity();
@@ -91,11 +87,8 @@ void CPlayScene::renderScene()
 
 	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
 
-	//CPlayer::getInstance()->drawEntity();
 	Turtle::getInstance()->drawEntity();
 	Elevator::getInstance()->drawEntity();
-	//CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
-	//CShowBouding::getInstance()->drawBouding(Turtle::getInstance());
 
 
 

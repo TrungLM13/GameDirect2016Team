@@ -1,10 +1,10 @@
 #ifndef __BULLETMANAGER_H__
 #define __BULLETMANAGER_H__
 
-#include "Game\Algorithsm\Singleton.h"
-#include "Game\Entity\MovableEntity.h"
-#include "Game\Entity\StaticEntity.h"
-#include "Game\Entity\Bullet\BulletNormal.h"
+#include "Class\Game\Algorithsm\Singleton.h"
+#include "Class\Game\Entity\MovableEntity.h"
+#include "Class\Game\Entity\StaticEntity.h"
+#include "Class\Game\Entity\Bullet\BulletNormal.h"
 
 class CBulletManager : public CSingleton<CBulletManager>
 {
