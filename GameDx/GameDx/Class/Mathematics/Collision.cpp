@@ -63,8 +63,8 @@ COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CBaseEntity* Ob
 			velocity = vector2d(MovableObject->getVelocity().x - object->getVelocity().x, MovableObject->getVelocity().y - object->getVelocity().y);
 		}
 
-		if (AABB(GetBroadPhaseBox(movableBox, velocity), baseBox, moveX, moveY))
-		{
+	//	if (AABB(GetBroadPhaseBox(movableBox, velocity), baseBox, moveX, moveY))
+		//{
 			timeCollition = SweptAABB(GetBoundForMovable(movableBox, velocity), baseBox, normalX, normalY);
 			
 			// nesscessary. because if timeCollition > 1, thats mean, MovableObject' direction and Base's direction is opposition and more and more away from each other.
@@ -92,7 +92,7 @@ COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CBaseEntity* Ob
 			}
 
 		}
-	}
+	//}
 
 	return COLDIRECTION::COLDIRECTION_NONE;
 }

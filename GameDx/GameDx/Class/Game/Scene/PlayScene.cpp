@@ -94,6 +94,7 @@ void CPlayScene::renderScene()
 	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i)
 	{
 		CMapManager::getInstance()->getListBonus().at(i)->drawEntity();
+		CShowBouding::getInstance()->drawBouding(CMapManager::getInstance()->getListBonus().at(i));
 	}
 
 	CPlayer::getInstance()->drawEntity();

@@ -36,44 +36,11 @@ void CStar::updateEntity(CKeyBoard* device)
 
 void CStar::updateEntity(float deltaTime)
 {
-	if (this->m_Velocity.x == 0)
-	{
-		if (this->m_Velocity.y<0)
-			this->m_Velocity.y *= (-1);
-		if (this->m_Position.y > 166)
-		{
-			if (this->m_Velocity.y > 0)
-				this->m_Velocity = vector2d(0, this->m_Velocity.y*(-1));
-		}
-		this->m_Position.y = this->m_Position.y + this->m_Velocity.y*deltaTime/50 ;
-		//this->m_Position = vector3d(50,this->m_Position.y, 0);
-		if (this->m_Position.y == 166)
-		{
-			this->m_Velocity = vector2d(5, 5);
-		}
-	}
-	else
-	{
-		if (this->m_Position.y < 10)
-		{
-			if (this->m_Velocity.y < 0)
-				this->m_Velocity = vector2d(this->m_Velocity.x, this->m_Velocity.y*(-1));
-
-		}
-		if (this->m_Position.y > 100)
-		{
-			if (this->m_Velocity.y >0)
-				this->m_Velocity = vector2d(this->m_Velocity.x, this->m_Velocity.y*(-1));
-		}
-		if (this->m_Position.x > 200)
-		{
-			if (this->m_Velocity.x > 0)
-			{
-				this->m_Velocity = vector2d(this->m_Velocity.x*(-1), this->m_Velocity.y);
-			}
-		}
-		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250, this->m_Position.y + this->m_Velocity.y *deltaTime / 100, 0);
-	}
+	static int temp = 1;
+	m_Position.x += 1 * sin((2 * PI / 6));
+	m_Position.y += 3 * cos(2 * PI / 6) * temp ;
+	if (m_Position.y > 100 || m_Position.y < 30)
+		temp *= -1;
 }
 
 void CStar::drawEntity()

@@ -90,3 +90,8 @@ void CMapManager::pushBonusObject(CBaseEntity* entity)
 {
 	m_listBonus.push_back(entity);
 }
+
+void CMapManager::popBonusObject()
+{
+	m_listBonus.pop_back();
+}

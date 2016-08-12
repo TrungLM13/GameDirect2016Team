@@ -40,6 +40,9 @@
 #define matrix						D3DXMATRIX
 
 #define PI							3.14
+#define GRAVITATION					-9.8
+#define VEL_DEFAULT_X			0
+#define VEL_DEFAULT_Y				9.8
 
 #define SIGN(A)						(A >= 0 ? 1 : -1)
 #define DIRECT_COORDINATE(A)		{-(A)}
@@ -88,6 +91,11 @@
 
 #define PLAYER_UNDYING_TIME	10000
 #define SMALL_PLAYER_UNDYING_TIME 5000
+
+#define STAR_VELOCITY_MAX 5
+#define BRICK_VELOCITY_MAX_Y 5
+#define BRICK_PRE_POSITION_Y 70
+#define BRICK_PRE_POSITION_Y_MAX 100
 
 #define POOLSIZE					5
 #define LEVELPOOL(A)				(A*POOLSIZE)		

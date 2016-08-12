@@ -19,7 +19,9 @@ CBrick::CBrick(vector2d position, BRICK_TYPE type)
 	m_Position.y = position.y;
 
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(0, 0);
+
+	this->m_Velocity = vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y);
+
 	m_BrickType = type;
 
 	this->initEntity();
@@ -53,62 +55,52 @@ void CBrick::updateEntity(CKeyBoard* device)
 
 void CBrick::updateEntity(float deltaTime)
 {
-
-	if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_BOTTOM) {
-	//	m_Velocity.y = 5;
-		m_BrickState = BRICK_STATE::BRICK_BOX;
-	}
-
-	/*switch (CCollision::CheckCollision(CPlayer::getInstance(), this))
+	switch (CCollision::CheckCollision(CPlayer::getInstance(), this))
 	{
 	case COLDIRECTION::COLDIRECTION_BOTTOM:
-		m_Velocity.y = 5;
- 		m_BrickState = BRICK_STATE::BRICK_BOX;
-		m_BrickEvent = BRICK_EVENT::EVENT_PROCCESSING;
-			break;
+		m_Velocity.y = VEL_DEFAULT_Y + BRICK_VELOCITY_MAX_Y;
+
+		if (m_BrickState == BRICK_STATE::BRICK_NORMAL) {
+			m_BrickState = BRICK_STATE::BRICK_BOX;
+			m_BrickEvent = BRICK_EVENT::EVENT_PROCCESSING;
+		}
+		break;
 	case COLDIRECTION::COLDIRECTION_TOP:
 		break;
 	default:
 		break;
-	} */
+	}
 
-	if (m_Position.y > 140){
+	if (m_Position.y >= BRICK_PRE_POSITION_Y_MAX){
 		if (m_Velocity.y > 0){
 			m_Velocity.y = CHANGE_DIRECTION(m_Velocity.y);
 		}
 	}
 
-	if (m_Position.y <= 70 && m_Velocity.y < 0) {
-		m_Velocity.y = 0;
+	if (SIGN(m_Velocity.y) == DIRECTION::DIRECTION_DOWN) {
+		if (m_Position.y <= BRICK_PRE_POSITION_Y) {
+			m_Velocity.y = VEL_DEFAULT_Y;
+		}
 	}
+	
+	m_Position = vector3d(m_Position.x, m_Position.y + (m_Velocity.y  + SIGN(m_Velocity.y) * GRAVITATION)* deltaTime / 100, 0);
 
-	if (m_Position.y == 70 && m_BrickState == BRICK_STATE::BRICK_BOX && m_BrickEvent == BRICK_EVENT::EVENT_PROCCESSING) {
+	if (m_Position.y <= BRICK_PRE_POSITION_Y && m_BrickState == BRICK_STATE::BRICK_BOX && m_BrickEvent == BRICK_EVENT::EVENT_PROCCESSING) {
 		m_BrickEvent = BRICK_EVENT::EVENT_DONE;
 	}
 
 	if (m_BrickEvent == BRICK_EVENT::EVENT_DONE){
-		
+		m_Star = new CStar();
+		CMapManager::getInstance()->pushBonusObject(m_Star);
+		m_BrickEvent = BRICK_EVENT::EVENT_NONE;
+		m_BrickType = BRICK_TYPE::BRICK_NONE;
 	}
-	m_Position = vector3d(m_Position.x, m_Position.y + m_Velocity.y *deltaTime / 100, 0);
+
 }
 
 void CBrick::drawEntity()
 {
 	this->m_listSprite.at(this->m_BrickState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-	/*if (isDraw)
-	{
-		counttime++;
-		if (isGiftBox == 0)
-		{
-			ItemCoin->drawEntity();
-		}
-		if (isGiftBox == 1)
-		{
-			ItemStar->drawEntity();
-		}
-	}
-	for (int i = 0; i < m_listSprite.size(); i++)
-		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);*/
 }
 
 void CBrick::updateEntity(RECT* camera)

@@ -24,6 +24,7 @@ public:
 	vector<CBox2D*>			getListRect();
 	static CMapManager*		getInstance();
 	void pushBonusObject(CBaseEntity* entity);
+	void popBonusObject();
 
 private:
 	static CMapManager*		m_instance;

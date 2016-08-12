@@ -30,5 +30,7 @@ public:
 	BRICK_EVENT m_BrickEvent;
 	BRICK_STATE m_BrickState;
 	CStar* m_Star;
+
+	
 };
 #endif
