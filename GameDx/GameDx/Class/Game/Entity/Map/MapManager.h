@@ -23,6 +23,7 @@ public:
 	vector<CTiless*>		getListBackground();
 	vector<CBox2D*>			getListRect();
 	static CMapManager*		getInstance();
+	void pushBonusObject(CBaseEntity* entity);
 
 private:
 	static CMapManager*		m_instance;

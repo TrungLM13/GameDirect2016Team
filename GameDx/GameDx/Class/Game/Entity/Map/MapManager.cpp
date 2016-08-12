@@ -73,10 +73,10 @@ bool CMapManager::loadEntityInMap()
 
 	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
-		if (type == "1E")
-			m_listEnemy.push_back(new CMushroom(positionEntity, EnemyStyle::TOF_RED_MUSHROOM));
+		/*if (type == "1E")
+			m_listEnemy.push_back(new CMushroom(positionEntity, EnemyStyle::TOF_RED_MUSHROOM));*/
 		if (type == "1B")
-			m_listBonus.push_back(new CBrick(positionEntity));
+			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_STAR));
 		if (type == "1T")
 			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
 		if (type == "R")
@@ -84,4 +84,9 @@ bool CMapManager::loadEntityInMap()
 	}
 
 	return true;
+}
+
+void CMapManager::pushBonusObject(CBaseEntity* entity)
+{
+	m_listBonus.push_back(entity);
 }

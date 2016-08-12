@@ -38,7 +38,7 @@ bool CPlayer::initEntity()
 
 	m_State = PLAYERSTATES::STAND;
 	m_PlayerState = new CStandState();
-	m_PlayerTag = PLAYERTAGS::FIRE;
+	m_PlayerTag = PLAYERTAGS::SMALL;
 
 	m_Acceleration = vector2d(0.5f, 0);
 	m_Velocity = vector2d(VEL_PLAYER_X_MIN, VEL_PLAYER_Y);
@@ -285,10 +285,10 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 	//-----Handle Collision with Bonus----//
 	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
-		switch (CMapManager::getInstance()->getListEnemy().at(i)->getTagNodeId())
+		switch (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId())
 		{
 		case TAGNODE::RED_MUSHROOM:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i))) {
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i))) {
 				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
 					m_PlayerTag = PLAYERTAGS::BIG;
 					this->loadSprite();
@@ -296,7 +296,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			}
 			break;
 		case TAGNODE::STAR:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i))) {
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i))) {
 				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
 					m_PlayerTag = PLAYERTAGS::UNDYING;
 					this->loadSprite();
@@ -305,7 +305,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			}
 			break;
 		case TAGNODE::FLOWER:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i))) {
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i))) {
 				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
 					m_PlayerTag = PLAYERTAGS::FIRE;
 				}
@@ -314,12 +314,17 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		case TAGNODE::COIN:
 			break;
 		case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
 			{
-				if (this->m_Velocity.y > 0)
+				if (this->m_Velocity.y >= 0)
 				{
 					this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
 				}
+			}
+			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_TOP){
+				this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+				this->m_PlayerState->exitCurrentState(*this, new CStandState());
+				this->m_PlayerState->enter(*this);
 			}
 			break;
 		default:

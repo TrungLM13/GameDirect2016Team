@@ -24,7 +24,6 @@ bool CPlayScene::initScene()
 
 	CPlayer::getInstance();
 
-	m_ListEntity.push_back(new CStar());
 	m_ListEntity.push_back(new CFlag());
 	m_ListEntity.push_back(new CFlagPole());
 	m_ListEntity.push_back(new CFlagPoleTail());
@@ -48,21 +47,30 @@ void CPlayScene::updateScene(double deltaTime)
 
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
+		CPlayer::getInstance()->handleCollision(CMapManager::getInstance()->getListBonus().at(i), deltaTime);
 		CMapManager::getInstance()->getListEnemy().at(i)->updateEntity(deltaTime);
 	}
 
+	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i)
+	{
+		CPlayer::getInstance()->handleCollision(CMapManager::getInstance()->getListBonus().at(i), deltaTime);
+		CMapManager::getInstance()->getListBonus().at(i)->updateEntity(deltaTime);
+	}
 	CCamera::getInstance()->Update(CPlayer::getInstance()->getPosition());
 
-	for (int i = 0; i < m_ListEntity.size(); ++i) {
-		m_ListEntity.at(i)->updateEntity(deltaTime);
-		m_ListEntity.at(i)->updateCollision(CPlayer::getInstance(), deltaTime);
 
-		CPlayer::getInstance()->handleCollision(m_ListEntity.at(i), deltaTime);
+	//for (int i = 0; i < m_ListEntity.size(); ++i) {
+	//	m_ListEntity.at(i)->updateEntity(deltaTime);
+	//	m_ListEntity.at(i)->updateCollision(CPlayer::getInstance(), deltaTime);
 
-		for (int j = 0; j < m_ListEntity.size(); ++j) {
-			m_ListEntity.at(i)->handleCollision(m_ListEntity.at(j), deltaTime);
-		}
-	}
+	//	CPlayer::getInstance()->handleCollision(m_ListEntity.at(i), deltaTime);
+
+	//	for (int j = 0; j < m_ListEntity.size(); ++j) {
+	//		m_ListEntity.at(i)->handleCollision(m_ListEntity.at(j), deltaTime);
+	//	}
+	//}
+
+	
 }
 
 void CPlayScene::updateScene(CKeyBoard* keyboard)
@@ -82,6 +90,12 @@ void CPlayScene::renderScene()
 	{
 		CMapManager::getInstance()->getListBackground().at(i)->drawEntity();
 	}
+
+	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i)
+	{
+		CMapManager::getInstance()->getListBonus().at(i)->drawEntity();
+	}
+
 	CPlayer::getInstance()->drawEntity();
 
 

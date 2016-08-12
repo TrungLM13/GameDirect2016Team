@@ -37,17 +37,6 @@ public:
 	static const wchar_t*	smallfiremario_die;
 	static const wchar_t*	smallfiremario_jum;
 	static const wchar_t*	smallfiremario_run;
-	/************RESOURCE FOR SMALLUNDYINGMARIO************/
-	static const wchar_t*	smallundyingmario_cdir;
-	static const wchar_t*	smallundyingmario_stand;
-	static const wchar_t*	smallundyingmario_jum;
-	static const wchar_t*	smallundyingmario_run;
-	/************RESOURCE FOR SMALLUNDYINGMARIO************/
-	static const wchar_t*	bigundyingmario_cdir;
-	static const wchar_t*	bigundyingmario_stand;
-	static const wchar_t*	bigundyingmario_jum;
-	static const wchar_t*	bigundyingmario_run;
-	/*************************************************/
 
 	/************RESOURCE FOR SMALLUNDYINGMARIO************/
 	static const wchar_t*	smallmario_undying_stand;

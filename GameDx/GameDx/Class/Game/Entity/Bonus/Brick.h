@@ -9,8 +9,7 @@ class CBrick : public CMovable
 {
 public:
 	CBrick();
-	CBrick(int isGift);
-	CBrick(vector2d pos);
+	CBrick(vector2d position, BRICK_TYPE type);
 	~CBrick();
 	virtual	bool			loadSprite()											override;
 	virtual	bool			initEntity()											override;
@@ -26,13 +25,10 @@ public:
 	void setPosition(vector3d position);
 	void setVelocity(vector2d velocity);
 	void setGiftBox(bool check);
-	void checkShowItem();
-private:
-	int isGiftBox;
-	int stateBrick;
-	CCoinInBox* ItemCoin;
-	CStar* ItemStar;
-	bool isDraw;
-	int counttime;
+public:
+	BRICK_TYPE m_BrickType;
+	BRICK_EVENT m_BrickEvent;
+	BRICK_STATE m_BrickState;
+	CStar* m_Star;
 };
 #endif

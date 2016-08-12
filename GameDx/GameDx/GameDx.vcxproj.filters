@@ -204,6 +204,9 @@
     <ClCompile Include="Class\Game\Entity\Bullet\BulletNormal.cpp">
       <Filter>Game\Entity\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\BonusManager.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -427,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bullet\BulletNormal.h">
       <Filter>Game\Entity\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\BonusManager.h">
+      <Filter>Game\Entity\Bonus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

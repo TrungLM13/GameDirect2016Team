@@ -293,6 +293,26 @@ enum ELEVATOR_STATE
 	RIGHT = 3,
 	LEFT = 4
 };
+
+enum BRICK_TYPE
+{
+	BRICK_NONE = 0,
+	BRICK_STAR = 1,
+	BRICK_COIN = 2
+};
+
+enum BRICK_EVENT
+{
+	EVENT_NONE = 0,
+	EVENT_PROCCESSING = 1,
+	EVENT_DONE = 2
+};
+
+enum BRICK_STATE
+{
+	BRICK_NORMAL = 0,
+	BRICK_BOX = 1
+};
 /******************************/
 
 /*CONST*/

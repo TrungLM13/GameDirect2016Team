@@ -32,17 +32,6 @@ const wchar_t*		CInfomationResource::smallfiremario_cdir		= L"Resource//Image//G
 const wchar_t*		CInfomationResource::smallfiremario_die			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//smallfiremario_die.png";
 const wchar_t*		CInfomationResource::smallfiremario_jum			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//smallfiremario_jum.png";
 const wchar_t*		CInfomationResource::smallfiremario_run			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//smallfiremario_run.png";
-/************RESOURCE FOR SMALLUNDYINGMARIO************/
-const wchar_t*	CInfomationResource::smallundyingmario_cdir			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_cdir.png";
-const wchar_t*	CInfomationResource::smallundyingmario_stand		= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_dung.png";
-const wchar_t*	CInfomationResource::smallundyingmario_jum			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_jum.png";
-const wchar_t*	CInfomationResource::smallundyingmario_run			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_be_run.png";
-/************RESOURCE FOR SMALLUNDYINGMARIO************/
-const wchar_t*	CInfomationResource::bigundyingmario_cdir			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_cdir.png";
-const wchar_t*	CInfomationResource::bigundyingmario_stand			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_dung.png";
-const wchar_t*	CInfomationResource::bigundyingmario_jum			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_jum.png";
-const wchar_t*	CInfomationResource::bigundyingmario_run			= L"Resource//Image//Game//Sprites//Mario//SmallFireMario//bat_tu_lon_run.png";
-/*************************************************/
 
 /*******************************************/
 
@@ -54,7 +43,7 @@ const wchar_t*	CInfomationResource::bigundyingmario_run			= L"Resource//Image//G
  /***********RESOURCE FOR UNDYINGMARIO************/															  
  const wchar_t*	CInfomationResource::bigmario_undying_stand			= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_lon_dung.png";
  const wchar_t*	CInfomationResource::bigmario_undying_run			= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_lon_run.png";
- const wchar_t*	CInfomationResource::bigmario_undying_jum		= L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_lon_jum.png";
+ const wchar_t*	CInfomationResource::bigmario_undying_jum		    = L"Resource//Image//Game//Sprites//Mario//UndyingMario//bat_tu_lon_jum.png";
 
 
 /************ENERMY RESOURCE*******/

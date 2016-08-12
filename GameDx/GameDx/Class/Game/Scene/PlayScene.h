@@ -42,13 +42,6 @@ public:
 	virtual void renderScene()						override;
 
 private:
-	vector<CCoin*>			listCoin;
-	vector<CStar*>			listStar;
-	vector<CBrick*>			listBrick;
-	vector<CIteminbox*>		listIteminbox;
-	vector<CGiftBox*>		listGiftBox;
-	vector<CMovable *>		listMovable;
-	vector<CCoinInBox*>		listCoinInBox;
 	vector<CBaseEntity*>	m_ListEntity;
 };
 
