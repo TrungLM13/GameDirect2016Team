@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="220" height="13" tilewidth="16" tileheight="16" nextobjectid="504">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="220" height="13" tilewidth="16" tileheight="16" nextobjectid="518">
  <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="2" tilecount="924" columns="33">
   <image source="../../../../../ChuyenNganh/android/assets/level/tileset_gutter.png" trans="55aaff" width="594" height="504"/>
  </tileset>
@@ -313,7 +313,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="3_dam_may" width="220" height="13">
+ <layer name="3_dam_may" width="220" height="13" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -462,16 +462,15 @@
   <object id="267" x="3312" y="176" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="xi_mang_1">
-  <object id="186" x="1152" y="192" width="240"/>
-  <object id="187" x="1440" y="192" width="1040" height="16"/>
-  <object id="188" x="2512" y="192" width="1008" height="16"/>
-  <object id="268" x="1152" y="192" width="240" height="16"/>
-  <object id="492" x="0" y="192" width="1120" height="16"/>
- </objectgroup>
- <objectgroup name="flag_pole">
-  <object id="502" x="3328" y="32" height="144"/>
+  <object id="504" x="0" y="192" width="1120" height="16"/>
+  <object id="505" x="1152" y="192" width="240" height="16"/>
+  <object id="506" x="1440" y="192" width="1040" height="16"/>
+  <object id="507" x="2512" y="192" width="1008" height="16"/>
  </objectgroup>
  <objectgroup name="green_flag">
   <object id="503" x="3312" y="32" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="flag_pole">
+  <object id="517" x="3312" y="48" width="16" height="128"/>
  </objectgroup>
 </map>

@@ -76,4 +76,4 @@ xi_mang		1152	192	240	16
 xi_mang		1440	192	1040	16
 xi_mang		2512	192	1008	16
 green_flag	3312	32	16	16
-flag_pole	3328	32	0	144
+flag_pole	3312	32	16	128
