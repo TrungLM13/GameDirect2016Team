@@ -18,5 +18,5 @@ CBaseState* CDieState::handleInput(CPlayer& player, CKeyBoard* input){
 
 void CDieState::update(CPlayer& player, double deltaTime) {
 
-	player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + player.getVelocity().y * deltaTime / 60, 0));
+	player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + (player.getVelocity().y + GRAVITATION) * deltaTime / 60, 0));
 }

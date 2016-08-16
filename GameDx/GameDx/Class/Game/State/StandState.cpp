@@ -42,6 +42,8 @@ CBaseState* CStandState::handleInput(CPlayer& player, CKeyBoard* input){
 		if (player.getVelocity().y < 0)
 			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 
+		player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y + VEL_PLAYER_Y));
+
 		return new CJumpState();
 	}
 
@@ -61,4 +63,6 @@ void CStandState::update(CPlayer& player, double deltaTime) {
 		this->exitCurrentState(player, new CRunState());
 		player.getState()->enter(player);
 	}
+
+	player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + (player.getVelocity().y + GRAVITATION) * deltaTime / 60, 0));
 }

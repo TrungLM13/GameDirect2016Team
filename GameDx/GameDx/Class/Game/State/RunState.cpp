@@ -33,6 +33,8 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 				player.m_PreJumpPos = player.getPosition();
 				if (player.getVelocity().y < 0)
 					player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
+
+				player.setVelocity(vector2d(player.getVelocity().x, player.getVelocity().y + VEL_PLAYER_Y));
 				return new CJumpState();
 			}
 
@@ -80,7 +82,7 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 
 void CRunState::update(CPlayer& player, double deltaTime) {
 	if (!player.m_IsCollision) {
-		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y, 0));
+		//player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y, 0));
 	}
 
 	if (player.m_IsAutoMove) {
@@ -88,6 +90,10 @@ void CRunState::update(CPlayer& player, double deltaTime) {
 		if (player.getPosition().x > 350) {
 			player.m_IsAutoMove = false;
 		}
-		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + player.getVelocity().y * deltaTime / 100, 0));
+		//player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + player.getVelocity().y * deltaTime / 100, 0));
 	}
+
+	player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + (player.getVelocity().y + GRAVITATION) * deltaTime / 100, 0));
+
+
 }

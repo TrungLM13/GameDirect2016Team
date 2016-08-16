@@ -58,7 +58,7 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 	if (m_IsMoveX) {
 		if (player.getVelocity().x == VEL_PLAYER_X_MIN)
 		{
-			player.setVelocity(vector2d(VEL_PLAYER_X, VEL_PLAYER_Y));
+			player.setVelocity(vector2d(VEL_PLAYER_X, VEL_DEFAULT_Y + VEL_PLAYER_Y));
 		}
 		deltaX = player.getVelocity().x * deltaTime / 100;
 	}
@@ -72,7 +72,7 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
 	}
 
-	player.setPosition(vector3d(player.getPosition().x + deltaX, player.getPosition().y + player.getVelocity().y *deltaTime / 40, 0));
+	player.setPosition(vector3d(player.getPosition().x + deltaX, player.getPosition().y + (player.getVelocity().y + GRAVITATION) *deltaTime / 40, 0));
 }
 
 void CJumpState::update(CPlayer& player, CBaseEntity* entity) {

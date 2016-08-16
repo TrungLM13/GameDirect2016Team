@@ -41,7 +41,7 @@ bool CPlayer::initEntity()
 	m_PlayerTag = PLAYERTAGS::SMALL;
 
 	m_Acceleration = vector2d(0.5f, 0);
-	m_Velocity = vector2d(VEL_PLAYER_X_MIN, VEL_PLAYER_Y);
+	m_Velocity = vector2d(VEL_PLAYER_X_MIN, VEL_DEFAULT_Y);
 
 	m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
 	m_Direction.at(DIRECTIONINDEX::DIRECTION_Y) = DIRECTION::DIRECTION_UP;
@@ -170,36 +170,31 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		if (this->m_State != PLAYERSTATES::DIE) {
 
 			this->getBounding().setVelocity(this->getVelocity());
+
 			switch (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
 			{
 			case COLDIRECTION::COLDIRECTION_TOP:
 				m_IsAutoJump = false;
-				if (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))) == COLDIRECTION::COLDIRECTION_TOP)
-				{
-					if (!m_IsAutoMove) {
-						this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+				m_Velocity.y = VEL_DEFAULT_Y;
 
-						if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
-							this->m_PlayerState->exitCurrentState(*this, new CStandState());
-							this->m_PlayerState->enter(*this);
-						}
-					}
-					else {
-						this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
-						this->m_PlayerState->exitCurrentState(*this, new CRunState());
-						this->m_PlayerState->enter(*this);
-					}
+				if (!m_IsAutoMove) {
+					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
 
-					break;
-			case COLDIRECTION::COLDIRECTION_NONE:
-				if (m_State == PLAYERSTATES::RUN || m_State == PLAYERSTATES::STAND ||
-					m_State == PLAYERSTATES::STAND_SHOOT || m_State == PLAYERSTATES::MOVE_SHOOT) {
-					if (!m_IsAutoMove && !m_IsAutoJump){
-						m_Velocity.y = VEL_PLAYER_Y;
-						this->m_PlayerState->exitCurrentState(*this, new CDieState());
+					if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
+						this->m_PlayerState->exitCurrentState(*this, new CStandState());
 						this->m_PlayerState->enter(*this);
 					}
 				}
+				else {
+					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+					this->m_PlayerState->exitCurrentState(*this, new CRunState());
+					this->m_PlayerState->enter(*this);
+				}
+
+				break;
+			case COLDIRECTION::COLDIRECTION_NONE:
+				if (m_State != PLAYERSTATES::JUMP || m_State != PLAYERSTATES::JUMP)
+					m_Velocity.y = VEL_PLAYER_Y_MIN;
 
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
@@ -221,9 +216,9 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			default:
 
 				break;
-				}
-
 			}
+
+			//}
 		}
 		else
 		{
@@ -247,7 +242,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 				CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
 			{
 				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-					m_Velocity.y = VEL_PLAYER_Y;
+					m_Velocity.y = VEL_DEFAULT_Y;
 					this->m_PlayerState->exitCurrentState(*this, new CDieState());
 					this->m_PlayerState->enter(*this);
 				}
@@ -263,7 +258,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			}
 			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
 			{
-				this->m_Position.y = CMapManager::getInstance()->getListEnemy().at(i)->getPosition().y + CMapManager::getInstance()->getListEnemy().at(i) ->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+				this->m_Position.y = CMapManager::getInstance()->getListEnemy().at(i)->getPosition().y + CMapManager::getInstance()->getListEnemy().at(i)->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
 				this->m_PlayerState->exitCurrentState(*this, new CStandState());
 				this->m_PlayerState->enter(*this);
 				m_IsAutoJump = true;
@@ -328,8 +323,14 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			}
 			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_TOP){
 				this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-				this->m_PlayerState->exitCurrentState(*this, new CStandState());
-				this->m_PlayerState->enter(*this);
+				if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
+					this->m_PlayerState->exitCurrentState(*this, new CStandState());
+					this->m_PlayerState->enter(*this);
+				}
+				else if (this->m_State == PLAYERSTATES::JUMP) {
+					this->m_PlayerState->exitCurrentState(*this, new CRunState());
+					this->m_PlayerState->enter(*this);
+				}
 			}
 			break;
 		default:
@@ -337,6 +338,16 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		}
 	}
 
+	//-----Handle Collision with Screen - Die State----//
+
+	this->getBounding().setVelocity(this->getVelocity());
+	if (CCollision::CheckCollision(this->getBounding(), CBox2D(0, 0, BACKBUFFER_WIDTH, 10)) == COLDIRECTION::COLDIRECTION_TOP) {
+		if (!m_IsAutoMove && !m_IsAutoJump && m_State != PLAYERSTATES::DIE){
+			m_Velocity.y = VEL_DEFAULT_Y + VEL_PLAYER_Y;
+			this->m_PlayerState->exitCurrentState(*this, new CDieState());
+			this->m_PlayerState->enter(*this);
+		}
+	}
 
 	switch (entity->getTagNodeId())
 	{
@@ -386,7 +397,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 				this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
 			}
 
-			m_Velocity.y = VEL_PLAYER_Y;
+			m_Velocity.y = VEL_DEFAULT_Y;
 
 		}
 		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
