@@ -7,6 +7,7 @@ class CStar : public CMovable
 {
 public:
 	CStar();
+	CStar(vector3d pos);
 	~CStar();
 	virtual	bool			loadSprite()									override;
 	virtual	bool			initEntity()									override;

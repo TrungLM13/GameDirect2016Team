@@ -7,6 +7,7 @@ class CCoinInBox : public CMovable
 {
 public:
 	CCoinInBox();
+	CCoinInBox(vector3d pos);
 	~CCoinInBox();
 	virtual	bool			loadSprite()											override;
 	virtual	bool			initEntity()											override;
@@ -14,6 +15,7 @@ public:
 	virtual void			updateEntity(RECT* camera)                              override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
 	virtual void			drawEntity()											override;
+	virtual int				getTagNodeId()											override;
 private:
 	bool isDraw;
 };

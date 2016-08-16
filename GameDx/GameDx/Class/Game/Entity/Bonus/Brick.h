@@ -4,6 +4,7 @@
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\Bonus\CoinInBox.h"
 #include "Class\Game\Entity\Bonus\Star.h"
+#include "Class\Game\Entity\Bonus\GreenMushroom.h"
 
 class CBrick : public CMovable
 {
@@ -21,15 +22,17 @@ public:
 	virtual int				getTagNodeId()											override;
 
 public:
-
 	void setPosition(vector3d position);
 	void setVelocity(vector2d velocity);
-	void setGiftBox(bool check);
+
 public:
 	BRICK_TYPE m_BrickType;
-	BRICK_EVENT m_BrickEvent;
+	GIFTBOX_BRICK_EVENT m_BrickEvent;
 	BRICK_STATE m_BrickState;
 	CStar* m_Star;
+	CCoinInBox* m_Coin;
+	CGreenMushroom* m_GreenMushRoom;
+	float m_CountCoin;
 
 	
 };

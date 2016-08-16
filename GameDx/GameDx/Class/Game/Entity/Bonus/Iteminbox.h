@@ -14,12 +14,13 @@ public:
 	virtual void			updateEntity(RECT* camera)                      override;
 	virtual void			updateEntity(CKeyBoard *device)					override;
 	virtual void			drawEntity()									override;
+	virtual int             getTagNodeId()									override;
 
 public:
 	void chkShowItem(CPlayer*);
 	void setVelocity(vector2d velocity);
 	void setPosition(vector3d position);
-	ITEMINBOX_TYPE getitemtype();
+	ITEMINBOX_TYPE getItemType();
 
 private:
 	ITEMINBOX_TYPE        m_itemtype;

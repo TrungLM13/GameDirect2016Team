@@ -35,6 +35,15 @@ vector<CBaseEntity*>	CMapManager::getListBonus()
 	return m_listBonus;
 }
 
+void CMapManager::setListBonus(vector<CBaseEntity*> list) {
+	/*for (int i = 0; i < list.size(); ++i) {
+		m_listBonus.assign(i, list.at(i));
+	}*/
+
+	m_listBonus = list;
+
+}
+
 vector<CTiless*> CMapManager::getListBackground()
 {
 	return m_listBackground;
@@ -58,13 +67,13 @@ bool CMapManager::loadEntityInMap()
 
 	ifstream data;
 
-	string filePath			= "Resource\\Data\\" + CPopUpInfo::getInstance()->getMapName() + ".txt";
+	string filePath = "Resource\\Data\\" + CPopUpInfo::getInstance()->getMapName() + ".txt";
 
 	// convert to unicode
-	int wchars_num			= MultiByteToWideChar(CP_UTF8, 0, filePath.c_str(), -1, NULL, 0);
-	wchar_t* wstr			= new wchar_t[wchars_num];
+	int wchars_num = MultiByteToWideChar(CP_UTF8, 0, filePath.c_str(), -1, NULL, 0);
+	wchar_t* wstr = new wchar_t[wchars_num];
 	MultiByteToWideChar(CP_UTF8, 0, filePath.c_str(), -1, wstr, wchars_num);
-	
+
 	data.open(wstr);
 
 	vector2d positionEntity;
@@ -73,10 +82,20 @@ bool CMapManager::loadEntityInMap()
 
 	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
-		/*if (type == "1E")
-			m_listEnemy.push_back(new CMushroom(positionEntity, EnemyStyle::TOF_RED_MUSHROOM));*/
 		if (type == "1B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_STAR));
+		if (type == "2B")
+			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_COIN));
+		if (type == "3B")
+			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_NONE));
+		if (type == "4B")
+			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
+		if (type == "5B")
+			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_COIN));
+		if (type == "6B")
+			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_NONE));
+		if (type == "7B")
+			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_GREENMUSHROOM));
 		if (type == "1T")
 			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
 		if (type == "R")
@@ -94,4 +113,23 @@ void CMapManager::pushBonusObject(CBaseEntity* entity)
 void CMapManager::popBonusObject()
 {
 	m_listBonus.pop_back();
+}
+
+void CMapManager::pushInFirst(CBaseEntity* entity)
+{
+	m_listBonus.insert(m_listBonus.begin(), entity);
+}
+
+void CMapManager::removeInFirst() {
+	m_listBonus.erase(m_listBonus.begin());
+}
+
+void CMapManager::removeEntity(vector<CBaseEntity*>& list, int tagnode)
+{
+	for (int i = 0; i < list.size(); ++i)
+	{
+		if (list.at(i)->getTagNodeId() == tagnode)
+			list.erase(list.begin() + i);
+	}
+
 }

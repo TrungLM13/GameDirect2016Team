@@ -1,7 +1,23 @@
 #include "Iteminbox.h"
 #include "Class\Game\Utill\InformationResource.h"
-#include "Class\Mathematics\SweptAABB.h"
+#include "Class\Mathematics\Collision.h"
+#include "Class\Game\Entity\Map\MapManager.h"
 
+inline bool IsCollision(CMovable* entity, vector<CBaseEntity*> listEntity) {
+	for (int i = 0; i < listEntity.size(); i++)
+	{
+		if (listEntity.at(i)->getTagNodeId() == TAGNODE::GIFT_BOX)
+		{
+			if (CCollision::CheckCollision(entity, listEntity.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+			{
+				return true;
+			}
+		}
+
+	}
+
+	return false;
+}
 
 CIteminbox::CIteminbox()
 {
@@ -23,10 +39,8 @@ bool CIteminbox::loadSprite()
 bool CIteminbox::initEntity()
 {
 	chkShowItem(CPlayer::getInstance());
-	m_Position = vector3d(100, 200, 0);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(9.8, 9.8);
 	return true;
 }
 
@@ -39,38 +53,76 @@ void CIteminbox::updateEntity(float deltaTime)
 {
 	if (this->m_itemtype == ITEMINBOX_TYPE::REDMUSHROOM)
 	{
-		if (this->m_Position.y > 100)
+		if (this->m_Position.y >= REDMUSHROOM_POSITION_Y_MAX)
 		{
-			if (this->m_Velocity.y >0)
-				this->m_Velocity = vector2d(this->m_Velocity.x, this->m_Velocity.y*(-1)); 
-			this->m_Position.y = this->m_Position.y + this->m_Velocity.y *deltaTime / 100;
+			this->m_Velocity.y = VEL_DEFAULT_Y;
+			this->m_Position.y = REDMUSHROOM_POSITION_Y_MAX;
+
+			if (IsCollision(this, CMapManager::getInstance()->getListBonus()))
+			{
+				this->m_Velocity.x = REDMUSHROOM_VELOCITY_MAX;
+			}
+			else{
+				this->m_Velocity.y = 0;
+			}
 		}
-		if (this->m_Position.y <= 10)
+		for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); i++)
 		{
-			this->m_Position.y = 10;
+			this->getBounding().setVelocity(this->getVelocity());
+			if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+			{
+				this->m_Velocity.x = VEL_DEFAULT_X + REDMUSHROOM_VELOCITY_MAX;
+				this->m_Velocity.y = VEL_DEFAULT_Y;
+			}
+			else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_LEFT) {
+				// Change direction 
+				this->m_Velocity.x = CHANGE_DIRECTION(this->m_Velocity.x);
+			}
+			else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_NONE)
+			{
+				if (this->getVelocity().x != VEL_DEFAULT_X &&
+					IsCollision(this, CMapManager::getInstance()->getListBonus()) == false)
+					this->m_Velocity.y = 0;
+			}
 		}
-		if (this->m_Position.x >200)
+
+		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250, this->m_Position.y + (this->m_Velocity.y + GRAVITATION) *deltaTime / 100, 0);
+
+		if (CCollision::getInstance()->CheckCollision(this, CPlayer::getInstance()))
 		{
-			if (this->m_Velocity.x > 0)
-				this->m_Velocity = vector2d(this->m_Velocity.x*(-1), this->m_Velocity.y);
+			if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::BIG)
+			{
+				vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+				CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::RED_MUSHROOM);
+				CMapManager::getInstance()->setListBonus(tempBonusList);
+				tempBonusList.clear();
+			}
 		}
-		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250,this->m_Position.y, 0);
+	}
+	else if (this->m_itemtype == ITEMINBOX_TYPE::ITEM_FLOWER)
+	{
+		if (this->m_Position.y > FLOWER_POSITION_Y_MAX) {
+			this->m_Velocity.y = VEL_DEFAULT_Y;
+			this->m_Position.y = FLOWER_POSITION_Y_MAX;
+		}
+		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250, this->m_Position.y + (this->m_Velocity.y + GRAVITATION) *deltaTime / 100, 0);
+
+		if (CCollision::getInstance()->CheckCollision(this, CPlayer::getInstance()))
+		{
+			if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::FIRE)
+			{
+				vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+				CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::FLOWER);
+				CMapManager::getInstance()->setListBonus(tempBonusList);
+				tempBonusList.clear();
+			}
+		}
 	}
 }
 
 void CIteminbox::drawEntity()
 {
-	for (int i = 0; i < m_listSprite.size(); i++)
-	{
-		if (this->m_itemtype == 0)
-		{
-			this->m_listSprite.at(0)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-		}
-		if (this->m_itemtype == 1)
-		{
-			this->m_listSprite.at(1)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-		}
-	}
+	this->m_listSprite.at(this->m_itemtype)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CIteminbox::updateEntity(RECT* camera)
@@ -84,8 +136,12 @@ void CIteminbox::setVelocity(vector2d velocity)
 	this->m_Velocity.y = velocity.y;
 }
 
+void CIteminbox::setPosition(vector3d position)
+{
+	this->m_Position = position;
+}
 
-ITEMINBOX_TYPE CIteminbox::getitemtype()
+ITEMINBOX_TYPE CIteminbox::getItemType()
 {
 	return this->m_itemtype;
 }
@@ -101,5 +157,17 @@ void CIteminbox::chkShowItem(CPlayer* player)
 	{
 		this->m_itemtype = ITEMINBOX_TYPE::ITEM_FLOWER;
 		this->m_TagNode = "Flower";
+	}
+}
+
+int  CIteminbox::getTagNodeId()
+{
+	if (this->m_itemtype == ITEMINBOX_TYPE::REDMUSHROOM)
+	{
+		return TAGNODE::RED_MUSHROOM;
+	}
+	else if (this->m_itemtype == ITEMINBOX_TYPE::ITEM_FLOWER)
+	{
+		return TAGNODE::FLOWER;
 	}
 }

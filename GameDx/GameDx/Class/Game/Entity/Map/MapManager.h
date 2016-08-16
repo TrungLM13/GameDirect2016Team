@@ -20,11 +20,15 @@ public:
 public:
 	vector<CBaseEntity*>	getListEnemy();
 	vector<CBaseEntity*>	getListBonus();
+	void					setListBonus(vector<CBaseEntity*> list);
 	vector<CTiless*>		getListBackground();
 	vector<CBox2D*>			getListRect();
 	static CMapManager*		getInstance();
 	void pushBonusObject(CBaseEntity* entity);
 	void popBonusObject();
+	void pushInFirst(CBaseEntity* entity);
+	void removeInFirst();
+	void removeEntity(vector<CBaseEntity*>& list, int tagnode);
 
 private:
 	static CMapManager*		m_instance;

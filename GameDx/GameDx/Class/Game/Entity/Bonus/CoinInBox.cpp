@@ -2,10 +2,26 @@
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
+#include "Class\Game\Entity\Map\MapManager.h"
 
 CCoinInBox::CCoinInBox()
 {
 	this->initEntity();
+}
+
+CCoinInBox::CCoinInBox(vector3d pos)
+{
+	this->m_Position = pos;
+	this->initEntity();
+
+	/*for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
+		if (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId() == TAGNODE::COININBOX ) {
+			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
+			CMapManager::getInstance()->setListBonus(tempBonusList);
+			tempBonusList.clear();*/
+		//}
+	//}
 }
 
 CCoinInBox:: ~CCoinInBox()
@@ -23,10 +39,9 @@ bool CCoinInBox::initEntity()
 {
 	this->m_TagNode = "CoinInBox";
 	isDraw = true;
-	m_Position = vector3d(50, 50, 0);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(0,0);
+	this->m_Velocity = vector2d(0, 0);
 	return true;
 }
 
@@ -37,30 +52,46 @@ void CCoinInBox::updateEntity(CKeyBoard* device)
 
 void CCoinInBox::updateEntity(float deltaTime)
 {
-	
-	if (this->m_Position.y >= 200)
-	{
-		isDraw = true;
-		m_Velocity.y *= -1;
+	// Handle: Player day cuc gach an tien lien tuc
+	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
+		if (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId() == TAGNODE::COININBOX &&
+			CMapManager::getInstance()->getListBonus().at(i)->getPosition().y <= 100 &&
+			CMapManager::getInstance()->getListBonus().at(i)->getVelocity().y <= 0)
+		{
+			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
+			CMapManager::getInstance()->setListBonus(tempBonusList);
+			tempBonusList.clear();
+		}
 	}
-    if (this->m_Position.y <= 150 && this->m_Velocity.y <0)
+
+	if (this->m_Position.y >= 120)
 	{
-		isDraw = false;
-		m_Velocity.y = 0;
+		m_Velocity.y = CHANGE_DIRECTION(m_Velocity.y);
 	}
-	this->m_Position.y = this->m_Position.y + this->m_Velocity.y *deltaTime / 100;
+	if (this->m_Position.y <= 100 && this->m_Velocity.y + GRAVITATION <= 0)
+	{
+		m_Velocity.y = VEL_DEFAULT_Y;
+		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+		CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
+		CMapManager::getInstance()->setListBonus(tempBonusList);
+		tempBonusList.clear();
+	}
+	this->m_Position.y = this->m_Position.y + (this->m_Velocity.y + SIGN(m_Velocity.y) * GRAVITATION) *deltaTime / 100;
 }
 
 void CCoinInBox::drawEntity()
 {
-	if (isDraw)
-	{
-		for (int i = 0; i < m_listSprite.size(); i++)
-			this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-	}
+	for (int i = 0; i < m_listSprite.size(); i++)
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CCoinInBox::updateEntity(RECT* camera)
 {
 
+}
+
+int	CCoinInBox::getTagNodeId()
+{
+	return TAGNODE::COININBOX;
 }

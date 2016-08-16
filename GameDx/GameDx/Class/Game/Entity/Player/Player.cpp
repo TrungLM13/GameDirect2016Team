@@ -302,6 +302,11 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 					this->loadSprite();
 					this->m_UndyingTime = PLAYER_UNDYING_TIME;
 				}
+				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+					m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+					this->loadSprite();
+					this->m_UndyingTime = PLAYER_UNDYING_TIME;
+				}
 			}
 			break;
 		case TAGNODE::FLOWER:

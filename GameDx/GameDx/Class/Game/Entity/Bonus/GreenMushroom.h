@@ -7,6 +7,7 @@ class CGreenMushroom : public CMovable
 {
 public:
 	CGreenMushroom();
+	CGreenMushroom(vector3d pos);
 	~CGreenMushroom();
 	virtual bool			loadSprite()									override;
 	virtual	bool			initEntity()									override;

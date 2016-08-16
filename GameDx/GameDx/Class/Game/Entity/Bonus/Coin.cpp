@@ -56,3 +56,7 @@ void CCoin::updateEntity(RECT* camera)
 
 }
 
+int  CCoin::getTagNodeId()
+{
+	return TAGNODE::COIN;
+}
