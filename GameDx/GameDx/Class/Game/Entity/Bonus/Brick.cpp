@@ -78,11 +78,11 @@ void CBrick::updateEntity(float deltaTime)
 			}
 		}
 		else if (m_BrickState == BRICK_STATE::BRICK_BOX) {
-			if (m_CountCoin > 0 && m_BrickType == BRICK_TYPE::BRICK_COIN)
+			/*if (m_CountCoin > 0 && m_BrickType == BRICK_TYPE::BRICK_COIN)
 			{
 				m_Velocity.y = VEL_DEFAULT_Y + BRICK_VELOCITY_MAX_Y;
 			}
-			else
+			else*/
 				m_Velocity.y = VEL_DEFAULT_Y;
 		}
 		break;
