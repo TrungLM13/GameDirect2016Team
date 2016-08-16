@@ -22,7 +22,7 @@ public:
 	virtual void			updateEntity(float deltaTime)							override;
 	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
-			void			handleCollision(CBaseEntity* entity,float deltaTime);
+	void			handleCollision(CBaseEntity* entity, float deltaTime);
 	virtual void			drawEntity()											override;
 	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
@@ -52,5 +52,3 @@ protected:
 private:
 };
 #endif
-
-

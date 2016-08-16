@@ -56,6 +56,7 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 	}
 
 	if (m_IsMoveX) {
+
 		if (player.getVelocity().x == VEL_PLAYER_X_MIN)
 		{
 			player.setVelocity(vector2d(VEL_PLAYER_X, VEL_DEFAULT_Y + VEL_PLAYER_Y));
