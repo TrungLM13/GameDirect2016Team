@@ -10,6 +10,7 @@ CStandState::~CStandState() {
 }
 
 void CStandState::enter(CPlayer& player) {
+	//player.setVelocity(vector2d(VEL_PLAYER_X_MIN, player.getVelocity().y));
 	if (m_IsShoot)
 	{
 		player.setState(PLAYERSTATES::STAND_SHOOT);

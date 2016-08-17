@@ -25,12 +25,14 @@ bool CPlayScene::initScene()
 	CPlayer::getInstance();
 
 	m_ListEntity.push_back(new CFlag());
-	m_ListEntity.push_back(new CFlagPole());
-	m_ListEntity.push_back(new CFlagPoleTail());
+	/*m_ListEntity.push_back(new CFlagPole());
+	m_ListEntity.push_back(new CFlagPoleTail());*/
 
 	//m_ListEntity.push_back(new CBulletNormal());
 
 	//Elevator::getInstance()->initEntity();
+
+	
 
 	return true;
 }
@@ -54,6 +56,7 @@ void CPlayScene::updateScene(double deltaTime)
 		CPlayer::getInstance()->handleCollision(CMapManager::getInstance()->getListBonus().at(i), deltaTime);
 		CMapManager::getInstance()->getListBonus().at(i)->updateEntity(deltaTime);
 	}
+
 	CCamera::getInstance()->Update(CPlayer::getInstance()->getPosition());
 
 

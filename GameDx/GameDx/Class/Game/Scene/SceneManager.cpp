@@ -9,7 +9,6 @@ CSceneManager::CSceneManager()
 	this->init();
 }
 
-
 CSceneManager::~CSceneManager()
 {
 }

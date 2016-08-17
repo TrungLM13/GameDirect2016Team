@@ -2,6 +2,7 @@
 #include <fstream>
 #include "Class\Framework\Camera.h"
 #include "Class\Game\Scene\PopupInfo.h"
+#include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
 
 
 CMapManager* CMapManager::m_instance = NULL;
@@ -82,13 +83,15 @@ bool CMapManager::loadEntityInMap()
 
 	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
+		/*if (type == "3E")
+			m_listBonus.push_back(new CCarnivorousPlants());*/
 		if (type == "1B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_STAR));
 		if (type == "2B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_COIN));
 		if (type == "3B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_NONE));
-		if (type == "4B")
+		/*if (type == "4B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
 		if (type == "5B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_COIN));
@@ -99,11 +102,11 @@ bool CMapManager::loadEntityInMap()
 		if (type == "8B")
 			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::UP_DOWN));
 		if (type == "9B")
-			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::RIGHT_LEFT));
-		if (type == "1T")
-			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
+			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::RIGHT_LEFT));*/
 		if (type == "R")
 			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y, size.x, size.y));
+		if (type == "1T")
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
 	}
 
 	return true;

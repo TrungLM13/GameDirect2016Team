@@ -7,6 +7,21 @@
 #include "Class\Game\State\DieState.h"
 #include "Class\\Game\Entity\Map\MapManager.h"
 
+inline bool IsCollision_Player(CMovable* entity, vector<CBaseEntity*> listEntity) {
+	for (int i = 0; i < listEntity.size(); i++)
+	{
+		if (listEntity.at(i)->getTagNodeId() == TAGNODE::BRICK)
+		{
+			if (CCollision::CheckCollision(entity, listEntity.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 CPlayer::CPlayer()
 {
 	this->initEntity();
@@ -28,7 +43,7 @@ bool CPlayer::initEntity()
 	m_IsCollision = false;
 	m_IsAutoMove = false;
 	m_IsAutoJump = false;
-	m_IsFreeFall = true;
+	m_IsFreeFall = false;
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
@@ -172,6 +187,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			switch (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
 			{
 			case COLDIRECTION::COLDIRECTION_TOP:
+				m_IsFreeFall = false;
 				m_IsAutoJump = false;
 				m_Velocity.y = VEL_DEFAULT_Y;
 
@@ -191,8 +207,11 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 				break;
 			case COLDIRECTION::COLDIRECTION_NONE:
-				if (m_State != PLAYERSTATES::JUMP || m_State != PLAYERSTATES::JUMP)
+				if (m_State != PLAYERSTATES::JUMP) {
 					m_Velocity.y = VEL_PLAYER_Y_MIN;
+					m_IsFreeFall = true;
+
+				}
 
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
@@ -321,13 +340,37 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 				}
 			}
 			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_TOP){
-				this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-				if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
+				if (this->m_State == PLAYERSTATES::JUMP) {
+					this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getY() + this->getBounding().getHeight() / 2;
 					this->m_PlayerState->exitCurrentState(*this, new CStandState());
 					this->m_PlayerState->enter(*this);
 				}
-				else if (this->m_State == PLAYERSTATES::JUMP) {
-					this->m_PlayerState->exitCurrentState(*this, new CRunState());
+				this->m_Velocity.y = VEL_DEFAULT_Y;
+			}
+			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_LEFT){
+				// Need to narrow the bounding of player
+				/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+					this->m_Position.x = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getX() - this->getBounding().getWidth() / 2;
+					this->m_Velocity.x = VEL_PLAYER_X_MIN;
+				}
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
+					
+				}*/
+			}
+			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_RIGHT){
+				// Need to narrow the bounding of player
+				/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+					this->m_Position.x = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
+					this->m_Velocity.x = VEL_PLAYER_X_MIN;
+				}
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
+
+				}*/
+			}
+			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_NONE){
+				if (!IsCollision_Player(this, CMapManager::getInstance()->getListBonus()) &&
+					m_IsFreeFall == true) {
+					this->m_PlayerState->exitCurrentState(*this, new CJumpState());
 					this->m_PlayerState->enter(*this);
 				}
 			}

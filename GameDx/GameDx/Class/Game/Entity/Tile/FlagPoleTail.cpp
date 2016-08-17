@@ -10,7 +10,7 @@ CFlagPoleTail::CFlagPoleTail()
 
 CFlagPoleTail:: ~CFlagPoleTail()
 {
-
+	
 }
 
 bool CFlagPoleTail::loadSprite()

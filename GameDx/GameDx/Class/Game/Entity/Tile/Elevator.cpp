@@ -36,9 +36,6 @@ bool Elevator::initEntity()
 
 bool Elevator::loadSprite()
 {
-	/*if (m_listSprite.size() > 0) {
-		m_listSprite.clear();
-		}*/
 	this->m_listSprite.push_back(new CSprite(CInfomationResource::elevator, 1, 1, 1, 0));
 
 	return true;

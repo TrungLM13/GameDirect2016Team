@@ -59,18 +59,18 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 
 		if (player.getVelocity().x == VEL_PLAYER_X_MIN)
 		{
-			player.setVelocity(vector2d(VEL_PLAYER_X, VEL_DEFAULT_Y + VEL_PLAYER_Y));
+			player.setVelocity(vector2d(VEL_PLAYER_X, player.getVelocity().y));
 		}
 		deltaX = player.getVelocity().x * deltaTime / 100;
 	}
 
 	if (m_IsJumpHigh) {
 		if (player.getPosition().y >= player.m_PreJumpPos.y + PLAYER_JUMP_HIGH_LIMIT)
-			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
+			player.setVelocity(vector2d(player.getVelocity().x, VEL_PLAYER_Y_MIN));
 	}
 	else {
 		if (player.getPosition().y >= player.m_PreJumpPos.y + PLAYER_JUMP_LIMIT)
-			player.setVelocity(vector2d(player.getVelocity().x, CHANGE_DIRECTION(player.getVelocity().y)));
+			player.setVelocity(vector2d(player.getVelocity().x, VEL_PLAYER_Y_MIN));
 	}
 
 	player.setPosition(vector3d(player.getPosition().x + deltaX, player.getPosition().y + (player.getVelocity().y + GRAVITATION) *deltaTime / 40, 0));
