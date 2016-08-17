@@ -19,7 +19,6 @@ public:
 	virtual void			updateEntity(RECT* camera)                              override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
 	virtual void			drawEntity()											override;
-	virtual void			updateCollision(CBaseEntity*, float deltaTime)			override;
 	virtual int				getTagNodeId()											override;
 
 public:

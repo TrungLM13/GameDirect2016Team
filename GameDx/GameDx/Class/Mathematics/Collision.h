@@ -7,7 +7,7 @@
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Game\Algorithsm\Singleton.h"
 
-class CCollision: public CSingleton<CCollision>
+class CCollision
 {
 public:
 	CCollision();

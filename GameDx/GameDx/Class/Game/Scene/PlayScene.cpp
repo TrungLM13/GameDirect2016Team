@@ -28,11 +28,9 @@ bool CPlayScene::initScene()
 	m_ListEntity.push_back(new CFlagPole());
 	m_ListEntity.push_back(new CFlagPoleTail());
 
-	m_ListEntity.push_back(new CBulletNormal());
+	//m_ListEntity.push_back(new CBulletNormal());
 
-
-	//Turtle::getInstance()->initEntity();
-	Elevator::getInstance()->initEntity();
+	//Elevator::getInstance()->initEntity();
 
 	return true;
 }
@@ -40,8 +38,8 @@ bool CPlayScene::initScene()
 void CPlayScene::updateScene(double deltaTime)
 {
 	
-	Turtle::getInstance()->updateEntity(deltaTime);
-	Elevator::getInstance()->updateEntity(deltaTime);
+	/*Turtle::getInstance()->updateEntity(deltaTime);
+	Elevator::getInstance()->updateEntity(deltaTime);*/
 
 	CPlayer::getInstance()->updateEntity(deltaTime);
 
@@ -80,12 +78,18 @@ void CPlayScene::updateScene(CKeyBoard* keyboard)
 
 	CPlayer::getInstance()->updateEntity(keyboard);
 
-	Turtle::getInstance()->updateEntity(keyboard);
-	Elevator::getInstance()->updateEntity(keyboard);
+	/*Turtle::getInstance()->updateEntity(keyboard);
+	Elevator::getInstance()->updateEntity(keyboard);*/
 }
 
 void CPlayScene::renderScene()
 {
+	/*OutputDebugString(L"FPS GAME: ");
+	OutputDebugString(_itow(CTimer::getInstance()->getElapedTime(), new WCHAR[1], 10));
+	OutputDebugString(L"\n");
+*/
+	CPlayer::getInstance()->drawEntity();
+
 	for (int i = 0; i < CMapManager::getInstance()->getListBackground().size(); ++i)
 	{
 		CMapManager::getInstance()->getListBackground().at(i)->drawEntity();
@@ -94,29 +98,25 @@ void CPlayScene::renderScene()
 	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i)
 	{
 		CMapManager::getInstance()->getListBonus().at(i)->drawEntity();
-		//CShowBouding::getInstance()->drawBouding(CMapManager::getInstance()->getListBonus().at(i));
 	}
-
-	CPlayer::getInstance()->drawEntity();
-
-
-	CShowBouding::getInstance()->drawBouding(CPlayer::getInstance());
-
-	Turtle::getInstance()->drawEntity();
-	Elevator::getInstance()->drawEntity();
-
-
 
 	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
 	{
 		CMapManager::getInstance()->getListEnemy().at(i)->drawEntity();
 	}
 
-	for (int i = 0; i < m_ListEntity.size(); ++i)
-	{
-		m_ListEntity.at(i)->drawEntity();
-		CShowBouding::getInstance()->drawBouding(m_ListEntity.at(i));
-	}
+
+	/*Turtle::getInstance()->drawEntity();
+	Elevator::getInstance()->drawEntity();*/
+
+
+
+
+	//for (int i = 0; i < m_ListEntity.size(); ++i)
+	//{
+	//	m_ListEntity.at(i)->drawEntity();
+	//	//CShowBouding::getInstance()->drawBouding(m_ListEntity.at(i));
+	//}
 
 
 }

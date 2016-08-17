@@ -4,6 +4,8 @@
 #include "Class\Game\Algorithsm\Singleton.h"
 #include "Class\Game\Utill\ShowBouding.h"
 
+#include <vld.h>
+
 class CBaseState;
 
 #ifndef __CPLAYER_H__
@@ -49,6 +51,7 @@ protected:
 	int						m_PlayerTag;
 	CBaseState*				m_PlayerState;
 	int						m_UndyingTime;
+	
 private:
 };
 #endif

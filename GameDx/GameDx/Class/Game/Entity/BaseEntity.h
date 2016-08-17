@@ -27,7 +27,6 @@ public:
 	virtual void   updateEntity(RECT* camera) = 0;
 	virtual void   updateEntity(float deltaTime) = 0;
 	virtual void   handleCollision(CBaseEntity*entity, float deltaTime) = 0;
-	virtual	void   updateCollision(CBaseEntity*, float deltaTime) = 0;
 	virtual CBox2D   getBounding() = 0;
 	virtual const char*  getTagNode() = 0;
 	virtual vector2d  getVelocity() = 0;

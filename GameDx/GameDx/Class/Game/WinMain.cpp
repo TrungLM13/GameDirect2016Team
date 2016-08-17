@@ -14,6 +14,8 @@
 #include "Class\Game\Game\Game.h"
 #include "Class\Game\Scene\MenuScene.h"
 
+#include <vld.h>
+
 int CALLBACK WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	CGame* game = new CGame(hInstance);
@@ -39,7 +41,6 @@ int CALLBACK WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR 
 			game->updateGame(CTimer::getInstance()->getElapedTime());
 			game->renderGame();
 		}
-
 
 		OutputDebugString(L"FPS GAME: ");
 		OutputDebugString(_itow(CTimer::getInstance()->getElapedTime(), new WCHAR[1], 10));

@@ -14,7 +14,11 @@ CMapManager::CMapManager()
 
 CMapManager::~CMapManager()
 {
-
+	m_listAllMapInGame.clear();
+	m_listBackground.clear();
+	m_listBonus.clear();
+	m_listEnemy.clear();
+	m_listRectangeForCollision.clear();
 }
 
 CMapManager* CMapManager::getInstance()
@@ -36,10 +40,6 @@ vector<CBaseEntity*>	CMapManager::getListBonus()
 }
 
 void CMapManager::setListBonus(vector<CBaseEntity*> list) {
-	/*for (int i = 0; i < list.size(); ++i) {
-		m_listBonus.assign(i, list.at(i));
-	}*/
-
 	m_listBonus = list;
 
 }

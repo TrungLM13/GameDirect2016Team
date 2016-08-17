@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Visual Leak Detector\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -102,7 +102,6 @@
     <ClInclude Include="Class\Game\Algorithsm\QuadTree.h" />
     <ClInclude Include="Class\Game\Algorithsm\Singleton.h" />
     <ClInclude Include="Class\Game\Entity\BaseEntity.h" />
-    <ClInclude Include="Class\Game\Entity\Bonus\BonusManager.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Brick.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\BrickMini.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Coin.h" />
@@ -114,8 +113,8 @@
     <ClInclude Include="Class\Game\Entity\Bullet\BulletManager.h" />
     <ClInclude Include="Class\Game\Entity\Bullet\BulletNormal.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\CarnivorousPlants.h" />
-    <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h" />
     <ClInclude Include="Class\Game\Entity\Enemy\Mushroom.h" />
+    <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h" />
     <ClInclude Include="Class\Game\Entity\Map\MapManager.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tile.h" />
     <ClInclude Include="Class\Game\Entity\Map\Tiless.h" />
@@ -178,7 +177,6 @@
     <ClCompile Include="Class\Game\Algorithsm\QuadNode.cpp" />
     <ClCompile Include="Class\Game\Algorithsm\QuadTree.cpp" />
     <ClCompile Include="Class\Game\Entity\BaseEntity.cpp" />
-    <ClCompile Include="Class\Game\Entity\Bonus\BonusManager.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Brick.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\BrickMini.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp" />
@@ -190,8 +188,8 @@
     <ClCompile Include="Class\Game\Entity\Bullet\BulletManager.cpp" />
     <ClCompile Include="Class\Game\Entity\Bullet\BulletNormal.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\CarnivorousPlants.cpp" />
-    <ClCompile Include="Class\Game\Entity\Enemy\Turtle.cpp" />
     <ClCompile Include="Class\Game\Entity\Enemy\Mushroom.cpp" />
+    <ClCompile Include="Class\Game\Entity\Enemy\Turtle.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tile.cpp" />
     <ClCompile Include="Class\Game\Entity\Map\Tiless.cpp" />

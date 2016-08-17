@@ -26,7 +26,6 @@ public:
 	virtual  vector2d		 getVelocity();
 	virtual  void			setVelocity(vector2d);
 	void					handleCollision(CBaseEntity*entity, float deltaTime) {};
-	virtual	void			updateCollision(CBaseEntity*, float deltaTime)							{};
 
 protected:
 	vector2d    m_Velocity;

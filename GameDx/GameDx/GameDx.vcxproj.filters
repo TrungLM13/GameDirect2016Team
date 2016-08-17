@@ -159,6 +159,27 @@
     <ClCompile Include="Class\Game\Entity\Map\MapManager.cpp">
       <Filter>Game\MapManager</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Tile\Elevator.cpp">
+      <Filter>Game\Entity\Tile\Elevator</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Tiless.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Objectss.cpp">
+      <Filter>Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Map\Tile.cpp">
+      <Filter>Game\Entity\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Mathematics\Collision.cpp">
+      <Filter>Game\Aglorithsm</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bullet\BulletManager.cpp">
+      <Filter>Game\Entity\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bullet\BulletNormal.cpp">
+      <Filter>Game\Entity\Bullet</Filter>
+    </ClCompile>
     <ClCompile Include="Class\Game\Entity\Enemy\Turtle.cpp">
       <Filter>Game\Entity\Enemies</Filter>
     </ClCompile>
@@ -386,30 +407,6 @@
     <ClInclude Include="Class\Game\Entity\Tile\FlagCastle.h">
       <Filter>Game\Entity\Tile\Castle</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h">
-      <Filter>Game\Entity\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleBaseState.h">
-      <Filter>Game\State\TurtleState</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleDieState.h">
-      <Filter>Game\State\TurtleState</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleEnsconseState.h">
-      <Filter>Game\State\TurtleState</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleFlyState.h">
-      <Filter>Game\State\TurtleState</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleIndentState.h">
-      <Filter>Game\State\TurtleState</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleRunState.h">
-      <Filter>Game\State\TurtleState</Filter>
-    </ClInclude>
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleSurfingState.h">
-      <Filter>Game\State\TurtleState</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Entity\Tile\Elevator.h">
       <Filter>Game\Entity\Tile\Elevator</Filter>
     </ClInclude>
@@ -434,8 +431,29 @@
     <ClInclude Include="Class\Game\Entity\Bullet\BulletNormal.h">
       <Filter>Game\Entity\Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Entity\Bonus\BonusManager.h">
-      <Filter>Game\Entity\Bonus</Filter>
+    <ClInclude Include="Class\Game\Entity\Enemy\Turtle.h">
+      <Filter>Game\Entity\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleBaseState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleDieState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleEnsconseState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleFlyState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleIndentState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleRunState.h">
+      <Filter>Game\State\TurtleState</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\State\TurtleState\TurtleSurfingState.h">
+      <Filter>Game\State\TurtleState</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\BrickMini.h">
       <Filter>Game\Entity\Bonus</Filter>

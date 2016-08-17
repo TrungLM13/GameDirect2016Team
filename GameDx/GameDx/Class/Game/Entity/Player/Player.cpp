@@ -316,7 +316,8 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 			{
 				if (this->m_Velocity.y >= 0)
 				{
-					this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+					//this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+					this->m_Velocity.y = VEL_PLAYER_Y_MIN;
 				}
 			}
 			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_TOP){
@@ -339,7 +340,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 	//-----Handle Collision with Screen - Die State----//
 
 	this->getBounding().setVelocity(this->getVelocity());
-	if (CCollision::CheckCollision(this->getBounding(), CBox2D(0, 0, BACKBUFFER_WIDTH, 10)) == COLDIRECTION::COLDIRECTION_TOP) {
+	if (CCollision::CheckCollision(this->getBounding(), CBox2D(0, 0, BACKBUFFER_WIDTH, 0)) == COLDIRECTION::COLDIRECTION_TOP) {
 		if (!m_IsAutoMove && !m_IsAutoJump && m_State != PLAYERSTATES::DIE){
 			m_Velocity.y = VEL_DEFAULT_Y + VEL_PLAYER_Y;
 			this->m_PlayerState->exitCurrentState(*this, new CDieState());

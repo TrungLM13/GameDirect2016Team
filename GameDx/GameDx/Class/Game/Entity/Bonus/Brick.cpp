@@ -27,6 +27,10 @@ CBrick::CBrick(vector2d position, BRICK_TYPE type)
 
 CBrick:: ~CBrick()
 {
+	SAFE_RELEASE(m_Coin);
+	SAFE_RELEASE(m_Star);
+	SAFE_RELEASE(m_GreenMushRoom);
+
 }
 
 bool CBrick::loadSprite()
@@ -176,10 +180,6 @@ void CBrick::setPosition(vector3d position) {
 
 void CBrick::setVelocity(vector2d velocity) {
 	m_Velocity = velocity;
-}
-
-void CBrick::updateCollision(CBaseEntity* player, float deltaTime)
-{
 }
 
 int	CBrick::getTagNodeId()

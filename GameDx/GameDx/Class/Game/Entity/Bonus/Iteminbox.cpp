@@ -88,7 +88,7 @@ void CIteminbox::updateEntity(float deltaTime)
 
 		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250, this->m_Position.y + (this->m_Velocity.y + GRAVITATION) *deltaTime / 100, 0);
 
-		if (CCollision::getInstance()->CheckCollision(this, CPlayer::getInstance()))
+		if (CCollision::CheckCollision(this, CPlayer::getInstance()))
 		{
 			if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::BIG)
 			{
@@ -107,7 +107,7 @@ void CIteminbox::updateEntity(float deltaTime)
 		}
 		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250, this->m_Position.y + (this->m_Velocity.y + GRAVITATION) *deltaTime / 100, 0);
 
-		if (CCollision::getInstance()->CheckCollision(this, CPlayer::getInstance()))
+		if (CCollision::CheckCollision(this, CPlayer::getInstance()))
 		{
 			if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::FIRE)
 			{

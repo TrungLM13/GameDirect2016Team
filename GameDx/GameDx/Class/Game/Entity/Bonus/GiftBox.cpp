@@ -27,7 +27,8 @@ CGiftBox::CGiftBox(vector2d pos, GIFTBOX_TYPE type)
 
 CGiftBox:: ~CGiftBox()
 {
-
+	SAFE_RELEASE(m_Coin);
+	SAFE_RELEASE(m_itemInBox);
 }
 
 bool CGiftBox::loadSprite()
@@ -128,10 +129,6 @@ void CGiftBox::updateEntity(float deltaTime)
 		this->m_GiftBoxType = GIFTBOX_TYPE::GIFTBOX_NONE;
 
 	}
-}
-
-void CGiftBox::updateCollision(CBaseEntity *, float deltaTime)
-{
 }
 
 void CGiftBox::drawEntity()

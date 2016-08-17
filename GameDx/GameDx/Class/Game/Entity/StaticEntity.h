@@ -26,7 +26,6 @@ public:
 	virtual  vector3d					getPosition()															 override;
 	virtual  vector2d					getVelocity();
 	void								handleCollision(CBaseEntity*entity, float deltaTime) {};
-	virtual	void						updateCollision(CBaseEntity*, float deltaTime)							{};
 
 protected:
 	vector3d    m_Position;

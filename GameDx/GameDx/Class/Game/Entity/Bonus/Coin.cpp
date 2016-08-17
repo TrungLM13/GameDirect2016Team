@@ -41,10 +41,6 @@ void CCoin::updateEntity(float deltaTime)
 {
 }
 
-void CCoin::updateCollision(CBaseEntity*, float deltaTime)
-{
-}
-
 void CCoin::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)
