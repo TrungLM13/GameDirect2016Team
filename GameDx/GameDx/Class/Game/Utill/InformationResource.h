@@ -109,6 +109,9 @@ public:
 	static const wchar_t*   giftbox;
 	static const wchar_t*   box;
 	static const wchar_t*	flower;
+	static const wchar_t*	brickbreak;
+	static const wchar_t*	brickbreak_left;
+	static const wchar_t*	brickbreak_right;
 	/*************************************************/
 
 	/************RESOURCE FOR BOUDING *************/

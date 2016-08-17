@@ -1,6 +1,7 @@
 #include "BulletNormal.h"
 #include <math.h>
 #include "Class\Game\Entity\Player\Player.h"
+
 CBulletNormal::CBulletNormal()
 {
 	this->initEntity();
@@ -75,6 +76,7 @@ void	CBulletNormal::setState(int newState)
 {
 	m_State = newState;
 }
+
 int		CBulletNormal::getState()
 {
 	return m_State;

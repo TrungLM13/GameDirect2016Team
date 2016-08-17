@@ -207,6 +207,9 @@
     <ClCompile Include="Class\Game\Entity\Bonus\BonusManager.cpp">
       <Filter>Game\Entity\Bonus</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Entity\Bonus\BrickMini.cpp">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -432,6 +435,9 @@
       <Filter>Game\Entity\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="Class\Game\Entity\Bonus\BonusManager.h">
+      <Filter>Game\Entity\Bonus</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Entity\Bonus\BrickMini.h">
       <Filter>Game\Entity\Bonus</Filter>
     </ClInclude>
   </ItemGroup>

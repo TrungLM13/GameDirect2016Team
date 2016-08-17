@@ -101,6 +101,10 @@ const wchar_t*		CInfomationResource::greenmushroom				= L"Resource//Image//Game/
 const wchar_t*		CInfomationResource::giftbox					= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_cham_hoi.png";
 const wchar_t*		CInfomationResource::box						= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_mat_cham_hoi.png";
 const wchar_t*		CInfomationResource::flower						= L"Resource//Image//Game//Sprites//Mario//Bonus//hoa.png";
+const wchar_t*		CInfomationResource::brickbreak					= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_4.png";
+const wchar_t*		CInfomationResource::brickbreak_left			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai.png";
+const wchar_t*		CInfomationResource::brickbreak_right			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai.png";
+
 /*************************************************/
 
 /************RESOURCE FOR BOUDING *************/

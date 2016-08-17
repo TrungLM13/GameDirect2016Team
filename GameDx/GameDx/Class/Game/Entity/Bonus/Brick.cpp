@@ -38,6 +38,7 @@ bool CBrick::loadSprite()
 
 bool CBrick::initEntity()
 {
+	isBreak = false;
 	m_Star = nullptr;
 	m_Coin = nullptr;
 	m_GreenMushRoom = nullptr;
@@ -76,14 +77,28 @@ void CBrick::updateEntity(float deltaTime)
 
 				m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING;
 			}
+			else if (m_BrickType == BRICK_TYPE::BRICK_NONE && this->m_BrickState == BRICK_STATE::BRICK_NORMAL){
+				if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::BIG ||
+					CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::FIRE ||
+					CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::UNDYING)
+				{
+					isBreak = true;
+					m_BrickMini.push_back(new CBrickMini(this->m_Position, BRICKMINI_TYPE::BRICKMINI_LEFT_UP));
+					m_BrickMini.push_back(new CBrickMini(vector3d(this->m_Position.x + 8, this->m_Position.y, 0), BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN));
+					m_BrickMini.push_back(new CBrickMini(vector3d(this->m_Position.x, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_UP));
+					m_BrickMini.push_back(new CBrickMini(vector3d(this->m_Position.x + 8, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN));
+					for (int i = 0; i < m_BrickMini.size(); i++)
+					{
+						CMapManager::getInstance()->pushBonusObject(m_BrickMini.at(i));
+					}
+
+					this->m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_NONE;
+				}
+
+			}
 		}
 		else if (m_BrickState == BRICK_STATE::BRICK_BOX) {
-			/*if (m_CountCoin > 0 && m_BrickType == BRICK_TYPE::BRICK_COIN)
-			{
-				m_Velocity.y = VEL_DEFAULT_Y + BRICK_VELOCITY_MAX_Y;
-			}
-			else*/
-				m_Velocity.y = VEL_DEFAULT_Y;
+			m_Velocity.y = VEL_DEFAULT_Y;
 		}
 		break;
 	case COLDIRECTION::COLDIRECTION_TOP:
@@ -146,7 +161,8 @@ void CBrick::updateEntity(float deltaTime)
 
 void CBrick::drawEntity()
 {
-	this->m_listSprite.at(this->m_BrickState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	if (!isBreak)
+		this->m_listSprite.at(this->m_BrickState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CBrick::updateEntity(RECT* camera)

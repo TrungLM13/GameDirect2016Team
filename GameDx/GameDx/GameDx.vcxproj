@@ -104,6 +104,7 @@
     <ClInclude Include="Class\Game\Entity\BaseEntity.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\BonusManager.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Brick.h" />
+    <ClInclude Include="Class\Game\Entity\Bonus\BrickMini.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\Coin.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\CoinInBox.h" />
     <ClInclude Include="Class\Game\Entity\Bonus\GiftBox.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Class\Game\Entity\BaseEntity.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\BonusManager.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Brick.cpp" />
+    <ClCompile Include="Class\Game\Entity\Bonus\BrickMini.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\Coin.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\CoinInBox.cpp" />
     <ClCompile Include="Class\Game\Entity\Bonus\GiftBox.cpp" />
