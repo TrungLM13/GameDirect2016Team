@@ -96,6 +96,10 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_NONE));
 		if (type == "7B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_GREENMUSHROOM));
+		if (type == "8B")
+			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::UP_DOWN));
+		if (type == "9B")
+			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::RIGHT_LEFT));
 		if (type == "1T")
 			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
 		if (type == "R")

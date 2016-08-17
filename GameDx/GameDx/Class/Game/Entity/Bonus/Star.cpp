@@ -45,6 +45,7 @@ bool CStar::loadSprite()
 bool CStar::initEntity()
 {
 	this->m_TagNode = "Star";
+
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(0, 0);

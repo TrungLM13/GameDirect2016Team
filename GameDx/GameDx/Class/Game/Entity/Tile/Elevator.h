@@ -11,7 +11,7 @@ class Elevator : public CMovable, public CSingleton<Elevator>
 {
 public:
 	Elevator();
-	Elevator(directDevice);
+	Elevator(vector2d pos, ELEVATOR_STATE ElevatorState);
 	~Elevator();
 
 	virtual bool			initEntity()											override;
@@ -21,6 +21,7 @@ public:
 	virtual void			drawEntity()											override;
 	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
+	virtual int				getTagNodeId()											override;
 
 public:
 	void setPosition(vector3d position);
