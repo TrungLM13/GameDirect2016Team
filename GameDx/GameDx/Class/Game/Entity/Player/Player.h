@@ -4,7 +4,7 @@
 #include "Class\Game\Algorithsm\Singleton.h"
 #include "Class\Game\Utill\ShowBouding.h"
 
-#include <vld.h>
+//#include <vld.h>
 
 class CBaseState;
 

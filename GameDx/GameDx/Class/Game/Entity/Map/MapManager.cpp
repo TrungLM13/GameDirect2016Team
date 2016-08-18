@@ -89,7 +89,7 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_STAR));
 		if (type == "2B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_COIN));
-		if (type == "3B")
+		/*if (type == "3B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_NONE));
 		/*if (type == "4B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));

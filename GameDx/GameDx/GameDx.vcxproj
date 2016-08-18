@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Visual Leak Detector\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -145,13 +145,6 @@
     <ClInclude Include="Class\Game\State\RunState.h" />
     <ClInclude Include="Class\Game\State\SitState.h" />
     <ClInclude Include="Class\Game\State\StandState.h" />
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleBaseState.h" />
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleDieState.h" />
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleEnsconseState.h" />
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleFlyState.h" />
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleIndentState.h" />
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleRunState.h" />
-    <ClInclude Include="Class\Game\State\TurtleState\TurtleSurfingState.h" />
     <ClInclude Include="Class\Game\Test\Test.h" />
     <ClInclude Include="Class\Game\Utill\ArchitectureEntity.h" />
     <ClInclude Include="Class\Game\Utill\Config.h" />
@@ -219,13 +212,6 @@
     <ClCompile Include="Class\Game\State\RunState.cpp" />
     <ClCompile Include="Class\Game\State\SitState.cpp" />
     <ClCompile Include="Class\Game\State\StandState.cpp" />
-    <ClCompile Include="Class\Game\State\TurtleState\TurtleBaseState.cpp" />
-    <ClCompile Include="Class\Game\State\TurtleState\TurtleDieState.cpp" />
-    <ClCompile Include="Class\Game\State\TurtleState\TurtleEnsconseState.cpp" />
-    <ClCompile Include="Class\Game\State\TurtleState\TurtleFlyState.cpp" />
-    <ClCompile Include="Class\Game\State\TurtleState\TurtleIndentState.cpp" />
-    <ClCompile Include="Class\Game\State\TurtleState\TurtleRunState.cpp" />
-    <ClCompile Include="Class\Game\State\TurtleState\TurtleSurfingState.cpp" />
     <ClCompile Include="Class\Game\Test\Test.cpp" />
     <ClCompile Include="Class\Game\Utill\InformationResource.cpp" />
     <ClCompile Include="Class\Game\Utill\ShowBouding.cpp" />

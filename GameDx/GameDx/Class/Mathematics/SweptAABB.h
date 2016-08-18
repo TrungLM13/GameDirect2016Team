@@ -29,10 +29,10 @@ inline CBox2D GetSweptBroadPhaseBox(CBox2D box, vector2d velocity)
 {
 	CBox2D boundingBox(0, 0, 0, 0);
 
-	box.getVelocityX() > 0 ? boundingBox.setX(box.getX())									: boundingBox.setX(box.getX()			+ box.getVelocityX());
-	box.getVelocityY() > 0 ? boundingBox.setY(box.getY() + box.getVelocityY())				: boundingBox.setY(box.getY());		// Because of changing axis to decac
-	box.getVelocityX() > 0 ? boundingBox.setWidth(box.getWidth()	+ box.getVelocityX())	: boundingBox.setWidth(box.getWidth()	- box.getVelocityX());
-	box.getVelocityY() > 0 ? boundingBox.setHeight(box.getHeight()	+ box.getVelocityY())	: boundingBox.setWidth(box.getHeight()	- box.getVelocityY());
+	box.getVelocityX() > 0 ? boundingBox.setX(box.getX())									: boundingBox.setX(box.getX()			- box.getVelocityX());
+	box.getVelocityY() > 0 ? boundingBox.setY(box.getY())									: boundingBox.setY(box.getY()			- box.getVelocityY());		// Because of changing axis to decac
+	boundingBox.setWidth(box.getWidth()	+ box.getVelocityX());
+	boundingBox.setHeight(box.getHeight()	+ box.getVelocityY());
 
 	boundingBox.setVelocityX((velocity.x * CTimer::getInstance()->getElapedTime() / 1000.0) / ((float) 1 / FPS));
 	boundingBox.setVelocityY((velocity.y * CTimer::getInstance()->getElapedTime() / 1000.0) / ((float) 1 / FPS));

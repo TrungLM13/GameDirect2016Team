@@ -14,7 +14,7 @@
 #include "Class\Game\Game\Game.h"
 #include "Class\Game\Scene\MenuScene.h"
 
-#include <vld.h>
+//#include <vld.h>
 
 int CALLBACK WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
