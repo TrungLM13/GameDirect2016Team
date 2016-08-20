@@ -234,3 +234,7 @@ int CBrick::getMap()
 {
 	return this->map;
 }
+
+int CBrick::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

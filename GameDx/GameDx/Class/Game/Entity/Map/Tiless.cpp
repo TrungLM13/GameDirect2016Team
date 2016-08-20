@@ -140,3 +140,19 @@ CBox2D  CTiless::getBounding()
 	}
 	return *m_Bounding;
 }
+
+const char*	CTiless::getTagNode() {
+	return nullptr;
+}
+
+int CTiless::getObjectType() {
+	return OBJECT_TYPE::TYPE_TILE;
+}
+
+int	CTiless::getTagNodeId() {
+	return TAGNODE::TILE;
+}
+
+vector3d CTiless::getPosition() {
+	return vector3d(0, 0, 0);
+}

@@ -26,12 +26,15 @@ public:
 	virtual void			updateEntity(float deltaTime)							override;
 	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
-	void			handleCollision(CBaseEntity* entity, float deltaTime);
 	virtual void			drawEntity()											override;
 	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
 	virtual int				getTagNodeId()											override;
+	virtual int				getObjectType()											override;
 
+	void					handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime);
+	void					handleCollisionWithEnermy(CObjectss* enermyEntity, float deltaTime);
+	void					handleCollisionWithTile(float deltaTime);
 public:
 	void					setPosition(vector3d position);
 	void					setState(PLAYERSTATES state);

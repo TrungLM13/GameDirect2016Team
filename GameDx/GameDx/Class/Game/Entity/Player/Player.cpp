@@ -88,7 +88,7 @@ bool CPlayer::loadSprite()
 	switch (m_PlayerTag)
 	{
 	case PLAYERTAGS::SMALL:
-	//	push_back_new<CSprite>(m_listSprite);
+		//	push_back_new<CSprite>(m_listSprite);
 
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::STAND), 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::STAND), 1, 1, 1, 0));
@@ -119,7 +119,7 @@ bool CPlayer::loadSprite()
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::RUN), 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::JUMP), 1, 4, 4, 0));
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::DIE), 1, 1, 1, 0));
-	//	this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
+		//	this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
 		break;
 	case PLAYERTAGS::FIRE:
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::FIRE, PLAYERSTATES::STAND), 1, 1, 1, 0));
@@ -187,7 +187,7 @@ void CPlayer::updateEntity(CKeyBoard* input)
 	}
 }
 
-void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
+void CPlayer::handleCollisionWithTile(float deltaTime) {
 
 	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); ++i) {
 		if (this->m_State != PLAYERSTATES::DIE) {
@@ -257,140 +257,6 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 
 	}
 
-
-	//-----Handle Collision with enermy----//
-
-	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i){
-		switch (CMapManager::getInstance()->getListEnemy().at(i)->getTagNodeId())
-		{
-		case TAGNODE::MUSHROOM: case TAGNODE::TURTLE:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_LEFT ||
-				CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_RIGHT ||
-				CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
-			{
-				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-					m_Velocity.y = VEL_DEFAULT_Y;
-					this->m_PlayerState->exitCurrentState(*this, new CDieState());
-					this->m_PlayerState->enter(*this);
-				}
-				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
-				{
-					//undying but small and exists in 5s
-					this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
-					this->loadSprite();
-					this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
-				}
-
-				m_IsAutoJump = false;
-			}
-			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListEnemy().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
-			{
-				this->m_Position.y = CMapManager::getInstance()->getListEnemy().at(i)->getPosition().y + CMapManager::getInstance()->getListEnemy().at(i)->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-				this->m_PlayerState->exitCurrentState(*this, new CStandState());
-				this->m_PlayerState->enter(*this);
-				m_IsAutoJump = true;
-			}
-
-			break;
-		case TAGNODE::CARNIVOROUS_PLANT:
-			if (this->m_PlayerTag != PLAYERTAGS::UNDYING && this->m_PlayerTag != PLAYERTAGS::SMALL_UNDYING) {
-				if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
-					this->m_PlayerState->exitCurrentState(*this, new CDieState());
-					this->m_PlayerState->enter(*this);
-				}
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
-	//-----Handle Collision with Bonus----//
-	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
-		switch (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId())
-		{
-		case TAGNODE::RED_MUSHROOM:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i))) {
-				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-					m_PlayerTag = PLAYERTAGS::BIG;
-					this->loadSprite();
-				}
-			}
-			break;
-		case TAGNODE::STAR:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i))) {
-				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
-					m_PlayerTag = PLAYERTAGS::UNDYING;
-					this->loadSprite();
-					this->m_UndyingTime = PLAYER_UNDYING_TIME;
-				}
-				if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-					m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
-					this->loadSprite();
-					this->m_UndyingTime = PLAYER_UNDYING_TIME;
-				}
-			}
-			break;
-		case TAGNODE::FLOWER:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i))) {
-				if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
-					m_PlayerTag = PLAYERTAGS::FIRE;
-				}
-			}
-			break;
-		case TAGNODE::COIN:
-			break;
-		case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
-			{
-				this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y - CMapManager::getInstance()->getListBonus().at(i)->getBounding().getHeight() / 2 - this->getBounding().getHeight() / 2;
-				if (this->m_Velocity.y >= 0)
-				{
-					//this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
-					this->m_Velocity.y = VEL_PLAYER_Y_MIN;
-				}
-			}
-			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_TOP){
-				if (this->m_State == PLAYERSTATES::JUMP) {
-					this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getY() + this->getBounding().getHeight() / 2;
-					this->m_PlayerState->exitCurrentState(*this, new CStandState());
-					this->m_PlayerState->enter(*this);
-				}
-				this->m_Velocity.y = VEL_DEFAULT_Y;
-			}
-			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_LEFT){
-				// Need to narrow the bounding of player
-				/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
-					this->m_Position.x = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getX() - this->getBounding().getWidth() / 2;
-					this->m_Velocity.x = VEL_PLAYER_X_MIN;
-					}
-					else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
-
-					}*/
-			}
-			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_RIGHT){
-				// Need to narrow the bounding of player
-				/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-					this->m_Position.x = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
-					this->m_Velocity.x = VEL_PLAYER_X_MIN;
-					}
-					else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
-
-					}*/
-			}
-			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_NONE){
-				if (!IsCollision_Player(this, CMapManager::getInstance()->getListBonus()) &&
-					m_IsFreeFall == true) {
-					this->m_PlayerState->exitCurrentState(*this, new CJumpState());
-					this->m_PlayerState->enter(*this);
-				}
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
 	//-----Handle Collision with Screen - Die State----//
 
 	this->getBounding().setVelocity(this->getVelocity());
@@ -403,86 +269,223 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		}
 	}
 
-	switch (entity->getTagNodeId())
+
+
+	//switch (entity->getTagNodeId())
+	//{
+	//case TAGNODE::FLAG:
+	//	if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
+	//	{
+	//		// Only if after collision top with flag pole tail and bottom with flag, player change into run state
+	//		if (m_IsEnable) {
+	//			m_IsAutoMove = true;
+	//			if (m_Velocity.x <= 0) {
+	//				m_Velocity.x = VEL_PLAYER_X;
+	//			}
+	//			this->m_PlayerState->exitCurrentState(*this, new CRunState());
+	//			this->m_PlayerState->enter(*this);
+	//		}
+	//		else m_IsAutoMove = false;
+
+	//	}
+	//	break;
+	//case TAGNODE::FLAG_POLE:
+	//	if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
+	//	{
+	//		if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
+	//			if (m_Position.y > 100){
+	//				m_Position.x = entity->getPosition().x;
+	//				this->m_PlayerState->exitCurrentState(*this, new CClimbState());
+	//			}
+	//			else
+	//			{
+	//				this->m_PlayerState->exitCurrentState(*this, new CJumpState());
+	//			}
+	//		}
+
+	//	}
+	//	break;
+	//case TAGNODE::FLAG_POLE_TAIL:
+	//	if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
+	//	{
+	//		m_IsCollision = true;
+
+	//		if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
+	//		{
+	//			m_Velocity.x = VEL_PLAYER_X_MIN;
+	//		}
+	//		else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+	//			m_IsCollision = false;
+	//			this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
+	//		}
+
+	//		m_Velocity.y = VEL_DEFAULT_Y;
+
+	//	}
+	//	else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
+	//		m_IsEnable = true; // Signal for flag auto run
+	//		if (this->m_State == PLAYERSTATES::CLIMB) {
+	//			m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+	//			m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
+
+	//			m_Velocity.x = abs(m_Velocity.x) * m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
+	//		}
+	//		/*if (m_IsAutoMove)
+	//		{
+	//		this->m_PlayerState->exitCurrentState(*this, new CRunState());
+	//		this->m_PlayerState->enter(*this);
+	//		}*/
+	//	}
+	//	else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE) {
+	//		m_IsCollision = false;
+	//	}
+	//	break;
+
+	//case TAGNODE::NONE:
+	//	if (this->m_State == PLAYERSTATES::STAND || PLAYERSTATES::RUN)
+	//	{
+	//		//m_IsCollision = false;
+	//	}
+	//	break;
+	//default:
+	//	break;
+	//}
+}
+
+void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) {
+
+	//-----Handle Collision with Bonus----//
+	switch (bonusEntity->getTagNodeId())
 	{
-	case TAGNODE::FLAG:
-		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
+	case TAGNODE::RED_MUSHROOM:
+		if (CCollision::CheckCollision(this, bonusEntity)) {
+			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+				m_PlayerTag = PLAYERTAGS::BIG;
+				this->loadSprite();
+			}
+		}
+		break;
+	case TAGNODE::STAR:
+		if (CCollision::CheckCollision(this, bonusEntity)) {
+			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
+				m_PlayerTag = PLAYERTAGS::UNDYING;
+				this->loadSprite();
+				this->m_UndyingTime = PLAYER_UNDYING_TIME;
+			}
+			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+				m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+				this->loadSprite();
+				this->m_UndyingTime = PLAYER_UNDYING_TIME;
+			}
+		}
+		break;
+	case TAGNODE::FLOWER:
+		if (CCollision::CheckCollision(this, bonusEntity)) {
+			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
+				m_PlayerTag = PLAYERTAGS::FIRE;
+			}
+		}
+		break;
+	case TAGNODE::COIN:
+		break;
+	case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
+		if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_BOTTOM)
 		{
-			// Only if after collision top with flag pole tail and bottom with flag, player change into run state
-			if (m_IsEnable) {
-				m_IsAutoMove = true;
-				if (m_Velocity.x <= 0) {
-					m_Velocity.x = VEL_PLAYER_X;
-				}
-				this->m_PlayerState->exitCurrentState(*this, new CRunState());
+			this->m_Position.y = bonusEntity->getPosition().y - bonusEntity->getBounding().getHeight() / 2 - this->getBounding().getHeight() / 2;
+			if (this->m_Velocity.y >= 0)
+			{
+				//this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+				this->m_Velocity.y = VEL_PLAYER_Y_MIN;
+			}
+		}
+		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_TOP){
+			if (this->m_State == PLAYERSTATES::JUMP) {
+				this->m_Position.y = bonusEntity->getBounding().getY() + this->getBounding().getHeight() / 2;
+				this->m_PlayerState->exitCurrentState(*this, new CStandState());
 				this->m_PlayerState->enter(*this);
 			}
-			else m_IsAutoMove = false;
-
+			this->m_Velocity.y = VEL_DEFAULT_Y;
 		}
-		break;
-	case TAGNODE::FLAG_POLE:
-		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
-		{
-			if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
-				if (m_Position.y > 100){
-					m_Position.x = entity->getPosition().x;
-					this->m_PlayerState->exitCurrentState(*this, new CClimbState());
-				}
-				else
-				{
-					this->m_PlayerState->exitCurrentState(*this, new CJumpState());
-				}
+		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_LEFT){
+			// Need to narrow the bounding of player
+			/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+			this->m_Position.x = bonusEntity->getBounding().getX() - this->getBounding().getWidth() / 2;
+			this->m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
+			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
 
-		}
-		break;
-	case TAGNODE::FLAG_POLE_TAIL:
-		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
-		{
-			m_IsCollision = true;
-
-			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
-			{
-				m_Velocity.x = VEL_PLAYER_X_MIN;
-			}
-			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-				m_IsCollision = false;
-				this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
-			}
-
-			m_Velocity.y = VEL_DEFAULT_Y;
-
-		}
-		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
-			m_IsEnable = true; // Signal for flag auto run
-			if (this->m_State == PLAYERSTATES::CLIMB) {
-				m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-				m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
-
-				m_Velocity.x = abs(m_Velocity.x) * m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
-			}
-			/*if (m_IsAutoMove)
-			{
-			this->m_PlayerState->exitCurrentState(*this, new CRunState());
-			this->m_PlayerState->enter(*this);
 			}*/
 		}
-		else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE) {
-			m_IsCollision = false;
+		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_RIGHT){
+			// Need to narrow the bounding of player
+			/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+			this->m_Position.x = bonusEntity->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
+			this->m_Velocity.x = VEL_PLAYER_X_MIN;
+			}
+			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
+
+			}*/
+		}
+		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_NONE){
+			if (!IsCollision_Player(this, CMapManager::getInstance()->getListBonus()) &&
+				m_IsFreeFall == true) {
+				this->m_PlayerState->exitCurrentState(*this, new CJumpState());
+				this->m_PlayerState->enter(*this);
+			}
 		}
 		break;
+	default:
+		break;
+	}
 
-	case TAGNODE::NONE:
-		if (this->m_State == PLAYERSTATES::STAND || PLAYERSTATES::RUN)
+}
+
+void CPlayer::handleCollisionWithEnermy(CObjectss* enermyEntity, float deltaTime) {
+	//-----Handle Collision with enermy----//
+	switch (enermyEntity->getTagNodeId())
+	{
+	case TAGNODE::MUSHROOM: case TAGNODE::TURTLE:
+		if (CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_LEFT ||
+			CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_RIGHT ||
+			CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_BOTTOM)
 		{
-			//m_IsCollision = false;
+			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+				m_Velocity.y = VEL_DEFAULT_Y;
+				this->m_PlayerState->exitCurrentState(*this, new CDieState());
+				this->m_PlayerState->enter(*this);
+			}
+			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
+			{
+				//undying but small and exists in 5s
+				this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+				this->loadSprite();
+				this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
+			}
+
+			m_IsAutoJump = false;
+		}
+		else if (CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_TOP)
+		{
+			this->m_Position.y = enermyEntity->getPosition().y + enermyEntity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+			this->m_PlayerState->exitCurrentState(*this, new CStandState());
+			this->m_PlayerState->enter(*this);
+			m_IsAutoJump = true;
+		}
+
+		break;
+	case TAGNODE::CARNIVOROUS_PLANT:
+		if (this->m_PlayerTag != PLAYERTAGS::UNDYING && this->m_PlayerTag != PLAYERTAGS::SMALL_UNDYING) {
+			if (CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_TOP) {
+				this->m_PlayerState->exitCurrentState(*this, new CDieState());
+				this->m_PlayerState->enter(*this);
+			}
 		}
 		break;
 	default:
 		break;
 	}
 }
+
 
 void CPlayer::drawEntity()
 {
@@ -523,4 +526,8 @@ void CPlayer::setPlayerTag(int playerTag){
 
 int CPlayer::getPlayerTag() {
 	return m_PlayerTag;
+}
+
+int	CPlayer::getObjectType() {
+	return OBJECT_TYPE::TYPE_PLAYER;
 }

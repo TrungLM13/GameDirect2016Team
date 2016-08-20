@@ -63,3 +63,7 @@ int  CCoin::getTagNodeId()
 {
 	return TAGNODE::COIN;
 }
+
+int CCoin::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

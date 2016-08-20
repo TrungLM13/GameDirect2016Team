@@ -11,11 +11,15 @@ public:
 	CTiless(vector2d, int type);
 	~CTiless();
 
-	virtual		bool	initEntity();
-	virtual		void	drawEntity();
-	virtual		bool	loadSprite();
-	virtual		CBox2D	getBounding()			override;
-	virtual		void	updateEntity(float deltaTime){};
+	virtual		bool			initEntity();
+	virtual		void			drawEntity();
+	virtual		bool			loadSprite();
+	virtual		CBox2D			getBounding()			override;
+	virtual const char*			getTagNode()			override;
+	virtual		void			updateEntity(float deltaTime){};
+	virtual int					getObjectType()			override;
+	virtual int					getTagNodeId()          override;
+	virtual vector3d			getPosition()			override;
 private:
 	int				m_ID;
 };

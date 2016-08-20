@@ -103,3 +103,7 @@ int	CCoinInBox::getTagNodeId()
 {
 	return TAGNODE::COININBOX;
 }
+
+int CCoinInBox::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

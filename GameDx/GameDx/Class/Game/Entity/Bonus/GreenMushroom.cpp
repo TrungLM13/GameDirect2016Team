@@ -128,3 +128,7 @@ void CGreenMushroom::setVelocity(vector2d velocity)
 int CGreenMushroom::getTagNodeId() {
 	return TAGNODE::GREEN_MUSHROOM;
 }
+
+int CGreenMushroom::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

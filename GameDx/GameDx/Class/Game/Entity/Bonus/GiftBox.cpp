@@ -161,3 +161,7 @@ int	CGiftBox::getTagNodeId()
 {
 	return TAGNODE::GIFT_BOX;
 }
+
+int CGiftBox::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

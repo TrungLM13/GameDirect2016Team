@@ -131,3 +131,7 @@ int	Elevator::getTagNodeId()
 {
 	return TAGNODE::ELEVATOR;
 }
+
+int Elevator::getObjectType() {
+	return OBJECT_TYPE::TYPE_TILE;
+}

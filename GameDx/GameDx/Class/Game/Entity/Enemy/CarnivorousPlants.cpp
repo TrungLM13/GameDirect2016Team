@@ -78,4 +78,7 @@ void CCarnivorousPlants::updateEntity(RECT* camera)
 
 }
 
+int CCarnivorousPlants::getObjectType() {
+	return OBJECT_TYPE::TYPE_ENERMY;
+}
 

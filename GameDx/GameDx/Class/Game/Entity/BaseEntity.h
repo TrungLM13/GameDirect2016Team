@@ -27,11 +27,11 @@ public:
 
 	virtual void				updateEntity(CKeyBoard* deivce)							= 0;
 	virtual void				updateEntity(RECT* camera)								= 0;
-	virtual void				handleCollision(CBaseEntity*entity, float deltaTime)	= 0;
 	virtual const char*			getTagNode()											= 0;
 	virtual vector2d			getVelocity()											= 0;
-	virtual int					getTagNodeId()          { return 0; };
 	virtual vector3d			getPosition()											= 0;
+	virtual int					getTagNodeId()          { return 0; };
+	virtual int					getObjectType() = 0;
 
 
 	bool m_IsEnable;

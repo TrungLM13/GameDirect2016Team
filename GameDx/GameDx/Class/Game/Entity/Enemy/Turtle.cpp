@@ -104,3 +104,7 @@ void CTurtule::drawEntity()
 int	CTurtule::getTagNodeId() {
 	return TAGNODE::TURTLE;
 }
+
+int CTurtule::getObjectType() {
+	return OBJECT_TYPE::TYPE_ENERMY;
+}

@@ -119,3 +119,6 @@ int	CBrickMini::getTagNodeId()
 	return TAGNODE::BRICKMINI;
 }
 
+int CBrickMini::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

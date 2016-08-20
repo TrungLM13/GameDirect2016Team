@@ -34,8 +34,18 @@ void CPlayScene::updateScene(double deltaTime)
 
 	m_listObjectInViewport = m_treeGame->Retrieve(CCamera::getInstance()->getBoundingScreen());
 
-	for (int i = 0; i < m_listObjectInViewport.size(); ++i)
+	for (int i = 0; i < m_listObjectInViewport.size(); ++i) {
+		if (m_listObjectInViewport.at(i)->getObjectType() == OBJECT_TYPE::TYPE_BONUS) {
+			CPlayer::getInstance()->handleCollisionWithBonus(m_listObjectInViewport.at(i), deltaTime);
+		}
+		else if (m_listObjectInViewport.at(i)->getObjectType() == OBJECT_TYPE::TYPE_ENERMY) {
+			CPlayer::getInstance()->handleCollisionWithEnermy(m_listObjectInViewport.at(i), deltaTime);
+		}
+		else if (m_listObjectInViewport.at(i)->getObjectType() == OBJECT_TYPE::TYPE_TILE) {
+			CPlayer::getInstance()->handleCollisionWithTile(deltaTime);
+		}
 		m_listObjectInViewport.at(i)->updateEntity(deltaTime);
+	}
 }
 
 void CPlayScene::updateScene(CKeyBoard* keyboard)

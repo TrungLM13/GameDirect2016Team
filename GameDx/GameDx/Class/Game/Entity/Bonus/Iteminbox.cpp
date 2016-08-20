@@ -188,3 +188,7 @@ int  CIteminbox::getTagNodeId()
 		return TAGNODE::FLOWER;
 	}
 }
+
+int CIteminbox::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

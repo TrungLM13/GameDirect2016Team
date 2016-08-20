@@ -15,6 +15,7 @@ public:
 	virtual void			updateEntity(CKeyBoard *device)							override;
 	virtual void			drawEntity()											override;
 	virtual bool			loadSprite()											override;
+	virtual int				getObjectType()											override;
 
 private:
 	int m_Direction;

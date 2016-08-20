@@ -129,6 +129,14 @@
 /************************************/
 
 /*ENUM*/
+
+enum OBJECT_TYPE {
+	TYPE_PLAYER = 1,
+	TYPE_TILE = 2,
+	TYPE_BONUS = 3,
+	TYPE_ENERMY = 4
+};
+
 enum GAMESTATE
 {
 	STATE_END,

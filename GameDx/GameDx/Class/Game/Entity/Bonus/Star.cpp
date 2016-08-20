@@ -123,3 +123,6 @@ int	CStar::getTagNodeId(){
 	return TAGNODE::STAR;
 }
 
+int CStar::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
+}

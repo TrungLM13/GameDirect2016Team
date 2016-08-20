@@ -64,3 +64,7 @@ bool CTile::loadSprite()
 int CTile::getTagNodeId() {
 	return TAGNODE::TILE;
 }
+
+int CTile::getObjectType() {
+	return OBJECT_TYPE::TYPE_TILE;
+}

@@ -20,6 +20,7 @@ public:
 	virtual void drawEntity();
 	virtual bool loadSprite();
 	virtual int  getTagNodeId();
+	virtual int				getObjectType()											override;
 
 	int    m_Index;
 	vector3d  m_Pos;

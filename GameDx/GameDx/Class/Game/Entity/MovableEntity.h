@@ -22,10 +22,11 @@ public:
 	virtual  CBox2D			getBounding()											override;
 	virtual  bool			initEntity();
 	virtual  const char*    getTagNode()											override;
+	virtual int				getObjectType()											override { return 0; };
 	virtual  int			getTagNodeId()											override { return 0; };
 	virtual  vector2d		 getVelocity();
 	virtual  void			setVelocity(vector2d);
-	void					handleCollision(CBaseEntity*entity, float deltaTime) {};
+
 
 protected:
 	vector2d    m_Velocity;

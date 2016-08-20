@@ -22,6 +22,8 @@ public:
 	int getTagNodeId();
 	bool loadSprite();
 
+	virtual int				getObjectType()											override;
+
 private:
 	vector2d	m_Direction;
 	int			m_Type;

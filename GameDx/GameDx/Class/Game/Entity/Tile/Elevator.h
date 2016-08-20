@@ -22,6 +22,7 @@ public:
 	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
 	virtual int				getTagNodeId()											override;
+	virtual int				getObjectType()											override;
 
 public:
 	void setPosition(vector3d position);

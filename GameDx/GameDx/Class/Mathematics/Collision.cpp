@@ -10,7 +10,7 @@ CCollision::~CCollision()
 {
 }
 
-COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CBaseEntity* Object)
+COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CObjectss* Object)
 {
 	float		moveX, moveY;
 	vector2d	velocity;
@@ -98,7 +98,7 @@ COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CBaseEntity* Ob
 	}
 }
 
-COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CBaseEntity* Object, double timeCollision)
+COLDIRECTION CCollision::CheckCollision(CMovable* MovableObject, CObjectss* Object, double& timeCollision)
 {
 	timeCollision = 0;
 

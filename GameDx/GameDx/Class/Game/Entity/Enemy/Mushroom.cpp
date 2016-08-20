@@ -136,4 +136,8 @@ int CMushroom::getTagNodeId(){
 	return TAGNODE::MUSHROOM;
 }
 
+int CMushroom::getObjectType() {
+	return OBJECT_TYPE::TYPE_ENERMY;
+}
+
 class CMapManager;

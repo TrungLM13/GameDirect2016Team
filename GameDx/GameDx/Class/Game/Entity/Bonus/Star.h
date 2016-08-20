@@ -16,6 +16,7 @@ public:
 	virtual void			updateEntity(CKeyBoard *device)					override;
 	virtual void			drawEntity()									override;		
 	virtual int				getTagNodeId()									override;
+	virtual int				getObjectType()									override;
 
 private:
 	float STAR_POSITION_Y_MAX;
