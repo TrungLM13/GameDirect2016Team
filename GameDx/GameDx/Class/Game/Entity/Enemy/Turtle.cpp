@@ -10,7 +10,6 @@ CTurtule::CTurtule()
 
 CTurtule::~CTurtule()
 {
-	SAFE_RELEASE(m_Turtle_State);
 	SAFE_RELEASE(m_ResouceImage);
 
 	if (!m_listSprite.empty()) {
