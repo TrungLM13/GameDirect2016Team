@@ -14,18 +14,19 @@ public:
 	~CQuadNode();
 
 	void					ReleaseNode();
-	bool					InsertEntity(CBaseEntity*);
+	bool					InsertEntity(CObjectss*);
 
 	int						getNodeLevel();							void		setNodeLevel(int);
 	CBox2D					getNodeSize();							void		setNodeSize(CBox2D);
-	vector<CBaseEntity*>	getEntityList();						
+	vector<CObjectss*>		retrieveEntity(CBox2D);
+	vector<CObjectss*>		getEntityList();						
 	CQuadNode**				getParent();							
 	void					SplitParent();
 
 private:
 	int						m_NodeLevel;
 	CBox2D					m_NodeSize;
-	vector<CBaseEntity*>	m_EntityList;
+	vector<CObjectss*>		m_EntityList;
 	CQuadNode**				m_Node;
 };
 

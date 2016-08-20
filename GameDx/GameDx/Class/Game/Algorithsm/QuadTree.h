@@ -14,7 +14,7 @@ public:
 
 	void								CreateTree();
 	void								ReleaseTree();
-	vector<CBaseEntity*>				Retrieve();
+	vector<CObjectss*>					Retrieve(CBox2D);
 protected:
 	CQuadNode*							m_Node;
 

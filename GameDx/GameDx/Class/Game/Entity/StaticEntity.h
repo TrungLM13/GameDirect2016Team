@@ -28,9 +28,7 @@ public:
 	void								handleCollision(CBaseEntity*entity, float deltaTime) {};
 
 protected:
-	vector3d    m_Position;
-	//CBox2D*     m_Bounding;
-	vector<CSprite*>  m_listSprite;
+
 };
 
 #endif

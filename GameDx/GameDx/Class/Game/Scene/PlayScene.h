@@ -2,33 +2,8 @@
 #define __PLAYSCENE_H__
 
 #include "BaseScene.h"
-#include "Class\Game\Test\Test.h"
-#include "Class\Game\Entity\Player\Player.h"
-#include "Class\Game\Entity\Bonus\Coin.h"
-#include "Class\Game\Entity\Bonus\Star.h"
-#include "Class\Game\Entity\Bonus\Brick.h"
-#include "Class\Game\Entity\Bonus\GiftBox.h"
-#include "Class\Game\Entity\Enemy\Mushroom.h"
-#include "Class\Game\Entity\MovableEntity.h"
-#include "Class\Game\Entity\Bonus\Iteminbox.h"
-#include "Class\Game\Entity\Bonus\CoinInBox.h"
+#include "Class\Game\Algorithsm\QuadTree.h"
 
-
-#include "Class\Game\Entity\Tile\Flag.h"
-
-#include "Class\Game\Entity\Map\Tile.h"
-#include "Class\Game\Entity\Tile\FlagPole.h"
-#include "Class\Game\Entity\Tile\FlagPoleHead.h"
-#include "Class\Game\Entity\Tile\FlagPoleTail.h"
-#include "Class\Game\Entity\Tile\Castle.h"
-#include "Class\Game\Entity\Tile\FlagCastle.h"
-
-#include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
-
-#include "Class\Game\Entity\Tile\Elevator.h"
-#include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
-
-//#include <vld.h>
 
 class CPlayScene :
 	public CBaseScene
@@ -43,7 +18,8 @@ public:
 	virtual void renderScene()						override;
 
 private:
-	vector<CBaseEntity*>	m_ListEntity;
+	CQuadTree*				m_treeGame;
+	vector<CObjectss*>		m_listObjectInViewport;
 };
 
 #endif

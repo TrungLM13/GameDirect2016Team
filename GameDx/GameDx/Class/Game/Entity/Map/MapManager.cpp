@@ -3,6 +3,7 @@
 #include "Class\Framework\Camera.h"
 #include "Class\Game\Scene\PopupInfo.h"
 #include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
+#include "Class\Game\Entity\Bonus\Brick.h"
 
 
 CMapManager* CMapManager::m_instance = NULL;
@@ -83,8 +84,8 @@ bool CMapManager::loadEntityInMap()
 
 	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
-		/*if (type == "3E")
-			m_listBonus.push_back(new CCarnivorousPlants());*/
+		if (type == "3E")
+			m_listBonus.push_back(new CCarnivorousPlants());
 		if (type == "1B")
 			m_listBonus.push_back(new CBrick(1,positionEntity, BRICK_TYPE::BRICK_STAR));
 		if (type == "2B")

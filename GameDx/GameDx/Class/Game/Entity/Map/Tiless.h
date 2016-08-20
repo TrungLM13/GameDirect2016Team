@@ -14,7 +14,8 @@ public:
 	virtual		bool	initEntity();
 	virtual		void	drawEntity();
 	virtual		bool	loadSprite();
-
+	virtual		CBox2D	getBounding()			override;
+	virtual		void	updateEntity(float deltaTime){};
 private:
 	int				m_ID;
 };

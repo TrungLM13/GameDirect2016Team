@@ -391,8 +391,8 @@ enum BRICKMINI_TYPE
 /********************/
 
 #define				SIZE_MAP_WIDTH			20000
-#define				SIZE_MAP_HIGHT			20000
-#define				MAX_OBJECT_OF_NODE		4
-#define				MAX_LEVEL_OF_NODE		5
+#define				SIZE_MAP_HIGHT			700
+#define				MAX_OBJECT_OF_NODE		20
+#define				MAX_LEVEL_OF_NODE		6
 
 #endif

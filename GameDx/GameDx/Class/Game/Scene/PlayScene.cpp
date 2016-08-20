@@ -1,12 +1,9 @@
 #include "PlayScene.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Scene\PopupInfo.h"
-
 #include "Class\Game\Entity\Map\MapManager.h"
-
-#include "Class\Game\State\StandState.h"
-#include "Class\Mathematics\Collision.h"
-#include "Class\Game\Entity\Bullet\BulletNormal.h"
+#include "Class\Game\Algorithsm\QuadTree.h"
+#include "Class\Game\Entity\Player\Player.h"
 
 CPlayScene::CPlayScene()
 {
@@ -15,111 +12,44 @@ CPlayScene::CPlayScene()
 
 CPlayScene::~CPlayScene()
 {
-	m_ListEntity.clear();
+
 }
 
 bool CPlayScene::initScene()
 {
 	CMapManager::getInstance();
+	m_treeGame = new CQuadTree();
+
+	m_treeGame->CreateTree();
 
 	CPlayer::getInstance();
-
-	m_ListEntity.push_back(new CFlag());
-	/*m_ListEntity.push_back(new CFlagPole());
-	m_ListEntity.push_back(new CFlagPoleTail());*/
-
-	//m_ListEntity.push_back(new CBulletNormal());
-
-	//Elevator::getInstance()->initEntity();
-
-	
-
 	return true;
 }
 
 void CPlayScene::updateScene(double deltaTime)
 {
-	
-	/*Turtle::getInstance()->updateEntity(deltaTime);
-	Elevator::getInstance()->updateEntity(deltaTime);*/
-
 	CPlayer::getInstance()->updateEntity(deltaTime);
-
-	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
-	{
-		CPlayer::getInstance()->handleCollision(CMapManager::getInstance()->getListBonus().at(i), deltaTime);
-		CMapManager::getInstance()->getListEnemy().at(i)->updateEntity(deltaTime);
-	}
-
-	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i)
-	{
-		CPlayer::getInstance()->handleCollision(CMapManager::getInstance()->getListBonus().at(i), deltaTime);
-		CMapManager::getInstance()->getListBonus().at(i)->updateEntity(deltaTime);
-	}
 
 	CCamera::getInstance()->Update(CPlayer::getInstance()->getPosition());
 
+	m_listObjectInViewport = m_treeGame->Retrieve(CCamera::getInstance()->getBoundingScreen());
 
-	//for (int i = 0; i < m_ListEntity.size(); ++i) {
-	//	m_ListEntity.at(i)->updateEntity(deltaTime);
-	//	m_ListEntity.at(i)->updateCollision(CPlayer::getInstance(), deltaTime);
-
-	//	CPlayer::getInstance()->handleCollision(m_ListEntity.at(i), deltaTime);
-
-	//	for (int j = 0; j < m_ListEntity.size(); ++j) {
-	//		m_ListEntity.at(i)->handleCollision(m_ListEntity.at(j), deltaTime);
-	//	}
-	//}
-
-	
+	for (int i = 0; i < m_listObjectInViewport.size(); ++i)
+		m_listObjectInViewport.at(i)->updateEntity(deltaTime);
 }
 
 void CPlayScene::updateScene(CKeyBoard* keyboard)
 {
 	if (keyboard->KeyPress(DIK_P))
 		return;
-
 	CPlayer::getInstance()->updateEntity(keyboard);
-
-	/*Turtle::getInstance()->updateEntity(keyboard);
-	Elevator::getInstance()->updateEntity(keyboard);*/
 }
 
 void CPlayScene::renderScene()
 {
-	/*OutputDebugString(L"FPS GAME: ");
-	OutputDebugString(_itow(CTimer::getInstance()->getElapedTime(), new WCHAR[1], 10));
-	OutputDebugString(L"\n");
-*/
 	CPlayer::getInstance()->drawEntity();
 
-	for (int i = 0; i < CMapManager::getInstance()->getListBackground().size(); ++i)
-	{
-		CMapManager::getInstance()->getListBackground().at(i)->drawEntity();
-	}
-
-	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i)
-	{
-		CMapManager::getInstance()->getListBonus().at(i)->drawEntity();
-	}
-
-	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
-	{
-		CMapManager::getInstance()->getListEnemy().at(i)->drawEntity();
-	}
-
-
-	/*Turtle::getInstance()->drawEntity();
-	Elevator::getInstance()->drawEntity();*/
-
-
-
-
-	//for (int i = 0; i < m_ListEntity.size(); ++i)
-	//{
-	//	m_ListEntity.at(i)->drawEntity();
-	//	//CShowBouding::getInstance()->drawBouding(m_ListEntity.at(i));
-	//}
-
-
+	if (m_listObjectInViewport.size())
+	for (int i = 0; i < m_listObjectInViewport.size(); ++i)
+		m_listObjectInViewport.at(i)->drawEntity();
 }
