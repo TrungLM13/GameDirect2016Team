@@ -4,6 +4,7 @@
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\Entity\Bonus\CoinInBox.h"
 #include "Class\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Utill\ResourceManager\BonusResource.h"
 
 CBrick::CBrick()
 {
@@ -30,13 +31,31 @@ CBrick:: ~CBrick()
 	SAFE_RELEASE(m_Coin);
 	SAFE_RELEASE(m_Star);
 	SAFE_RELEASE(m_GreenMushRoom);
+	SAFE_RELEASE(this->m_ResouceImage);
+
+	for (int i = 0; i < m_BrickMini.size(); ++i) {
+		SAFE_RELEASE(m_BrickMini.at(i));
+		m_BrickMini.at(i) = nullptr;
+	}
+
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
+
+	vector<CBrick*>c;
+	auto_ptr<CBrick> p(new CBrick());
+	c.push_back(p.get());
+	p.release();
 
 }
 
 bool CBrick::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::brick, 1, 1, 1, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::box, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICK), 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::GIFT_BOX, GIFTBOX_STATE::GIFTBOX), 1, 1, 1, 0));
 	return true;
 }
 
@@ -49,6 +68,7 @@ bool CBrick::initEntity()
 	m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE; // When Brick doesnt move
 	m_BrickState = BRICK_STATE::BRICK_NORMAL;
 	m_CountCoin = COIN_NUM_MAX;
+	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	return true;
 }

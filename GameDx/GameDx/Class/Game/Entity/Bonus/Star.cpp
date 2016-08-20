@@ -4,6 +4,7 @@
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Map\MapManager.h"
 #include "Class\Game\Entity\Bonus\Brick.h"
+#include "Class\Game\Utill\ResourceManager\BonusResource.h"
 
 inline bool IsCollision_Star(CMovable* entity, vector<CBaseEntity*> listEntity) {
 	for (int i = 0; i < listEntity.size(); i++)
@@ -33,18 +34,25 @@ CStar::CStar(vector3d pos)
 
 CStar:: ~CStar()
 {
-
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 bool CStar::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::star, 1, 4, 4, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::STAR), 1, 4, 4, 0));
 	return true;
 }
 
 bool CStar::initEntity()
 {
 	this->m_TagNode = "Star";
+
+	this->m_ResouceImage = new CBonusResource();
 
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);

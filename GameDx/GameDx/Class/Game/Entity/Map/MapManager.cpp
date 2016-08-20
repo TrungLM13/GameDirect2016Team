@@ -91,7 +91,7 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_COIN));
 		/*if (type == "3B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_NONE));
-		/*if (type == "4B")
+		if (type == "4B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
 		if (type == "5B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_COIN));
@@ -99,7 +99,7 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_NONE));
 		if (type == "7B")
 			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_GREENMUSHROOM));
-		if (type == "8B")
+		/*if (type == "8B")
 			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::UP_DOWN));
 		if (type == "9B")
 			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::RIGHT_LEFT));*/

@@ -1,5 +1,7 @@
 #include "Turtle.h"
-#include "Class\Game\Utill\InformationResource.h"
+
+#include "Class\Game\Utill\ResourceManager\EnermyResource.h"
+
 
 CTurtule::CTurtule()
 {
@@ -8,6 +10,15 @@ CTurtule::CTurtule()
 
 CTurtule::~CTurtule()
 {
+	SAFE_RELEASE(m_Turtle_State);
+	SAFE_RELEASE(m_ResouceImage);
+
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 CTurtule::CTurtule(vector2d, int type)
@@ -18,12 +29,13 @@ CTurtule::CTurtule(vector2d, int type)
 
 bool CTurtule::initEntity()
 {
-	//m_Position = vector3d(200, 50, 0.5);
 	m_Position = vector3d(50, 100, 0.5);
 
 	m_State = TURTLE_STATE::TURTLE_RUN;
 	m_TagNode = "Turtle";
 	m_Velocity = vector2d(4, 2.5);
+
+	this->m_ResouceImage = new CEnermyResource(TAGNODE::TURTLE);
 
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
@@ -40,23 +52,23 @@ bool CTurtule::loadSprite()
 	switch (m_Type)
 	{
 	case TURTLE_TAG::GREEN:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::greenturtle_run, 1, 2, 2, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::greenturtle_ensconse, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::greenturtle_indent, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::greenturtle_fly, 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::GREEN, TURTLE_STATE::TURTLE_RUN), 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::GREEN, TURTLE_STATE::TURTLE_ENSCONSE), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::GREEN, TURTLE_STATE::TURTLE_INDENT), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::GREEN, TURTLE_STATE::TURTLE_FLY), 1, 2, 2, 0));
 
 		break;
 	case TURTLE_TAG::RED:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::redturtle_run, 1, 2, 2, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::redturtle_ensconse, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::redturtle_indent, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::redturtle_fly, 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::RED, TURTLE_STATE::TURTLE_RUN), 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::RED, TURTLE_STATE::TURTLE_ENSCONSE), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::RED, TURTLE_STATE::TURTLE_INDENT), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::RED, TURTLE_STATE::TURTLE_FLY), 1, 2, 2, 0));
 		break;
 	case TURTLE_TAG::NAVI:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::naviturtle_run, 1, 2, 2, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::naviturtle_ensconse, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::naviturtle_indent, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::naviturtle_fly, 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::NAVI, TURTLE_STATE::TURTLE_RUN), 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::NAVI, TURTLE_STATE::TURTLE_ENSCONSE), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::NAVI, TURTLE_STATE::TURTLE_INDENT), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TURTLE_TAG::NAVI, TURTLE_STATE::TURTLE_FLY), 1, 2, 2, 0));
 		break;
 	default:
 		break;

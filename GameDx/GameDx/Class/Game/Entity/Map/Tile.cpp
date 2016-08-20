@@ -14,6 +14,12 @@ CTile::CTile(vector3d pos, int State)
 
 CTile::~CTile()
 {
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 bool CTile::initEntity()

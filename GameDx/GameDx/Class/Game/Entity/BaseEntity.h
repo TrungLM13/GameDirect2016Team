@@ -14,6 +14,7 @@
 #include "Class\Framework\Sprite.h"
 #include "Class\Framework\Camera.h"
 #include "Class\Game\Entity\Objectss.h"
+#include "Class\Game\Utill\ResourceManager\BaseResource.h"
 
 class CBaseEntity : public CObjectss
 {
@@ -21,7 +22,7 @@ public:
 
 	CBaseEntity();
 	CBaseEntity(directDevice);
-	~CBaseEntity();
+	virtual ~CBaseEntity();
 
 	virtual void   updateEntity(CKeyBoard* deivce) = 0;
 	virtual void   updateEntity(RECT* camera) = 0;

@@ -3,6 +3,7 @@
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Utill\ShowBouding.h"
+#include "Class\Game\Utill\ResourceManager\TileResource.h"
 
 CFlagPole::CFlagPole()
 {
@@ -11,18 +12,19 @@ CFlagPole::CFlagPole()
 
 CFlagPole:: ~CFlagPole()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
 }
 
 bool CFlagPole::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::flagPole, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_FLAG_POLE), 1, 1, 1, 0));
 	return true;
 }
 
 bool CFlagPole::initEntity()
 {
 	m_Position = vector3d(250, 120, 0);
+	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	m_TagNode = "FlagPole";

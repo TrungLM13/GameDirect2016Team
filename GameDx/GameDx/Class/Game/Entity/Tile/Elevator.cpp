@@ -1,5 +1,5 @@
 #include "Elevator.h"
-#include "Class\Game\Utill\InformationResource.h"
+#include "Class\Game\Utill\ResourceManager\TileResource.h"
 
 Elevator::Elevator()
 {
@@ -8,6 +8,14 @@ Elevator::Elevator()
 
 Elevator::~Elevator()
 {
+	SAFE_RELEASE(m_ResouceImage);
+
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 Elevator::Elevator(vector2d pos, ELEVATOR_STATE ElevatorState)
@@ -28,6 +36,8 @@ bool Elevator::initEntity()
 
 	m_Velocity = vector2d(ELEVATOR_VELOCITY_X, ELEVATOR_VELOCITY_Y);
 
+	this->m_ResouceImage = new CTileResource();
+
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 
@@ -36,8 +46,7 @@ bool Elevator::initEntity()
 
 bool Elevator::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::elevator, 1, 1, 1, 0));
-
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_ELEVATOR), 1, 1, 1, 0));
 	return true;
 }
 

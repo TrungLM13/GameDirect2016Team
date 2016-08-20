@@ -10,7 +10,7 @@
 inline bool IsCollision_Player(CMovable* entity, vector<CBaseEntity*> listEntity) {
 	for (int i = 0; i < listEntity.size(); i++)
 	{
-		if (listEntity.at(i)->getTagNodeId() == TAGNODE::BRICK)
+		if (listEntity.at(i)->getTagNodeId() == TAGNODE::BRICK || listEntity.at(i)->getTagNodeId() == TAGNODE::GIFT_BOX)
 		{
 			if (CCollision::CheckCollision(entity, listEntity.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
 			{
@@ -30,6 +30,13 @@ CPlayer::CPlayer()
 CPlayer::~CPlayer()
 {
 	SAFE_RELEASE(m_PlayerState);
+	SAFE_RELEASE(m_ResouceImage);
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 CPlayer::CPlayer(directDevice device)
@@ -61,6 +68,7 @@ bool CPlayer::initEntity()
 	m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
 	m_Direction.at(DIRECTIONINDEX::DIRECTION_Y) = DIRECTION::DIRECTION_UP;
 
+	this->m_ResouceImage = new CPlayerResource(TAGNODE::PLAYER);
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 
@@ -80,48 +88,50 @@ bool CPlayer::loadSprite()
 	switch (m_PlayerTag)
 	{
 	case PLAYERTAGS::SMALL:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_cdir, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_run, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_jum, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_climb, 1, 2, 2, 0));
+	//	push_back_new<CSprite>(m_listSprite);
+
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::STAND), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::STAND), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::RUN), 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::JUMP), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::DIE), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL, PLAYERSTATES::CLIMB), 1, 2, 2, 0));
 		break;
 	case PLAYERTAGS::BIG:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_run, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_jum, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::STAND), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::STAND), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::RUN), 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::JUMP), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::DIE), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::CLIMB), 1, 2, 2, 0));
 		break;
 	case PLAYERTAGS::SMALL_UNDYING:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_stand, 1, 4, 4, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_stand, 1, 4, 4, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_run, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_undying_jum, 1, 4, 4, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_climb, 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL_UNDYING, PLAYERSTATES::STAND), 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL_UNDYING, PLAYERSTATES::STAND), 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL_UNDYING, PLAYERSTATES::RUN), 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL_UNDYING, PLAYERSTATES::JUMP), 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::SMALL_UNDYING, PLAYERSTATES::DIE), 1, 1, 1, 0));
+		//this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_climb, 1, 2, 2, 0));
 		break;
 	case PLAYERTAGS::UNDYING:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_stand, 1, 4, 4, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_stand, 1, 4, 4, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_run, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_undying_jum, 1, 4, 4, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::STAND), 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::STAND), 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::RUN), 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::JUMP), 1, 4, 4, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::UNDYING, PLAYERSTATES::DIE), 1, 1, 1, 0));
+	//	this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
 		break;
 	case PLAYERTAGS::FIRE:
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_stand, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_run, 1, 3, 3, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jum, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::smallmario_die, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::FIRE, PLAYERSTATES::STAND), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::FIRE, PLAYERSTATES::STAND), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::FIRE, PLAYERSTATES::RUN), 1, 3, 3, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::FIRE, PLAYERSTATES::JUMP), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::FIRE, PLAYERSTATES::DIE), 1, 1, 1, 0));
 		/*this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));*/
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigmario_climb, 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::CLIMB), 1, 2, 2, 0));
 		break;
 	default:
 		break;
@@ -333,6 +343,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
 			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
 			{
+				this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y - CMapManager::getInstance()->getListBonus().at(i)->getBounding().getHeight() / 2 - this->getBounding().getHeight() / 2;
 				if (this->m_Velocity.y >= 0)
 				{
 					//this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
@@ -352,20 +363,20 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 				/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
 					this->m_Position.x = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getX() - this->getBounding().getWidth() / 2;
 					this->m_Velocity.x = VEL_PLAYER_X_MIN;
-				}
-				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
-					
-				}*/
+					}
+					else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
+
+					}*/
 			}
 			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_RIGHT){
 				// Need to narrow the bounding of player
 				/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
 					this->m_Position.x = CMapManager::getInstance()->getListBonus().at(i)->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
 					this->m_Velocity.x = VEL_PLAYER_X_MIN;
-				}
-				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
+					}
+					else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
 
-				}*/
+					}*/
 			}
 			else if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_NONE){
 				if (!IsCollision_Player(this, CMapManager::getInstance()->getListBonus()) &&

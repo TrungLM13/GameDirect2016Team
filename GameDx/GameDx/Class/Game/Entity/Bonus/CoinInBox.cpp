@@ -3,6 +3,7 @@
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Utill\ResourceManager\BonusResource.h"
 
 CCoinInBox::CCoinInBox()
 {
@@ -26,12 +27,18 @@ CCoinInBox::CCoinInBox(vector3d pos)
 
 CCoinInBox:: ~CCoinInBox()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 bool CCoinInBox::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::coinInBox, 1, 4, 4, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::COININBOX), 1, 4, 4, 0));
 	return true;
 }
 
@@ -39,6 +46,7 @@ bool CCoinInBox::initEntity()
 {
 	this->m_TagNode = "CoinInBox";
 	isDraw = true;
+	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(0, 0);
