@@ -2,6 +2,7 @@
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
+#include "Class\Game\Utill\ResourceManager\TileResource.h"
 
 
 CCastle::CCastle()
@@ -12,18 +13,19 @@ CCastle::CCastle()
 
 CCastle:: ~CCastle()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
 }
 
 bool CCastle::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::castle, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CASTTLE), 1, 1, 1, 0));
 	return true;
 }
 
 bool CCastle::initEntity()
 {
 	m_Position = vector3d(180, 110, 0);
+	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	m_TagNode		= "Castle";

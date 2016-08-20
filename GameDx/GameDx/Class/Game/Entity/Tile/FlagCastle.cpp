@@ -1,6 +1,7 @@
 #include "FlagCastle.h"
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Game\Entity\Player\Player.h"
+#include "Class\Game\Utill\ResourceManager\TileResource.h"
 
 
 CFlagCastle::CFlagCastle()
@@ -11,18 +12,19 @@ CFlagCastle::CFlagCastle()
 
 CFlagCastle:: ~CFlagCastle()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
 }
 
 bool CFlagCastle::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::flagCastle, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CASTLE_FLAG), 1, 1, 1, 0));
 	return true;
 }
 
 bool CFlagCastle::initEntity()
 {
 	m_Position = vector3d(180, 140, 0);
+	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(0, 0);

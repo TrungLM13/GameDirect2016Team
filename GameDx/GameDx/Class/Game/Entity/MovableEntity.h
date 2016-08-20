@@ -16,7 +16,7 @@ class CMovable : public CBaseEntity
 {
 public:
 	CMovable();
-	~CMovable();
+	virtual ~CMovable();
 	virtual  bool			loadSprite() = 0;
 	virtual  vector3d		getPosition();
 	virtual  CBox2D			getBounding()											override;

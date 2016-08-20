@@ -4,6 +4,7 @@
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Utill\ResourceManager\BonusResource.h"
 
 CGiftBox::CGiftBox()
 {
@@ -32,12 +33,19 @@ CGiftBox:: ~CGiftBox()
 {
 	SAFE_RELEASE(m_Coin);
 	SAFE_RELEASE(m_itemInBox);
+
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 bool CGiftBox::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::box, 1, 1, 1, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::giftbox, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::GIFT_BOX, GIFTBOX_STATE::GIFTBOX), 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::GIFT_BOX, GIFTBOX_STATE::GIFTBOX_NORMAL), 1, 1, 1, 0));
 	return true;
 }
 
@@ -49,6 +57,7 @@ bool CGiftBox::initEntity()
 	this->m_GiftBoxEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
 	this->m_GiftBoxState = GIFTBOX_STATE::GIFTBOX_NORMAL;
 
+	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 
 	return true;

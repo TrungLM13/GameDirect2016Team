@@ -16,7 +16,7 @@ class CStaticEntity : public CBaseEntity
 {
 public:
 	CStaticEntity();
-	~CStaticEntity();
+	virtual ~CStaticEntity();
 
 	virtual  bool						loadSprite() = 0;
 	virtual  CBox2D						getBounding()															 override;

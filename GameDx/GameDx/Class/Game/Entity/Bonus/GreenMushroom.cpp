@@ -2,6 +2,7 @@
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Utill\ResourceManager\BonusResource.h"
 
 
 inline bool IsCollision_GreenMushRoom(CMovable* entity, vector<CBaseEntity*> listEntity) {
@@ -31,18 +32,25 @@ CGreenMushroom::CGreenMushroom(vector3d pos)
 
 CGreenMushroom:: ~CGreenMushroom()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 bool CGreenMushroom::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::greenmushroom, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::GREEN_MUSHROOM), 1, 1, 1, 0));
 	return true;
 }
 
 bool CGreenMushroom::initEntity()
 {
 	this->m_TagNode = "GreenMushroom";
+	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(9.8, 9.8);

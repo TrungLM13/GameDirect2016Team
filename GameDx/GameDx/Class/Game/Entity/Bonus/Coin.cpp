@@ -2,6 +2,7 @@
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
+#include "Class\Game\Utill\ResourceManager\BonusResource.h"
 
 CCoin::CCoin()
 {
@@ -15,12 +16,18 @@ CCoin::CCoin(LPDIRECT3DDEVICE9)
 
 CCoin:: ~CCoin()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 bool CCoin::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::coin, 1, 4, 4, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::COIN), 1, 4, 4, 0));
 	return true;
 }
 

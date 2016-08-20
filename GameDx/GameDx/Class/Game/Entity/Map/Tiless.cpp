@@ -1,5 +1,5 @@
 #include "Tiless.h"
-
+#include "Class\Game\Utill\ResourceManager\TileResource.h"
 
 CTiless::CTiless()
 {
@@ -20,8 +20,16 @@ CTiless::CTiless(vector2d pos, int type)
 }
 CTiless::~CTiless()
 {
-	if (!m_listSprite.empty())
-		m_listSprite.clear();
+	/*if (!m_listSprite.empty())
+		m_listSprite.clear();*/
+	SAFE_RELEASE(this->m_ResouceImage);
+
+	if (!m_listSprite.empty()) {
+		for (int i = 0; i < m_listSprite.size(); ++i) {
+			SAFE_RELEASE(m_listSprite.at(i));
+			m_listSprite.at(i) = nullptr;
+		}
+	}
 }
 
 
@@ -30,75 +38,75 @@ bool	CTiless::loadSprite()
 	switch (m_ID)
 	{
 	case TileStyle::TOF_GRASS_LEFT:
-		m_listSprite.push_back(new CSprite(CInfomationResource::grass_left_map3));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_GRASS_LEFT)));
 		break;
 	case TileStyle::TOF_GRASS_RIGHT:
-		m_listSprite.push_back(new CSprite(CInfomationResource::grass_right_map3));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_GRASS_RIGHT)));
 		break;
 	case TileStyle::TOF_GRASS_MIDDLE:
-		m_listSprite.push_back(new CSprite(CInfomationResource::grass_middle_map3));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_GRASS_MIDDLE)));
 		break;
 	case TileStyle::TOF_GRASS_ONE_BUSH:
-		m_listSprite.push_back(new CSprite(CInfomationResource::grass_small_map1));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_GRASS_ONE_BUSH)));
 		break;
 	case TileStyle::TOF_GRASS_TOW_BUSH:
-		m_listSprite.push_back(new CSprite(CInfomationResource::grass_normal_map1));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_GRASS_TOW_BUSH)));
 		break;
 	case TileStyle::TOF_GRASS_THREE_BUSH:
-		m_listSprite.push_back(new CSprite(CInfomationResource::grass_big_map1));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_GRASS_THREE_BUSH)));
 		break;
 
 	case TileStyle::TOF_CASTTLE:
-		m_listSprite.push_back(new CSprite(CInfomationResource::castle));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CASTTLE)));
 		break;
 
 	case TileStyle::TOF_PIPE_HEAD_DOWN:
-		m_listSprite.push_back(new CSprite(CInfomationResource::pipe_head_down));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_PIPE_HEAD_DOWN)));
 		break;
 	case TileStyle::TOF_PIPE_HEAD_BODY_DOWN:
-		m_listSprite.push_back(new CSprite(CInfomationResource::pipe_head_body_down));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_PIPE_HEAD_BODY_DOWN)));
 		break;
 	case TileStyle::TOF_PIPE_BODY_DOWN:
-		m_listSprite.push_back(new CSprite(CInfomationResource::pipe_body_down));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_PIPE_BODY_DOWN)));
 		break;
 	case TileStyle::TOF_PIPE_HEAD_RIGHT:
-		m_listSprite.push_back(new CSprite(CInfomationResource::pipe_head_right));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_PIPE_HEAD_RIGHT)));
 		break;
 	case TileStyle::TOF_PIPE_BODY_RIGHT:
-		m_listSprite.push_back(new CSprite(CInfomationResource::pipe_body_right));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_PIPE_BODY_RIGHT)));
 		break;
 
 	case TileStyle::TOF_CEMENT_PIPE:
-		m_listSprite.push_back(new CSprite(CInfomationResource::cement_pipe));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CEMENT_PIPE)));
 		break;
 	case TileStyle::TOF_CEMENT_BARRIER_RED:
-		m_listSprite.push_back(new CSprite(CInfomationResource::cement_barrier_red));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CEMENT_BARRIER_RED)));
 		break;
 	case TileStyle::TOF_CEMENT_BARRIER_BLUE:
-		m_listSprite.push_back(new CSprite(CInfomationResource::cement_barrier_blue));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CEMENT_BARRIER_BLUE)));
 		break;
 	case TileStyle::TOF_CEMENT_LANE_RED:
-		m_listSprite.push_back(new CSprite(CInfomationResource::cement_lane_red));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CEMENT_LANE_RED)));
 		break;
 	case TileStyle::TOF_CEMENT_LANE_BLE:
-		m_listSprite.push_back(new CSprite(CInfomationResource::cement_barrier_blue));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CEMENT_LANE_BLE)));
 		break;
 	case TileStyle::TOF_CLOUND_ONE_MEMBER:
-		m_listSprite.push_back(new CSprite(CInfomationResource::clound_small));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CLOUND_ONE_MEMBER)));
 		break;
 	case TileStyle::TOF_CLOUND_TOW_MEMBER:
-		m_listSprite.push_back(new CSprite(CInfomationResource::clound_normal));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CLOUND_TOW_MEMBER)));
 		break;
 	case TileStyle::TOF_CLOUND_THREE_MEMBER:
-		m_listSprite.push_back(new CSprite(CInfomationResource::clound_big));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_CLOUND_THREE_MEMBER)));
 		break;
 
 	case TileStyle::TOF_MOUNTAIN_SMALL:
-		m_listSprite.push_back(new CSprite(CInfomationResource::mountain_head));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_MOUNTAIN_SMALL)));
 		break;
 
 	case TileStyle::TOF_MOUNTAIN_BIG:
-		m_listSprite.push_back(new CSprite(CInfomationResource::mountain_body));
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_MOUNTAIN_BIG)));
 	default:
 		return false;
 	}
@@ -108,6 +116,8 @@ bool	CTiless::loadSprite()
 
 bool	CTiless::initEntity()
 {
+	this->m_ResouceImage = new CTileResource();
+
 	this->loadSprite();
 	return true;
 }

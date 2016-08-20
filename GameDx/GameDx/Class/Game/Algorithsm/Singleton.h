@@ -1,6 +1,13 @@
 #ifndef __SINGLETON_H__
 #define __SINGLETON_H__
 
+//template <typename T, typename Container>
+//void push_back_new(Container &c) {
+//	auto_ptr<T> p(new T);
+//	c.push_back(p.get());
+//	p.release();
+//}
+
 template <class  T> class CSingleton
 {
 public:

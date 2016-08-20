@@ -149,6 +149,12 @@
     <ClInclude Include="Class\Game\Utill\ArchitectureEntity.h" />
     <ClInclude Include="Class\Game\Utill\Config.h" />
     <ClInclude Include="Class\Game\Utill\InformationResource.h" />
+    <ClInclude Include="Class\Game\Utill\ResourceManager\BaseResource.h" />
+    <ClInclude Include="Class\Game\Utill\ResourceManager\BonusResource.h" />
+    <ClInclude Include="Class\Game\Utill\ResourceManager\EnermyResource.h" />
+    <ClInclude Include="Class\Game\Utill\ResourceManager\PlayerResource.h" />
+    <ClInclude Include="Class\Game\Utill\ResourceManager\SceneResource.h" />
+    <ClInclude Include="Class\Game\Utill\ResourceManager\TileResource.h" />
     <ClInclude Include="Class\Game\Utill\ShowBouding.h" />
     <ClInclude Include="Class\Game\Utill\stdafx.h" />
     <ClInclude Include="Class\Mathematics\AABB.h" />
@@ -156,6 +162,7 @@
     <ClInclude Include="Class\Mathematics\Collision.h" />
     <ClInclude Include="Class\Mathematics\Polygon.h" />
     <ClInclude Include="Class\Mathematics\SweptAABB.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Class\Framework\Camera.cpp" />
@@ -214,6 +221,12 @@
     <ClCompile Include="Class\Game\State\StandState.cpp" />
     <ClCompile Include="Class\Game\Test\Test.cpp" />
     <ClCompile Include="Class\Game\Utill\InformationResource.cpp" />
+    <ClCompile Include="Class\Game\Utill\ResourceManager\BaseResource.cpp" />
+    <ClCompile Include="Class\Game\Utill\ResourceManager\BonusResource.cpp" />
+    <ClCompile Include="Class\Game\Utill\ResourceManager\EnermyResource.cpp" />
+    <ClCompile Include="Class\Game\Utill\ResourceManager\PlayerResource.cpp" />
+    <ClCompile Include="Class\Game\Utill\ResourceManager\SceneResource.cpp" />
+    <ClCompile Include="Class\Game\Utill\ResourceManager\TileResource.cpp" />
     <ClCompile Include="Class\Game\Utill\ShowBouding.cpp" />
     <ClCompile Include="Class\Game\WinMain.cpp" />
     <ClCompile Include="Class\Mathematics\Box2D.cpp" />

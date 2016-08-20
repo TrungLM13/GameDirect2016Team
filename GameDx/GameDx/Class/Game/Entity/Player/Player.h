@@ -3,6 +3,8 @@
 #include "Class\Game\State\BaseState.h"
 #include "Class\Game\Algorithsm\Singleton.h"
 #include "Class\Game\Utill\ShowBouding.h"
+#include "Class\Game\Utill\ResourceManager\BaseResource.h"
+#include "Class\Game\Utill\ResourceManager\PlayerResource.h"
 
 //#include <vld.h>
 
@@ -51,7 +53,6 @@ protected:
 	int						m_PlayerTag;
 	CBaseState*				m_PlayerState;
 	int						m_UndyingTime;
-	
 private:
 };
 #endif

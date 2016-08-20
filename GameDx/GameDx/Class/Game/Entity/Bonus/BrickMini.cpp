@@ -4,6 +4,7 @@
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\Entity\Bonus\CoinInBox.h"
 #include "Class\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Utill\ResourceManager\BonusResource.h"
 
 CBrickMini::CBrickMini()
 {
@@ -28,16 +29,17 @@ CBrickMini::CBrickMini(int map, vector3d position, BRICKMINI_TYPE type)
 
 CBrickMini:: ~CBrickMini()
 {
+	SAFE_RELEASE(this->m_ResouceImage);
 }
 
 bool CBrickMini::loadSprite()
 {
 	if (map == 1 || map == 3)
 	{
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_LEFT_UP), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_RIGHT_UP), 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN), 1, 1, 1, 0));
 	}
 	else if (map == 2)
 	{
@@ -46,11 +48,14 @@ bool CBrickMini::loadSprite()
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left2, 1, 1, 1, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right2, 1, 1, 1, 0));
 	}
+	
+
 	return true;
 }
 
 bool CBrickMini::initEntity()
 {
+	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	return true;
 }

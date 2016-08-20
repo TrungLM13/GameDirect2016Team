@@ -3,6 +3,7 @@
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Player\Player.h"
+#include "Class\Game\Utill\ResourceManager\TileResource.h"
 
 CFlag::CFlag()
 {
@@ -11,12 +12,12 @@ CFlag::CFlag()
 
 CFlag:: ~CFlag()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
 }
 
 bool CFlag::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::greenFlag, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_FLAG), 1, 1, 1, 0));
 	return true;
 }
 
@@ -24,6 +25,7 @@ bool CFlag::initEntity()
 {
 	m_Position = vector3d(242, 184, 0);
 	m_Velocity = vector2d(0, -9.8);
+	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	m_TagNode = "Flag";

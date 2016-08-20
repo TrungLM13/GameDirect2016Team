@@ -2,6 +2,7 @@
 #include "Class\Game\Utill\InformationResource.h"
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
+#include "Class\Game\Utill\ResourceManager\TileResource.h"
 
 CFlagPoleHead::CFlagPoleHead()
 {
@@ -10,18 +11,19 @@ CFlagPoleHead::CFlagPoleHead()
 
 CFlagPoleHead:: ~CFlagPoleHead()
 {
-
+	SAFE_RELEASE(this->m_ResouceImage);
 }
 
 bool CFlagPoleHead::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::flagPoleHead, 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_FLAG_POLE_HEAD), 1, 1, 1, 0));
 	return true;
 }
 
 bool CFlagPoleHead::initEntity()
 {
 	m_Position = vector3d(250, 200, 0);
+	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	m_TagNode = "FlagPoleHead";
