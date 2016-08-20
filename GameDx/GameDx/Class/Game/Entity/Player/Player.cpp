@@ -10,7 +10,9 @@
 inline bool IsCollision_Player(CMovable* entity, vector<CBaseEntity*> listEntity) {
 	for (int i = 0; i < listEntity.size(); i++)
 	{
-		if (listEntity.at(i)->getTagNodeId() == TAGNODE::BRICK)
+		if (listEntity.at(i)->getTagNodeId() == TAGNODE::BRICK || listEntity.at(i)->getTagNodeId() == TAGNODE::GIFT_BOX
+			
+			)
 		{
 			if (CCollision::CheckCollision(entity, listEntity.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
 			{
@@ -333,6 +335,7 @@ void CPlayer::handleCollision(CBaseEntity* entity, float deltaTime) {
 		case TAGNODE::BRICK: case TAGNODE::GIFT_BOX:
 			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_BOTTOM)
 			{
+				this->m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y - CMapManager::getInstance()->getListBonus().at(i)->getBounding().getHeight() / 2 - this->getBounding().getHeight() / 2;
 				if (this->m_Velocity.y >= 0)
 				{
 					//this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);

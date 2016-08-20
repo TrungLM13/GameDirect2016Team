@@ -86,14 +86,14 @@ bool CMapManager::loadEntityInMap()
 		/*if (type == "3E")
 			m_listBonus.push_back(new CCarnivorousPlants());*/
 		if (type == "1B")
-			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_STAR));
+			m_listBonus.push_back(new CBrick(1,positionEntity, BRICK_TYPE::BRICK_STAR));
 		if (type == "2B")
-			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_COIN));
-		/*if (type == "3B")
-			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_NONE));
-		/*if (type == "4B")
+			m_listBonus.push_back(new CBrick(2,positionEntity, BRICK_TYPE::BRICK_COIN));
+		if (type == "3B")
+			m_listBonus.push_back(new CBrick(2,positionEntity, BRICK_TYPE::BRICK_NONE));
+		if (type == "4B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
-		if (type == "5B")
+		/*ifif (type == "5B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_COIN));
 		if (type == "6B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_NONE));

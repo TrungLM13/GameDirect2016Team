@@ -10,8 +10,10 @@ CBrickMini::CBrickMini()
 	this->initEntity();
 }
 
-CBrickMini::CBrickMini(vector3d position, BRICKMINI_TYPE type)
+CBrickMini::CBrickMini(int map, vector3d position, BRICKMINI_TYPE type)
 {
+	this->map = map;
+
 	m_Position.x = position.x;
 	m_Position.y = position.y;
 
@@ -30,10 +32,20 @@ CBrickMini:: ~CBrickMini()
 
 bool CBrickMini::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left, 1, 1, 1, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right, 1, 1, 1, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left, 1, 1, 1, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right, 1, 1, 1, 0));
+	if (map == 1 || map == 3)
+	{
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right, 1, 1, 1, 0));
+	}
+	else if (map == 2)
+	{
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left2, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right2, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left2, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right2, 1, 1, 1, 0));
+	}
 	return true;
 }
 
@@ -53,24 +65,24 @@ void CBrickMini::updateEntity(float deltaTime)
 	if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_LEFT_UP)
 	{
 		this->m_Position.x += BRICKMINI_UP_VELOCITY * cos(PI / 3);
-		this->m_Position.y += BRICKMINI_UP_VELOCITY * sin(PI / 3) + GRAVITATION * deltaTime / 70;
+		this->m_Position.y += (BRICKMINI_UP_VELOCITY * sin(PI / 3) + GRAVITATION) * deltaTime / 70;
 	}
 	else if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN)
 	{
-		this->m_Position.x += BRICKMINI_DOWN_VELOCITY * cos(7*PI / 18);
-		this->m_Position.y += BRICKMINI_DOWN_VELOCITY * sin(7 * PI / 18) + GRAVITATION * deltaTime / 70;
+		this->m_Position.x += BRICKMINI_DOWN_VELOCITY * cos(7 * PI / 18);
+		this->m_Position.y += (BRICKMINI_DOWN_VELOCITY * sin(7 * PI / 18) + GRAVITATION) * deltaTime / 70;
 	}
 	else if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_RIGHT_UP)
 	{
 		this->m_Position.x += BRICKMINI_UP_VELOCITY * cos(2 * PI / 3);
-		this->m_Position.y += BRICKMINI_UP_VELOCITY * sin(2 * PI / 3) + GRAVITATION * deltaTime / 70;
+		this->m_Position.y += (BRICKMINI_UP_VELOCITY * sin(2 * PI / 3) + GRAVITATION)* deltaTime / 70;
 	}
 	else if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN)
 	{
 		this->m_Position.x += BRICKMINI_DOWN_VELOCITY * cos(11 * PI / 18);
-		this->m_Position.y += BRICKMINI_DOWN_VELOCITY * sin(11 * PI / 18) + GRAVITATION * deltaTime / 70;
+		this->m_Position.y += (BRICKMINI_DOWN_VELOCITY * sin(11 * PI / 18) + GRAVITATION)* deltaTime / 70;
 	}
-	if (this->m_Position.y <= VEL_DEFAULT_Y)
+	if (this->m_Position.y <= 20)
 	{
 		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
 		CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::BRICKMINI);

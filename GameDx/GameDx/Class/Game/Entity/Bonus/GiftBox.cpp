@@ -12,6 +12,8 @@ CGiftBox::CGiftBox()
 
 CGiftBox::CGiftBox(vector2d pos, GIFTBOX_TYPE type)
 {
+	this->GIFTBOX_PRE_POSITION_Y = pos.y;
+
 	this->m_Position.x = pos.x;
 	this->m_Position.y = pos.y;
 
@@ -23,6 +25,7 @@ CGiftBox::CGiftBox(vector2d pos, GIFTBOX_TYPE type)
 
 	this->initEntity();
 
+	this->GIFTBOX_PRE_POSITION_Y_MAX = pos.y + this->m_listSprite.at(0)->getFrameInfo().Height;
 }
 
 CGiftBox:: ~CGiftBox()
@@ -113,14 +116,14 @@ void CGiftBox::updateEntity(float deltaTime)
 	{
 		if (this->m_GiftBoxType == GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE)
 		{
-			this->m_itemInBox = new CIteminbox();
-			this->m_itemInBox->setPosition(vector3d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y, 0));
-			this->m_itemInBox->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 0.5));
+			this->m_itemInBox = new CIteminbox(vector2d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y + ADD_POS_Y));
+			//this->m_itemInBox->setPosition(vector3d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y + ADD_POS_Y, 0));
+			this->m_itemInBox->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 3));
 			CMapManager::getInstance()->pushInFirst(m_itemInBox);
 		}
 		else if (this->m_GiftBoxType == GIFTBOX_TYPE::GIFTBOX_COIN)
 		{
-			m_Coin = new CCoinInBox(vector3d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y, 0));
+			m_Coin = new CCoinInBox(vector3d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y + ADD_POS_Y, 0));
 			m_Coin->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
 			CMapManager::getInstance()->pushInFirst(m_Coin);
 		}

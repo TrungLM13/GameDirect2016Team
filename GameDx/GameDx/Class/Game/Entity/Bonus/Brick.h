@@ -11,7 +11,7 @@ class CBrick : public CMovable
 {
 public:
 	CBrick();
-	CBrick(vector2d position, BRICK_TYPE type);
+	CBrick(int map,vector2d position, BRICK_TYPE type);
 	~CBrick();
 	virtual	bool			loadSprite()											override;
 	virtual	bool			initEntity()											override;
@@ -22,10 +22,11 @@ public:
 	virtual int				getTagNodeId()											override;
 
 public:
+	int getMap();
 	void setPosition(vector3d position);
 	void setVelocity(vector2d velocity);
 
-public:
+private:
 	BRICK_TYPE m_BrickType;
 	GIFTBOX_BRICK_EVENT m_BrickEvent;
 	BRICK_STATE m_BrickState;
@@ -34,6 +35,7 @@ public:
 	CGreenMushroom* m_GreenMushRoom;
 	vector<CBrickMini*>  m_BrickMini;
 	float m_CountCoin;
-	bool isBreak;
+	int map;
+	vector3d PrePos;
 };
 #endif

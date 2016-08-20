@@ -29,6 +29,7 @@ CStar::CStar(vector3d pos)
 {
 	this->m_Position = pos;
 	this->initEntity();
+	this->STAR_POSITION_Y_MAX = pos.y + this->m_listSprite.at(0)->getFrameInfo().Height - ADD_POS_Y;
 }
 
 CStar:: ~CStar()

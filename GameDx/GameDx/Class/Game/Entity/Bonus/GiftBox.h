@@ -26,5 +26,7 @@ private:
 	GIFTBOX_STATE			m_GiftBoxState;
 	CIteminbox*				m_itemInBox;
 	CCoinInBox*				m_Coin;
+	float					GIFTBOX_PRE_POSITION_Y;
+	float					GIFTBOX_PRE_POSITION_Y_MAX;
 };
 #endif

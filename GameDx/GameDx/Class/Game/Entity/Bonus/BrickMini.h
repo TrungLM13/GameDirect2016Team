@@ -10,7 +10,7 @@ class CBrickMini : public CMovable
 {
 public:
 	CBrickMini();
-	CBrickMini(vector3d position, BRICKMINI_TYPE type);
+	CBrickMini(int map,vector3d position, BRICKMINI_TYPE type);
 	~CBrickMini();
 	virtual	bool			loadSprite()											override;
 	virtual	bool			initEntity()											override;
@@ -23,9 +23,9 @@ public:
 	void setPosition(vector3d position);
 	void setVelocity(vector2d velocity);
 
-public:
+private:
 	int m_BrickMiniType;
-
+	int map;
 	
 };
 #endif

@@ -5,14 +5,25 @@
 #include "Class\Game\Entity\Bonus\CoinInBox.h"
 #include "Class\Game\Entity\Map\MapManager.h"
 
+inline int getIndex(vector<CBaseEntity*> list, CBaseEntity* entity) {
+	for (int i = 0; i < list.size(); ++i) {
+		if (CMapManager::getInstance()->getListBonus().at(i) == entity) {
+			return i;
+		}
+	}
+}
+
 CBrick::CBrick()
 {
 	m_BrickType = BRICK_TYPE::BRICK_NONE;
 	this->initEntity();
 }
 
-CBrick::CBrick(vector2d position, BRICK_TYPE type)
+CBrick::CBrick(int map, vector2d position, BRICK_TYPE type)
 {
+	this->map = map;
+	this->PrePos = vector3d(position.x, position.y, 0);
+
 	m_Position.x = position.x;
 	m_Position.y = position.y;
 
@@ -30,19 +41,28 @@ CBrick:: ~CBrick()
 	SAFE_RELEASE(m_Coin);
 	SAFE_RELEASE(m_Star);
 	SAFE_RELEASE(m_GreenMushRoom);
-
+	for (int i = 0; i < m_BrickMini.size(); i++){
+		SAFE_RELEASE(m_BrickMini.at(i));
+	}
 }
 
 bool CBrick::loadSprite()
 {
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::brick, 1, 1, 1, 0));
-	this->m_listSprite.push_back(new CSprite(CInfomationResource::box, 1, 1, 1, 0));
+	if (map == 1 || map == 3)
+	{
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brick, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::box, 1, 1, 1, 0));
+	}
+	else if (map == 2)
+	{
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::brick2, 1, 1, 1, 0));
+		this->m_listSprite.push_back(new CSprite(CInfomationResource::box2, 1, 1, 1, 0));
+	}
 	return true;
 }
 
 bool CBrick::initEntity()
 {
-	isBreak = false;
 	m_Star = nullptr;
 	m_Coin = nullptr;
 	m_GreenMushRoom = nullptr;
@@ -86,15 +106,22 @@ void CBrick::updateEntity(float deltaTime)
 					CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::FIRE ||
 					CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::UNDYING)
 				{
-					isBreak = true;
-					m_BrickMini.push_back(new CBrickMini(this->m_Position, BRICKMINI_TYPE::BRICKMINI_LEFT_UP));
-					m_BrickMini.push_back(new CBrickMini(vector3d(this->m_Position.x + 8, this->m_Position.y, 0), BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN));
-					m_BrickMini.push_back(new CBrickMini(vector3d(this->m_Position.x, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_UP));
-					m_BrickMini.push_back(new CBrickMini(vector3d(this->m_Position.x + 8, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN));
+					m_BrickMini.push_back(new CBrickMini(this->map, this->m_Position, BRICKMINI_TYPE::BRICKMINI_LEFT_UP));
+					m_BrickMini.push_back(new CBrickMini(this->map, vector3d(this->m_Position.x + 8, this->m_Position.y, 0), BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN));
+					m_BrickMini.push_back(new CBrickMini(this->map, vector3d(this->m_Position.x, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_UP));
+					m_BrickMini.push_back(new CBrickMini(this->map, vector3d(this->m_Position.x + 8, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN));
+					
 					for (int i = 0; i < m_BrickMini.size(); i++)
 					{
 						CMapManager::getInstance()->pushBonusObject(m_BrickMini.at(i));
 					}
+					
+					vector<CBaseEntity*>  tempList = CMapManager::getInstance()->getListBonus();
+					tempList.erase(tempList.begin() + getIndex(tempList, this));
+
+					CMapManager::getInstance()->setListBonus(tempList);
+
+					tempList.clear();
 
 					this->m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_NONE;
 				}
@@ -111,26 +138,27 @@ void CBrick::updateEntity(float deltaTime)
 		break;
 	}
 
-	if (m_Position.y >= BRICK_PRE_POSITION_Y_MAX){
+	if (m_Position.y >= (this->PrePos.y + this->m_listSprite.at(m_State)->getFrameInfo().Height / 2)){
 		if (m_Velocity.y > 0){
 			m_Velocity.y = CHANGE_DIRECTION(m_Velocity.y);
 		}
 	}
 
 	if (SIGN(m_Velocity.y) == DIRECTION::DIRECTION_DOWN) {
-		if (m_Position.y <= BRICK_PRE_POSITION_Y) {
+		if (m_Position.y <= this->PrePos.y) {
 			m_Velocity.y = VEL_DEFAULT_Y;
 		}
 	}
 
 	m_Position = vector3d(m_Position.x, m_Position.y + (m_Velocity.y + SIGN(m_Velocity.y) * GRAVITATION)* deltaTime / 100, 0);
 
-	if (m_Position.y <= BRICK_PRE_POSITION_Y && m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING) {
+	if (m_Position.y <= this->PrePos.y && m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING) {
+
 		if ((m_BrickType == BRICK_TYPE::BRICK_STAR && m_BrickState == BRICK_STATE::BRICK_BOX) ||
 			(m_BrickType == BRICK_TYPE::BRICK_COIN) ||
-			(m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM && m_BrickState == BRICK_STATE::BRICK_BOX))
+     		(m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM && m_BrickState == BRICK_STATE::BRICK_BOX))
 		{
-			m_Position.y = BRICK_PRE_POSITION_Y;
+			m_Position.y = this->PrePos.y;
 			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_DONE;
 		}
 	}
@@ -138,22 +166,22 @@ void CBrick::updateEntity(float deltaTime)
 	if (m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_DONE){
 		if (m_BrickType == BRICK_TYPE::BRICK_STAR)
 		{
-			m_Star = new CStar(vector3d(this->m_Position.x, BRICK_PRE_POSITION_Y, 0));
-			m_Star->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 0.5));
+			m_Star = new CStar(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
+			m_Star->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
 			CMapManager::getInstance()->pushInFirst(m_Star);
-			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
+ 			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
 			m_BrickType = BRICK_TYPE::BRICK_NONE;
 		}
 		else if (m_BrickType == BRICK_TYPE::BRICK_COIN) {
-			m_Coin = new CCoinInBox(vector3d(this->m_Position.x, BRICK_PRE_POSITION_Y, 0));
+			m_Coin = new CCoinInBox(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
 			m_Coin->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
 			CMapManager::getInstance()->pushInFirst(m_Coin);
 			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
 		}
 		else if (this->m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM)
 		{
-			m_GreenMushRoom = new CGreenMushroom(vector3d(this->m_Position.x, BRICK_PRE_POSITION_Y, 0));
-			m_GreenMushRoom->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 0.5));
+			m_GreenMushRoom = new CGreenMushroom(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
+			m_GreenMushRoom->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
 			CMapManager::getInstance()->pushInFirst(m_GreenMushRoom);
 			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
 			m_BrickType = BRICK_TYPE::BRICK_NONE;
@@ -165,7 +193,6 @@ void CBrick::updateEntity(float deltaTime)
 
 void CBrick::drawEntity()
 {
-	if (!isBreak)
 		this->m_listSprite.at(this->m_BrickState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
@@ -185,4 +212,9 @@ void CBrick::setVelocity(vector2d velocity) {
 int	CBrick::getTagNodeId()
 {
 	return TAGNODE::BRICK;
+}
+
+int CBrick::getMap()
+{
+	return this->map;
 }

@@ -56,10 +56,10 @@ void CGreenMushroom::updateEntity(CKeyBoard* device)
 
 void CGreenMushroom::updateEntity(float deltaTime)
 {
-	if (this->m_Position.y >= REDMUSHROOM_POSITION_Y_MAX)
+	if (this->m_Position.y >= 86)
 	{
 		this->m_Velocity.y = VEL_DEFAULT_Y;
-		this->m_Position.y = REDMUSHROOM_POSITION_Y_MAX;
+		this->m_Position.y = 86;
 
 		if (IsCollision_GreenMushRoom(this, CMapManager::getInstance()->getListBonus()))
 		{

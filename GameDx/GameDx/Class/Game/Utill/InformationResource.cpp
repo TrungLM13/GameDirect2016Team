@@ -104,6 +104,10 @@ const wchar_t*		CInfomationResource::flower						= L"Resource//Image//Game//Spri
 const wchar_t*		CInfomationResource::brickbreak					= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_4.png";
 const wchar_t*		CInfomationResource::brickbreak_left			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai.png";
 const wchar_t*		CInfomationResource::brickbreak_right			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai.png";
+const wchar_t*		CInfomationResource::brickbreak_left2			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai_map2.png";
+const wchar_t*		CInfomationResource::brickbreak_right2			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai_map2.png";
+const wchar_t*		CInfomationResource::brick2						= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh.png";
+const wchar_t*		CInfomationResource::box2						= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh_0_cham_hoi.png";
 
 /*************************************************/
 

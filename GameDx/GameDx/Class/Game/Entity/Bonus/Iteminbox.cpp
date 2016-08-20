@@ -24,6 +24,15 @@ CIteminbox::CIteminbox()
 	this->initEntity();
 }
 
+CIteminbox::CIteminbox(vector2d pos)
+{
+	this->initEntity();
+	this->m_Position.x = pos.x;
+	this->m_Position.y = pos.y;
+
+	this->REDMUSHROOM_POSITION_Y_MAX = pos.y + this->m_listSprite.at(this->m_itemtype)->getFrameInfo().Height - ADD_POS_Y;
+}
+
 CIteminbox:: ~CIteminbox()
 {
 

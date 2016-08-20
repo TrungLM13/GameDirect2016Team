@@ -18,5 +18,6 @@ public:
 	virtual int				getTagNodeId()									override;
 
 private:
+	float STAR_POSITION_Y_MAX;
 };
 #endif

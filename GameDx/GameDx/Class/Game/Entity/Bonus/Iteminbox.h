@@ -7,6 +7,7 @@ class CIteminbox : public CMovable
 {
 public:
 	CIteminbox();
+	CIteminbox(vector2d pos);
 	~CIteminbox();
 	virtual bool			loadSprite()									override;
 	virtual	bool			initEntity()									override;
@@ -24,5 +25,6 @@ public:
 
 private:
 	ITEMINBOX_TYPE        m_itemtype;
+	float				  REDMUSHROOM_POSITION_Y_MAX;
 };
 #endif

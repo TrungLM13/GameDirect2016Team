@@ -112,6 +112,10 @@ public:
 	static const wchar_t*	brickbreak;
 	static const wchar_t*	brickbreak_left;
 	static const wchar_t*	brickbreak_right;
+	static const wchar_t*	brickbreak_left2;
+	static const wchar_t*	brickbreak_right2;
+	static const wchar_t*   brick2;
+	static const wchar_t*   box2;
 	/*************************************************/
 
 	/************RESOURCE FOR BOUDING *************/
