@@ -1,40 +1,54 @@
-//#include "GameOverScene.h"
-//
-//
-//CGameOverScene::CGameOverScene()
-//{
-//	this->initScene();
-//}
-//
-//
-//CGameOverScene::~CGameOverScene()
-//{
-//}
-//
-//bool CGameOverScene::initScene()
-//{
-//	m_Background = new CSprite(CInfomationResource::backgroundIntroStage);
-//
-//	return true;
-//
-//}
-//
-//void CGameOverScene::updateScene(double deltaTime)
-//{
-//
-//}
-//
-//void CGameOverScene::updateScene(CKeyBoard*)
-//{
-//
-//}
-//
-//void CGameOverScene::renderScene()
-//{
-//	m_Background->Render(vector3d(0.0, 0.0f, 0.5f), vector2d(1.0f, 1.0f), 0, DRAWCENTER_LEFT_TOP);
-//	CText::getInstace()->Draw(_T(GAME_OVER_STRING), vector3d(BACKBUFFER_WIDTH / 2, BACKBUFFER_HEIGHT / 3, 0.5), DEFAULT_FONT_COLOR, 20, DT_CENTER, DEFAULT_FONTNAME);
-//
-//	//CText::getInstace()->Draw(_T(GAME_OVER_STRING), vector3d(BACKBUFFER_WIDTH / 2, BACKBUFFER_HEIGHT / 3, 0.5), DEFAULT_FONT_COLOR, 15, DT_CENTER, DEFAULT_FONTNAME);
-//	//CText::getInstace()->Draw(_T(CONTINUE_STRING), vector3d(BACKBUFFER_WIDTH / 2, 3 * BACKBUFFER_HEIGHT / 5, 0.5f), DEFAULT_FONT_COLOR, 15, DT_CENTER, DEFAULT_FONTNAME);
-//	//CText::getInstace()->Draw(_T(SELECT_STAGE_STRING_GV),	vector3d(BACKBUFFER_WIDTH / 2, 4 *	BACKBUFFER_HEIGHT / 5, 0.5f), DEFAULT_FONT_COLOR, 15, DT_CENTER, DEFAULT_FONTNAME);
-//}
+#include "GameOverScene.h"
+#include <ctime>
+#include <stack>
+#include "Class\Game\Scene\PopupInfo.h"
+
+
+
+CGameOver::CGameOver()
+{
+	this->initScene();
+	m_actionChangeSceneTimer = 0;
+}
+
+
+CGameOver::~CGameOver()
+{
+}
+
+bool CGameOver::initScene()
+{
+	return true;
+}
+
+void CGameOver::updateScene(double deltaTime)
+{
+	if (m_actionChangeSceneTimer < 2000)
+	{
+		m_actionChangeSceneTimer += deltaTime;
+		return;
+	}
+	m_actionChangeSceneTimer = 0;
+
+	CBaseScene* tempScene = CSceneManager::getInstance()->getScene().top();
+	CSceneManager::getInstance()->getScene().pop();
+	delete[] tempScene;
+
+	CSceneManager::getInstance()->getScene().push(new CMenuScene());
+}
+
+void CGameOver::updateScene(CKeyBoard* keybard)
+{
+
+}
+
+void CGameOver::renderScene()
+{
+	string x = "GAME OVER";
+	int wchars_num = MultiByteToWideChar(CP_UTF8, 0, x.c_str(), -1, NULL, 0);
+	wchar_t* wstr = new wchar_t[wchars_num];
+	MultiByteToWideChar(CP_UTF8, 0, x.c_str(), -1, wstr, wchars_num);
+	CText::getInstace()->Draw(wstr, vector3d(120, 125, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
+
+	delete[] wstr;
+}

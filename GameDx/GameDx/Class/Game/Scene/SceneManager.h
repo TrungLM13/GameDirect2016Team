@@ -7,7 +7,7 @@
 #include "Class\Game\Scene\BaseScene.h"
 #include "Class\Game\Scene\MenuScene.h"
 #include "Class\Game\Scene\PlayScene.h"
-#include "Class\Game\Scene\SelectStageScene.h"
+#include "Class\Game\Scene\IntroMap.h"
 
 class CSceneManager
 {

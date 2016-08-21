@@ -25,6 +25,9 @@ const wchar_t*	CInfomationResource::popUp							= L"Resource//Image//PopupScene/
 const wchar_t*	CInfomationResource::itemLife						= L"Resource//Image//PopupScene//Item_life.png";
 /*************************************************/
 
+/************RESOURCE FOR PLAY SCENE********/
+const wchar_t*	CInfomationResource::backgroundPlayScene			= L"Resource//Image//SceneGame//intro.png";
+
 /************RESOURCE FOR BONUS **************/
 const wchar_t*		CInfomationResource::brickbreak_left2			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai_map2.png";
 const wchar_t*		CInfomationResource::brickbreak_right2			= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai_map2.png";

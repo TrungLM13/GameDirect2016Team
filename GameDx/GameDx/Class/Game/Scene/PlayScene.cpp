@@ -4,6 +4,7 @@
 #include "Class\Game\Entity\Map\MapManager.h"
 #include "Class\Game\Algorithsm\QuadTree.h"
 #include "Class\Game\Entity\Player\Player.h"
+#include "Class\Game\Scene\GameOverScene.h"
 
 CPlayScene::CPlayScene()
 {
@@ -12,16 +13,17 @@ CPlayScene::CPlayScene()
 
 CPlayScene::~CPlayScene()
 {
-
 }
 
 bool CPlayScene::initScene()
 {
+	m_backgroud				= new CSprite(CInfomationResource::backgroundPlayScene);
+
 	CMapManager::getInstance();
-	m_treeGame = new CQuadTree();
+	m_treeGame				= new CQuadTree();
 
 	m_treeGame->CreateTree();
-
+	m_actionDieTimer		= 0;
 	CPlayer::getInstance();
 	return true;
 }
@@ -35,17 +37,19 @@ void CPlayScene::updateScene(double deltaTime)
 	m_listObjectInViewport = m_treeGame->Retrieve(CCamera::getInstance()->getBoundingScreen());
 
 	for (int i = 0; i < m_listObjectInViewport.size(); ++i) {
-		if (m_listObjectInViewport.at(i)->getObjectType() == OBJECT_TYPE::TYPE_BONUS) {
+		if (m_listObjectInViewport.at(i)->getObjectType()		== OBJECT_TYPE::TYPE_BONUS) {
 			CPlayer::getInstance()->handleCollisionWithBonus(m_listObjectInViewport.at(i), deltaTime);
 		}
-		else if (m_listObjectInViewport.at(i)->getObjectType() == OBJECT_TYPE::TYPE_ENERMY) {
+		else if (m_listObjectInViewport.at(i)->getObjectType()	== OBJECT_TYPE::TYPE_ENERMY) {
 			CPlayer::getInstance()->handleCollisionWithEnermy(m_listObjectInViewport.at(i), deltaTime);
 		}
-		else if (m_listObjectInViewport.at(i)->getObjectType() == OBJECT_TYPE::TYPE_TILE) {
+		else if (m_listObjectInViewport.at(i)->getObjectType()	== OBJECT_TYPE::TYPE_TILE) {
 			CPlayer::getInstance()->handleCollisionWithTile(deltaTime);
 		}
 		m_listObjectInViewport.at(i)->updateEntity(deltaTime);
 	}
+
+	this->checkChangeScene(deltaTime);
 }
 
 void CPlayScene::updateScene(CKeyBoard* keyboard)
@@ -57,9 +61,57 @@ void CPlayScene::updateScene(CKeyBoard* keyboard)
 
 void CPlayScene::renderScene()
 {
+	m_backgroud->Render(CCamera::getInstance()->setPositionEntity(vector3d(CCamera::getInstance()->getPosisionCamera())), vector2d(1.0f, 1.0f), 0, DRAWCENTER_LEFT_TOP);
+	
+	wchar_t temp[100];
+	_itow(CPopUpInfo::getInstance()->getPoint(), temp, 10);
+	CText::getInstace()->Draw(temp, vector3d(50, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
+
+	ZeroMemory(temp, 100);
+	_itow(CPopUpInfo::getInstance()->getCoin(), temp, 10);
+	CText::getInstace()->Draw(temp, vector3d(110, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
+
+	int wchars_num = MultiByteToWideChar(CP_UTF8, 0, CPopUpInfo::getInstance()->getMapName().c_str(), -1, NULL, 0);
+	wchar_t* wstr = new wchar_t[wchars_num];
+	MultiByteToWideChar(CP_UTF8, 0, CPopUpInfo::getInstance()->getMapName().c_str(), -1, wstr, wchars_num);
+
+	CText::getInstace()->Draw(wstr, vector3d(160, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
+
+	ZeroMemory(temp, 100);
+	_itow(CPopUpInfo::getInstance()->getTimer(), temp, 10);
+	CText::getInstace()->Draw(temp, vector3d(220, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
+	
 	CPlayer::getInstance()->drawEntity();
 
 	if (m_listObjectInViewport.size())
 	for (int i = 0; i < m_listObjectInViewport.size(); ++i)
 		m_listObjectInViewport.at(i)->drawEntity();
+}
+
+void	CPlayScene::checkChangeScene(float deltaTime)
+{
+	if (CPlayer::getInstance()->getStateInt() == PLAYERSTATES::DIE)
+	{
+		if (m_actionDieTimer < 1000)
+		{
+			m_actionDieTimer += deltaTime;
+			return;
+		}
+
+		CPopUpInfo::getInstance()->setHelth(CPopUpInfo::getInstance()->getHelth() - 1);
+
+		CBaseScene* tempScene		= CSceneManager::getInstance()->getScene().top();
+		CSceneManager::getInstance()->getScene().pop();
+		delete[] tempScene;
+
+		if (CPopUpInfo::getInstance()->getHelth() > 0)
+			CSceneManager::getInstance()->getScene().push(new CIntroMap());
+		else
+			CSceneManager::getInstance()->getScene().push(new CGameOver());
+
+		CPlayer::getInstance()		->resetPlayer(vector3d(50, 28, 0.5));
+		CCamera::getInstance()		->setPositionCamera(vector3d(0, 240, 0));
+
+		m_actionDieTimer			= 0;
+	}
 }

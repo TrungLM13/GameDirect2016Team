@@ -17,9 +17,13 @@ public:
 	virtual void updateScene(CKeyBoard* keyboard)	override;
 	virtual void renderScene()						override;
 
+			void checkChangeScene(float deltaTime);
+
 private:
 	CQuadTree*				m_treeGame;
 	vector<CObjectss*>		m_listObjectInViewport;
+	CSprite*				m_backgroud;
+	float					m_actionDieTimer;
 };
 
 #endif
