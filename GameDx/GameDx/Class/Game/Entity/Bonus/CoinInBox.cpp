@@ -14,19 +14,13 @@ CCoinInBox::CCoinInBox(vector3d pos)
 {
 	this->m_Position = pos;
 	this->initEntity();
-
-	/*for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
-		if (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId() == TAGNODE::COININBOX ) {
-			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
-			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
-			CMapManager::getInstance()->setListBonus(tempBonusList);
-			tempBonusList.clear();*/
-		//}
-	//}
+	this->m_Pos_y_Max = this->m_Position.y + 3* this->m_listSprite.at(0)->getFrameInfo().Height;
+	this->m_Pos_y_Min = this->m_Position.y + this->m_listSprite.at(0)->getFrameInfo().Height;
 }
 
 CCoinInBox:: ~CCoinInBox()
 {
+	SAFE_RELEASE(this->m_Sound);
 	SAFE_RELEASE(this->m_ResouceImage);
 	if (!m_listSprite.empty()) {
 		for (int i = 0; i < m_listSprite.size(); ++i) {
@@ -50,6 +44,7 @@ bool CCoinInBox::initEntity()
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(0, 0);
+	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_coin.wav");
 	return true;
 }
 
@@ -60,29 +55,30 @@ void CCoinInBox::updateEntity(CKeyBoard* device)
 
 void CCoinInBox::updateEntity(float deltaTime)
 {
+	CAudio::getInstance()->PlaySoundW(m_Sound);
 	// Handle: Player day cuc gach an tien lien tuc
-	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
-		if (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId() == TAGNODE::COININBOX &&
-			CMapManager::getInstance()->getListBonus().at(i)->getPosition().y <= 100 &&
-			CMapManager::getInstance()->getListBonus().at(i)->getVelocity().y <= 0)
+	for (int i = 0; i < CMapManager::getInstance()->getListBonusItem().size(); ++i) {
+		if (CMapManager::getInstance()->getListBonusItem().at(i)->getTagNodeId() == TAGNODE::COININBOX &&
+			CMapManager::getInstance()->getListBonusItem().at(i)->getPosition().y <= 100 &&
+			CMapManager::getInstance()->getListBonusItem().at(i)->getVelocity().y <= 0)
 		{
-			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
-			CMapManager::getInstance()->setListBonus(tempBonusList);
+			CMapManager::getInstance()->setListBonusItem(tempBonusList);
 			tempBonusList.clear();
 		}
 	}
 
-	if (this->m_Position.y >= 120)
+	if (this->m_Position.y >= this->m_Pos_y_Max)
 	{
 		m_Velocity.y = CHANGE_DIRECTION(m_Velocity.y);
 	}
-	if (this->m_Position.y <= 100 && this->m_Velocity.y + GRAVITATION <= 0)
+	if (this->m_Position.y <= this->m_Pos_y_Min && (this->m_Velocity.y + GRAVITATION) <= 0)
 	{
 		m_Velocity.y = VEL_DEFAULT_Y;
-		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 		CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
-		CMapManager::getInstance()->setListBonus(tempBonusList);
+		CMapManager::getInstance()->setListBonusItem(tempBonusList);
 		tempBonusList.clear();
 	}
 	this->m_Position.y = this->m_Position.y + (this->m_Velocity.y + SIGN(m_Velocity.y) * GRAVITATION) *deltaTime / 100;

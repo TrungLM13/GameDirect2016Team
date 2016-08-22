@@ -19,6 +19,7 @@ inline bool IsCollision_GreenMushRoom(CMovable* entity, vector<CBaseEntity*> lis
 
 	return false;
 }
+
 CGreenMushroom::CGreenMushroom()
 {
 	this->initEntity();
@@ -28,6 +29,7 @@ CGreenMushroom::CGreenMushroom(vector3d pos)
 {
 	this->m_Position = pos;
 	this->initEntity();
+	this->m_Pos_y_Max = this->m_Position.y + this->m_listSprite.at(0)->getFrameInfo().Height - ADD_POS_Y;
 }
 
 CGreenMushroom:: ~CGreenMushroom()
@@ -64,10 +66,10 @@ void CGreenMushroom::updateEntity(CKeyBoard* device)
 
 void CGreenMushroom::updateEntity(float deltaTime)
 {
-	if (this->m_Position.y >= 86)
+	if (this->m_Position.y >= m_Pos_y_Max)
 	{
 		this->m_Velocity.y = VEL_DEFAULT_Y;
-		this->m_Position.y = 86;
+		this->m_Position.y = m_Pos_y_Max;
 
 		if (IsCollision_GreenMushRoom(this, CMapManager::getInstance()->getListBonus()))
 		{
@@ -80,6 +82,7 @@ void CGreenMushroom::updateEntity(float deltaTime)
 	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); i++)
 	{
 		this->getBounding().setVelocity(this->getVelocity());
+
 		if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
 		{
 			this->m_Velocity.x = VEL_DEFAULT_X + REDMUSHROOM_VELOCITY_MAX;
@@ -101,9 +104,9 @@ void CGreenMushroom::updateEntity(float deltaTime)
 
 	if (CCollision::CheckCollision(this, CPlayer::getInstance()))
 	{
-			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::GREEN_MUSHROOM);
-			CMapManager::getInstance()->setListBonus(tempBonusList);
+			CMapManager::getInstance()->setListBonusItem(tempBonusList);
 			tempBonusList.clear();
 	}
 }

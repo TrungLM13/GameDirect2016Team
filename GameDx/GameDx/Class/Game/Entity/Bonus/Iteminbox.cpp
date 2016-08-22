@@ -14,7 +14,6 @@ inline bool IsCollision(CMovable* entity, vector<CBaseEntity*> listEntity) {
 				return true;
 			}
 		}
-
 	}
 
 	return false;
@@ -31,11 +30,13 @@ CIteminbox::CIteminbox(vector2d pos)
 	this->m_Position.x = pos.x;
 	this->m_Position.y = pos.y;
 
-	this->REDMUSHROOM_POSITION_Y_MAX = pos.y + this->m_listSprite.at(this->m_itemtype)->getFrameInfo().Height - ADD_POS_Y;
+	this->ITEMINBOX_POSITION_Y_MAX = pos.y + this->m_listSprite.at(this->m_itemtype)->getFrameInfo().Height - ADD_POS_Y;
 }
 
 CIteminbox:: ~CIteminbox()
 {
+	SAFE_RELEASE(this->m_Sound1);
+	SAFE_RELEASE(this->m_Sound2);
 	SAFE_RELEASE(this->m_ResouceImage);
 	if (!m_listSprite.empty()) {
 		for (int i = 0; i < m_listSprite.size(); ++i) {
@@ -48,7 +49,7 @@ CIteminbox:: ~CIteminbox()
 bool CIteminbox::loadSprite()
 {
 	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::RED_MUSHROOM), 1, 1, 1, 0));
-	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::GREEN_MUSHROOM), 1, 4, 4, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::FLOWER), 1, 4, 4, 0));
 	return true;
 }
 
@@ -58,6 +59,17 @@ bool CIteminbox::initEntity()
 	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
+
+	/*if (this->m_itemtype == ITEMINBOX_TYPE::REDMUSHROOM)
+	{
+		this->m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
+	}
+	else if (this->m_itemtype == ITEMINBOX_TYPE::ITEM_FLOWER)
+	{
+		this->m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
+	}*/
+	this->m_Sound1 = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
+	this->m_Sound2 = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup.wav");
 	return true;
 }
 
@@ -68,12 +80,13 @@ void CIteminbox::updateEntity(CKeyBoard* device)
 
 void CIteminbox::updateEntity(float deltaTime)
 {
+//	CAudio::getInstance()->PlaySoundW(this->m_Sound1);
 	if (this->m_itemtype == ITEMINBOX_TYPE::REDMUSHROOM)
 	{
-		if (this->m_Position.y >= REDMUSHROOM_POSITION_Y_MAX)
+		if (this->m_Position.y >= ITEMINBOX_POSITION_Y_MAX)
 		{
 			this->m_Velocity.y = VEL_DEFAULT_Y;
-			this->m_Position.y = REDMUSHROOM_POSITION_Y_MAX;
+			this->m_Position.y = ITEMINBOX_POSITION_Y_MAX;
 
 			if (IsCollision(this, CMapManager::getInstance()->getListBonus()))
 			{
@@ -109,28 +122,33 @@ void CIteminbox::updateEntity(float deltaTime)
 		{
 			if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::BIG)
 			{
-				vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+				/*CAudio::getInstance()->StopSound(this->m_Sound1);
+				CAudio::getInstance()->PlaySoundW(this->m_Sound2);*/
+				vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 				CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::RED_MUSHROOM);
-				CMapManager::getInstance()->setListBonus(tempBonusList);
+				CMapManager::getInstance()->setListBonusItem(tempBonusList);
 				tempBonusList.clear();
 			}
 		}
 	}
 	else if (this->m_itemtype == ITEMINBOX_TYPE::ITEM_FLOWER)
 	{
-		if (this->m_Position.y > FLOWER_POSITION_Y_MAX) {
+		if (this->m_Position.y > ITEMINBOX_POSITION_Y_MAX) {
 			this->m_Velocity.y = VEL_DEFAULT_Y;
-			this->m_Position.y = FLOWER_POSITION_Y_MAX;
+			this->m_Position.y = ITEMINBOX_POSITION_Y_MAX;
 		}
 		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250, this->m_Position.y + (this->m_Velocity.y + GRAVITATION) *deltaTime / 100, 0);
 
 		if (CCollision::CheckCollision(this, CPlayer::getInstance()))
 		{
+			/*CAudio::getInstance()->StopSound(this->m_Sound1);
+			CAudio::getInstance()->PlaySoundW(this->m_Sound2);*/
+
 			if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::FIRE)
 			{
-				vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+				vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 				CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::FLOWER);
-				CMapManager::getInstance()->setListBonus(tempBonusList);
+				CMapManager::getInstance()->setListBonusItem(tempBonusList);
 				tempBonusList.clear();
 			}
 		}

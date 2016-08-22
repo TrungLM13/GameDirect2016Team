@@ -5,9 +5,19 @@ CJumpState::CJumpState() {
 	m_IsMoveX = false;
 	m_IsJumpHigh = false;
 	m_IsShoot = false;
+
+	if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::SMALL)
+	{
+		m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_jump-small.wav");
+	}
+	 else if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::BIG)
+	{
+		m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_jump-super.wav");
+	}
 }
 
 CJumpState::~CJumpState() {
+	SAFE_RELEASE(this->m_Sound);
 
 }
 
@@ -49,6 +59,8 @@ CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
 }
 
 void CJumpState::update(CPlayer& player, double deltaTime){
+
+	CAudio::getInstance()->PlaySoundW(m_Sound);
 	double deltaX = 0;
 
 	if (player.m_IsAutoJump) {

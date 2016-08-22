@@ -2,6 +2,7 @@
 #define __CITEMINBOX_H__
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\Player\Player.h"
+#include "Class\Framework\CAudio.h"
 
 class CIteminbox : public CMovable
 {
@@ -26,6 +27,8 @@ public:
 
 private:
 	ITEMINBOX_TYPE        m_itemtype;
-	float				  REDMUSHROOM_POSITION_Y_MAX;
+	float				  ITEMINBOX_POSITION_Y_MAX;
+	CSound*				  m_Sound1;
+	CSound*				  m_Sound2;
 };
 #endif

@@ -16,6 +16,10 @@ void CQuadTree::CreateTree()
 {
 	for (int i = 0; i < CMapManager::getInstance()->getListBackground().size(); ++i)
 		m_Node->InsertEntity(CMapManager::getInstance()->getListBackground().at(i));
+	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i)
+		m_Node->InsertEntity(CMapManager::getInstance()->getListBonus().at(i));
+	for (int i = 0; i < CMapManager::getInstance()->getListEnemy().size(); ++i)
+		m_Node->InsertEntity(CMapManager::getInstance()->getListEnemy().at(i));
 }
 
 void CQuadTree::ReleaseTree()

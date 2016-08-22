@@ -4,6 +4,7 @@
 #include "Class\Game\Scene\PopupInfo.h"
 #include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
 #include "Class\Game\Entity\Bonus\Brick.h"
+#include "Class\Game\Entity\Bonus\GiftBox.h"
 
 
 CMapManager* CMapManager::m_instance = NULL;
@@ -21,6 +22,7 @@ CMapManager::~CMapManager()
 	m_listBonus.clear();
 	m_listEnemy.clear();
 	m_listRectangeForCollision.clear();
+	m_listBonusItem.clear();
 }
 
 CMapManager* CMapManager::getInstance()
@@ -54,6 +56,16 @@ vector<CTiless*> CMapManager::getListBackground()
 vector<CBox2D*>	CMapManager::getListRect()
 {
 	return m_listRectangeForCollision;
+}
+
+vector<CBaseEntity*> CMapManager::getListBonusItem()
+{
+	return m_listBonusItem;
+}
+
+void CMapManager::setListBonusItem(vector<CBaseEntity*> list)
+{
+	this->m_listBonusItem = list;
 }
 
 bool CMapManager::initMapInfo()
@@ -92,16 +104,16 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CBrick(2,positionEntity, BRICK_TYPE::BRICK_COIN));
 		if (type == "3B")
 			m_listBonus.push_back(new CBrick(2,positionEntity, BRICK_TYPE::BRICK_NONE));
-		/*if (type == "3B")
-			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_NONE));
+		if (type == "3B")
+			m_listBonus.push_back(new CBrick(1,positionEntity, BRICK_TYPE::BRICK_NONE));
 		if (type == "4B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
-		/*ifif (type == "5B")
+		if (type == "5B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_COIN));
 		if (type == "6B")
 			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_NONE));
 		if (type == "7B")
-			m_listBonus.push_back(new CBrick(positionEntity, BRICK_TYPE::BRICK_GREENMUSHROOM));
+			m_listBonus.push_back(new CBrick(1,positionEntity, BRICK_TYPE::BRICK_GREENMUSHROOM));
 		/*if (type == "8B")
 			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::UP_DOWN));
 		if (type == "9B")
@@ -117,21 +129,21 @@ bool CMapManager::loadEntityInMap()
 
 void CMapManager::pushBonusObject(CBaseEntity* entity)
 {
-	m_listBonus.push_back(entity);
+	m_listBonusItem.push_back(entity);
 }
 
 void CMapManager::popBonusObject()
 {
-	m_listBonus.pop_back();
+	m_listBonusItem.pop_back();
 }
 
 void CMapManager::pushInFirst(CBaseEntity* entity)
 {
-	m_listBonus.insert(m_listBonus.begin(), entity);
+	m_listBonusItem.insert(m_listBonus.begin(), entity);
 }
 
 void CMapManager::removeInFirst() {
-	m_listBonus.erase(m_listBonus.begin());
+	m_listBonusItem.erase(m_listBonus.begin());
 }
 
 void CMapManager::removeEntity(vector<CBaseEntity*>& list, int tagnode)

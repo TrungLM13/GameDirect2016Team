@@ -2,6 +2,7 @@
 #define __CCOININBOX_H__
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\Player\Player.h"
+#include "Class\Framework\CAudio.h"
 
 class CCoinInBox : public CMovable
 {
@@ -19,5 +20,8 @@ public:
 	virtual int				getObjectType()											override;
 private:
 	bool isDraw;
+	CSound* m_Sound;
+	float   m_Pos_y_Max;
+	float	m_Pos_y_Min;
 };
 #endif

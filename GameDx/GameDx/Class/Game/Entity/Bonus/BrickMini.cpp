@@ -14,6 +14,7 @@ CBrickMini::CBrickMini()
 CBrickMini::CBrickMini(int map, vector3d position, BRICKMINI_TYPE type)
 {
 	this->map = map;
+	this->m_ResouceImage = new CBonusResource(map);
 
 	m_Position.x = position.x;
 	m_Position.y = position.y;
@@ -34,28 +35,16 @@ CBrickMini:: ~CBrickMini()
 
 bool CBrickMini::loadSprite()
 {
-	if (map == 1 || map == 3)
-	{
-		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_LEFT_UP), 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN), 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_RIGHT_UP), 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN), 1, 1, 1, 0));
-	}
-	else if (map == 2)
-	{
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left2, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right2, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_left2, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brickbreak_right2, 1, 1, 1, 0));
-	}
-	
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_LEFT_UP), 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN), 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_RIGHT_UP), 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICKMINI, BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN), 1, 1, 1, 0));
 
 	return true;
 }
 
 bool CBrickMini::initEntity()
 {
-	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	return true;
 }
@@ -89,9 +78,9 @@ void CBrickMini::updateEntity(float deltaTime)
 	}
 	if (this->m_Position.y <= 20)
 	{
-		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 		CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::BRICKMINI);
-		CMapManager::getInstance()->setListBonus(tempBonusList);
+		CMapManager::getInstance()->setListBonusItem(tempBonusList);
 		tempBonusList.clear();
 	}
 }

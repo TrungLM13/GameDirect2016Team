@@ -8,7 +8,7 @@
 
 inline int getIndex(vector<CBaseEntity*> list, CBaseEntity* entity) {
 	for (int i = 0; i < list.size(); ++i) {
-		if (CMapManager::getInstance()->getListBonus().at(i) == entity) {
+		if (CMapManager::getInstance()->getListBonusItem().at(i) == entity) {
 			return i;
 		}
 	}
@@ -33,6 +33,7 @@ CBrick::CBrick(int map, vector2d position, BRICK_TYPE type)
 	this->m_Velocity = vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y);
 
 	m_BrickType = type;
+	this->m_ResouceImage = new CBonusResource(map);
 
 	this->initEntity();
 }
@@ -62,17 +63,9 @@ CBrick:: ~CBrick()
 
 bool CBrick::loadSprite()
 {
-	if (map == 1 || map == 3)
-	{
-		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICK), 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::GIFT_BOX, GIFTBOX_STATE::GIFTBOX), 1, 1, 1, 0));
-	}
-	else if (map == 2)
-	{
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::brick2, 1, 1, 1, 0));
-		this->m_listSprite.push_back(new CSprite(CInfomationResource::box2, 1, 1, 1, 0));
-	}
-	
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICK, BRICK_STATE::BRICK_BOX), 1, 1, 1, 0));
+	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::BRICK, BRICK_STATE::BRICK_NORMAL), 1, 1, 1, 0));
+
 	return true;
 }
 
@@ -84,7 +77,6 @@ bool CBrick::initEntity()
 	m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE; // When Brick doesnt move
 	m_BrickState = BRICK_STATE::BRICK_NORMAL;
 	m_CountCoin = COIN_NUM_MAX;
-	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	return true;
 }
@@ -126,16 +118,16 @@ void CBrick::updateEntity(float deltaTime)
 					m_BrickMini.push_back(new CBrickMini(this->map, vector3d(this->m_Position.x + 8, this->m_Position.y, 0), BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN));
 					m_BrickMini.push_back(new CBrickMini(this->map, vector3d(this->m_Position.x, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_UP));
 					m_BrickMini.push_back(new CBrickMini(this->map, vector3d(this->m_Position.x + 8, this->m_Position.y + 8, 0), BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN));
-					
+
 					for (int i = 0; i < m_BrickMini.size(); i++)
 					{
 						CMapManager::getInstance()->pushBonusObject(m_BrickMini.at(i));
 					}
-					
-					vector<CBaseEntity*>  tempList = CMapManager::getInstance()->getListBonus();
+
+					vector<CBaseEntity*>  tempList = CMapManager::getInstance()->getListBonusItem();
 					tempList.erase(tempList.begin() + getIndex(tempList, this));
 
-					CMapManager::getInstance()->setListBonus(tempList);
+					CMapManager::getInstance()->setListBonusItem(tempList);
 
 					tempList.clear();
 
@@ -169,10 +161,9 @@ void CBrick::updateEntity(float deltaTime)
 	m_Position = vector3d(m_Position.x, m_Position.y + (m_Velocity.y + SIGN(m_Velocity.y) * GRAVITATION)* deltaTime / 100, 0);
 
 	if (m_Position.y <= this->PrePos.y && m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING) {
-
 		if ((m_BrickType == BRICK_TYPE::BRICK_STAR && m_BrickState == BRICK_STATE::BRICK_BOX) ||
 			(m_BrickType == BRICK_TYPE::BRICK_COIN) ||
-     		(m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM && m_BrickState == BRICK_STATE::BRICK_BOX))
+			(m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM && m_BrickState == BRICK_STATE::BRICK_BOX))
 		{
 			m_Position.y = this->PrePos.y;
 			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_DONE;
@@ -185,7 +176,7 @@ void CBrick::updateEntity(float deltaTime)
 			m_Star = new CStar(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
 			m_Star->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
 			CMapManager::getInstance()->pushInFirst(m_Star);
- 			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
+			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
 			m_BrickType = BRICK_TYPE::BRICK_NONE;
 		}
 		else if (m_BrickType == BRICK_TYPE::BRICK_COIN) {
@@ -209,7 +200,7 @@ void CBrick::updateEntity(float deltaTime)
 
 void CBrick::drawEntity()
 {
-		this->m_listSprite.at(this->m_BrickState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	this->m_listSprite.at(this->m_BrickState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CBrick::updateEntity(RECT* camera)

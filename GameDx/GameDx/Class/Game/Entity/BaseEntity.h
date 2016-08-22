@@ -27,6 +27,7 @@ public:
 
 	virtual void				updateEntity(CKeyBoard* deivce)							= 0;
 	virtual void				updateEntity(RECT* camera)								= 0;
+	virtual void				updateEntity(float deltaTime)							= 0;
 	virtual const char*			getTagNode()											= 0;
 	virtual vector2d			getVelocity()											= 0;
 	virtual vector3d			getPosition()											= 0;

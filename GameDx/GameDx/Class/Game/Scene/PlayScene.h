@@ -3,6 +3,7 @@
 
 #include "BaseScene.h"
 #include "Class\Game\Algorithsm\QuadTree.h"
+#include "Class\Framework\CAudio.h"
 
 
 class CPlayScene :
@@ -20,6 +21,7 @@ public:
 private:
 	CQuadTree*				m_treeGame;
 	vector<CObjectss*>		m_listObjectInViewport;
+	CSound*					m_Sound;
 };
 
 #endif

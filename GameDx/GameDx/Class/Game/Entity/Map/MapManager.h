@@ -23,12 +23,14 @@ public:
 	void					setListBonus(vector<CBaseEntity*> list);
 	vector<CTiless*>		getListBackground();
 	vector<CBox2D*>			getListRect();
+	vector<CBaseEntity*>    getListBonusItem();
+	void					setListBonusItem(vector<CBaseEntity*> list);
 	static CMapManager*		getInstance();
-	void pushBonusObject(CBaseEntity* entity);
-	void popBonusObject();
-	void pushInFirst(CBaseEntity* entity);
-	void removeInFirst();
-	void removeEntity(vector<CBaseEntity*>& list, int tagnode);
+	void					pushBonusObject(CBaseEntity* entity);
+	void					popBonusObject();
+	void					pushInFirst(CBaseEntity* entity);
+	void					removeInFirst();
+	void					removeEntity(vector<CBaseEntity*>& list, int tagnode);
 
 private:
 	static CMapManager*		m_instance;
@@ -40,6 +42,9 @@ private:
 	vector<CBaseEntity*>	m_listEnemy;
 	vector<CBaseEntity*>	m_listBonus;
 	vector<CBox2D*>			m_listRectangeForCollision;
+
+	// create list for object created while playing Game
+	vector<CBaseEntity*>    m_listBonusItem;
 };
 
 

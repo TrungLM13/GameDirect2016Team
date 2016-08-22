@@ -100,9 +100,9 @@ void CStar::updateEntity(float deltaTime)
 	{
 		if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::UNDYING ||
 			CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::SMALL_UNDYING) {
-			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::STAR);
-			CMapManager::getInstance()->setListBonus(tempBonusList);
+			CMapManager::getInstance()->setListBonusItem(tempBonusList);
 			tempBonusList.clear();
 		}
 	}

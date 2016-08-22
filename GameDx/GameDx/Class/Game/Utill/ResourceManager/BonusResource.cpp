@@ -19,7 +19,25 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 	case TAGNODE::STAR:
 		return  L"Resource//Image//Game//Sprites//Mario//Bonus//star.png";
 	case TAGNODE::BRICK:
-		return L"Resource//Image//Game//Sprites//Mario//Bonus//gach.png";
+		switch (state)
+		{
+		case BRICK_STATE::BRICK_NORMAL:
+			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3){
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach.png";
+			}
+			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			{
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh.png";
+			}
+		case BRICK_STATE::BRICK_BOX:
+			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3){
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_mat_cham_hoi.png";
+			}
+			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			{
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh_0_cham_hoi.png";
+			}
+		}
 	case TAGNODE::RED_MUSHROOM:
 		return L"Resource//Image//Game//Sprites//Mario//Bonus//nam_do_nho.png";
 	case TAGNODE::GREEN_MUSHROOM:
@@ -44,9 +62,23 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 		switch (state)
 		{
 		case BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN:case BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN:
-			return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai.png";
+			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3)
+			{
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai.png";
+			}
+			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			{
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai_map2.png";
+			}
 		case BRICKMINI_TYPE::BRICKMINI_LEFT_UP: case BRICKMINI_TYPE::BRICKMINI_RIGHT_UP:
-			return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai.png";
+			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3)
+			{
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai.png";
+			}
+			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			{
+				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai_map2.png";
+			}
 		default:
 			break;
 		}

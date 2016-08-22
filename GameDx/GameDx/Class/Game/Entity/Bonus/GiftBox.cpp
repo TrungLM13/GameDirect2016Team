@@ -126,7 +126,6 @@ void CGiftBox::updateEntity(float deltaTime)
 		if (this->m_GiftBoxType == GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE)
 		{
 			this->m_itemInBox = new CIteminbox(vector2d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y + ADD_POS_Y));
-			//this->m_itemInBox->setPosition(vector3d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y + ADD_POS_Y, 0));
 			this->m_itemInBox->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 3));
 			CMapManager::getInstance()->pushInFirst(m_itemInBox);
 		}

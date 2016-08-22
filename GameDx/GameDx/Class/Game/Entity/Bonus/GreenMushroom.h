@@ -19,8 +19,7 @@ public:
 	virtual int				getObjectType()									override;
 public:
 	void setVelocity(vector2d velocity);
-
-
 private:
+	float m_Pos_y_Max;
 };
 #endif
