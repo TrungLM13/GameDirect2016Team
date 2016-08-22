@@ -23,6 +23,7 @@ CBrick::CBrick()
 CBrick::CBrick(int map, vector2d position, BRICK_TYPE type)
 {
 	this->map = map;
+	this->m_ResouceImage->m_TypeObject = map;
 	this->PrePos = vector3d(position.x, position.y, 0);
 
 	m_Position.x = position.x;

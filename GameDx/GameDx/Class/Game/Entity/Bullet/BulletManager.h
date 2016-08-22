@@ -5,8 +5,9 @@
 #include "Class\Game\Entity\MovableEntity.h"
 #include "Class\Game\Entity\StaticEntity.h"
 #include "Class\Game\Entity\Bullet\BulletNormal.h"
+#include "Class\Game\Algorithsm\CObjectPool.h"
 
-class CBulletManager : public CSingleton<CBulletManager>
+class CBulletManager : public CObjectPool<CBulletManager>
 {
 public:
 	CBulletManager();

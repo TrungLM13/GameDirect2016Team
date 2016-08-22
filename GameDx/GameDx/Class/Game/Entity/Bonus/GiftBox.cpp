@@ -57,7 +57,7 @@ bool CGiftBox::initEntity()
 	this->m_GiftBoxEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
 	this->m_GiftBoxState = GIFTBOX_STATE::GIFTBOX_NORMAL;
 
-	this->m_ResouceImage = new CBonusResource();
+	this->m_ResouceImage = new CBonusResource(MAP_NUM::MAP_1);
 	this->loadSprite();
 
 	return true;
@@ -65,7 +65,8 @@ bool CGiftBox::initEntity()
 
 void CGiftBox::updateEntity(CKeyBoard* device)
 {
-
+	// Map2
+	this->m_ResouceImage->m_TypeObject = MAP_NUM::MAP_2;
 }
 
 void CGiftBox::updateEntity(float deltaTime)

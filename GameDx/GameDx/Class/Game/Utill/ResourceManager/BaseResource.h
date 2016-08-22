@@ -10,7 +10,7 @@ public:
 
 	virtual wchar_t* getImage(int tag = 0, int state = 0) = 0;
 
-protected:
+public:
 	int m_TypeObject;
 };
 

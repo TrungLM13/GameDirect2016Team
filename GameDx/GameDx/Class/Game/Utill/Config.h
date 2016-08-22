@@ -137,11 +137,12 @@ enum OBJECT_TYPE {
 	TYPE_ENERMY = 4
 };
 
-enum MAPNUM{
+enum MAP_NUM {
 	MAP_1 = 1,
 	MAP_2 = 2,
 	MAP_3 = 3
 };
+
 enum GAMESTATE
 {
 	STATE_END,
