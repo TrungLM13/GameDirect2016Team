@@ -166,6 +166,7 @@ void CPlayer::updateEntity(float deltaTime)
 
 	if (m_PlayerState)
 		m_PlayerState->update(*this, deltaTime);
+
 }
 
 void CPlayer::updateEntity(RECT* camera) {
@@ -526,6 +527,15 @@ void CPlayer::setPlayerTag(int playerTag){
 
 int CPlayer::getPlayerTag() {
 	return m_PlayerTag;
+}
+
+void CPlayer::resetPlayer(vector3d newPos)
+{
+	m_PlayerState->exitCurrentState(*this, new CStandState(newPos));
+	m_PlayerState->enter(*this);
+
+	m_PlayerTag			= PLAYERTAGS::SMALL;
+	this->loadSprite();
 }
 
 int	CPlayer::getObjectType() {

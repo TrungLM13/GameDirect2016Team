@@ -8,6 +8,7 @@
 class CStandState : public CBaseState {
 public:
 	CStandState();
+	CStandState(vector3d);
 	~CStandState();
 	void enter(CPlayer& player);
 	CBaseState* handleInput(CPlayer& player, CKeyBoard* device);

@@ -18,7 +18,7 @@ public:
 			vector3d		getPosisionCamera				();
 			vector4d		getViewport						();
 			CBox2D			getBoundingScreen				();
-			void			setPositionCamera				(vector3d*);
+			void			setPositionCamera				(vector3d);
 			void			setLimitRectOfCurrentMap		(float, float);
 
 private:

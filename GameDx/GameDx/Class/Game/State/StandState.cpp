@@ -5,6 +5,11 @@ CStandState::CStandState() {
 	m_IsShoot = false;
 }
 
+CStandState::CStandState(vector3d newPos) {
+	CPlayer::getInstance()->setPosition(newPos);
+	m_IsShoot = false;
+}
+
 CStandState::~CStandState() {
 
 }

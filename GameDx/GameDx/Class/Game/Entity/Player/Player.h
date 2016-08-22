@@ -44,6 +44,7 @@ public:
 	int						getStateInt();
 	void					setPlayerTag(int playerTag);
 	int						getPlayerTag();
+	void					resetPlayer(vector3d);
 
 	bool					m_IsCollision; // Use for collision with Flag Pole Tail
 	bool					m_IsAutoMove; // Signal for Flag auto run

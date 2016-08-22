@@ -65,6 +65,14 @@ public:
 		return m_introInfomtion->m_helths;
 	}
 
+	void		resetPopupInfo(){
+		m_introInfomtion->m_mapName			= "1-1";
+		m_introInfomtion->m_coin			= 1;
+		m_introInfomtion->m_helths			= 3;
+		m_introInfomtion->m_point			= m_introInfomtion->m_coin * 100;
+		m_introInfomtion->m_timer			= 400;
+	}
+
 	static CPopUpInfo* getInstance(){
 		if (!m_Instance)
 		{

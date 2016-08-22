@@ -41,6 +41,12 @@ CAMERASTATE	CCamera::getStateCamera()
 	return m_StateCamera;
 }
 
+void		CCamera::setPositionCamera(vector3d newPos)
+{
+	m_Position.x = newPos.x;
+	m_Position.y = newPos.y;
+}
+
 vector3d	CCamera::getPosisionCamera()
 {
 	return m_Position;

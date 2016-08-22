@@ -49,9 +49,6 @@
     <ClCompile Include="Class\Game\Scene\SceneManager.cpp">
       <Filter>Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Class\Game\Scene\SelectStageScene.cpp">
-      <Filter>Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Class\Game\Test\Test.cpp">
       <Filter>Game\Test</Filter>
     </ClCompile>
@@ -293,9 +290,6 @@
     <ClInclude Include="Class\Game\Scene\SceneManager.h">
       <Filter>Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Class\Game\Scene\SelectStageScene.h">
-      <Filter>Game\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Class\Game\Test\Test.h">
       <Filter>Game\Test</Filter>
     </ClInclude>
@@ -530,8 +524,5 @@
     <Filter Include="Game\Utill\ResourceManager">
       <UniqueIdentifier>{2be21d51-9bbc-4250-a45f-b931f8c523ad}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="GameDx.rc" />
   </ItemGroup>
 </Project>

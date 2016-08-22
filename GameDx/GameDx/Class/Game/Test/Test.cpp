@@ -90,6 +90,7 @@ void Test::Update(CKeyBoard* device)
 
 	if (device->KeyDown(DIK_UP))
 	{
+
 		CAudio::getInstance()->StopSound(backgroundMussic);
 		this->m_position.y += vx->y;
 	}

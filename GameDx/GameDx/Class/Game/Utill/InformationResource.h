@@ -34,6 +34,9 @@ public:
 	static const wchar_t*	itemLife;
 	/*************************************************/
 
+	/************RESOURCE FOR SCENE PLAY***********/
+	static const wchar_t*	backgroundPlayScene;
+
 	/************RESOURCE FOR BONUS **************/
 	static const wchar_t*	brickbreak_left2;
 	static const wchar_t*	brickbreak_right2;
