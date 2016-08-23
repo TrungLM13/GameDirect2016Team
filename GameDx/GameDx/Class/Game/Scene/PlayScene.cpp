@@ -78,12 +78,12 @@ void CPlayScene::updateScene(CKeyBoard* keyboard)
 
 void CPlayScene::renderScene()
 {
-	//m_backgroud->Render(CCamera::getInstance()->setPositionEntity(vector3d(CCamera::getInstance()->getPosisionCamera())), vector2d(1.0f, 1.0f), 0, DRAWCENTER_LEFT_TOP);
+	m_backgroud->Render(CCamera::getInstance()->setPositionEntity(vector3d(CCamera::getInstance()->getPosisionCamera())), vector2d(1.0f, 1.0f), 0, DRAWCENTER_LEFT_TOP);
 	
-	/*wchar_t temp[100];
+	wchar_t temp[100];
 	_itow(CPopUpInfo::getInstance()->getPoint(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(50, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
-
+		
 	ZeroMemory(temp, 100);
 	_itow(CPopUpInfo::getInstance()->getCoin(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(110, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
@@ -96,7 +96,7 @@ void CPlayScene::renderScene()
 
 	ZeroMemory(temp, 100);
 	_itow(CPopUpInfo::getInstance()->getTimer(), temp, 10);
-	CText::getInstace()->Draw(temp, vector3d(220, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);*/
+	CText::getInstace()->Draw(temp, vector3d(220, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
 
 	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
 	{
