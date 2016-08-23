@@ -4,6 +4,7 @@
 #include <tchar.h>
 #include <iostream>
 
+
 typedef enum TYPEOFTILE{
 	TOF_GRASS_LEFT				= 0,
 	TOF_GRASS_RIGHT,
@@ -49,4 +50,31 @@ typedef enum TYPEOFENEMY{
 } EnemyStyle;
 
 
+typedef enum TYPEOFDATAINPUT{
+	TODI_GIFT_BOX						= 1,
+	TODI_BRICK							= 2,
+	TODI_RED_MUSHROOM_BOX				= 3,
+	TODI_GREEN_MUSHROOM_BOX				= 4,
+	TODI_STARS							= 5,
+	TODI_COIN							= 9,
+	TODI_FLAG_POLE_TAIL					= 13,
+	TODI_FLAG_POLE						= 14,
+	TODI_FLAG_POLE_HEAD					= 15,
+	TODI_GREEN_FLAG						= 16,
+	TODI_GRASS_ONE_BRUSH				= 17,
+	TODI_GRASS_DOUBLE_BRUSH				= 18,
+	TODI_GRASS_TRIPPLE_BRUSH			= 19,
+	TODI_CLOUND_ONE						= 20,
+	TODI_CLOUND_DOUBLE					= 21,
+	TODI_CLOUND_TRIPPLE					= 22,
+	TODI_PIPE_HEAD						= 23,
+	TODI_PIPE_HEAD_BODY					= 24,
+	TODI_PIPE_BODY						= 25,
+	TODI_CASTLE							= 26,
+	TODI_LANDSCAPE						= 27,
+	TODI_CEMENT							= 32,
+	TODI_HEAD_MOUNTAIN					= 34,
+	TODI_TAIL_MOUNTAIN					= 33,
+	TODI_RECTANGLE						= -1
+} TODI;
 #endif

@@ -237,17 +237,33 @@ struct MapIntro
 
 struct MapInfo
 {
-	std::string		m_mapName;
-	std::string		m_pathData;
+	std::string				m_mapName;
+	std::string				m_pathData;
+	float					m_sizeX;
+	float					m_sizeY;
+
 	MapInfo(){
-		m_mapName		= "NOPE";
-		m_pathData		= "NOPE";
+		m_mapName	= "NOPE";
+		m_pathData	= "NOPE";
+		m_sizeX		= 0;
+		m_sizeY		= 0;
 	}
+
 	MapInfo(std::string mapName, std::string pathData){
-		m_mapName		= mapName;
-		m_pathData		= pathData;
+		m_mapName	= mapName;
+		m_pathData	= pathData;
+		m_sizeX		= 0;
+		m_sizeY		= 0;
+	}
+
+	MapInfo(std::string mapName, std::string pathData, float sizeX, float sizeY){
+		m_mapName	= mapName;
+		m_pathData	= pathData;
+		m_sizeX		= sizeX;
+		m_sizeY		= sizeY;
 	}
 };
+
 struct KeyState
 {
 	int KeyCode;
@@ -405,7 +421,7 @@ enum BRICKMINI_TYPE
 
 #define				SIZE_MAP_WIDTH			20000
 #define				SIZE_MAP_HIGHT			700
-#define				MAX_OBJECT_OF_NODE		20
-#define				MAX_LEVEL_OF_NODE		6
+#define				MAX_OBJECT_OF_NODE		10
+#define				MAX_LEVEL_OF_NODE		1000000
 
 #endif

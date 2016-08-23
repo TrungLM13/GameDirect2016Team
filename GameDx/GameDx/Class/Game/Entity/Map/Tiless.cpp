@@ -5,18 +5,22 @@ CTiless::CTiless()
 {
 	m_Position			= vector3dZero;
 	m_ID				= -1;
-	m_Bounding			= new CBox2D();
+	m_Bounding			= new CBox2D(m_Position.x, m_Position.y, 0, 0);
+
 	this->initEntity();
+	this->getBounding();
 }
 
 CTiless::CTiless(vector2d pos, int type)
 {
 	m_Position.x		= pos.x;
 	m_Position.y		= pos.y;
-	m_Bounding			= new CBox2D();
 	m_ID				= type;
 
+	m_Bounding			= new CBox2D();
+
 	this->initEntity();
+	this->getBounding();
 
 }
 CTiless::~CTiless()
@@ -133,10 +137,10 @@ CBox2D  CTiless::getBounding()
 {
 	if (m_listSprite.size())
 	{
-		m_Bounding->setX(m_Position.x - m_listSprite.at(0)->getFrameInfo().Width / 2 * std::abs(m_listSprite.at(0)->getScale().x));
-		m_Bounding->setY(m_Position.y + m_listSprite.at(0)->getFrameInfo().Height / 2 * std::abs(m_listSprite.at(0)->getScale().y));
-		m_Bounding->setWidth(m_listSprite.at(0)->getFrameInfo().Width        * std::abs(m_listSprite.at(0)->getScale().x));
-		m_Bounding->setHeight(m_listSprite.at(0)->getFrameInfo().Height      * std::abs(m_listSprite.at(0)->getScale().y));
+		m_Bounding->setX(m_Position.x);
+		m_Bounding->setY(m_Position.y);
+		m_Bounding->setWidth(m_listSprite.at(0)->getFrameInfo().Width);
+		m_Bounding->setHeight(m_listSprite.at(0)->getFrameInfo().Height);
 	}
 	return *m_Bounding;
 }

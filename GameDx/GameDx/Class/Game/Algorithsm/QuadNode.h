@@ -18,7 +18,7 @@ public:
 
 	int						getNodeLevel();							void		setNodeLevel(int);
 	CBox2D					getNodeSize();							void		setNodeSize(CBox2D);
-	vector<CObjectss*>		retrieveEntity(CBox2D);
+	vector<CObjectss*>*		retrieveEntity(CBox2D, vector<CObjectss*>*);
 	vector<CObjectss*>		getEntityList();						
 	CQuadNode**				getParent();							
 	void					SplitParent();

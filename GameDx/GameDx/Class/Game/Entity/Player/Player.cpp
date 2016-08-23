@@ -22,6 +22,20 @@ inline bool IsCollision_Player(CMovable* entity, vector<CBaseEntity*> listEntity
 	return false;
 }
 
+inline bool IsCollision_WithRect(CMovable* entity, vector<CBox2D*> listEntity) {
+	for (int i = 0; i < listEntity.size(); i++)
+	{
+		entity->getBounding().setVelocity(entity->getVelocity());
+		if (CCollision::CheckCollision(entity->getBounding(), *listEntity.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+		{
+			return true;
+		}
+
+	}
+
+	return false;
+}
+
 CPlayer::CPlayer()
 {
 	this->initEntity();
@@ -55,7 +69,7 @@ bool CPlayer::initEntity()
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
 	m_UndyingTime = 0;
-	m_Position = vector3d(50, 28, 0.5);
+	m_Position = vector3d(50, 46, 0);
 	m_PreJumpPos = vector3d(0, 0, 0);
 
 	m_State = PLAYERSTATES::STAND;
@@ -219,8 +233,10 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 				break;
 			case COLDIRECTION::COLDIRECTION_NONE:
 				if (m_State != PLAYERSTATES::JUMP) {
-					m_Velocity.y = VEL_PLAYER_Y_MIN;
-					m_IsFreeFall = true;
+					//if (!IsCollision_WithRect(this, CMapManager::getInstance()->getListRect())){
+							//m_Velocity.y = VEL_PLAYER_Y_MIN;
+							m_IsFreeFall = true;
+					//}
 
 				}
 
@@ -534,7 +550,7 @@ void CPlayer::resetPlayer(vector3d newPos)
 	m_PlayerState->exitCurrentState(*this, new CStandState(newPos));
 	m_PlayerState->enter(*this);
 
-	m_PlayerTag			= PLAYERTAGS::SMALL;
+	m_PlayerTag = PLAYERTAGS::SMALL;
 	this->loadSprite();
 }
 

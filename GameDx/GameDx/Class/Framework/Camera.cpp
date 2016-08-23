@@ -107,6 +107,6 @@ void		CCamera::setLimitRectOfCurrentMap(float width, float height)
 {
 	this->m_LimitRect.left			= 0;
 	this->m_LimitRect.right			= this->m_LimitRect.left + width;
-	this->m_LimitRect.bottom		= 530;
+	this->m_LimitRect.bottom		= 240;
 	this->m_LimitRect.top			= this->m_LimitRect.bottom + height;
 }

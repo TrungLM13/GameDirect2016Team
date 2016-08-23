@@ -3,7 +3,7 @@
 CQuadNode::CQuadNode()
 {
 	m_NodeLevel = 0;
-	m_NodeSize	= CBoxZero;
+	m_NodeSize = CBoxZero;
 }
 
 CQuadNode::~CQuadNode()
@@ -12,8 +12,8 @@ CQuadNode::~CQuadNode()
 
 CQuadNode::CQuadNode(int Level, CBox2D NodeBound)
 {
-	m_NodeLevel = Level;
-	m_NodeSize	= NodeBound;
+	m_NodeLevel		= Level;
+	m_NodeSize		= NodeBound;
 }
 
 int CQuadNode::getNodeLevel()
@@ -38,17 +38,17 @@ void CQuadNode::setNodeSize(CBox2D Size)
 
 CQuadNode** CQuadNode::getParent()
 {
-	return m_Node;	
+	return m_Node;
 }
 
 void CQuadNode::SplitParent()
 {
-	m_Node			= new CQuadNode*[4];
+	m_Node = new CQuadNode*[4];
 
-	this->m_Node[0] = new CQuadNode(this->m_NodeLevel*10 + 1, CBox2D(this->m_NodeSize.getX(), this->m_NodeSize.getY(), this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
-	this->m_Node[1] = new CQuadNode(this->m_NodeLevel*10 + 2, CBox2D(this->m_NodeSize.getX() + this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getY(), this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
-	this->m_Node[2] = new CQuadNode(this->m_NodeLevel*10 + 3, CBox2D(this->m_NodeSize.getX(), this->m_NodeSize.getY() - this->m_NodeSize.getHeight() / 2, this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
-	this->m_Node[3] = new CQuadNode(this->m_NodeLevel*10 + 4, CBox2D(this->m_NodeSize.getX() + this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getY() - this->m_NodeSize.getHeight() / 2, this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
+	this->m_Node[0] = new CQuadNode(this->m_NodeLevel * 10 + 1, CBox2D(this->m_NodeSize.getX(),										this->m_NodeSize.getY(),									this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
+	this->m_Node[1] = new CQuadNode(this->m_NodeLevel * 10 + 2, CBox2D(this->m_NodeSize.getX() + this->m_NodeSize.getWidth() / 2,	this->m_NodeSize.getY(),									this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
+	this->m_Node[2] = new CQuadNode(this->m_NodeLevel * 10 + 3, CBox2D(this->m_NodeSize.getX(),										this->m_NodeSize.getY() - this->m_NodeSize.getHeight() / 2, this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
+	this->m_Node[3] = new CQuadNode(this->m_NodeLevel * 10 + 4, CBox2D(this->m_NodeSize.getX() + this->m_NodeSize.getWidth() / 2,	this->m_NodeSize.getY() - this->m_NodeSize.getHeight() / 2,	this->m_NodeSize.getWidth() / 2, this->m_NodeSize.getHeight() / 2));
 }
 
 vector<CObjectss*> CQuadNode::getEntityList()
@@ -77,7 +77,7 @@ void CQuadNode::ReleaseNode()
 
 bool CQuadNode::InsertEntity(CObjectss* entity)
 {
-	if (!this)
+	if (m_Node)
 	{
 		if (CBox2D::Intersect(m_Node[0]->getNodeSize(), entity->getBounding()))
 			m_Node[0]->InsertEntity(entity);
@@ -88,41 +88,49 @@ bool CQuadNode::InsertEntity(CObjectss* entity)
 		if (CBox2D::Intersect(m_Node[3]->getNodeSize(), entity->getBounding()))
 			m_Node[3]->InsertEntity(entity);
 	}
-	
+
 	if (CBox2D::Intersect(this->getNodeSize(), entity->getBounding()))
 		m_EntityList.push_back(entity);
 
-	if (m_EntityList.size() > MAX_OBJECT_OF_NODE && (m_NodeSize.getWidth() > BACKBUFFER_WIDTH || m_NodeSize.getHeight()>BACKBUFFER_HEIGHT))
+	if (m_EntityList.size() > MAX_OBJECT_OF_NODE && m_NodeLevel < MAX_LEVEL_OF_NODE)
 	{
 		this->SplitParent();
 
-		if (CBox2D::Intersect(m_Node[0]->getNodeSize(), m_EntityList.back()->getBounding()))
-			m_Node[0]->InsertEntity(m_EntityList.back());
-		if (CBox2D::Intersect(m_Node[1]->getNodeSize(), m_EntityList.back()->getBounding()))
-			m_Node[1]->InsertEntity(m_EntityList.back());
-		if (CBox2D::Intersect(m_Node[2]->getNodeSize(), m_EntityList.back()->getBounding()))
-			m_Node[2]->InsertEntity(m_EntityList.back());
-		if (CBox2D::Intersect(m_Node[3]->getNodeSize(), m_EntityList.back()->getBounding()))
-			m_Node[3]->InsertEntity(m_EntityList.back());
+		while (!m_EntityList.empty())
+		{
+			if (CBox2D::Intersect(m_Node[0]->getNodeSize(), m_EntityList.back()->getBounding()))
+				m_Node[0]->InsertEntity(m_EntityList.back());
+			if (CBox2D::Intersect(m_Node[1]->getNodeSize(), m_EntityList.back()->getBounding()))
+				m_Node[1]->InsertEntity(m_EntityList.back());
+			if (CBox2D::Intersect(m_Node[2]->getNodeSize(), m_EntityList.back()->getBounding()))
+				m_Node[2]->InsertEntity(m_EntityList.back());
+			if (CBox2D::Intersect(m_Node[3]->getNodeSize(), m_EntityList.back()->getBounding()))
+				m_Node[3]->InsertEntity(m_EntityList.back());
 
-		m_EntityList.pop_back();
+			m_EntityList.pop_back();
+		}
+
 	}
-		return true;
+	return true;
 }
 
-vector<CObjectss*> CQuadNode::retrieveEntity(CBox2D rectCamera)
-{
-	vector<CObjectss*> tempList;
-	if (CBox2D::Intersect(this->getNodeSize(), rectCamera))
-		tempList.insert(tempList.end(), this->m_EntityList.begin(), this->m_EntityList.end());
 
-	if (m_Node)
+vector<CObjectss*>* CQuadNode::retrieveEntity(CBox2D rectCamera, vector<CObjectss*>* listResult)
+{
+	if (m_Node != NULL)
 	{
-		m_Node[0]->retrieveEntity(rectCamera);
-		m_Node[1]->retrieveEntity(rectCamera);
-		m_Node[2]->retrieveEntity(rectCamera);
-		m_Node[3]->retrieveEntity(rectCamera);
+		m_Node[0]->retrieveEntity(rectCamera, listResult);
+		m_Node[1]->retrieveEntity(rectCamera, listResult);
+		m_Node[2]->retrieveEntity(rectCamera, listResult);
+		m_Node[3]->retrieveEntity(rectCamera, listResult);
 	}
 
-	return tempList;
+	if (CBox2D::Intersect(this->getNodeSize(), rectCamera))
+	{
+		int temp = 1;
+	for (int i = 0; i < m_EntityList.size(); ++ i)
+		listResult->push_back(m_EntityList.at(i));
+	}
+
+	return listResult;
 };

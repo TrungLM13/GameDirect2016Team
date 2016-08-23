@@ -14,10 +14,10 @@ public:
 
 	void								CreateTree();
 	void								ReleaseTree();
-	vector<CObjectss*>					Retrieve(CBox2D);
+	vector<CObjectss*>*					Retrieve(CBox2D, vector<CObjectss*>*);
 protected:
 	CQuadNode*							m_Node;
-
+	vector2d							m_sizeWorld;
 };
 
 #endif

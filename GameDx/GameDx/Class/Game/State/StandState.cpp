@@ -3,6 +3,7 @@
 
 CStandState::CStandState() {
 	m_IsShoot = false;
+	//CPlayer::getInstance()->setVelocity(vector2d(CPlayer::getInstance()->getVelocity().x, VEL_DEFAULT_Y));
 }
 
 CStandState::CStandState(vector3d newPos) {

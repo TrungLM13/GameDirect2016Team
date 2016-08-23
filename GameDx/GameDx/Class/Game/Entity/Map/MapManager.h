@@ -26,6 +26,8 @@ public:
 	vector<CBaseEntity*>    getListBonusItem();
 	void					setListBonusItem(vector<CBaseEntity*> list);
 	static CMapManager*		getInstance();
+	vector<MapInfo*>		getListMapInGame();
+
 	void					pushBonusObject(CBaseEntity* entity);
 	void					popBonusObject();
 	void					pushInFirst(CBaseEntity* entity);
@@ -36,7 +38,6 @@ private:
 	static CMapManager*		m_instance;
 
 	vector<MapInfo*>		m_listAllMapInGame;
-	std::string				m_currentMapName;
 
 	vector<CTiless*>		m_listBackground;
 	vector<CBaseEntity*>	m_listEnemy;

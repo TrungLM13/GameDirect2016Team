@@ -5,6 +5,7 @@
 #include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
 #include "Class\Game\Entity\Bonus\Brick.h"
 #include "Class\Game\Entity\Bonus\GiftBox.h"
+#include "Class\Game\Entity\Tile\Castle.h"
 
 
 CMapManager* CMapManager::m_instance = NULL;
@@ -68,12 +69,32 @@ void CMapManager::setListBonusItem(vector<CBaseEntity*> list)
 	this->m_listBonusItem = list;
 }
 
+vector<MapInfo*> CMapManager::getListMapInGame()
+{
+	return m_listAllMapInGame;
+}
+
+
+
 bool CMapManager::initMapInfo()
 {
-	m_listAllMapInGame.push_back(new MapInfo("1-1", "Resource//Data//1-1.txt"));
-	m_listAllMapInGame.push_back(new MapInfo("1-2", "Resource//Data//1-2.txt"));
-	m_listAllMapInGame.push_back(new MapInfo("1-3", "Resource//Data//1-3.txt"));
+	m_listAllMapInGame.push_back(new MapInfo("1-1", "Resource//Data//1-1.txt", 3584, 240));
+	m_listAllMapInGame.push_back(new MapInfo("1-2", "Resource//Data//1-2.txt", 3584, 240));
+	m_listAllMapInGame.push_back(new MapInfo("1-3", "Resource//Data//1-3.txt", 3584, 240));
 	return true;
+}
+
+int CMapManager::getCurrentMapINT()
+{
+	string temp = CPopUpInfo::getInstance()->getMapName();
+
+	if (temp == "1-1")
+		return 1;
+	if (temp == "1-2")
+		return 2;
+	if (temp == "1-3")
+		return 3;
+	return -1;
 }
 
 bool CMapManager::loadEntityInMap()
@@ -92,36 +113,60 @@ bool CMapManager::loadEntityInMap()
 
 	vector2d positionEntity;
 	vector2d size;
-	string type;
+	int type;
 
 	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
-		if (type == "3E")
-			m_listBonus.push_back(new CCarnivorousPlants());
-		if (type == "1B")
-			m_listBonus.push_back(new CBrick(1,positionEntity, BRICK_TYPE::BRICK_STAR));
-		if (type == "2B")
-			m_listBonus.push_back(new CBrick(2,positionEntity, BRICK_TYPE::BRICK_COIN));
-		if (type == "3B")
-			m_listBonus.push_back(new CBrick(2,positionEntity, BRICK_TYPE::BRICK_NONE));
-		if (type == "3B")
-			m_listBonus.push_back(new CBrick(1,positionEntity, BRICK_TYPE::BRICK_NONE));
-		if (type == "4B")
-			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
-		if (type == "5B")
-			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_COIN));
-		if (type == "6B")
-			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_NONE));
-		if (type == "7B")
-			m_listBonus.push_back(new CBrick(1,positionEntity, BRICK_TYPE::BRICK_GREENMUSHROOM));
-		/*if (type == "8B")
-			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::UP_DOWN));
-		if (type == "9B")
-			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::RIGHT_LEFT));*/
-		if (type == "R")
-			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y, size.x, size.y));
-		if (type == "1T")
-			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
+		if (type == TODI::TODI_STARS)
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(),positionEntity,	BRICK_TYPE::BRICK_STAR));
+		if (type == TODI::TODI_COIN)
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_COIN));
+		if (type == TODI::TODI_BRICK)
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_NONE));
+		if (type == TODI::TODI_GREEN_MUSHROOM_BOX)
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_GREENMUSHROOM));
+
+		if (type == TODI::TODI_RED_MUSHROOM_BOX)
+			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
+		if (type == TODI::TODI_GIFT_BOX)
+			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_NONE));
+		
+		if (type == TODI::TODI_CASTLE)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));
+		if ((type == TODI::TODI_CEMENT))
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_RED));
+
+		if ((type == TODI::TODI_LANDSCAPE))
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_LANE_RED));
+
+		if (type == TODI::TODI_CLOUND_ONE)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CLOUND_ONE_MEMBER));
+		if (type == TODI::TODI_CLOUND_DOUBLE)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CLOUND_TOW_MEMBER));
+		if (type == TODI::TODI_CLOUND_TRIPPLE)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CLOUND_THREE_MEMBER));
+		
+		if (type == TODI::TODI_GRASS_ONE_BRUSH)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_GRASS_ONE_BUSH));
+		if (type == TODI::TODI_GRASS_DOUBLE_BRUSH)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_GRASS_TOW_BUSH));
+		if (type == TODI::TODI_GRASS_TRIPPLE_BRUSH)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_GRASS_THREE_BUSH));
+		
+		if (type == TODI::TODI_HEAD_MOUNTAIN)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_MOUNTAIN_SMALL));
+		if (type == TODI::TODI_TAIL_MOUNTAIN)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_MOUNTAIN_BIG));
+
+		if (type == TODI::TODI_PIPE_HEAD)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_HEAD_DOWN));
+		if (type == TODI::TODI_PIPE_HEAD_BODY)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_HEAD_BODY_DOWN));
+		if (type == TODI::TODI_PIPE_BODY)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_BODY_DOWN));
+
+		if (type == TODI::TODI_RECTANGLE)
+			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x, size.y));
 	}
 
 	return true;
