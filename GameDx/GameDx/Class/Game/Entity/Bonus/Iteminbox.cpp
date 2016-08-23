@@ -19,6 +19,20 @@ inline bool IsCollision(CMovable* entity, vector<CBaseEntity*> listEntity) {
 	return false;
 }
 
+inline bool getCollisionHandle(CMovable* entity) {
+	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); i++)
+	{
+		entity->getBounding().setVelocity(entity->getVelocity());
+		if (CCollision::CheckCollision(entity->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 CIteminbox::CIteminbox()
 {
 	this->initEntity();
@@ -62,11 +76,11 @@ bool CIteminbox::initEntity()
 
 	/*if (this->m_itemtype == ITEMINBOX_TYPE::REDMUSHROOM)
 	{
-		this->m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
+	this->m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
 	}
 	else if (this->m_itemtype == ITEMINBOX_TYPE::ITEM_FLOWER)
 	{
-		this->m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
+	this->m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
 	}*/
 	this->m_Sound1 = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup_appears.wav");
 	this->m_Sound2 = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_powerup.wav");
@@ -80,7 +94,7 @@ void CIteminbox::updateEntity(CKeyBoard* device)
 
 void CIteminbox::updateEntity(float deltaTime)
 {
-//	CAudio::getInstance()->PlaySoundW(this->m_Sound1);
+	//	CAudio::getInstance()->PlaySoundW(this->m_Sound1);
 	if (this->m_itemtype == ITEMINBOX_TYPE::REDMUSHROOM)
 	{
 		if (this->m_Position.y >= ITEMINBOX_POSITION_Y_MAX)
@@ -96,23 +110,27 @@ void CIteminbox::updateEntity(float deltaTime)
 				this->m_Velocity.y = 0;
 			}
 		}
-		for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); i++)
-		{
-			this->getBounding().setVelocity(this->getVelocity());
-			if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+		if (getCollisionHandle(this)) {
+			for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); i++)
 			{
-				this->m_Velocity.x = VEL_DEFAULT_X + REDMUSHROOM_VELOCITY_MAX;
-				this->m_Velocity.y = VEL_DEFAULT_Y;
-			}
-			else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_LEFT) {
-				// Change direction 
-				this->m_Velocity.x = CHANGE_DIRECTION(this->m_Velocity.x);
-			}
-			else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_NONE)
-			{
-				if (this->getVelocity().x != VEL_DEFAULT_X &&
-					IsCollision(this, CMapManager::getInstance()->getListBonus()) == false)
-					this->m_Velocity.y = 0;
+				this->getBounding().setVelocity(this->getVelocity());
+
+				if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+				{
+					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->m_Bounding->getHeight() / 2;
+					this->m_Velocity.y = VEL_DEFAULT_Y;
+				}
+				else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_LEFT) {
+					// Change direction 
+					if (m_Velocity.x >= 0)
+						this->m_Velocity.x = -(this->m_Velocity.x = VEL_DEFAULT_X + REDMUSHROOM_VELOCITY_MAX);
+				}
+				else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_NONE)
+				{
+					/*if (this->getVelocity().x != VEL_DEFAULT_X &&
+						IsCollision(this, CMapManager::getInstance()->getListBonus()) == false)
+						this->m_Velocity.y = 0;*/
+				}
 			}
 		}
 

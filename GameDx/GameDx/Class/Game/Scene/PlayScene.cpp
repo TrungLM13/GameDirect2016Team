@@ -7,15 +7,15 @@
 #include "Class\Game\Scene\GameOverScene.h"
 
 
-inline int getIndexRemove(vector<CObjectss*> list, CObjectss* entity) {
+inline int getIndexRemove(vector<CObjectss*> list) {
 	for (int i = 0; i < list.size(); ++i) {
-		if (CMapManager::getInstance()->getListBonus().at(i) == entity) {
+		if (list.at(i)->isDestroy) {
 			return i;
 		}
 	}
 
-	std::vector<CObjectss*>::iterator it;
-	it = std::find(list.begin(), list.end(), entity);
+	//std::vector<CObjectss*>::iterator it;
+	//it = std::find(list.begin(), list.end(), entity);
 }
 
 
@@ -48,7 +48,7 @@ bool CPlayScene::initScene()
 
 void CPlayScene::updateScene(double deltaTime)
 {
-	CAudio::getInstance()->PlaySoundW(m_Sound);
+	//CAudio::getInstance()->PlaySoundW(m_Sound);
 	CPlayer::getInstance()->updateEntity(deltaTime);
 
 	CCamera::getInstance()->Update(CPlayer::getInstance()->getPosition());
@@ -59,6 +59,10 @@ void CPlayScene::updateScene(double deltaTime)
 	CPlayer::getInstance()->handleCollisionWithTile(deltaTime);
 
 	for (int i = 0; i < m_listObjectInViewport->size(); ++i) {
+		if (m_listObjectInViewport->at(i)->isDestroy) {
+			m_listObjectInViewport->erase(m_listObjectInViewport->begin() + getIndexRemove(*m_listObjectInViewport));
+		}
+
 		if (m_listObjectInViewport->at(i)->getObjectType() == OBJECT_TYPE::TYPE_BONUS) {
 			CPlayer::getInstance()->handleCollisionWithBonus(m_listObjectInViewport->at(i), deltaTime);
 		}
@@ -68,10 +72,12 @@ void CPlayScene::updateScene(double deltaTime)
 
 		m_listObjectInViewport->at(i)->updateEntity(deltaTime);
 	}
+
 	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
 	{
 		for (int i = 0; i < CMapManager::getInstance()->getListBonusItem().size(); i++)
 		{
+			CPlayer::getInstance()->handleCollisionWithBonus(CMapManager::getInstance()->getListBonusItem().at(i), deltaTime);
 			CMapManager::getInstance()->getListBonusItem().at(i)->updateEntity(deltaTime);
 		}
 	}
@@ -109,6 +115,11 @@ void CPlayScene::renderScene()
 	ZeroMemory(temp, 100);
 	_itow(CPopUpInfo::getInstance()->getTimer(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(220, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
+	*/
+
+	if (m_listObjectInViewport->size())
+	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
+		m_listObjectInViewport->at(i)->drawEntity();
 
 	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
 	{
@@ -116,10 +127,8 @@ void CPlayScene::renderScene()
 		{
 			CMapManager::getInstance()->getListBonusItem().at(i)->drawEntity();
 		}
-	}*/
-	if (m_listObjectInViewport->size())
-	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
-		m_listObjectInViewport->at(i)->drawEntity();
+	}
+	
 	CPlayer::getInstance()->drawEntity();
 }
 
