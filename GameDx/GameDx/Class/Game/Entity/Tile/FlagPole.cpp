@@ -10,6 +10,13 @@ CFlagPole::CFlagPole()
 	this->initEntity();
 }
 
+CFlagPole::CFlagPole(vector2d pos)
+{
+	this->m_Position.x = pos.x;
+	this->m_Position.y = pos.y;
+	this->initEntity();
+}
+
 CFlagPole:: ~CFlagPole()
 {
 	SAFE_RELEASE(this->m_ResouceImage);
@@ -23,7 +30,6 @@ bool CFlagPole::loadSprite()
 
 bool CFlagPole::initEntity()
 {
-	m_Position = vector3d(250, 120, 0);
 	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
@@ -42,7 +48,7 @@ void CFlagPole::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)
 	{
-		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_LEFT_TOP, true, 10);
 	}
 }
 

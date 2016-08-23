@@ -9,6 +9,13 @@ CFlagPoleTail::CFlagPoleTail()
 	this->initEntity();
 }
 
+CFlagPoleTail::CFlagPoleTail(vector2d pos)
+{
+	this->m_Position.x = pos.x;
+	this->m_Position.y = pos.y;
+	this->initEntity();
+}
+
 CFlagPoleTail:: ~CFlagPoleTail()
 {
 	SAFE_RELEASE(this->m_ResouceImage);
@@ -22,7 +29,6 @@ bool CFlagPoleTail::loadSprite()
 
 bool CFlagPoleTail::initEntity()
 {
-	m_Position = vector3d(250, 48, 0);
 	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);

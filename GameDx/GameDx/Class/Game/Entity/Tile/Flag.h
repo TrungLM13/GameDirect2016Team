@@ -8,6 +8,7 @@ class CFlag : public CMovable
 {
 public:
 	CFlag();
+	CFlag(vector2d pos);
 	~CFlag();
 	virtual bool			initEntity()											override;
 	virtual void			updateEntity(float deltaTime)							override;

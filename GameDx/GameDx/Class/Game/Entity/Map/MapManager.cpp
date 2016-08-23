@@ -6,6 +6,14 @@
 #include "Class\Game\Entity\Bonus\Brick.h"
 #include "Class\Game\Entity\Bonus\GiftBox.h"
 #include "Class\Game\Entity\Tile\Castle.h"
+#include "Class\Game\Entity\Enemy\Mushroom.h"
+#include "Class\Game\Entity\Enemy\Turtle.h"
+#include "Class\Game\Entity\Enemy\CarnivorousPlants.h"
+#include "Class\Game\Entity\Tile\Flag.h"
+#include "Class\Game\Entity\Tile\FlagPole.h"
+#include "Class\Game\Entity\Tile\FlagPoleHead.h"
+#include "Class\Game\Entity\Tile\FlagPoleTail.h"
+
 
 
 CMapManager* CMapManager::m_instance = NULL;
@@ -130,6 +138,19 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
 		if (type == TODI::TODI_GIFT_BOX)
 			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_COIN));
+
+		if (type == TODI::TODI_FLAG_POLE_HEAD)
+			m_listBonus.push_back(new CFlagPoleHead(positionEntity));
+		if (type == TODI::TODI_FLAG_POLE)
+			m_listBonus.push_back(new CFlagPole(positionEntity));
+		if (type == TODI::TODI_GREEN_FLAG)
+			m_listBonus.push_back(new CFlag(positionEntity));
+		if (type == TODI::TODI_FLAG_POLE_TAIL)
+			m_listBonus.push_back(new CFlagPoleTail(positionEntity));
+
+
+		if (type == TODI::TODI_MUSHROOM)
+			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));
 		
 		if (type == TODI::TODI_CASTLE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));

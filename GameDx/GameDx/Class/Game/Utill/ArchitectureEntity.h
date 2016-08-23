@@ -75,6 +75,8 @@ typedef enum TYPEOFDATAINPUT{
 	TODI_CEMENT							= 32,
 	TODI_HEAD_MOUNTAIN					= 34,
 	TODI_TAIL_MOUNTAIN					= 33,
-	TODI_RECTANGLE						= -1
+	TODI_RECTANGLE						= -1,
+	TODI_MUSHROOM						= 28,
+	TODI_GREEN_TURTLE					= 30
 } TODI;
 #endif

@@ -7,6 +7,7 @@ class CFlagPole : public CStaticEntity
 {
 public:
 	CFlagPole();
+	CFlagPole(vector2d pos);
 	~CFlagPole();
 
 	virtual bool			initEntity()											override;

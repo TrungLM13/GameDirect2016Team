@@ -7,6 +7,7 @@ class CFlagPoleTail : public CStaticEntity
 {
 public:
 	CFlagPoleTail();
+	CFlagPoleTail(vector2d pos);
 	~CFlagPoleTail();
 
 	virtual bool			initEntity()											override;

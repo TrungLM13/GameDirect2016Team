@@ -14,6 +14,12 @@ CFlagPoleHead:: ~CFlagPoleHead()
 	SAFE_RELEASE(this->m_ResouceImage);
 }
 
+CFlagPoleHead::CFlagPoleHead(vector2d pos)
+{
+	this->m_Position.x = pos.x;
+	this->m_Position.y = pos.y;
+	this->initEntity();
+}
 bool CFlagPoleHead::loadSprite()
 {
 	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_FLAG_POLE_HEAD), 1, 1, 1, 0));
@@ -22,7 +28,6 @@ bool CFlagPoleHead::loadSprite()
 
 bool CFlagPoleHead::initEntity()
 {
-	m_Position = vector3d(250, 200, 0);
 	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
@@ -34,9 +39,11 @@ void CFlagPoleHead::updateEntity(CKeyBoard* device)
 {
 
 }
+
 void CFlagPoleHead::updateEntity(float deltaTime)
 {
 }
+
 void CFlagPoleHead::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)

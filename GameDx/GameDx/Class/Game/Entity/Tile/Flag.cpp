@@ -10,6 +10,13 @@ CFlag::CFlag()
 	this->initEntity();
 }
 
+CFlag::CFlag(vector2d pos)
+{
+	this->m_Position.x = pos.x;
+	this->m_Position.y = pos.y;
+	this->initEntity();
+}
+
 CFlag:: ~CFlag()
 {
 	SAFE_RELEASE(this->m_ResouceImage);
@@ -23,7 +30,6 @@ bool CFlag::loadSprite()
 
 bool CFlag::initEntity()
 {
-	m_Position = vector3d(242, 184, 0);
 	m_Velocity = vector2d(0, -9.8);
 	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
