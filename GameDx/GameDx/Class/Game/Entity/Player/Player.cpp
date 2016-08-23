@@ -233,10 +233,10 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 				break;
 			case COLDIRECTION::COLDIRECTION_NONE:
 				if (m_State != PLAYERSTATES::JUMP) {
-					//if (!IsCollision_WithRect(this, CMapManager::getInstance()->getListRect())){
-							//m_Velocity.y = VEL_PLAYER_Y_MIN;
+					if (!IsCollision_WithRect(this, CMapManager::getInstance()->getListRect())){
+							m_Velocity.y = VEL_PLAYER_Y_MIN;
 							m_IsFreeFall = true;
-					//}
+					}
 
 				}
 
