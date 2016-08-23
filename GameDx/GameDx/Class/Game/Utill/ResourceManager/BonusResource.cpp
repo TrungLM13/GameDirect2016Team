@@ -47,7 +47,6 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 	case TAGNODE::COININBOX:
 		return L"Resource//Image//Game//Sprites//Mario//Bonus//coin_xoay.png";
 	case TAGNODE::GIFT_BOX:
-		if (m_TypeObject == MAP_NUM::MAP_1 || m_TypeObject == MAP_NUM::MAP_3) {
 			switch (state)
 			{
 			case GIFTBOX_STATE::GIFTBOX_NORMAL:
@@ -57,18 +56,6 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 			default:
 				break;
 			}
-		}
-		else if (m_TypeObject == MAP_NUM::MAP_2) {
-			switch (state)
-			{
-			case GIFTBOX_STATE::GIFTBOX_NORMAL:
-				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_cham_hoi.png";
-			case GIFTBOX_STATE::GIFTBOX:
-				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_mat_cham_hoi.png";
-			default:
-				break;
-			}
-		}
 	case TAGNODE::FLOWER:
 		return L"Resource//Image//Game//Sprites//Mario//Bonus//hoa.png";
 	case TAGNODE::BRICKMINI:
