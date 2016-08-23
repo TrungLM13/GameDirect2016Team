@@ -6,6 +6,19 @@
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\Scene\GameOverScene.h"
 
+
+inline int getIndexRemove(vector<CObjectss*> list, CObjectss* entity) {
+	for (int i = 0; i < list.size(); ++i) {
+		if (CMapManager::getInstance()->getListBonus().at(i) == entity) {
+			return i;
+		}
+	}
+
+	std::vector<CObjectss*>::iterator it;
+	it = std::find(list.begin(), list.end(), entity);
+}
+
+
 CPlayScene::CPlayScene()
 {
 	this->initScene();
@@ -65,6 +78,8 @@ void CPlayScene::updateScene(double deltaTime)
 			CMapManager::getInstance()->getListBonusItem().at(i)->updateEntity(deltaTime);
 		}
 	}
+
+
 
 	this->checkChangeScene(deltaTime);
 }

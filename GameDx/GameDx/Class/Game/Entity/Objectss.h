@@ -23,6 +23,8 @@ public:
 	virtual int				getObjectType()					= 0;
 
 	virtual int				getTagNodeId()          { return 0; };
+
+	bool					isDestroy;
 protected:
 	const char*				m_TagNode;
 	vector3d				m_Position;

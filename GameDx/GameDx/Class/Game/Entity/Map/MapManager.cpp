@@ -184,11 +184,12 @@ void CMapManager::popBonusObject()
 
 void CMapManager::pushInFirst(CBaseEntity* entity)
 {
-	m_listBonusItem.insert(m_listBonus.begin(), entity);
+	m_listBonusItem.insert(m_listBonusItem.begin(), entity);
 }
 
 void CMapManager::removeInFirst() {
-	m_listBonusItem.erase(m_listBonus.begin());
+	if (!m_listBonusItem.empty())
+	m_listBonusItem.erase(m_listBonusItem.begin());
 }
 
 void CMapManager::removeEntity(vector<CBaseEntity*>& list, int tagnode)

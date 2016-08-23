@@ -8,7 +8,7 @@
 
 inline int getIndex(vector<CBaseEntity*> list, CBaseEntity* entity) {
 	for (int i = 0; i < list.size(); ++i) {
-		if (CMapManager::getInstance()->getListBonusItem().at(i) == entity) {
+		if (CMapManager::getInstance()->getListBonus().at(i) == entity) {
 			return i;
 		}
 	}
@@ -23,7 +23,7 @@ CBrick::CBrick()
 CBrick::CBrick(int map, vector2d position, BRICK_TYPE type)
 {
 	this->map = map;
-	this->m_ResouceImage->m_TypeObject = map;
+//	this->m_ResouceImage->m_TypeObject = map;
 	this->PrePos = vector3d(position.x, position.y, 0);
 
 	m_Position.x = position.x;
@@ -125,10 +125,12 @@ void CBrick::updateEntity(float deltaTime)
 						CMapManager::getInstance()->pushBonusObject(m_BrickMini.at(i));
 					}
 
-					vector<CBaseEntity*>  tempList = CMapManager::getInstance()->getListBonusItem();
+					this->isDestroy = true;
+
+					vector<CBaseEntity*>  tempList = CMapManager::getInstance()->getListBonus();
 					tempList.erase(tempList.begin() + getIndex(tempList, this));
 
-					CMapManager::getInstance()->setListBonusItem(tempList);
+					CMapManager::getInstance()->setListBonus(tempList);
 
 					tempList.clear();
 

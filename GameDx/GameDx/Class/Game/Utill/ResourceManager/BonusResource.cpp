@@ -22,18 +22,18 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 		switch (state)
 		{
 		case BRICK_STATE::BRICK_NORMAL:
-			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3){
+			if (this->m_TypeObject == MAP_NUM::MAP_1 || this->m_TypeObject == MAP_NUM::MAP_3){
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach.png";
 			}
-			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			else if (this->m_TypeObject == MAP_NUM::MAP_2)
 			{
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh.png";
 			}
 		case BRICK_STATE::BRICK_BOX:
-			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3){
+			if (this->m_TypeObject == MAP_NUM::MAP_1 || this->m_TypeObject == MAP_NUM::MAP_3){
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_mat_cham_hoi.png";
 			}
-			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			else if (this->m_TypeObject == MAP_NUM::MAP_2)
 			{
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh_0_cham_hoi.png";
 			}
@@ -75,20 +75,20 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 		switch (state)
 		{
 		case BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN:case BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN:
-			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3)
+			if (this->m_TypeObject == MAP_NUM::MAP_1 || this->m_TypeObject == MAP_NUM::MAP_3)
 			{
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai.png";
 			}
-			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			else if (this->m_TypeObject == MAP_NUM::MAP_2)
 			{
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_phai_map2.png";
 			}
 		case BRICKMINI_TYPE::BRICKMINI_LEFT_UP: case BRICKMINI_TYPE::BRICKMINI_RIGHT_UP:
-			if (this->m_TypeObject == MAPNUM::MAP_1 || this->m_TypeObject == MAPNUM::MAP_3)
+			if (this->m_TypeObject == MAP_NUM::MAP_1 || this->m_TypeObject == MAP_NUM::MAP_3)
 			{
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai.png";
 			}
-			else if (this->m_TypeObject == MAPNUM::MAP_2)
+			else if (this->m_TypeObject == MAP_NUM::MAP_2)
 			{
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_vo_trai_map2.png";
 			}
