@@ -112,8 +112,10 @@ void CPlayScene::renderScene()
 	ZeroMemory(temp, 100);
 	_itow(CPopUpInfo::getInstance()->getTimer(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(220, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
-	
 
+	if (m_listObjectInViewport->size())
+	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
+		m_listObjectInViewport->at(i)->drawEntity();
 
 	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
 	{
@@ -122,10 +124,6 @@ void CPlayScene::renderScene()
 			CMapManager::getInstance()->getListBonusItem().at(i)->drawEntity();
 		}
 	}
-
-	if (m_listObjectInViewport->size())
-	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
-		m_listObjectInViewport->at(i)->drawEntity();
 
 	CPlayer::getInstance()->drawEntity();
 }

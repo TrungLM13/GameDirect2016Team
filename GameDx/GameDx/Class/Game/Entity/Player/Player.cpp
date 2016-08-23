@@ -289,88 +289,6 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 			this->m_PlayerState->enter(*this);
 		}
 	}
-
-
-
-	//switch (entity->getTagNodeId())
-	//{
-	//case TAGNODE::FLAG:
-	//	if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_BOTTOM)
-	//	{
-	//		// Only if after collision top with flag pole tail and bottom with flag, player change into run state
-	//		if (m_IsEnable) {
-	//			m_IsAutoMove = true;
-	//			if (m_Velocity.x <= 0) {
-	//				m_Velocity.x = VEL_PLAYER_X;
-	//			}
-	//			this->m_PlayerState->exitCurrentState(*this, new CRunState());
-	//			this->m_PlayerState->enter(*this);
-	//		}
-	//		else m_IsAutoMove = false;
-
-	//	}
-	//	break;
-	//case TAGNODE::FLAG_POLE:
-	//	if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
-	//	{
-	//		if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
-	//			if (m_Position.y > 100){
-	//				m_Position.x = entity->getPosition().x;
-	//				this->m_PlayerState->exitCurrentState(*this, new CClimbState());
-	//			}
-	//			else
-	//			{
-	//				this->m_PlayerState->exitCurrentState(*this, new CJumpState());
-	//			}
-	//		}
-
-	//	}
-	//	break;
-	//case TAGNODE::FLAG_POLE_TAIL:
-	//	if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_LEFT)
-	//	{
-	//		m_IsCollision = true;
-
-	//		if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
-	//		{
-	//			m_Velocity.x = VEL_PLAYER_X_MIN;
-	//		}
-	//		else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-	//			m_IsCollision = false;
-	//			this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
-	//		}
-
-	//		m_Velocity.y = VEL_DEFAULT_Y;
-
-	//	}
-	//	else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
-	//		m_IsEnable = true; // Signal for flag auto run
-	//		if (this->m_State == PLAYERSTATES::CLIMB) {
-	//			m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-	//			m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
-
-	//			m_Velocity.x = abs(m_Velocity.x) * m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
-	//		}
-	//		/*if (m_IsAutoMove)
-	//		{
-	//		this->m_PlayerState->exitCurrentState(*this, new CRunState());
-	//		this->m_PlayerState->enter(*this);
-	//		}*/
-	//	}
-	//	else if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_NONE) {
-	//		m_IsCollision = false;
-	//	}
-	//	break;
-
-	//case TAGNODE::NONE:
-	//	if (this->m_State == PLAYERSTATES::STAND || PLAYERSTATES::RUN)
-	//	{
-	//		//m_IsCollision = false;
-	//	}
-	//	break;
-	//default:
-	//	break;
-	//}
 }
 
 void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) {
@@ -430,7 +348,7 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_LEFT){
 			// Need to narrow the bounding of player
 			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
-			//	this->m_Position.x = bonusEntity->getBounding().getX() - this->getBounding().getWidth() / 2;
+				//	this->m_Position.x = bonusEntity->getBounding().getX() - this->getBounding().getWidth() / 2;
 				this->m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
 			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
@@ -440,7 +358,7 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_RIGHT){
 			// Need to narrow the bounding of player
 			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-			//	this->m_Position.x = bonusEntity->getBounding().getX() + bonusEntity->getBounding().getWidth() + this->getBounding().getWidth() / 2;
+				//	this->m_Position.x = bonusEntity->getBounding().getX() + bonusEntity->getBounding().getWidth() + this->getBounding().getWidth() / 2;
 				this->m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
 			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
@@ -455,6 +373,83 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 			}
 		}
 		break;
+
+	case TAGNODE::FLAG:
+		if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_BOTTOM)
+		{
+			// Only if after collision top with flag pole tail and bottom with flag, player change into run state
+			if (m_IsEnable) {
+				m_IsAutoMove = true;
+				if (m_Velocity.x <= 0) {
+					m_Velocity.x = VEL_PLAYER_X;
+				}
+				this->m_PlayerState->exitCurrentState(*this, new CRunState());
+				this->m_PlayerState->enter(*this);
+			}
+			else m_IsAutoMove = false;
+
+		}
+		break;
+	case TAGNODE::FLAG_POLE:
+		if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_LEFT)
+		{
+			if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
+				if (m_Position.y > 100){
+					m_Position.x = bonusEntity->getPosition().x;
+					this->m_PlayerState->exitCurrentState(*this, new CClimbState());
+				}
+				else
+				{
+					this->m_PlayerState->exitCurrentState(*this, new CJumpState());
+				}
+			}
+
+		}
+		break;
+
+	case TAGNODE::FLAG_POLE_TAIL:
+		if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_LEFT)
+		{
+			m_IsCollision = true;
+
+			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
+			{
+				m_Velocity.x = VEL_PLAYER_X_MIN;
+			}
+			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+				m_IsCollision = false;
+				this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
+			}
+
+			m_Velocity.y = VEL_DEFAULT_Y;
+
+		}
+		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_TOP) {
+			m_IsEnable = true; // Signal for flag auto run
+			if (this->m_State == PLAYERSTATES::CLIMB) {
+				m_Position.y = bonusEntity->getPosition().y + bonusEntity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+				m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
+
+				m_Velocity.x = abs(m_Velocity.x) * m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
+			}
+			/*if (m_IsAutoMove)
+			{
+			this->m_PlayerState->exitCurrentState(*this, new CRunState());
+			this->m_PlayerState->enter(*this);
+			}*/
+		}
+		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_NONE) {
+			m_IsCollision = false;
+		}
+		break;
+
+	case TAGNODE::NONE:
+		if (this->m_State == PLAYERSTATES::STAND || PLAYERSTATES::RUN)
+		{
+			//m_IsCollision = false;
+		}
+		break;
+
 	default:
 		break;
 	}
