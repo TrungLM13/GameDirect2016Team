@@ -5,9 +5,9 @@
 CQuadTree::CQuadTree()
 {
 	m_sizeWorld = vector2d(CMapManager::getInstance()->getListMapInGame().at(CMapManager::getInstance()->getCurrentMapINT())->m_sizeX,
-							CMapManager::getInstance()->getListMapInGame().at(CMapManager::getInstance()->getCurrentMapINT())->m_sizeY);
+		CMapManager::getInstance()->getListMapInGame().at(CMapManager::getInstance()->getCurrentMapINT())->m_sizeY);
 
-	m_Node		= new CQuadNode(0, CBox2D(0, m_sizeWorld.y, m_sizeWorld.x, m_sizeWorld.y));
+		m_Node = new CQuadNode(0, CBox2D(0, m_sizeWorld.y, m_sizeWorld.x, m_sizeWorld.y));
 }
 
 
@@ -28,6 +28,7 @@ void CQuadTree::CreateTree()
 void CQuadTree::ReleaseTree()
 {
 	m_Node->ReleaseNode();
+
 }
 
 vector<CObjectss*>* CQuadTree::Retrieve(CBox2D rectCamera, vector<CObjectss*>* listResult)

@@ -10,7 +10,13 @@ class CQuadTree : public CSingleton<CQuadTree>
 {
 public:
 	CQuadTree();
+	CQuadTree(int level, CBox2D* bound);
 	~CQuadTree();
+
+	int level;
+	vector<CObjectss*> listObjects;
+	CQuadTree** nodes;
+	CBox2D* bounds;
 
 	void								CreateTree();
 	void								ReleaseTree();

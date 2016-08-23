@@ -242,18 +242,19 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
-				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+					m_Position.x = CMapManager::getInstance()->getListRect().at(i)->getX() - this->getBounding().getWidth() / 2;
 					m_Velocity.x = VEL_PLAYER_X_MIN;
 				}
-				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
 					m_Velocity.x = VEL_PLAYER_X;
 				}
 				break;
 			case COLDIRECTION::COLDIRECTION_RIGHT:
-				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
 					m_Velocity.x = VEL_PLAYER_X_MIN;
 				}
-				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
 					m_Velocity.x = -VEL_PLAYER_X;
 				}
 				break;
@@ -277,7 +278,7 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 	//-----Handle Collision with Screen - Die State----//
 
 	this->getBounding().setVelocity(this->getVelocity());
-	if (CCollision::CheckCollision(this->getBounding(), CBox2D(0, 0, BACKBUFFER_WIDTH, 0)) == COLDIRECTION::COLDIRECTION_TOP) {
+	if (CCollision::CheckCollision(this->getBounding(), CBox2D(0, 0, 3584, 0)) == COLDIRECTION::COLDIRECTION_TOP) {
 		if (!m_IsAutoMove && !m_IsAutoJump && m_State != PLAYERSTATES::DIE){
 			m_Velocity.y = VEL_DEFAULT_Y + VEL_PLAYER_Y;
 			m_IsFreeFall = false;
@@ -425,23 +426,23 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 		}
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_LEFT){
 			// Need to narrow the bounding of player
-			/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
+			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
 			this->m_Position.x = bonusEntity->getBounding().getX() - this->getBounding().getWidth() / 2;
 			this->m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
 			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
 
-			}*/
+			}
 		}
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_RIGHT){
 			// Need to narrow the bounding of player
-			/*if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-			this->m_Position.x = bonusEntity->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
+			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+		//	this->m_Position.x = bonusEntity->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
 			this->m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
 			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
 
-			}*/
+			}
 		}
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_NONE){
 			if (!IsCollision_Player(this, CMapManager::getInstance()->getListBonus()) &&
@@ -502,7 +503,6 @@ void CPlayer::handleCollisionWithEnermy(CObjectss* enermyEntity, float deltaTime
 		break;
 	}
 }
-
 
 void CPlayer::drawEntity()
 {

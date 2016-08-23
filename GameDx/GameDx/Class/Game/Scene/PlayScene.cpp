@@ -30,18 +30,19 @@ CPlayScene::~CPlayScene()
 
 bool CPlayScene::initScene()
 {
-	m_backgroud				= new CSprite(CInfomationResource::backgroundPlayScene);
-	m_listObjectInViewport	= new vector<CObjectss*>();
+	m_backgroud = new CSprite(CInfomationResource::backgroundPlayScene);
+	m_listObjectInViewport = new vector<CObjectss*>();
 
 	CMapManager::getInstance();
+
 	m_treeGame = new CQuadTree();
-	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//Pokemon_Pokemon_-_No.wav");
-	m_treeGame->CreateTree();
-	m_treeGame				= new CQuadTree();
 
 	m_treeGame->CreateTree();
-	m_actionDieTimer		= 0;
+
+	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//Pokemon_Pokemon_-_No.wav");
+	m_actionDieTimer = 0;
 	CPlayer::getInstance();
+
 	return true;
 }
 
@@ -49,10 +50,6 @@ void CPlayScene::updateScene(double deltaTime)
 {
 	CAudio::getInstance()->PlaySoundW(m_Sound);
 	CPlayer::getInstance()->updateEntity(deltaTime);
-	/*for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); i++)
-	{
-	CMapManager::getInstance()->getListBonus().at(i)->updateEntity(deltaTime);
-	}*/
 
 	CCamera::getInstance()->Update(CPlayer::getInstance()->getPosition());
 
@@ -62,13 +59,13 @@ void CPlayScene::updateScene(double deltaTime)
 	CPlayer::getInstance()->handleCollisionWithTile(deltaTime);
 
 	for (int i = 0; i < m_listObjectInViewport->size(); ++i) {
-		if (m_listObjectInViewport->at(i)->getObjectType()		== OBJECT_TYPE::TYPE_BONUS) {
+		if (m_listObjectInViewport->at(i)->getObjectType() == OBJECT_TYPE::TYPE_BONUS) {
 			CPlayer::getInstance()->handleCollisionWithBonus(m_listObjectInViewport->at(i), deltaTime);
 		}
-		else if (m_listObjectInViewport->at(i)->getObjectType()	== OBJECT_TYPE::TYPE_ENERMY) {
+		else if (m_listObjectInViewport->at(i)->getObjectType() == OBJECT_TYPE::TYPE_ENERMY) {
 			CPlayer::getInstance()->handleCollisionWithEnermy(m_listObjectInViewport->at(i), deltaTime);
 		}
-		
+
 		m_listObjectInViewport->at(i)->updateEntity(deltaTime);
 	}
 	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
@@ -78,8 +75,6 @@ void CPlayScene::updateScene(double deltaTime)
 			CMapManager::getInstance()->getListBonusItem().at(i)->updateEntity(deltaTime);
 		}
 	}
-
-
 
 	this->checkChangeScene(deltaTime);
 }
@@ -96,6 +91,9 @@ void CPlayScene::renderScene()
 	m_backgroud->Render(CCamera::getInstance()->setPositionEntity(vector3d(CCamera::getInstance()->getPosisionCamera())), vector2d(1.0f, 1.0f), 0, DRAWCENTER_LEFT_TOP);
 	
 	wchar_t temp[100];
+	
+	/*wchar_t temp[100];
+>>>>>>> 59536451887ca6d0f3ef741fe40047b988196abe
 	_itow(CPopUpInfo::getInstance()->getPoint(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(50, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
 		
@@ -138,7 +136,7 @@ void	CPlayScene::checkChangeScene(float deltaTime)
 
 		CPopUpInfo::getInstance()->setHelth(CPopUpInfo::getInstance()->getHelth() - 1);
 
-		CBaseScene* tempScene		= CSceneManager::getInstance()->getScene().top();
+		CBaseScene* tempScene = CSceneManager::getInstance()->getScene().top();
 		CSceneManager::getInstance()->getScene().pop();
 		delete[] tempScene;
 
@@ -147,9 +145,9 @@ void	CPlayScene::checkChangeScene(float deltaTime)
 		else
 			CSceneManager::getInstance()->getScene().push(new CGameOver());
 
-		CPlayer::getInstance()		->resetPlayer(vector3d(50, 28, 0.5));
-		CCamera::getInstance()		->setPositionCamera(vector3d(0, 240, 0));
+		CPlayer::getInstance()->resetPlayer(vector3d(50, 28, 0.5));
+		CCamera::getInstance()->setPositionCamera(vector3d(0, 240, 0));
 
-		m_actionDieTimer			= 0;
+		m_actionDieTimer = 0;
 	}
 }
