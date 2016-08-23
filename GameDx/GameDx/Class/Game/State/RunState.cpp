@@ -46,7 +46,7 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 
 			return this;
 		}
-		if (input->KeyDown(DIK_LEFT)) {
+		if (input->KeyDown(DIK_LEFT) && player.getPosition().x > 0) {
 			player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_LEFT;
 			player.setVelocity(vector2d(VEL_PLAYER_X * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
 
@@ -77,7 +77,7 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 	else {
 		/*if (player.getVelocity().x == 0) {
 			player.setVelocity(vector2d(VEL_PLAYER_X, player.getVelocity().y));
-		}*/
+			}*/
 		return this;
 	}
 }
@@ -94,8 +94,7 @@ void CRunState::update(CPlayer& player, double deltaTime) {
 		}
 		//player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + player.getVelocity().y * deltaTime / 100, 0));
 	}
-
-	player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + (player.getVelocity().y + GRAVITATION) * deltaTime / 100, 0));
+		player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + (player.getVelocity().y + GRAVITATION) * deltaTime / 100, 0));
 
 
 }

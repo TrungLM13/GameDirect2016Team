@@ -39,7 +39,7 @@ bool CPlayScene::initScene()
 
 	m_treeGame->CreateTree();
 
-	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//Pokemon_Pokemon_-_No.wav");
+//	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//Pokemon_Pokemon_-_No.wav");
 	m_actionDieTimer = 0;
 	CPlayer::getInstance();
 

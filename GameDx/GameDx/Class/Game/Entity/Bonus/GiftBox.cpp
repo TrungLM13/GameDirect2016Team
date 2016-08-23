@@ -111,14 +111,15 @@ void CGiftBox::updateEntity(float deltaTime)
 	m_Position = vector3d(m_Position.x, m_Position.y + (m_Velocity.y + SIGN(m_Velocity.y) * GRAVITATION)* deltaTime / 100, 0);
 
 	if (this->m_Position.y <= GIFTBOX_PRE_POSITION_Y &&
-		this->m_GiftBoxEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING &&
 		this->m_GiftBoxState == GIFTBOX_STATE::GIFTBOX)
 	{
+		this->m_Position.y = GIFTBOX_PRE_POSITION_Y;
+
 		if (this->m_GiftBoxType == GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE ||
 			this->m_GiftBoxType == GIFTBOX_TYPE::GIFTBOX_COIN)
 		{
-			this->m_Position.y = GIFTBOX_PRE_POSITION_Y;
-			this->m_GiftBoxEvent = GIFTBOX_BRICK_EVENT::EVENT_DONE;
+			if (this->m_GiftBoxEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING)
+				this->m_GiftBoxEvent = GIFTBOX_BRICK_EVENT::EVENT_DONE;
 		}
 	}
 

@@ -23,7 +23,7 @@ CBrick::CBrick()
 CBrick::CBrick(int map, vector2d position, BRICK_TYPE type)
 {
 	this->map = map;
-//	this->m_ResouceImage->m_TypeObject = map;
+	//	this->m_ResouceImage->m_TypeObject = map;
 	this->PrePos = vector3d(position.x, position.y, 0);
 
 	m_Position.x = position.x;
@@ -163,13 +163,16 @@ void CBrick::updateEntity(float deltaTime)
 
 	m_Position = vector3d(m_Position.x, m_Position.y + (m_Velocity.y + SIGN(m_Velocity.y) * GRAVITATION)* deltaTime / 100, 0);
 
-	if (m_Position.y <= this->PrePos.y && m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING) {
+	if (m_Position.y <= this->PrePos.y) {
+		m_Position.y = this->PrePos.y;
+
 		if ((m_BrickType == BRICK_TYPE::BRICK_STAR && m_BrickState == BRICK_STATE::BRICK_BOX) ||
 			(m_BrickType == BRICK_TYPE::BRICK_COIN) ||
 			(m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM && m_BrickState == BRICK_STATE::BRICK_BOX))
 		{
-			m_Position.y = this->PrePos.y;
-			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_DONE;
+			//m_Position.y = this->PrePos.y;
+			if (m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING)
+				m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_DONE;
 		}
 	}
 
