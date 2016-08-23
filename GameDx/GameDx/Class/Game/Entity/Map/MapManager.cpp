@@ -129,7 +129,7 @@ bool CMapManager::loadEntityInMap()
 		if (type == TODI::TODI_RED_MUSHROOM_BOX)
 			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
 		if (type == TODI::TODI_GIFT_BOX)
-			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_NONE));
+			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_COIN));
 		
 		if (type == TODI::TODI_CASTLE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));

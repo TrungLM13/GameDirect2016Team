@@ -1,5 +1,7 @@
 
 #include "Camera.h"
+#include "Class\Game\Scene\PopupInfo.h"
+#include "Class\Game\Entity\Map\MapManager.h"
 
 vector3d			CCamera::m_Position					= vector3dZero;
 matrix				CCamera::m_MatrixTransform;
@@ -15,8 +17,8 @@ CCamera::CCamera()
 	m_Position		= vector3d(0, BACKBUFFER_HEIGHT, 0);
 	m_ViewportX		= &m_Position.x;
 	m_ViewportY		= &m_Position.y;
-
-	setLimitRectOfCurrentMap(3000, BACKBUFFER_HEIGHT);
+	setLimitRectOfCurrentMap(CMapManager::getInstance()->getListMapInGame().at(CMapManager::getInstance()->getCurrentMapINT())->m_sizeX, 
+		CMapManager::getInstance()->getListMapInGame().at(CMapManager::getInstance()->getCurrentMapINT())->m_sizeY);
 	D3DXMatrixIdentity(&m_MatrixTransform);
 	
 }
@@ -34,6 +36,10 @@ CCamera*	CCamera::getInstance()
 	if (!m_Instance)
 		m_Instance	= new CCamera();
 	return	m_Instance;
+}
+
+void		CCamera::setLimitRect(RECT newSizeWorld){
+	m_LimitRect = newSizeWorld;
 }
 
 CAMERASTATE	CCamera::getStateCamera()
@@ -106,7 +112,7 @@ vector3d	CCamera::setPositionEntity(vector3d	&pos)
 void		CCamera::setLimitRectOfCurrentMap(float width, float height)
 {
 	this->m_LimitRect.left			= 0;
-	this->m_LimitRect.right			= this->m_LimitRect.left + width;
+	this->m_LimitRect.right			= this->m_LimitRect.left + width - BACKBUFFER_HEIGHT/2;
 	this->m_LimitRect.bottom		= 240;
 	this->m_LimitRect.top			= this->m_LimitRect.bottom + height;
 }

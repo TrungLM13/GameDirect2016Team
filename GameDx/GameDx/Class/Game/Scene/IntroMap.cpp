@@ -39,7 +39,7 @@ void CIntroMap::updateScene(double deltaTime)
 
 	CBaseScene* tempScene = CSceneManager::getInstance()->getScene().top();
 	CSceneManager::getInstance()->getScene().pop();
-	delete tempScene;
+	//delete tempScene;
 
 	CSceneManager::getInstance()->getScene().push(new CPlayScene());
 }

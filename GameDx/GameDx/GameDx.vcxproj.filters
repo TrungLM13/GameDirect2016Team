@@ -23,7 +23,7 @@
       <Filter>Framework\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="Class\Framework\Text.cpp">
-      <Filter>Framework\Text</Filter>
+      <Filter>Framework\Sprite\Text</Filter>
     </ClCompile>
     <ClCompile Include="Class\Framework\Timer.cpp">
       <Filter>Framework\Timer</Filter>
@@ -255,7 +255,7 @@
       <Filter>Framework\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="Class\Framework\Text.h">
-      <Filter>Framework\Text</Filter>
+      <Filter>Framework\Sprite\Text</Filter>
     </ClInclude>
     <ClInclude Include="Class\Framework\Timer.h">
       <Filter>Framework\Timer</Filter>
@@ -470,9 +470,6 @@
     <Filter Include="Framework\Sprite">
       <UniqueIdentifier>{50a177ec-4cd5-4e80-a1f9-cc988f165b90}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Text">
-      <UniqueIdentifier>{75413c06-0eec-4154-ac60-f889239285a6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Timer">
       <UniqueIdentifier>{95a37953-12f0-4e29-b7ce-22be497b7ffa}</UniqueIdentifier>
     </Filter>
@@ -523,6 +520,9 @@
     </Filter>
     <Filter Include="Game\Utill\ResourceManager">
       <UniqueIdentifier>{2be21d51-9bbc-4250-a45f-b931f8c523ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Sprite\Text">
+      <UniqueIdentifier>{75413c06-0eec-4154-ac60-f889239285a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

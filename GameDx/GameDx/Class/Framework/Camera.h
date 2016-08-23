@@ -14,6 +14,7 @@ public:
 	static	void			AutoUpdate						(vector3d	positionPlayer);
 	static	vector3d		setPositionEntity				(vector3d	&position);
 	static	CCamera*		getInstance						();
+	static  void			setLimitRect					(RECT);
 			CAMERASTATE		getStateCamera					();
 			vector3d		getPosisionCamera				();
 			vector4d		getViewport						();
