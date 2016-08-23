@@ -6,20 +6,20 @@
 
 CMushroom::CMushroom()
 {
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(0.1, -0.98);
-	this->m_Direction = vector2d(DIRECTION::DIRECTION_LEFT, DIRECTION::DIRECTION_DOWN);
+	this->m_Bounding	= new CBox2D(0, 0, 0, 0);
+	this->m_Velocity	= vector2d(0.1, -0.98);
+	this->m_Direction	= vector2d(DIRECTION::DIRECTION_LEFT, DIRECTION::DIRECTION_DOWN);
 	this->initEntity();
 }
 
 CMushroom::CMushroom(vector2d vect, int type){
-	m_Position.x = vect.x;
-	m_Position.y = vect.y;
+	m_Position.x		= vect.x;
+	m_Position.y		= vect.y;
+	m_Type				= type;
 
-	m_Type = type;
-
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(5, 9.8);
+	this->m_Bounding	= new CBox2D(0, 0, 0, 0);
+	this->m_Velocity	= vector2d(5, 9.8);
+	this->m_Direction	= vector2d(DIRECTION::DIRECTION_LEFT, DIRECTION::DIRECTION_DOWN);
 
 	this->initEntity();
 }
@@ -42,7 +42,6 @@ bool	CMushroom::loadSprite(){
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::MUSHROOM, MUSHROOM_STATE::MUSH_RUN), 1, 2));
 		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::MUSHROOM, MUSHROOM_STATE::MUSH_IS_ACTTACKED), 1, 1));
 		break;
-
 	case EnemyStyle::TOF_BLUE_MUSHROOM:
 		break;
 	default:
@@ -53,9 +52,10 @@ bool	CMushroom::loadSprite(){
 
 bool	CMushroom::initEntity()
 {
-	this->m_ResouceImage = new CEnermyResource();
+	this->m_ResouceImage		= new CEnermyResource();
 	this->loadSprite();
-	this->m_State = MUSHROOM_STATE::MUSH_RUN;
+	this->m_State				= MUSHROOM_STATE::MUSH_RUN;
+	this->getBounding();
 	return true;
 }
 
@@ -93,14 +93,15 @@ void	CMushroom::updateEntity(RECT* rectCamera)
 void	CMushroom::updateCollision(float deltaTime)
 {
 	this->getBounding().setVelocity(this->getVelocity());
+	vector<CBox2D*> listRect = CMapManager::getInstance()->getListRect();
 
-	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); ++i) {
+	for (int i = 0; i < listRect.size(); ++i) {
 		if (this->m_State != MUSHROOM_STATE::MUSH_IS_ACTTACKED) {
 			this->getBounding().setVelocity(this->getVelocity());
-			switch (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
+			switch (CCollision::CheckCollision(this->getBounding(), *(listRect.at(i))))
 			{
 			case COLDIRECTION::COLDIRECTION_TOP:
-				this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+				this->m_Position.y = listRect.at(i)->getY() + this->getBounding().getHeight() / 2;
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
 			case COLDIRECTION::COLDIRECTION_RIGHT:
@@ -125,6 +126,9 @@ void	CMushroom::updateCollision(float deltaTime)
 			break;
 		}
 	}
+
+	if (m_Position.x <= 0)
+		m_Velocity.x *= -1;
 }
 
 void	CMushroom::drawEntity()

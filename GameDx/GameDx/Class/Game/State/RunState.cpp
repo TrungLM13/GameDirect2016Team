@@ -75,9 +75,9 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 		return new CStandState();
 	}
 	else {
-		/*if (player.getVelocity().x == 0) {
+		if (player.getVelocity().x == 0) {
 			player.setVelocity(vector2d(VEL_PLAYER_X, player.getVelocity().y));
-			}*/
+			}
 		return this;
 	}
 }
