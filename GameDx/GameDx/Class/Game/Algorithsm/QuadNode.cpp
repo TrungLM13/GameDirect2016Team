@@ -3,7 +3,7 @@
 CQuadNode::CQuadNode()
 {
 	m_NodeLevel = 0;
-	m_NodeSize = CBoxZero;
+	m_NodeSize	= CBoxZero;
 }
 
 CQuadNode::~CQuadNode()
@@ -89,7 +89,7 @@ bool CQuadNode::InsertEntity(CObjectss* entity)
 			m_Node[3]->InsertEntity(entity);
 	}
 
-	if (CBox2D::Intersect(this->getNodeSize(), entity->getBounding()))
+	else if(CBox2D::Intersect(this->getNodeSize(), entity->getBounding()))
 		m_EntityList.push_back(entity);
 
 	if (m_EntityList.size() > MAX_OBJECT_OF_NODE && m_NodeLevel < MAX_LEVEL_OF_NODE)
@@ -109,11 +109,9 @@ bool CQuadNode::InsertEntity(CObjectss* entity)
 
 			m_EntityList.pop_back();
 		}
-
 	}
 	return true;
 }
-
 
 vector<CObjectss*>* CQuadNode::retrieveEntity(CBox2D rectCamera, vector<CObjectss*>* listResult)
 {
@@ -125,11 +123,11 @@ vector<CObjectss*>* CQuadNode::retrieveEntity(CBox2D rectCamera, vector<CObjects
 		m_Node[3]->retrieveEntity(rectCamera, listResult);
 	}
 
-	if (CBox2D::Intersect(this->getNodeSize(), rectCamera))
+	if (CBox2D::Intersect(this->getNodeSize(), rectCamera) && (!m_EntityList.empty()))
 	{
 		int temp = 1;
-	for (int i = 0; i < m_EntityList.size(); ++ i)
-		listResult->push_back(m_EntityList.at(i));
+		for (int i = 0; i < m_EntityList.size(); ++ i)
+			listResult->push_back(m_EntityList.at(i));
 	}
 
 	return listResult;
