@@ -234,8 +234,8 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 			case COLDIRECTION::COLDIRECTION_NONE:
 				if (m_State != PLAYERSTATES::JUMP) {
 					if (!IsCollision_WithRect(this, CMapManager::getInstance()->getListRect())){
-							m_Velocity.y = VEL_PLAYER_Y_MIN;
-							m_IsFreeFall = true;
+						m_Velocity.y = VEL_PLAYER_Y_MIN;
+						m_IsFreeFall = true;
 					}
 
 				}
@@ -247,15 +247,16 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 					m_Velocity.x = VEL_PLAYER_X_MIN;
 				}
 				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-					m_Velocity.x = VEL_PLAYER_X;
+					m_Velocity.x = - VEL_PLAYER_X;
 				}
 				break;
 			case COLDIRECTION::COLDIRECTION_RIGHT:
 				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
+					m_Position.x = CMapManager::getInstance()->getListRect().at(i)->getX() + this->getBounding().getWidth() / 2;
 					m_Velocity.x = VEL_PLAYER_X_MIN;
 				}
 				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
-					m_Velocity.x = -VEL_PLAYER_X;
+					m_Velocity.x = VEL_PLAYER_X;
 				}
 				break;
 			default:
@@ -427,8 +428,8 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_LEFT){
 			// Need to narrow the bounding of player
 			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
-			this->m_Position.x = bonusEntity->getBounding().getX() - this->getBounding().getWidth() / 2;
-			this->m_Velocity.x = VEL_PLAYER_X_MIN;
+				this->m_Position.x = bonusEntity->getBounding().getX() - this->getBounding().getWidth() / 2;
+				this->m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
 			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT){
 
@@ -437,8 +438,8 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_RIGHT){
 			// Need to narrow the bounding of player
 			if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-		//	this->m_Position.x = bonusEntity->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
-			this->m_Velocity.x = VEL_PLAYER_X_MIN;
+				//	this->m_Position.x = bonusEntity->getBounding().getX() + CMapManager::getInstance()->getListBonus().at(i)->getBounding().getWidth() + this->getBounding().getWidth() / 2;
+				this->m_Velocity.x = VEL_PLAYER_X_MIN;
 			}
 			else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT){
 

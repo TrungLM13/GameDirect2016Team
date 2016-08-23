@@ -93,7 +93,6 @@ void CPlayScene::renderScene()
 	wchar_t temp[100];
 	
 	/*wchar_t temp[100];
->>>>>>> 59536451887ca6d0f3ef741fe40047b988196abe
 	_itow(CPopUpInfo::getInstance()->getPoint(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(50, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
 		
@@ -117,7 +116,7 @@ void CPlayScene::renderScene()
 		{
 			CMapManager::getInstance()->getListBonusItem().at(i)->drawEntity();
 		}
-	}
+	}*/
 	if (m_listObjectInViewport->size())
 	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
 		m_listObjectInViewport->at(i)->drawEntity();

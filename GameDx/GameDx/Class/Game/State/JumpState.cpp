@@ -43,6 +43,7 @@ CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
 		m_IsShoot = false;
 
 	if (input->KeyDown(DIK_RIGHT)) {
+		player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
 		m_IsMoveX = true;
 		if (player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT)
 			player.setVelocity(vector2d(CHANGE_DIRECTION(player.getVelocity().x), player.getVelocity().y));
@@ -50,6 +51,7 @@ CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
 		return this;
 	}
 	else if (input->KeyDown(DIK_LEFT)) {
+		player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_LEFT;
 		m_IsMoveX = true;
 		if (player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT)
 			player.setVelocity(vector2d(CHANGE_DIRECTION(player.getVelocity().x), player.getVelocity().y));
@@ -71,9 +73,9 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 
 		if (player.getVelocity().x == VEL_PLAYER_X_MIN)
 		{
-			player.setVelocity(vector2d(VEL_PLAYER_X, player.getVelocity().y));
+			player.setVelocity(vector2d(VEL_PLAYER_X * player.m_Direction.at(DIRECTIONINDEX::DIRECTION_X), player.getVelocity().y));
 		}
-		deltaX = player.getVelocity().x * deltaTime / 100;
+		deltaX = player.getVelocity().x * deltaTime / 60;
 	}
 
 	if (m_IsJumpHigh) {
