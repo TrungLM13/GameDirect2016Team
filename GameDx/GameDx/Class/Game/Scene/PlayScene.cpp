@@ -105,9 +105,9 @@ void CPlayScene::renderScene()
 			CMapManager::getInstance()->getListBonusItem().at(i)->drawEntity();
 		}
 	}
-	if (m_listObjectInViewport.size())
-	for (int i = 0; i < m_listObjectInViewport.size(); ++i)
-		m_listObjectInViewport.at(i)->drawEntity();
+	if (m_listObjectInViewport->size())
+	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
+		m_listObjectInViewport->at(i)->drawEntity();
 	CPlayer::getInstance()->drawEntity();
 }
 

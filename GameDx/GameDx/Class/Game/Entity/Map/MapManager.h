@@ -26,7 +26,9 @@ public:
 	vector<CBaseEntity*>    getListBonusItem();
 	void					setListBonusItem(vector<CBaseEntity*> list);
 	static CMapManager*		getInstance();
+
 	vector<MapInfo*>		getListMapInGame();
+	int						getCurrentMapINT();
 
 	void					pushBonusObject(CBaseEntity* entity);
 	void					popBonusObject();

@@ -22,7 +22,7 @@ public:
 
 private:
 	CQuadTree*				m_treeGame;
-	vector<CObjectss*>		m_listObjectInViewport;
+	vector<CObjectss*>*		m_listObjectInViewport;
 	CSound*					m_Sound;
 	CSprite*				m_backgroud;
 	float					m_actionDieTimer;
