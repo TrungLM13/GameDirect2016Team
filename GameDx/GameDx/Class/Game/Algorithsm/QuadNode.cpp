@@ -122,6 +122,10 @@ vector<CObjectss*>* CQuadNode::retrieveEntity(CBox2D rectCamera, vector<CObjects
 		m_Node[2]->retrieveEntity(rectCamera, listResult);
 		m_Node[3]->retrieveEntity(rectCamera, listResult);
 	}
+	else
+	for (int i = 0; i < m_EntityList.size(); ++i)
+		if (m_EntityList.at(i)->isDestroy)
+			m_EntityList.erase(m_EntityList.begin() + i);
 
 	if (CBox2D::Intersect(this->getNodeSize(), rectCamera) && (!m_EntityList.empty()))
 	{
