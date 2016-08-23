@@ -60,7 +60,7 @@ void CCoinInBox::updateEntity(float deltaTime)
 	// Handle: Player day cuc gach an tien lien tuc
 	for (int i = 0; i < CMapManager::getInstance()->getListBonusItem().size(); ++i) {
 		if (CMapManager::getInstance()->getListBonusItem().at(i)->getTagNodeId() == TAGNODE::COININBOX &&
-			CMapManager::getInstance()->getListBonusItem().at(i)->getPosition().y <= 100 &&
+			CMapManager::getInstance()->getListBonusItem().at(i)->getPosition().y <= m_Pos_y_Min &&
 			CMapManager::getInstance()->getListBonusItem().at(i)->getVelocity().y <= 0)
 		{
 			CPopUpInfo::getInstance()->addPoint(1);
