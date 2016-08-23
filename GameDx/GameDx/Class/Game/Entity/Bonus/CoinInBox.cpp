@@ -4,6 +4,7 @@
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Map\MapManager.h"
 #include "Class\Game\Utill\ResourceManager\BonusResource.h"
+#include "Class\Game\Scene\PopupInfo.h"
 
 CCoinInBox::CCoinInBox()
 {
@@ -14,7 +15,7 @@ CCoinInBox::CCoinInBox(vector3d pos)
 {
 	this->m_Position = pos;
 	this->initEntity();
-	this->m_Pos_y_Max = this->m_Position.y + 3* this->m_listSprite.at(0)->getFrameInfo().Height;
+	this->m_Pos_y_Max = this->m_Position.y + 2* this->m_listSprite.at(0)->getFrameInfo().Height;
 	this->m_Pos_y_Min = this->m_Position.y + this->m_listSprite.at(0)->getFrameInfo().Height;
 }
 
@@ -62,6 +63,9 @@ void CCoinInBox::updateEntity(float deltaTime)
 			CMapManager::getInstance()->getListBonusItem().at(i)->getPosition().y <= 100 &&
 			CMapManager::getInstance()->getListBonusItem().at(i)->getVelocity().y <= 0)
 		{
+			CPopUpInfo::getInstance()->addPoint(1);
+			CPopUpInfo::getInstance()->addCoin(1);
+
 			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
 			CMapManager::getInstance()->setListBonusItem(tempBonusList);
@@ -76,6 +80,10 @@ void CCoinInBox::updateEntity(float deltaTime)
 	if (this->m_Position.y <= this->m_Pos_y_Min && (this->m_Velocity.y + GRAVITATION) <= 0)
 	{
 		m_Velocity.y = VEL_DEFAULT_Y;
+
+		CPopUpInfo::getInstance()->addPoint(1);
+		CPopUpInfo::getInstance()->addCoin(1);
+
 		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
 		CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
 		CMapManager::getInstance()->setListBonusItem(tempBonusList);

@@ -184,7 +184,7 @@ void CBrick::updateEntity(float deltaTime)
 		}
 		else if (m_BrickType == BRICK_TYPE::BRICK_COIN) {
 			m_Coin = new CCoinInBox(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
-			m_Coin->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
+			m_Coin->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 5));
 			CMapManager::getInstance()->pushInFirst(m_Coin);
 			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
 		}
