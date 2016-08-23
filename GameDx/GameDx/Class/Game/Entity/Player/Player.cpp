@@ -69,7 +69,8 @@ bool CPlayer::initEntity()
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
 	m_UndyingTime = 0;
-	m_Position = vector3d(50, 70, 0);
+	//m_Position = vector3d(50, 70, 0);
+	m_Position = vector3d(3100, 70, 0);
 	m_PreJumpPos = vector3d(0, 0, 0);
 
 	m_State = PLAYERSTATES::STAND;
@@ -394,13 +395,12 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 		if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_LEFT)
 		{
 			if (m_State == PLAYERSTATES::JUMP || m_State == PLAYERSTATES::JUMP_SHOOT) {
-				if (m_Position.y > 100){
-					m_Position.x = bonusEntity->getPosition().x;
-					this->m_PlayerState->exitCurrentState(*this, new CClimbState());
-				}
-				else
-				{
-					this->m_PlayerState->exitCurrentState(*this, new CJumpState());
+				m_Position.x = bonusEntity->getPosition().x;
+				this->m_PlayerState->exitCurrentState(*this, new CClimbState());
+				m_IsCollision = false;
+
+				//Just cause when player jump and collide with flag pole, need to jump a hight after that climbing
+				if (m_Position.y > 60){
 				}
 			}
 
@@ -421,22 +421,17 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 				this->m_Velocity.x = VEL_PLAYER_X * this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
 			}
 
-			m_Velocity.y = VEL_DEFAULT_Y;
+			//m_Velocity.y = VEL_DEFAULT_Y;
 
 		}
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_TOP) {
 			m_IsEnable = true; // Signal for flag auto run
 			if (this->m_State == PLAYERSTATES::CLIMB) {
-				m_Position.y = bonusEntity->getPosition().y + bonusEntity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
+				m_Position.y = bonusEntity->getPosition().y + this->getBounding().getHeight() / 2;
 				m_Direction.at(DIRECTIONINDEX::DIRECTION_X) = DIRECTION::DIRECTION_RIGHT;
 
 				m_Velocity.x = abs(m_Velocity.x) * m_Direction.at(DIRECTIONINDEX::DIRECTION_X);
 			}
-			/*if (m_IsAutoMove)
-			{
-			this->m_PlayerState->exitCurrentState(*this, new CRunState());
-			this->m_PlayerState->enter(*this);
-			}*/
 		}
 		else if (CCollision::CheckCollision(this, bonusEntity) == COLDIRECTION::COLDIRECTION_NONE) {
 			m_IsCollision = false;

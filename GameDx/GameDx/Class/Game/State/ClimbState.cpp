@@ -18,8 +18,9 @@ CBaseState* CClimbState::handleInput(CPlayer& player, CKeyBoard* input) {
 }
 
 void CClimbState::update(CPlayer& player, double deltaTime) {
-	player.setVelocity(vector2d((float)VEL_PLAYER_X, (float)(-VEL_DEFAULT_Y)));
+	if (player.getPosition().y > 90)
+		player.setVelocity(vector2d((float)VEL_PLAYER_X, VEL_PLAYER_Y_MIN));
 
 	if (player.m_IsAutoMove == false)
-		player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + player.getVelocity().y * deltaTime / 240, 0));
+		player.setPosition(vector3d(player.getPosition().x, player.getPosition().y + (player.getVelocity().y + GRAVITATION) * deltaTime / 240, 0));
 }

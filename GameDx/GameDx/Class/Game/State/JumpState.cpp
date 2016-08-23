@@ -63,6 +63,7 @@ CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
 void CJumpState::update(CPlayer& player, double deltaTime){
 
 	//CAudio::getInstance()->PlaySoundW(m_Sound);
+
 	double deltaX = 0;
 
 	if (player.m_IsAutoJump) {
@@ -88,7 +89,4 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 	}
 
 	player.setPosition(vector3d(player.getPosition().x + deltaX, player.getPosition().y + (player.getVelocity().y + GRAVITATION) *deltaTime / 40, 0));
-}
-
-void CJumpState::update(CPlayer& player, CBaseEntity* entity) {
 }

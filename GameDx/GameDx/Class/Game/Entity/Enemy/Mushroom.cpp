@@ -116,11 +116,12 @@ void	CMushroom::updateCollision(float deltaTime)
 	/* Collision with Player*/
 	if (this->m_State != MUSHROOM_STATE::MUSH_IS_ACTTACKED) {
 		this->getBounding().setVelocity(this->getVelocity());
-		CPlayer::getInstance()->getBounding().setVelocity(CPlayer::getInstance()->getVelocity());
-		switch (CCollision::CheckCollision(this->getBounding(), CPlayer::getInstance()->getBounding()))
+		//CPlayer::getInstance()->getBounding().setVelocity(CPlayer::getInstance()->getVelocity());
+		switch (CCollision::CheckCollision(this, CPlayer::getInstance()))
 		{
 		case COLDIRECTION::COLDIRECTION_BOTTOM:
 			m_State = MUSHROOM_STATE::MUSH_IS_ACTTACKED;
+			this->isDestroy = true;
 			break;
 		default:
 			break;

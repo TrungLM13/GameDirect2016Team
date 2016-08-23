@@ -17,7 +17,7 @@ CFlagPoleHead:: ~CFlagPoleHead()
 CFlagPoleHead::CFlagPoleHead(vector2d pos)
 {
 	this->m_Position.x = pos.x;
-	this->m_Position.y = pos.y;
+	this->m_Position.y = pos.y - 16;
 	this->initEntity();
 }
 bool CFlagPoleHead::loadSprite()
@@ -47,7 +47,7 @@ void CFlagPoleHead::updateEntity(float deltaTime)
 void CFlagPoleHead::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)
-		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_LEFT_TOP, true, 10);
 }
 
 void CFlagPoleHead::updateEntity(RECT* camera)

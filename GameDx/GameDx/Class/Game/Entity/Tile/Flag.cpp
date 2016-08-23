@@ -4,6 +4,7 @@
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Entity\Player\Player.h"
 #include "Class\Game\Utill\ResourceManager\TileResource.h"
+#include "Class\Game\Entity\Map\MapManager.h"
 
 CFlag::CFlag()
 {
@@ -13,7 +14,7 @@ CFlag::CFlag()
 CFlag::CFlag(vector2d pos)
 {
 	this->m_Position.x = pos.x;
-	this->m_Position.y = pos.y;
+	this->m_Position.y = pos.y - 8;
 	this->initEntity();
 }
 
@@ -30,7 +31,7 @@ bool CFlag::loadSprite()
 
 bool CFlag::initEntity()
 {
-	m_Velocity = vector2d(0, -9.8);
+	m_Velocity = vector2d(0, VEL_DEFAULT_Y);
 	this->m_ResouceImage = new CTileResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
@@ -43,23 +44,24 @@ void CFlag::updateEntity(CKeyBoard* device)
 
 }
 
-void CFlag::handleCollision(CBaseEntity* entity, float deltaTime) {
-	if (entity->getTagNodeId() == TAGNODE::FLAG_POLE_TAIL){
-		if (CCollision::CheckCollision(this, entity) == COLDIRECTION::COLDIRECTION_TOP) {
-			m_IsEnable = true;
-			m_Position.y = entity->getPosition().y + entity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-		}
-	}
-}
-
 void CFlag::updateEntity(float deltaTime)
 {
-	if ( CPlayer::getInstance()->m_IsEnable == true) {
+	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
+		if (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId() == TAGNODE::FLAG_POLE_TAIL){
+			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_TOP) {
+				m_IsEnable = true;
+				m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y + this->getBounding().getHeight();
+			}
+		}
+	}
+
+	if (CPlayer::getInstance()->m_IsEnable == true) {
 		if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_BOTTOM) {
 			m_Velocity.y = CPlayer::getInstance()->getVelocity().y;
 		}
 		else if (CCollision::CheckCollision(CPlayer::getInstance(), this) == COLDIRECTION::COLDIRECTION_NONE && m_IsEnable == false) {
-			m_Position.y += m_Velocity.y * deltaTime / 60;
+			m_Velocity.y = 0;
+			m_Position.y += (m_Velocity.y + GRAVITATION) * deltaTime / 60;
 		}
 	}
 
@@ -68,7 +70,7 @@ void CFlag::updateEntity(float deltaTime)
 void CFlag::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)
-		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_LEFT_TOP, true, 10);
 }
 
 void CFlag::updateEntity(RECT* camera)
@@ -78,4 +80,8 @@ void CFlag::updateEntity(RECT* camera)
 
 int	CFlag::getTagNodeId() {
 	return TAGNODE::FLAG;
+}
+
+int CFlag::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
 }

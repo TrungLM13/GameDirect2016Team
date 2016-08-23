@@ -139,21 +139,21 @@ bool CMapManager::loadEntityInMap()
 		if (type == TODI::TODI_GIFT_BOX)
 			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_COIN));
 
-		if (type == TODI::TODI_FLAG_POLE_HEAD)
-			m_listBonus.push_back(new CFlagPoleHead(positionEntity));
 		if (type == TODI::TODI_FLAG_POLE)
 			m_listBonus.push_back(new CFlagPole(positionEntity));
+		if (type == TODI::TODI_FLAG_POLE_HEAD)
+			m_listBonus.push_back(new CFlagPoleHead(positionEntity));
 		if (type == TODI::TODI_GREEN_FLAG)
 			m_listBonus.push_back(new CFlag(positionEntity));
 		if (type == TODI::TODI_FLAG_POLE_TAIL)
 			m_listBonus.push_back(new CFlagPoleTail(positionEntity));
 
-
-		if (type == TODI::TODI_MUSHROOM)
+		/*if (type == TODI::TODI_MUSHROOM)
 			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));
 		
 		if (type == TODI::TODI_CASTLE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));
+*/
 		if ((type == TODI::TODI_CEMENT))
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_RED));
 
