@@ -3,14 +3,19 @@
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Utill\ResourceManager\BonusResource.h"
+#include"Class\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Scene\PopupInfo.h"
 
 CCoin::CCoin()
 {
 	this->initEntity();
 }
 
-CCoin::CCoin(LPDIRECT3DDEVICE9)
+CCoin::CCoin(vector2d pos)
 {
+	this->m_Position.x = pos.x;
+	this->m_Position.y = pos.y;
+
 	this->initEntity();
 }
 
@@ -33,7 +38,7 @@ bool CCoin::loadSprite()
 
 bool CCoin::initEntity()
 {
-	m_Position = vector3d(100, 200, 0);
+	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	return true;
@@ -46,6 +51,18 @@ void CCoin::updateEntity(CKeyBoard* device)
 
 void CCoin::updateEntity(float deltaTime)
 {
+	if (CCollision::CheckCollision(CPlayer::getInstance(), this))
+	{
+		this->isDestroy = true;
+
+		CPopUpInfo::getInstance()->addPoint(1);
+		CPopUpInfo::getInstance()->addCoin(1);
+
+		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonus();
+		CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COIN);
+		CMapManager::getInstance()->setListBonus(tempBonusList);
+		tempBonusList.clear();
+	}
 }
 
 void CCoin::drawEntity()

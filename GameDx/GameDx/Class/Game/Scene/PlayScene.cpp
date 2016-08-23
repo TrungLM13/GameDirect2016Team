@@ -57,6 +57,7 @@ void CPlayScene::updateScene(double deltaTime)
 	m_treeGame->Retrieve(CCamera::getInstance()->getBoundingScreen(), m_listObjectInViewport);
 
 	CPlayer::getInstance()->handleCollisionWithTile(deltaTime);
+
 	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
 	{
 		for (int i = 0; i < CMapManager::getInstance()->getListBonusItem().size(); i++)
@@ -125,6 +126,7 @@ void CPlayScene::renderScene()
 
 	if (m_listObjectInViewport->size())
 	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
+
 		m_listObjectInViewport->at(i)->drawEntity();
 
 	CPlayer::getInstance()->drawEntity();

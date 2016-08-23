@@ -24,7 +24,7 @@ public:
 	~CPopUpInfo(){
 	};
 
-	void	setMapName(string newMapName){
+	void		setMapName(string newMapName){
 		m_introInfomtion->m_mapName			= newMapName;
 	};
 
@@ -32,7 +32,7 @@ public:
 		return m_introInfomtion->m_mapName;
 	}
 
-	void	setPoint(int newPoint){
+	void		setPoint(int newPoint){
 		m_introInfomtion->m_point			= newPoint;
 	};
 
@@ -41,7 +41,7 @@ public:
 		return m_introInfomtion->m_point;
 	}
 
-	void	setTimer(int newTimer){
+	void		setTimer(int newTimer){
 		m_introInfomtion->m_timer			= newTimer;
 	};
 
@@ -49,29 +49,34 @@ public:
 		return m_introInfomtion->m_timer;
 	}
 
-	void	setCoin(int newCoin){
+	void		setCoin(int newCoin){
 		m_introInfomtion->m_coin			= newCoin;
 	};
 
-	void	addCoin(int addCoin){
+	void		addCoin(int addCoin){
 		m_introInfomtion->m_coin += addCoin;
 	}
 
-	void	addPoint(int addPoint){
+	void		addPoint(int addPoint){
 		m_introInfomtion->m_point += addPoint * 100;
 	}
-
 
 	int			getCoin(){
 		return m_introInfomtion->m_coin;
 	}
 
-	void	setHelth(int newHelth){
+	void		setHelth(int newHelth){
 		m_introInfomtion->m_helths			= newHelth;
 	};
 
 	int			getHelth(){
 		return m_introInfomtion->m_helths;
+	}
+
+	void		addHelth(int addHelth)
+	{
+		if (m_introInfomtion->m_helths < 3)
+			m_introInfomtion->m_helths += addHelth;
 	}
 
 	void		resetPopupInfo(){

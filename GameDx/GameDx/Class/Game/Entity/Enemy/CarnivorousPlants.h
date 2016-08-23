@@ -7,6 +7,7 @@ class CCarnivorousPlants : public CMovable
 {
 public:
 	CCarnivorousPlants();
+	CCarnivorousPlants(vector2d pos, CARNIVOROUS_PLANT_TYPE type);
 	~CCarnivorousPlants();
 
 	virtual bool			initEntity()											override;
@@ -18,8 +19,9 @@ public:
 	virtual int				getObjectType()											override;
 
 private:
-	int m_Direction;
-	int m_mapId;
+	int						m_Direction;
+	int						m_mapId;
+	CARNIVOROUS_PLANT_TYPE  m_Type;
 };
 
 #endif

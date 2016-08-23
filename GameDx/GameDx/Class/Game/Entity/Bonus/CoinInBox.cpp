@@ -45,7 +45,7 @@ bool CCoinInBox::initEntity()
 	this->loadSprite();
 	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	this->m_Velocity = vector2d(0, 0);
-	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_coin.wav");
+//	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_coin.wav");
 	return true;
 }
 
@@ -56,17 +56,19 @@ void CCoinInBox::updateEntity(CKeyBoard* device)
 
 void CCoinInBox::updateEntity(float deltaTime)
 {
-	CAudio::getInstance()->PlaySoundW(m_Sound);
+//	CAudio::getInstance()->PlaySoundW(m_Sound);
 	// Handle: Player day cuc gach an tien lien tuc
-	for (int i = 0; i < CMapManager::getInstance()->getListBonusItem().size(); ++i) {
-		if (CMapManager::getInstance()->getListBonusItem().at(i)->getTagNodeId() == TAGNODE::COININBOX &&
-			CMapManager::getInstance()->getListBonusItem().at(i)->getPosition().y <= m_Pos_y_Min &&
-			CMapManager::getInstance()->getListBonusItem().at(i)->getVelocity().y <= 0)
+
+	vector<CBaseEntity*> ListBonusItem = CMapManager::getInstance()->getListBonusItem();
+	for (int i = 0; i < ListBonusItem.size(); ++i) {
+		if (ListBonusItem.at(i)->getTagNodeId() == TAGNODE::COININBOX &&
+			ListBonusItem.at(i)->getPosition().y <= m_Pos_y_Min &&
+			ListBonusItem.at(i)->getVelocity().y <= 0)
 		{
 			CPopUpInfo::getInstance()->addPoint(1);
 			CPopUpInfo::getInstance()->addCoin(1);
 
-			vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
+			vector<CBaseEntity*> tempBonusList = ListBonusItem;
 			CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
 			CMapManager::getInstance()->setListBonusItem(tempBonusList);
 			tempBonusList.clear();
@@ -81,10 +83,10 @@ void CCoinInBox::updateEntity(float deltaTime)
 	{
 		m_Velocity.y = VEL_DEFAULT_Y;
 
-		CPopUpInfo::getInstance()->addPoint(1);
-		CPopUpInfo::getInstance()->addCoin(1);
+		/*CPopUpInfo::getInstance()->addPoint(1);
+		CPopUpInfo::getInstance()->addCoin(1);*/
 
-		vector<CBaseEntity*> tempBonusList = CMapManager::getInstance()->getListBonusItem();
+		vector<CBaseEntity*> tempBonusList = ListBonusItem;
 		CMapManager::getInstance()->removeEntity(tempBonusList, TAGNODE::COININBOX);
 		CMapManager::getInstance()->setListBonusItem(tempBonusList);
 		tempBonusList.clear();

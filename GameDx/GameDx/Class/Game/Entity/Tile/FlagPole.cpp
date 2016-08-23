@@ -39,11 +39,13 @@ bool CFlagPole::initEntity()
 
 void CFlagPole::updateEntity(CKeyBoard* device)
 {
-
+	
 }
+
 void CFlagPole::updateEntity(float deltaTime)
 {
 }
+
 void CFlagPole::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)

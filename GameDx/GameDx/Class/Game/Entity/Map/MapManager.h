@@ -25,6 +25,7 @@ public:
 	vector<CBox2D*>			getListRect();
 	vector<CBaseEntity*>    getListBonusItem();
 	void					setListBonusItem(vector<CBaseEntity*> list);
+	void					setListEnemy(vector<CBaseEntity*> list);
 	static CMapManager*		getInstance();
 
 	vector<MapInfo*>		getListMapInGame();

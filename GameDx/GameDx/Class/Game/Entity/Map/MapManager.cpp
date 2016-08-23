@@ -13,6 +13,8 @@
 #include "Class\Game\Entity\Tile\FlagPole.h"
 #include "Class\Game\Entity\Tile\FlagPoleHead.h"
 #include "Class\Game\Entity\Tile\FlagPoleTail.h"
+#include "Class\Game\Entity\Bonus\Coin.h"
+#include "Class\Game\Entity\Tile\Elevator.h"
 
 
 
@@ -77,6 +79,11 @@ void CMapManager::setListBonusItem(vector<CBaseEntity*> list)
 	this->m_listBonusItem = list;
 }
 
+void CMapManager::setListEnemy(vector<CBaseEntity*> list)
+{
+	this->m_listEnemy = list;
+}
+
 vector<MapInfo*> CMapManager::getListMapInGame()
 {
 	return m_listAllMapInGame;
@@ -127,12 +134,14 @@ bool CMapManager::loadEntityInMap()
 	{
 		if (type == TODI::TODI_STARS)
 			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(),positionEntity,	BRICK_TYPE::BRICK_STAR));
-		if (type == TODI::TODI_COIN)
+		if (type == TODI::TODI_COININBOX)
 			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_COIN));
 		if (type == TODI::TODI_BRICK)
 			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_NONE));
 		if (type == TODI::TODI_GREEN_MUSHROOM_BOX)
 			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_GREENMUSHROOM));
+		if (type == TODI::TODI_COIN)
+			m_listBonus.push_back(new CCoin(positionEntity));
 
 		if (type == TODI::TODI_RED_MUSHROOM_BOX)
 			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
@@ -149,16 +158,31 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CFlagPoleTail(positionEntity));
 
 
-		if (type == TODI::TODI_MUSHROOM)
-			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));
+		if (type == TODI::TODI_ELEVATOR_UP)
+			m_listBonus.push_back(new Elevator(positionEntity,							ELEVATOR_STATE::UP));
+		if (type == TODI::TODI_ELEVATOR_DOWN)
+			m_listBonus.push_back(new Elevator(positionEntity,							ELEVATOR_STATE::DOWN));
+
+
+		/*if (type == TODI::TODI_MUSHROOM)
+			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));*/
+		if (type == TODI::TODI_BLUE_CARNIVOROUSPLANTS)
+			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::BLUE_CARNIVOROUS_PLANT));
+		if (type == TODI::TODI_GREEN_CARNIVOROUSPLANTS)
+			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::GREEN_CARNIVOROUS_PLANT));
+
 		
 		if (type == TODI::TODI_CASTLE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));
 		if ((type == TODI::TODI_CEMENT))
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_RED));
+		if ((type == TODI::TODI_BLUE_STAIR))
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_BLUE));
 
 		if ((type == TODI::TODI_LANDSCAPE))
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_LANE_RED));
+		if (type == TODI::TODI_GREEN_LANDSCAPE)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_LANE_BLE));
 
 		if (type == TODI::TODI_CLOUND_ONE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CLOUND_ONE_MEMBER));
@@ -185,6 +209,7 @@ bool CMapManager::loadEntityInMap()
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_HEAD_BODY_DOWN));
 		if (type == TODI::TODI_PIPE_BODY)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_BODY_DOWN));
+		
 
 		if (type == TODI::TODI_RECTANGLE)
 			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x, size.y));

@@ -62,7 +62,7 @@ CBaseState* CJumpState::handleInput(CPlayer& player, CKeyBoard* input) {
 
 void CJumpState::update(CPlayer& player, double deltaTime){
 
-	CAudio::getInstance()->PlaySoundW(m_Sound);
+	//CAudio::getInstance()->PlaySoundW(m_Sound);
 	double deltaX = 0;
 
 	if (player.m_IsAutoJump) {
