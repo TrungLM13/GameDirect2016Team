@@ -53,6 +53,15 @@ public:
 		m_introInfomtion->m_coin			= newCoin;
 	};
 
+	void	addCoin(int addCoin){
+		m_introInfomtion->m_coin += addCoin;
+	}
+
+	void	addPoint(int addPoint){
+		m_introInfomtion->m_point += addPoint * 100;
+	}
+
+
 	int			getCoin(){
 		return m_introInfomtion->m_coin;
 	}

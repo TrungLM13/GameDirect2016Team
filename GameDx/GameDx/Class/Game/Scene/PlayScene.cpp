@@ -57,6 +57,14 @@ void CPlayScene::updateScene(double deltaTime)
 	m_treeGame->Retrieve(CCamera::getInstance()->getBoundingScreen(), m_listObjectInViewport);
 
 	CPlayer::getInstance()->handleCollisionWithTile(deltaTime);
+	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
+	{
+		for (int i = 0; i < CMapManager::getInstance()->getListBonusItem().size(); i++)
+		{
+			CPlayer::getInstance()->handleCollisionWithBonus(CMapManager::getInstance()->getListBonusItem().at(i), deltaTime);
+			CMapManager::getInstance()->getListBonusItem().at(i)->updateEntity(deltaTime);
+		}
+	}
 
 	for (int i = 0; i < m_listObjectInViewport->size(); ++i) {
 		if (m_listObjectInViewport->at(i)->isDestroy) {
@@ -71,15 +79,6 @@ void CPlayScene::updateScene(double deltaTime)
 		}
 
 		m_listObjectInViewport->at(i)->updateEntity(deltaTime);
-	}
-
-	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
-	{
-		for (int i = 0; i < CMapManager::getInstance()->getListBonusItem().size(); i++)
-		{
-			CPlayer::getInstance()->handleCollisionWithBonus(CMapManager::getInstance()->getListBonusItem().at(i), deltaTime);
-			CMapManager::getInstance()->getListBonusItem().at(i)->updateEntity(deltaTime);
-		}
 	}
 
 	this->checkChangeScene(deltaTime);
@@ -97,8 +96,6 @@ void CPlayScene::renderScene()
 	m_backgroud->Render(CCamera::getInstance()->setPositionEntity(vector3d(CCamera::getInstance()->getPosisionCamera())), vector2d(1.0f, 1.0f), 0, DRAWCENTER_LEFT_TOP);
 	
 	wchar_t temp[100];
-	
-	/*wchar_t temp[100];
 	_itow(CPopUpInfo::getInstance()->getPoint(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(50, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
 		
@@ -115,11 +112,8 @@ void CPlayScene::renderScene()
 	ZeroMemory(temp, 100);
 	_itow(CPopUpInfo::getInstance()->getTimer(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(220, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
-	*/
+	
 
-	if (m_listObjectInViewport->size())
-	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
-		m_listObjectInViewport->at(i)->drawEntity();
 
 	if (CMapManager::getInstance()->getListBonusItem().size() != 0)
 	{
@@ -128,7 +122,11 @@ void CPlayScene::renderScene()
 			CMapManager::getInstance()->getListBonusItem().at(i)->drawEntity();
 		}
 	}
-	
+
+	if (m_listObjectInViewport->size())
+	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
+		m_listObjectInViewport->at(i)->drawEntity();
+
 	CPlayer::getInstance()->drawEntity();
 }
 

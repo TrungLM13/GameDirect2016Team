@@ -133,7 +133,7 @@ void CGiftBox::updateEntity(float deltaTime)
 		else if (this->m_GiftBoxType == GIFTBOX_TYPE::GIFTBOX_COIN)
 		{
 			m_Coin = new CCoinInBox(vector3d(this->m_Position.x, GIFTBOX_PRE_POSITION_Y + ADD_POS_Y, 0));
-			m_Coin->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
+			m_Coin->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 5));
 			CMapManager::getInstance()->pushInFirst(m_Coin);
 		}
 
