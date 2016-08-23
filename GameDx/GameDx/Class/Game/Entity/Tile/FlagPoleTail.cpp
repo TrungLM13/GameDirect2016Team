@@ -46,7 +46,7 @@ void CFlagPoleTail::updateEntity(float deltaTime)
 void CFlagPoleTail::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); i++)
-		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+		this->m_listSprite.at(i)->Render(CCamera::setPositionEntity(m_Position), vector2d(1, 1), 0, DRAWCENTER_LEFT_TOP, true, 10);
 }
 
 void CFlagPoleTail::updateEntity(RECT* camera)
@@ -56,4 +56,8 @@ void CFlagPoleTail::updateEntity(RECT* camera)
 
 int	CFlagPoleTail::getTagNodeId() {
 	return TAGNODE::FLAG_POLE_TAIL;
+}
+
+int CFlagPoleTail::getObjectType() {
+	return OBJECT_TYPE::TYPE_BONUS;
 }

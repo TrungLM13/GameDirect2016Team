@@ -148,10 +148,10 @@ bool CMapManager::loadEntityInMap()
 		if (type == TODI::TODI_GIFT_BOX)
 			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_COIN));
 
-		if (type == TODI::TODI_FLAG_POLE_HEAD)
-			m_listBonus.push_back(new CFlagPoleHead(positionEntity));
 		if (type == TODI::TODI_FLAG_POLE)
 			m_listBonus.push_back(new CFlagPole(positionEntity));
+		if (type == TODI::TODI_FLAG_POLE_HEAD)
+			m_listBonus.push_back(new CFlagPoleHead(positionEntity));
 		if (type == TODI::TODI_GREEN_FLAG)
 			m_listBonus.push_back(new CFlag(positionEntity));
 		if (type == TODI::TODI_FLAG_POLE_TAIL)
@@ -170,10 +170,10 @@ bool CMapManager::loadEntityInMap()
 			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::BLUE_CARNIVOROUS_PLANT));
 		if (type == TODI::TODI_GREEN_CARNIVOROUSPLANTS)
 			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::GREEN_CARNIVOROUS_PLANT));
-
 		
-		if (type == TODI::TODI_CASTLE)
+		/*if (type == TODI::TODI_CASTLE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));
+*/
 		if ((type == TODI::TODI_CEMENT))
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_RED));
 		if ((type == TODI::TODI_BLUE_STAIR))

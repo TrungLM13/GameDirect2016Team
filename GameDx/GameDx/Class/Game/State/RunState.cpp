@@ -75,21 +75,21 @@ CBaseState* CRunState::handleInput(CPlayer& player, CKeyBoard* input){
 		return new CStandState();
 	}
 	else {
-		/*if (player.getVelocity().x == 0) {
+		if (player.getVelocity().x == 0) {
 			player.setVelocity(vector2d(VEL_PLAYER_X, player.getVelocity().y));
-			}*/
+			}
 		return this;
 	}
 }
 
 void CRunState::update(CPlayer& player, double deltaTime) {
-	if (!player.m_IsCollision) {
-		//player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y, 0));
+	if (player.m_IsCollision) {
+		player.setVelocity(vector2d(VEL_PLAYER_X_MIN, player.getVelocity().y));
 	}
 
 	if (player.m_IsAutoMove) {
 		// If position x of player at the castle (350), stop running auto
-		if (player.getPosition().x > 350) {
+		if (player.getPosition().x > 3232) {
 			player.m_IsAutoMove = false;
 		}
 		//player.setPosition(vector3d(player.getPosition().x + player.getVelocity().x * deltaTime / 120, player.getPosition().y + player.getVelocity().y * deltaTime / 100, 0));

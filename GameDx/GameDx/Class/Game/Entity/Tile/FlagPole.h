@@ -17,6 +17,7 @@ public:
 	virtual void			drawEntity()											override;
 	virtual int				getTagNodeId()											override;
 	virtual bool			loadSprite()											override;
+	virtual	int				getObjectType()											override;
 private:
 
 };

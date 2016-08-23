@@ -89,6 +89,3 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 
 	player.setPosition(vector3d(player.getPosition().x + deltaX, player.getPosition().y + (player.getVelocity().y + GRAVITATION) *deltaTime / 40, 0));
 }
-
-void CJumpState::update(CPlayer& player, CBaseEntity* entity) {
-}
