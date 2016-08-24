@@ -136,8 +136,8 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(),positionEntity,	BRICK_TYPE::BRICK_STAR));
 		if (type == TODI::TODI_COININBOX)
 			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_COIN));
-		/*if (type == TODI::TODI_BRICK)
-			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_NONE));*/
+		if (type == TODI::TODI_BRICK)
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_NONE));
 		if (type == TODI::TODI_GREEN_MUSHROOM_BOX)
 			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_GREENMUSHROOM));
 		if (type == TODI::TODI_COIN)

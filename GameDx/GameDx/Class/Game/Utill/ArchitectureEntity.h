@@ -55,7 +55,7 @@ typedef enum TYPEOFENEMY{
 
 typedef enum TYPEOFDATAINPUT{
 	TODI_GIFT_BOX						= 1,
-	TODI_BRICK							= 2,
+	TODI_BRICK							= 60,
 	TODI_RED_MUSHROOM_BOX				= 3,
 	TODI_GREEN_MUSHROOM_BOX				= 4,
 	TODI_STARS							= 5,
@@ -91,6 +91,6 @@ typedef enum TYPEOFDATAINPUT{
 	TODI_ELEVATOR_UP					= 44,
 	TODI_ELEVATOR_DOWN					= 50,
 	
-	TODI_BRICK_TILE						= 60
+	TODI_BRICK_TILE						= 2
 } TODI;
 #endif

@@ -69,7 +69,7 @@ bool CPlayer::initEntity()
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
 	m_UndyingTime = 0;
-	m_Position = vector3d(1800, 46, 0);
+	m_Position = vector3d(50, 50, 0);
 	m_PreJumpPos = vector3d(0, 0, 0);
 
 	m_State = PLAYERSTATES::STAND;

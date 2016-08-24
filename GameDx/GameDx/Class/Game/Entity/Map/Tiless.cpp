@@ -134,7 +134,9 @@ bool	CTiless::initEntity()
 void	CTiless::drawEntity()
 {
 	for (int i = 0; i < m_listSprite.size(); ++i)
-	if (m_ID == TileStyle::TOF_MOUNTAIN_BIG || m_ID == TOF_MOUNTAIN_SMALL || TOF_PIPE_HEAD_DOWN)
+	if (m_ID == TileStyle::TOF_BRICK_TILE)
+		m_listSprite.at(i)->Render(CCamera::getInstance()->setPositionEntity(m_Position), vector2d(1, 1), 0, DRAWCENTER_MIDDLE_MIDDLE);
+	else if (m_ID == TileStyle::TOF_MOUNTAIN_BIG || m_ID == TOF_MOUNTAIN_SMALL || TOF_PIPE_HEAD_DOWN)
 		m_listSprite.at(i)->Render(CCamera::getInstance()->setPositionEntity(vector3d(m_Position.x, m_Position.y - 16, 0.5f)), vector2d(1, 1), 0, DRAWCENTER_LEFT_BOTTOM, true, 10);
 	else
 		m_listSprite.at(i)->Render(CCamera::getInstance()->setPositionEntity(m_Position), vector2d(1, 1), 0, DRAWCENTER_LEFT_TOP, true, 10);
