@@ -26,7 +26,7 @@ inline bool IsCollision_WithRect(CMovable* entity, vector<CBox2D*> listEntity) {
 	for (int i = 0; i < listEntity.size(); i++)
 	{
 		entity->getBounding().setVelocity(entity->getVelocity());
-		if (CCollision::CheckCollision(entity->getBounding(), *listEntity.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+		if (CCollision::CheckCollision(entity->getBounding(), *listEntity.at(i)))
 		{
 			return true;
 		}
@@ -69,7 +69,7 @@ bool CPlayer::initEntity()
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
 	m_UndyingTime = 0;
-	m_Position = vector3d(50, 50, 0);
+	m_Position = vector3d(50, 70, 0);
 	m_PreJumpPos = vector3d(0, 0, 0);
 
 	m_State = PLAYERSTATES::STAND;
@@ -147,7 +147,7 @@ bool CPlayer::loadSprite()
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_runfire, 1, 3, 3, 0));
 		this->m_listSprite.push_back(new CSprite(CInfomationResource::bigfiremario_jumfire, 1, 1, 1, 0));*/
-		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::BIG, PLAYERSTATES::CLIMB), 1, 2, 2, 0));
+		this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(PLAYERTAGS::FIRE, PLAYERSTATES::CLIMB), 1, 2, 2, 0));
 		break;
 	default:
 		break;
@@ -206,28 +206,29 @@ void CPlayer::updateEntity(CKeyBoard* input)
 
 void CPlayer::handleCollisionWithTile(float deltaTime) {
 
-	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); ++i) {
+	vector<CBox2D*> listRect = CMapManager::getInstance()->getListRect();
+
+	for (int i = 0; i < listRect.size(); ++i) {
 		if (this->m_State != PLAYERSTATES::DIE) {
 
 			this->getBounding().setVelocity(this->getVelocity());
 
-			switch (CCollision::CheckCollision(this->getBounding(), *(CMapManager::getInstance()->getListRect().at(i))))
+			switch (CCollision::CheckCollision(this->getBounding(), *(listRect.at(i))))
 			{
 			case COLDIRECTION::COLDIRECTION_TOP:
 				m_IsFreeFall = false;
 				m_IsAutoJump = false;
 				m_Velocity.y = VEL_DEFAULT_Y;
 
-				if (!m_IsAutoMove) {
-					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
+				this->m_Position.y = listRect.at(i)->getY() + this->getBounding().getHeight() / 2;
 
+				if (!m_IsAutoMove) {
 					if (this->m_State != PLAYERSTATES::RUN && this->m_State != PLAYERSTATES::MOVE_SHOOT) {
 						this->m_PlayerState->exitCurrentState(*this, new CStandState());
 						this->m_PlayerState->enter(*this);
 					}
 				}
 				else {
-					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->getBounding().getHeight() / 2;
 					this->m_PlayerState->exitCurrentState(*this, new CRunState());
 					this->m_PlayerState->enter(*this);
 				}
@@ -235,7 +236,7 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 				break;
 			case COLDIRECTION::COLDIRECTION_NONE:
 				if (m_State != PLAYERSTATES::JUMP) {
-					if (!IsCollision_WithRect(this, CMapManager::getInstance()->getListRect())){
+					if (!IsCollision_WithRect(this, listRect)){
 						m_Velocity.y = VEL_PLAYER_Y_MIN;
 						m_IsFreeFall = true;
 					}
@@ -245,9 +246,11 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
 				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
-					if (!m_IsFreeFall) {
-						m_Position.x = CMapManager::getInstance()->getListRect().at(i)->getX() - this->getBounding().getWidth() / 2;
-						m_Velocity.x = VEL_PLAYER_X_MIN;
+					m_Position.x = listRect.at(i)->getX() - this->getBounding().getWidth() / 2;
+					m_Velocity.x = VEL_PLAYER_X_MIN;
+
+					if (m_IsAutoJump) {
+						m_Velocity.y = VEL_PLAYER_Y_MIN;
 					}
 				}
 				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
@@ -256,8 +259,12 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 				break;
 			case COLDIRECTION::COLDIRECTION_RIGHT:
 				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
-					m_Position.x = CMapManager::getInstance()->getListRect().at(i)->getX() + CMapManager::getInstance()->getListRect().at(i)->getWidth() + this->getBounding().getWidth() / 2;
+					m_Position.x = listRect.at(i)->getX() + listRect.at(i)->getWidth() + this->getBounding().getWidth() / 2;
 					m_Velocity.x = VEL_PLAYER_X_MIN;
+
+					if (m_IsAutoJump) {
+						m_Velocity.y = VEL_PLAYER_Y_MIN;
+					}
 				}
 				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
 					m_Velocity.x = VEL_PLAYER_X;
@@ -481,9 +488,14 @@ void CPlayer::handleCollisionWithEnermy(CObjectss* enermyEntity, float deltaTime
 		else if (CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_TOP)
 		{
 			this->m_Position.y = enermyEntity->getPosition().y + enermyEntity->getBounding().getHeight() / 2 + this->getBounding().getHeight() / 2;
-			this->m_PlayerState->exitCurrentState(*this, new CStandState());
+
+			//Dont need for auto jump
+			/*this->m_PlayerState->exitCurrentState(*this, new CStandState());
 			this->m_PlayerState->enter(*this);
-			m_IsAutoJump = true;
+			m_IsAutoJump = true;*/
+
+
+			m_Velocity.y = VEL_PLAYER_Y_MIN;
 		}
 
 		break;

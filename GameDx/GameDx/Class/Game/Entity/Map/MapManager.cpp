@@ -133,20 +133,20 @@ bool CMapManager::loadEntityInMap()
 	while (data >> type >> positionEntity.x >> positionEntity.y >> size.x >> size.y)
 	{
 		if (type == TODI::TODI_STARS)
-			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(),positionEntity,	BRICK_TYPE::BRICK_STAR));
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity, BRICK_TYPE::BRICK_STAR));
 		if (type == TODI::TODI_COININBOX)
-			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_COIN));
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity, BRICK_TYPE::BRICK_COIN));
 		if (type == TODI::TODI_BRICK)
-			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_NONE));
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity, BRICK_TYPE::BRICK_NONE));
 		if (type == TODI::TODI_GREEN_MUSHROOM_BOX)
-			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity,	BRICK_TYPE::BRICK_GREENMUSHROOM));
+			m_listBonus.push_back(new CBrick(this->getCurrentMapINT(), positionEntity, BRICK_TYPE::BRICK_GREENMUSHROOM));
 		if (type == TODI::TODI_COIN)
 			m_listBonus.push_back(new CCoin(positionEntity));
 
 		if (type == TODI::TODI_RED_MUSHROOM_BOX)
-			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
+			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_ITEMINBOX_TYPE));
 		if (type == TODI::TODI_GIFT_BOX)
-			m_listBonus.push_back(new CGiftBox(positionEntity,							GIFTBOX_TYPE::GIFTBOX_COIN));
+			m_listBonus.push_back(new CGiftBox(positionEntity, GIFTBOX_TYPE::GIFTBOX_COIN));
 
 		if (type == TODI::TODI_FLAG_POLE)
 			m_listBonus.push_back(new CFlagPole(positionEntity));
@@ -158,61 +158,66 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new CFlagPoleTail(positionEntity));
 
 		if (type == TODI::TODI_ELEVATOR_UP)
-			m_listBonus.push_back(new Elevator(positionEntity,							ELEVATOR_STATE::UP_DOWN));
+			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::UP_DOWN));
 		if (type == TODI::TODI_ELEVATOR_DOWN)
-			m_listBonus.push_back(new Elevator(positionEntity,							ELEVATOR_STATE::UP));
+			m_listBonus.push_back(new Elevator(positionEntity, ELEVATOR_STATE::UP));
 
-		/*if (type == TODI::TODI_MUSHROOM)
+		if (type == TODI::TODI_MUSHROOM)
 			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));
-		*/if (type == TODI::TODI_BLUE_CARNIVOROUSPLANTS)
-			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::BLUE_CARNIVOROUS_PLANT));
+		if (type == TODI::TODI_BLUE_CARNIVOROUSPLANTS)
+			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity, CARNIVOROUS_PLANT_TYPE::BLUE_CARNIVOROUS_PLANT));
 		if (type == TODI::TODI_GREEN_CARNIVOROUSPLANTS)
-			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::GREEN_CARNIVOROUS_PLANT));
-		
+			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity, CARNIVOROUS_PLANT_TYPE::GREEN_CARNIVOROUS_PLANT));
+
 		/*if (type == TODI::TODI_CASTLE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));
-*/
+			*/
 		if ((type == TODI::TODI_CEMENT))
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_RED));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_BARRIER_RED));
 		if ((type == TODI::TODI_BLUE_STAIR))
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_BLUE));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_BARRIER_BLUE));
 
 		if ((type == TODI::TODI_LANDSCAPE))
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_LANE_RED));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_RED));
 		if (type == TODI::TODI_GREEN_LANDSCAPE)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_LANE_BLE));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CEMENT_LANE_BLE));
 
 		if (type == TODI::TODI_CLOUND_ONE)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CLOUND_ONE_MEMBER));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CLOUND_ONE_MEMBER));
 		if (type == TODI::TODI_CLOUND_DOUBLE)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CLOUND_TOW_MEMBER));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CLOUND_TOW_MEMBER));
 		if (type == TODI::TODI_CLOUND_TRIPPLE)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CLOUND_THREE_MEMBER));
-		
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_CLOUND_THREE_MEMBER));
+
 		if (type == TODI::TODI_GRASS_ONE_BRUSH)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_GRASS_ONE_BUSH));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_GRASS_ONE_BUSH));
 		if (type == TODI::TODI_GRASS_DOUBLE_BRUSH)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_GRASS_TOW_BUSH));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_GRASS_TOW_BUSH));
 		if (type == TODI::TODI_GRASS_TRIPPLE_BRUSH)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_GRASS_THREE_BUSH));
-		
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_GRASS_THREE_BUSH));
+
 		if (type == TODI::TODI_HEAD_MOUNTAIN)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_MOUNTAIN_SMALL));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_MOUNTAIN_SMALL));
 		if (type == TODI::TODI_TAIL_MOUNTAIN)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_MOUNTAIN_BIG));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_MOUNTAIN_BIG));
 
 		if (type == TODI::TODI_PIPE_HEAD)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_HEAD_DOWN));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_PIPE_HEAD_DOWN));
 		if (type == TODI::TODI_PIPE_HEAD_BODY)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_HEAD_BODY_DOWN));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_PIPE_HEAD_BODY_DOWN));
 		if (type == TODI::TODI_PIPE_BODY)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_BODY_DOWN));
-		
-		if (type == TODI::TODI_BRICK_TILE)
-			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_BRICK_TILE));
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_PIPE_BODY_DOWN));
 
-		if (type == TODI::TODI_RECTANGLE)
-			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x, size.y));
+		if (type == TODI::TODI_BRICK_TILE)
+			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_BRICK_TILE));
+
+		if (type == TODI::TODI_RECTANGLE) {
+			if (this->getCurrentMapINT() == MAP_NUM::MAP_1)
+				//m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x, size.y));
+				m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x - 8, size.y));
+			else if (this->getCurrentMapINT() == MAP_NUM::MAP_2)
+				m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 8, size.x - 8, size.y));
+		}
 	}
 
 	return true;
@@ -235,7 +240,7 @@ void CMapManager::pushInFirst(CBaseEntity* entity)
 
 void CMapManager::removeInFirst() {
 	if (!m_listBonusItem.empty())
-	m_listBonusItem.erase(m_listBonusItem.begin());
+		m_listBonusItem.erase(m_listBonusItem.begin());
 }
 
 void CMapManager::removeEntity(vector<CBaseEntity*>& list, int tagnode)

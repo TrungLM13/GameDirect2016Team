@@ -77,12 +77,12 @@ void	CMushroom::updateEntity(float deltaTime)
 
 void	CMushroom::updateEntity(CKeyBoard* device)
 {
-	if (device->KeyPress(DIK_DELETE))
+	/*if (device->KeyPress(DIK_DELETE))
 
 	if (m_State == MUSHROOM_STATE::MUSH_RUN)
 		m_State = MUSHROOM_STATE::MUSH_IS_ACTTACKED;
 	else
-		m_State = MUSHROOM_STATE::MUSH_RUN;
+		m_State = MUSHROOM_STATE::MUSH_RUN;*/
 }
 
 void	CMushroom::updateEntity(RECT* rectCamera)
@@ -93,6 +93,7 @@ void	CMushroom::updateEntity(RECT* rectCamera)
 void	CMushroom::updateCollision(float deltaTime)
 {
 	this->getBounding().setVelocity(this->getVelocity());
+
 	vector<CBox2D*> listRect = CMapManager::getInstance()->getListRect();
 
 	for (int i = 0; i < listRect.size(); ++i) {
