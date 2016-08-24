@@ -83,9 +83,6 @@ void CIntroMap::renderScene()
 	CText::getInstace()->Draw(temp, vector3d(130, 125, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
 	
 	ZeroMemory(temp, 100);
-	//temp = 'x';
-	//CText::getInstace()->Draw(temp, vector3d(130, 125, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
-
 	string x = "x";
 	wchars_num = MultiByteToWideChar(CP_UTF8, 0, x.c_str(), -1, NULL, 0);
 	MultiByteToWideChar(CP_UTF8, 0, x.c_str(), -1, wstr, wchars_num);

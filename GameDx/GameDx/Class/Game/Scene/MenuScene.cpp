@@ -37,7 +37,7 @@ void CMenuScene::updateScene(double deltaTime)
 		CBaseScene* tempScene = CSceneManager::getInstance()->getScene().top();
 		CSceneManager::getInstance()->getScene().pop();
 		delete[] tempScene;
-		CSceneManager::getInstance()->getScene().push(new CIntroMap());
+		CSceneManager::getInstance()->getScene().push(new CSelectedScene());
 	}
 }
 

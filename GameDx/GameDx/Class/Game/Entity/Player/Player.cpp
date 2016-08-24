@@ -6,6 +6,7 @@
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\State\DieState.h"
 #include "Class\\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Scene\PopupInfo.h"
 
 inline bool IsCollision_Player(CMovable* entity, vector<CBaseEntity*> listEntity) {
 	for (int i = 0; i < listEntity.size(); i++)
@@ -191,6 +192,12 @@ void CPlayer::updateEntity(RECT* camera) {
 
 void CPlayer::updateEntity(CKeyBoard* input)
 {
+	if (input->KeyPress(DIK_F1))
+	if (CMapManager::getInstance()->getCurrentMapINT() == 1)
+		m_Position = vector3d(3180, 50, 0);
+	else if (CMapManager::getInstance()->getCurrentMapINT() == 2)
+		m_Position = vector3d(3819, 50, 0);
+
 	if (m_PlayerState){
 		CBaseState* state = m_PlayerState->handleInput(*this, input);
 

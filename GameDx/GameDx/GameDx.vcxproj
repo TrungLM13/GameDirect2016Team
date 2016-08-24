@@ -137,6 +137,7 @@
     <ClInclude Include="Class\Game\Scene\PlayScene.h" />
     <ClInclude Include="Class\Game\Scene\PopupInfo.h" />
     <ClInclude Include="Class\Game\Scene\SceneManager.h" />
+    <ClInclude Include="Class\Game\Scene\SelectedScene.h" />
     <ClInclude Include="Class\Game\State\BaseState.h" />
     <ClInclude Include="Class\Game\State\ClimbState.h" />
     <ClInclude Include="Class\Game\State\DieState.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="Class\Game\Scene\PlayScene.cpp" />
     <ClCompile Include="Class\Game\Scene\PopupInfo.cpp" />
     <ClCompile Include="Class\Game\Scene\SceneManager.cpp" />
+    <ClCompile Include="Class\Game\Scene\SelectedScene.cpp" />
     <ClCompile Include="Class\Game\State\BaseState.cpp" />
     <ClCompile Include="Class\Game\State\ClimbState.cpp" />
     <ClCompile Include="Class\Game\State\DieState.cpp" />

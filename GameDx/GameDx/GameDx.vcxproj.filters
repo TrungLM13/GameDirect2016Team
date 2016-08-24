@@ -222,6 +222,9 @@
     <ClCompile Include="Class\Game\Utill\ResourceManager\TileResource.cpp">
       <Filter>Game\Utill\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Game\Scene\SelectedScene.cpp">
+      <Filter>Game\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class\Game\Utill\stdafx.h">
@@ -443,6 +446,9 @@
     </ClInclude>
     <ClInclude Include="Class\Game\Utill\ResourceManager\TileResource.h">
       <Filter>Game\Utill\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Class\Game\Scene\SelectedScene.h">
+      <Filter>Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

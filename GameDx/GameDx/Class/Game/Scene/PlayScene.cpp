@@ -114,6 +114,12 @@ void CPlayScene::renderScene()
 	_itow(CPopUpInfo::getInstance()->getTimer(), temp, 10);
 	CText::getInstace()->Draw(temp, vector3d(220, 24, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
 
+	/*HELTH VIEWER*/
+	ZeroMemory(temp, 100);
+	_itow(CPopUpInfo::getInstance()->getHelth(), temp, 10);
+	CText::getInstace()->Draw(temp, vector3d(42, 57, 0), DEFAULT_FONT_COLOR, 8, DT_CENTER, DEFAULT_FONTNAME);
+	/*********************************************************************************************************/
+
 	if (m_listObjectInViewport->size())
 	for (int i = 0; i < m_listObjectInViewport->size(); ++i)
 		m_listObjectInViewport->at(i)->drawEntity();
@@ -136,6 +142,32 @@ void CPlayScene::renderScene()
 
 void	CPlayScene::checkChangeScene(float deltaTime)
 {
+	if (CPlayer::getInstance()->getPosition().x >= 3230 && CMapManager::getInstance()->getCurrentMapINT() == 1)
+	{
+		CPopUpInfo::getInstance()->setMapName("1-2");
+		CPopUpInfo::getInstance()->setTimer(1000);
+		CPlayer::getInstance()->resetPlayer(vector3d(70, 50, 0.5));
+
+		CMapManager::getInstance()->resetToMap(1);
+		CCamera::getInstance()->setPositionCamera(vector3d(0, 240, 0));
+
+		CBaseScene* tempScene = CSceneManager::getInstance()->getScene().top();
+		CSceneManager::getInstance()->getScene().pop();
+		delete[] tempScene;
+
+		CSceneManager::getInstance()->getScene().push(new CIntroMap());
+	}
+	else if (CPlayer::getInstance()->getPosition().x >= 3820 && CMapManager::getInstance()->getCurrentMapINT() == 2){
+		
+
+		CBaseScene* tempScene = CSceneManager::getInstance()->getScene().top();
+		CSceneManager::getInstance()->getScene().pop();
+		delete[] tempScene;
+
+		CSceneManager::getInstance()->getScene().push(new CGameOver());
+	}
+
+
 	if (CPlayer::getInstance()->getStateInt() == PLAYERSTATES::DIE)
 	{
 		if (m_actionDieTimer < 1000)
@@ -155,9 +187,10 @@ void	CPlayScene::checkChangeScene(float deltaTime)
 		else
 			CSceneManager::getInstance()->getScene().push(new CGameOver());
 
-		CPlayer::getInstance()->resetPlayer(vector3d(50, 28, 0.5));
+		CPlayer::getInstance()->resetPlayer(vector3d(70, 50, 0.5));
 		CCamera::getInstance()->setPositionCamera(vector3d(0, 240, 0));
 
 		m_actionDieTimer = 0;
+
 	}
 }

@@ -43,6 +43,12 @@ public:
 	static const wchar_t*   brick2;
 	static const wchar_t*   box2;
 	/*************************************************/
+
+	/************RESOURCE FOR SELECTED STATE**********/
+	static const wchar_t*	selectedMapBackground;
+	static const wchar_t*	map1SelectedIcon;
+	static const wchar_t*   map2SelectedIcon;
+	static const wchar_t*	arrowSelected;
 	/************RESOURCE FOR BOUDING *************/
 	static const wchar_t*	boundingsprite;
 };

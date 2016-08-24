@@ -35,5 +35,11 @@ const wchar_t*		CInfomationResource::brick2						= L"Resource//Image//Game//Spri
 const wchar_t*		CInfomationResource::box2						= L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh_0_cham_hoi.png";
 
 /*************************************************/
+/************RESOURCES FOR SELECTED SCENE********/
+const wchar_t*		CInfomationResource::map1SelectedIcon			= L"Resource//Image//SelectStage//iconMap1.png";
+const wchar_t*		CInfomationResource::map2SelectedIcon			= L"Resource//Image//SelectStage//iconMap2.png";
+const wchar_t*		CInfomationResource::arrowSelected				= L"Resource//Image//SelectStage//selectArrow.png";
+const wchar_t*		CInfomationResource::selectedMapBackground		= L"Resource//Image//SelectStage//SelectedMapBackgroundScene.png";
+/*************************************************/
 /************RESOURCE FOR BOUDING *************/
 const wchar_t*		CInfomationResource::boundingsprite				= L"Resource//Image//Game//Other//bean.png";

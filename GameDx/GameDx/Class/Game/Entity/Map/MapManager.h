@@ -37,6 +37,9 @@ public:
 	void					removeInFirst();
 	void					removeEntity(vector<CBaseEntity*>& list, int tagnode);
 
+	void					CMapManager::resetVectorData();
+	void					CMapManager::resetToMap(int map);
+
 private:
 	static CMapManager*		m_instance;
 

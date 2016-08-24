@@ -8,6 +8,7 @@
 #include "Class\Game\Scene\MenuScene.h"
 #include "Class\Game\Scene\PlayScene.h"
 #include "Class\Game\Scene\IntroMap.h"
+#include "Class\Game\Scene\SelectedScene.h"
 
 class CSceneManager
 {

@@ -252,3 +252,64 @@ void CMapManager::removeEntity(vector<CBaseEntity*>& list, int tagnode)
 	}
 
 }
+
+void CMapManager::resetVectorData(){
+
+	CTiless* temp;
+	while (!m_listBackground.empty())
+	{
+		temp = m_listBackground.back();
+		m_listBackground.pop_back();
+		delete temp;
+		temp = NULL;
+	}
+	m_listBackground.clear();
+
+	CBaseEntity* tempEnemy;
+	while (!m_listEnemy.empty())
+	{
+		tempEnemy = m_listEnemy.back();
+		m_listEnemy.pop_back();
+		delete tempEnemy;
+		tempEnemy = NULL;
+	}
+	m_listEnemy.clear();
+
+	CBaseEntity* tempBonus;
+	while (!m_listBonus.empty())
+	{
+		tempBonus = m_listBonus.back();
+		m_listBonus.pop_back();
+		delete tempBonus;
+		tempBonus = NULL;
+	}
+	m_listBonus.clear();
+
+	CBox2D* tempRect;
+	while (!m_listRectangeForCollision.empty())
+	{
+		tempRect = m_listRectangeForCollision.back();
+		m_listRectangeForCollision.pop_back();
+		delete tempRect;
+		tempRect = NULL;
+	}
+	m_listRectangeForCollision.clear();
+
+	CBaseEntity* temoBonusItem;
+	while (!m_listBonusItem.empty())
+	{
+		temoBonusItem = m_listBonusItem.back();
+		m_listBonusItem.pop_back();
+		delete temoBonusItem;
+		temoBonusItem = NULL;
+	}
+	m_listBonusItem.clear();
+}
+
+void CMapManager::resetToMap(int map)
+{
+	this->resetVectorData();
+	CPopUpInfo::getInstance()->setMapName(CMapManager::getInstance()->getListMapInGame().at(map)->m_mapName);
+	this->loadEntityInMap();
+
+}
