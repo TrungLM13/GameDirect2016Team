@@ -69,7 +69,6 @@ bool CPlayer::initEntity()
 	m_Direction.push_back(DIRECTION::DIRECTION_NONE);
 
 	m_UndyingTime = 0;
-	//m_Position = vector3d(50, 70, 0);
 	m_Position = vector3d(50, 70, 0);
 	m_PreJumpPos = vector3d(0, 0, 0);
 
@@ -165,7 +164,7 @@ void CPlayer::updateEntity(float deltaTime)
 			m_UndyingTime -= deltaTime;
 		else
 		{
-			this->m_PlayerTag = PLAYERTAGS::BIG;
+			this->m_PlayerTag = m_PreTag;
 			this->loadSprite();
 		}
 	}
@@ -246,8 +245,10 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
 				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
-					m_Position.x = CMapManager::getInstance()->getListRect().at(i)->getX() - this->getBounding().getWidth() / 2;
-					m_Velocity.x = VEL_PLAYER_X_MIN;
+					if (!m_IsFreeFall) {
+						m_Position.x = CMapManager::getInstance()->getListRect().at(i)->getX() - this->getBounding().getWidth() / 2;
+						m_Velocity.x = VEL_PLAYER_X_MIN;
+					}
 				}
 				else if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_LEFT) {
 					m_Velocity.x = -VEL_PLAYER_X;
@@ -308,6 +309,7 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 	case TAGNODE::STAR:
 		if (CCollision::CheckCollision(this, bonusEntity)) {
 			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
+				m_PreTag = m_PlayerTag;
 				m_PlayerTag = PLAYERTAGS::UNDYING;
 				this->loadSprite();
 				this->m_UndyingTime = PLAYER_UNDYING_TIME;
@@ -323,6 +325,7 @@ void CPlayer::handleCollisionWithBonus(CObjectss* bonusEntity, float deltaTime) 
 		if (CCollision::CheckCollision(this, bonusEntity)) {
 			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE) {
 				m_PlayerTag = PLAYERTAGS::FIRE;
+				this->loadSprite();
 			}
 		}
 		break;
@@ -460,18 +463,18 @@ void CPlayer::handleCollisionWithEnermy(CObjectss* enermyEntity, float deltaTime
 			CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_RIGHT ||
 			CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_BOTTOM)
 		{
-			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-				m_Velocity.y = VEL_DEFAULT_Y;
-				this->m_PlayerState->exitCurrentState(*this, new CDieState());
-				this->m_PlayerState->enter(*this);
-			}
-			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
-			{
-				//undying but small and exists in 5s
-				this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
-				this->loadSprite();
-				this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
-			}
+			//if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+			//	m_Velocity.y = VEL_DEFAULT_Y;
+			//	this->m_PlayerState->exitCurrentState(*this, new CDieState());
+			//	this->m_PlayerState->enter(*this);
+			//}
+			//if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
+			//{
+			//	//undying but small and exists in 5s
+			//	this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+			//	this->loadSprite();
+			//	this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
+			//}
 
 			m_IsAutoJump = false;
 		}

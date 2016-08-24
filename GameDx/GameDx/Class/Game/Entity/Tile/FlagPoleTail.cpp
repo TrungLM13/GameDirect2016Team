@@ -14,6 +14,8 @@ CFlagPoleTail::CFlagPoleTail(vector2d pos)
 	this->m_Position.x = pos.x;
 	this->m_Position.y = pos.y;
 	this->initEntity();
+
+	this->getBounding();
 }
 
 CFlagPoleTail:: ~CFlagPoleTail()

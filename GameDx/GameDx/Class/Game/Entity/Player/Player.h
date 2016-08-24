@@ -57,6 +57,8 @@ protected:
 	int						m_PlayerTag;
 	CBaseState*				m_PlayerState;
 	int						m_UndyingTime;
+
+	int						m_PreTag;
 private:
 };
 #endif

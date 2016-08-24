@@ -157,12 +157,10 @@ bool CMapManager::loadEntityInMap()
 		if (type == TODI::TODI_FLAG_POLE_TAIL)
 			m_listBonus.push_back(new CFlagPoleTail(positionEntity));
 
-
 		if (type == TODI::TODI_ELEVATOR_UP)
 			m_listBonus.push_back(new Elevator(positionEntity,							ELEVATOR_STATE::UP));
 		if (type == TODI::TODI_ELEVATOR_DOWN)
 			m_listBonus.push_back(new Elevator(positionEntity,							ELEVATOR_STATE::DOWN));
-
 
 		if (type == TODI::TODI_MUSHROOM)
 			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));
@@ -171,9 +169,9 @@ bool CMapManager::loadEntityInMap()
 		if (type == TODI::TODI_GREEN_CARNIVOROUSPLANTS)
 			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::GREEN_CARNIVOROUS_PLANT));
 		
-		/*if (type == TODI::TODI_CASTLE)
+		if (type == TODI::TODI_CASTLE)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CASTTLE));
-*/
+
 		if ((type == TODI::TODI_CEMENT))
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_CEMENT_BARRIER_RED));
 		if ((type == TODI::TODI_BLUE_STAIR))

@@ -16,6 +16,8 @@ CFlag::CFlag(vector2d pos)
 	this->m_Position.x	= pos.x;
 	this->m_Position.y	= pos.y - 8;
 	this->initEntity();
+
+	this->getBounding();
 }
 
 CFlag:: ~CFlag()

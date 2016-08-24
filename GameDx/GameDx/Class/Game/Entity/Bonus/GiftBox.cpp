@@ -61,6 +61,8 @@ bool CGiftBox::initEntity()
 	this->loadSprite();
 	this->getBounding();
 
+	this->getBounding();
+
 	return true;
 }
 

@@ -15,6 +15,8 @@ CFlagPole::CFlagPole(vector2d pos)
 	this->m_Position.x		= pos.x;
 	this->m_Position.y		= pos.y - 16;
 	this->initEntity();
+
+	this->getBounding();
 }
 
 CFlagPole:: ~CFlagPole()

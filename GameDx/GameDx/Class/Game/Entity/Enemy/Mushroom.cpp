@@ -69,7 +69,7 @@ void	CMushroom::updateEntity(float deltaTime)
 
 	if (m_State == MUSHROOM_STATE::MUSH_IS_ACTTACKED)
 	{
-
+		this->isDestroy = true;
 	}
 
 	updateCollision(deltaTime);
@@ -104,8 +104,12 @@ void	CMushroom::updateCollision(float deltaTime)
 				this->m_Position.y = listRect.at(i)->getY() + this->getBounding().getHeight() / 2;
 				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
+				if (m_Velocity.x >= 0) {
+					m_Velocity.x = -5.8;
+				}
+				break;
 			case COLDIRECTION::COLDIRECTION_RIGHT:
-				m_Velocity.x *= -1;
+				m_Velocity.x = 5.8;
 				break;
 			default:
 				break;

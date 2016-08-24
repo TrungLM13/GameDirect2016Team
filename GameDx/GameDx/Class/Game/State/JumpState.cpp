@@ -65,7 +65,7 @@ void CJumpState::update(CPlayer& player, double deltaTime){
 	//CAudio::getInstance()->PlaySoundW(m_Sound);
 	double deltaX = 0;
 
-	if (player.m_IsAutoJump) {
+	if (player.m_IsAutoJump && player.getStateInt() != PLAYERSTATES::DIE) {
 		m_IsMoveX = true;
 	}
 

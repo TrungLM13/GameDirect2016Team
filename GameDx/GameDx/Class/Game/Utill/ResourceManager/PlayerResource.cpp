@@ -68,7 +68,7 @@ wchar_t* CPlayerResource::getImage(int tag, int state) {
 		case PLAYERSTATES::JUMP:
 			return L"Resource//Image//Game//Sprites//Mario//BigFireMario//bigfiremario_jum.png";
 		case PLAYERSTATES::CLIMB:
-			return L"Resource//Image//Game//Sprites//Mario//BigMario//bigmario_ducot.png";
+			return L"Resource//Image//Game//Sprites//Mario//BigFireMario//mario_white_climb.png";
 		case PLAYERSTATES::DIE:
 			return L"Resource//Image//Game//Sprites//Mario//SmallMario//smallmario_die.png";
 		case PLAYERSTATES::STAND_SHOOT:
