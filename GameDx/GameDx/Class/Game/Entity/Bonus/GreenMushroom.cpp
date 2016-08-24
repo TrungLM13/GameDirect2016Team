@@ -95,6 +95,7 @@ void CGreenMushroom::updateEntity(float deltaTime)
 
 		if (CCollision::CheckCollision(this->getBounding(), *listRect.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
 		{
+			this->m_Position.y = listRect.at(i)->getY() + this->m_Bounding->getHeight() / 2;
 			this->m_Velocity.x = VEL_DEFAULT_X + REDMUSHROOM_VELOCITY_MAX;
 			this->m_Velocity.y = VEL_DEFAULT_Y;
 		}

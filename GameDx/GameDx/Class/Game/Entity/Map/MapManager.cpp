@@ -212,11 +212,7 @@ bool CMapManager::loadEntityInMap()
 			m_listBackground.push_back(new CTiless(positionEntity, TileStyle::TOF_BRICK_TILE));
 
 		if (type == TODI::TODI_RECTANGLE) {
-			if (this->getCurrentMapINT() == MAP_NUM::MAP_1)
-				//m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x, size.y));
-				m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x - 8, size.y));
-			else if (this->getCurrentMapINT() == MAP_NUM::MAP_2)
-				m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 8, size.x - 8, size.y));
+				m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x, size.y));
 		}
 	}
 

@@ -251,6 +251,15 @@ void CPlayer::handleCollisionWithTile(float deltaTime) {
 				}
 
 				break;
+
+			case COLDIRECTION::COLDIRECTION_BOTTOM:
+				this->m_Position.y = listRect.at(i)->getY() - listRect.at(i)->getHeight() - this->getBounding().getHeight() / 2;
+				if (this->m_Velocity.y >= 0)
+				{
+					//this->m_Velocity.y = CHANGE_DIRECTION(this->m_Velocity.y);
+					this->m_Velocity.y = VEL_PLAYER_Y_MIN;
+				}
+				break;
 			case COLDIRECTION::COLDIRECTION_LEFT:
 				if (this->m_Direction.at(DIRECTIONINDEX::DIRECTION_X) == DIRECTION::DIRECTION_RIGHT) {
 					m_Position.x = listRect.at(i)->getX() - this->getBounding().getWidth() / 2;
@@ -477,20 +486,20 @@ void CPlayer::handleCollisionWithEnermy(CObjectss* enermyEntity, float deltaTime
 			CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_RIGHT ||
 			CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_BOTTOM)
 		{
-			if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
-				m_Velocity.y = VEL_DEFAULT_Y;
-				this->m_PlayerState->exitCurrentState(*this, new CDieState());
-				this->m_PlayerState->enter(*this);
-			}
-			if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
-			{
-				//undying but small and exists in 5s
-				this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
-				this->loadSprite();
-				this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
-			}
+			//if (this->m_PlayerTag == PLAYERTAGS::SMALL) {
+			//	m_Velocity.y = VEL_DEFAULT_Y;
+			//	this->m_PlayerState->exitCurrentState(*this, new CDieState());
+			//	this->m_PlayerState->enter(*this);
+			//}
+			//if (this->m_PlayerTag == PLAYERTAGS::BIG || this->m_PlayerTag == PLAYERTAGS::FIRE)
+			//{
+			//	//undying but small and exists in 5s
+			//	this->m_PlayerTag = PLAYERTAGS::SMALL_UNDYING;
+			//	this->loadSprite();
+			//	this->m_UndyingTime = SMALL_PLAYER_UNDYING_TIME;
+			//}
 
-			m_IsAutoJump = false;
+			//m_IsAutoJump = false;
 		}
 		else if (CCollision::CheckCollision(this, enermyEntity) == COLDIRECTION::COLDIRECTION_TOP)
 		{

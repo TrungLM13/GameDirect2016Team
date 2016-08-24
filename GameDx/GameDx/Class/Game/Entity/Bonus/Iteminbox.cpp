@@ -113,27 +113,31 @@ void CIteminbox::updateEntity(float deltaTime)
 			}
 		}
 		if (getCollisionHandle(this)) {
-			for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); i++)
+
+			vector<CBox2D*> listRect = CMapManager::getInstance()->getListRect();
+			for (int i = 0; i < listRect.size(); i++)
 			{
 				this->getBounding().setVelocity(this->getVelocity());
 
-				if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+				if (CCollision::CheckCollision(this->getBounding(), *listRect.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
 				{
-					this->m_Position.y = CMapManager::getInstance()->getListRect().at(i)->getY() + this->m_Bounding->getHeight() / 2;
+					this->m_Position.y = listRect.at(i)->getY() + this->m_Bounding->getHeight() / 2;
 					this->m_Velocity.y = VEL_DEFAULT_Y;
 				}
-				else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_LEFT) {
+				else if (CCollision::CheckCollision(this->getBounding(), *listRect.at(i)) == COLDIRECTION::COLDIRECTION_LEFT) {
 					// Change direction 
 					if (m_Velocity.x >= 0)
 						this->m_Velocity.x = -(this->m_Velocity.x = VEL_DEFAULT_X + REDMUSHROOM_VELOCITY_MAX);
 				}
-				else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_NONE)
+				else if (CCollision::CheckCollision(this->getBounding(), *listRect.at(i)) == COLDIRECTION::COLDIRECTION_NONE)
 				{
 					/*if (this->getVelocity().x != VEL_DEFAULT_X &&
 						IsCollision(this, CMapManager::getInstance()->getListBonus()) == false)
 						this->m_Velocity.y = 0;*/
 				}
 			}
+
+			listRect.clear();
 		}
 
 		this->m_Position = vector3d(this->m_Position.x + this->m_Velocity.x*deltaTime / 250, this->m_Position.y + (this->m_Velocity.y + GRAVITATION) *deltaTime / 100, 0);
