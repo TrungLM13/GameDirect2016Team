@@ -26,5 +26,7 @@ public:
 protected:
 	vector2d				m_Acceleration;
 	int						m_Type;
+	float					ELEVATOR_POSITION_Y_MIN;
+	float					ELEVATOR_POSITION_Y_MAX;
 };
 #endif

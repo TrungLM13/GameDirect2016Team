@@ -26,7 +26,7 @@ wchar_t* CTileResource::getImage(int tag, int state) {
 	case TYPEOFTILE::TOF_CEMENT_BARRIER_RED:
 		return L"Resource//Image//Game//Tile//map-1//flag_pole_tail.png";
 	case TYPEOFTILE::TOF_CEMENT_LANE_BLE:
-		return L"Resource//Image//Game//Tile//map-2//chan_cot_co_xanh.png";
+		return L"Resource//Image//Game//Tile//map-2//xi_mang_xanh_1.png";
 	case TYPEOFTILE::TOF_CEMENT_LANE_RED:
 		return L"Resource//Image//Game//Tile//map-1//xi_mang_1.png";
 	case TYPEOFTILE::TOF_CEMENT_PIPE:

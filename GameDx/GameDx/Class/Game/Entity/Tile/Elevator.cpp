@@ -26,6 +26,9 @@ Elevator::Elevator(vector2d pos, ELEVATOR_STATE ElevatorState)
 	this->m_Type		= ElevatorState;
 
 	this->initEntity();
+	
+	this->ELEVATOR_POSITION_Y_MAX = pos.y + 2*this->m_listSprite.at(0)->getFrameInfo().Width;
+	this->ELEVATOR_POSITION_Y_MIN = pos.y - this->m_listSprite.at(0)->getFrameInfo().Width;
 
 }
 

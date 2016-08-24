@@ -18,7 +18,6 @@ CCoin::CCoin(vector2d newPosition)
 
 	m_State			= 0;
 
-	this->getBounding();
 	this->initEntity();
 }
 
@@ -42,8 +41,12 @@ bool CCoin::loadSprite()
 
 bool CCoin::initEntity()
 {
-	this->m_ResouceImage = new CBonusResource();
+	this->m_ResouceImage	= new CBonusResource();
 	this->loadSprite();
+
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->getBounding();
+	
 	return true;
 }
 
