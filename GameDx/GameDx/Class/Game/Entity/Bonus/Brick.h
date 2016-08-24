@@ -28,15 +28,14 @@ public:
 	void setVelocity(vector2d velocity);
 
 private:
-	BRICK_TYPE m_BrickType;
-	GIFTBOX_BRICK_EVENT m_BrickEvent;
-	BRICK_STATE m_BrickState;
-	CStar* m_Star;
-	CCoinInBox* m_Coin;
-	CGreenMushroom* m_GreenMushRoom;
-	vector<CBrickMini*>  m_BrickMini;
-	float m_CountCoin;
-	int map;
-	vector3d PrePos;
+	BRICK_TYPE				m_BrickType;
+	GIFTBOX_BRICK_EVENT		m_BrickEvent;
+	CStar*					m_Star;
+	CCoinInBox*				m_Coin;
+	CGreenMushroom*			m_GreenMushRoom;
+	vector<CBrickMini*>		m_BrickMini;
+	float					m_CountCoin;
+	int						map;
+	vector3d				PrePos;
 };
 #endif

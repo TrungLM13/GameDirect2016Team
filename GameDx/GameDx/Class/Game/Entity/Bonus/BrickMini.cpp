@@ -13,18 +13,17 @@ CBrickMini::CBrickMini()
 
 CBrickMini::CBrickMini(int map, vector3d position, BRICKMINI_TYPE type)
 {
-	this->map = map;
-	this->m_ResouceImage = new CBonusResource(map);
+	this->map				= CMapManager::getInstance()->getCurrentMapINT();;
+	this->m_ResouceImage	= new CBonusResource(this->map);
 
-	m_Position.x = position.x;
-	m_Position.y = position.y;
+	m_Position.x			= position.x;
+	m_Position.y			= position.y;
+	m_State					= type;
 
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->m_Velocity		= vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y);
 
-	this->m_Velocity = vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y);
-
-	m_BrickMiniType = type;
-
+	this->getBounding();
 	this->initEntity();
 }
 
@@ -56,22 +55,22 @@ void CBrickMini::updateEntity(CKeyBoard* device)
 
 void CBrickMini::updateEntity(float deltaTime)
 {
-	if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_LEFT_UP)
+	if (this->m_State == BRICKMINI_TYPE::BRICKMINI_LEFT_UP)
 	{
 		this->m_Position.x += BRICKMINI_UP_VELOCITY * cos(PI / 3);
 		this->m_Position.y += (BRICKMINI_UP_VELOCITY * sin(PI / 3) + GRAVITATION) * deltaTime / 70;
 	}
-	else if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN)
+	else if (this->m_State == BRICKMINI_TYPE::BRICKMINI_LEFT_DOWN)
 	{
 		this->m_Position.x += BRICKMINI_DOWN_VELOCITY * cos(7 * PI / 18);
 		this->m_Position.y += (BRICKMINI_DOWN_VELOCITY * sin(7 * PI / 18) + GRAVITATION) * deltaTime / 70;
 	}
-	else if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_RIGHT_UP)
+	else if (this->m_State == BRICKMINI_TYPE::BRICKMINI_RIGHT_UP)
 	{
 		this->m_Position.x += BRICKMINI_UP_VELOCITY * cos(2 * PI / 3);
 		this->m_Position.y += (BRICKMINI_UP_VELOCITY * sin(2 * PI / 3) + GRAVITATION)* deltaTime / 70;
 	}
-	else if (this->m_BrickMiniType == BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN)
+	else if (this->m_State == BRICKMINI_TYPE::BRICKMINI_RIGHT_DOWN)
 	{
 		this->m_Position.x += BRICKMINI_DOWN_VELOCITY * cos(11 * PI / 18);
 		this->m_Position.y += (BRICKMINI_DOWN_VELOCITY * sin(11 * PI / 18) + GRAVITATION)* deltaTime / 70;
@@ -87,7 +86,7 @@ void CBrickMini::updateEntity(float deltaTime)
 
 void CBrickMini::drawEntity()
 {
-	this->m_listSprite.at(this->m_BrickMiniType)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	this->m_listSprite.at(this->m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CBrickMini::updateEntity(RECT* camera)

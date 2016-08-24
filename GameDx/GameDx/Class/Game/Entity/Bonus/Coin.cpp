@@ -19,6 +19,16 @@ CCoin::CCoin(vector2d pos)
 	this->initEntity();
 }
 
+CCoin::CCoin(vector2d newPosition)
+{
+	m_Position.x	= newPosition.x;
+	m_Position.y	= newPosition.y;
+
+	m_State			= 0;
+	this->initEntity();
+}
+
+
 CCoin:: ~CCoin()
 {
 	SAFE_RELEASE(this->m_ResouceImage);

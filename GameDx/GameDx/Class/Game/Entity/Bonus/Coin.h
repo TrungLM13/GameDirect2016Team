@@ -7,7 +7,10 @@ class CCoin : public CStaticEntity
 {
 public:
 	CCoin();
-	CCoin(vector2d pos);
+
+	CCoin(LPDIRECT3DDEVICE9);
+	CCoin(vector2d newPosition);
+
 	~CCoin();
 	virtual	bool			loadSprite()											override;
 	virtual	bool			initEntity()											override;

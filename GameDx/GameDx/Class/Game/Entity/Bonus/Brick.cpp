@@ -5,6 +5,7 @@
 #include "Class\Game\Entity\Bonus\CoinInBox.h"
 #include "Class\Game\Entity\Map\MapManager.h"
 #include "Class\Game\Utill\ResourceManager\BonusResource.h"
+#include "Class\Game\Scene\PopupInfo.h"
 
 inline int getIndex(vector<CBaseEntity*> list, CBaseEntity* entity) {
 	for (int i = 0; i < list.size(); ++i) {
@@ -22,19 +23,16 @@ CBrick::CBrick()
 
 CBrick::CBrick(int map, vector2d position, BRICK_TYPE type)
 {
-	this->map = map;
-	//	this->m_ResouceImage->m_TypeObject = map;
-	this->PrePos = vector3d(position.x, position.y, 0);
+	this->map			= CMapManager::getInstance()->getCurrentMapINT();
+	this->PrePos		= vector3d(position.x, position.y, 0);
 
-	m_Position.x = position.x;
-	m_Position.y = position.y;
+	this->m_Position.x	= position.x;
+	this->m_Position.y	= position.y;
 
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
+	this->m_Bounding	= new CBox2D(0, 0, 0, 0);
 
-	this->m_Velocity = vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y);
-
-	m_BrickType = type;
-	this->m_ResouceImage = new CBonusResource(map);
+	this->m_Velocity	= vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y);
+	m_BrickType			= type;
 
 	this->initEntity();
 }
@@ -72,12 +70,14 @@ bool CBrick::loadSprite()
 
 bool CBrick::initEntity()
 {
-	m_Star = nullptr;
-	m_Coin = nullptr;
-	m_GreenMushRoom = nullptr;
-	m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE; // When Brick doesnt move
-	m_BrickState = BRICK_STATE::BRICK_NORMAL;
-	m_CountCoin = COIN_NUM_MAX;
+	m_Star					= nullptr;
+	m_Coin					= nullptr;
+	m_GreenMushRoom			= nullptr;
+	m_BrickEvent			= GIFTBOX_BRICK_EVENT::EVENT_NONE; // When Brick doesnt move
+	m_State					= BRICK_STATE::BRICK_NORMAL;
+	m_CountCoin				= COIN_NUM_MAX;
+	m_ResouceImage			= new CBonusResource(map);
+	this->getBounding();
 	this->loadSprite();
 	return true;
 }
@@ -92,25 +92,25 @@ void CBrick::updateEntity(float deltaTime)
 	switch (CCollision::CheckCollision(CPlayer::getInstance(), this))
 	{
 	case COLDIRECTION::COLDIRECTION_BOTTOM:
-		if (m_BrickState == BRICK_STATE::BRICK_NORMAL) {
+		if (m_State == BRICK_STATE::BRICK_NORMAL) {
 			m_Velocity.y = VEL_DEFAULT_Y + BRICK_VELOCITY_MAX_Y;
 			if (m_BrickType == BRICK_TYPE::BRICK_STAR ||
 				m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM) {
-				m_BrickState = BRICK_STATE::BRICK_BOX;
-				m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING;
+				m_State			= BRICK_STATE::BRICK_BOX;
+				m_BrickEvent	= GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING;
 			}
 			else if (m_BrickType == BRICK_TYPE::BRICK_COIN) {
 				m_CountCoin--;
 				if (m_CountCoin >= 7) {
-					m_BrickState = BRICK_STATE::BRICK_NORMAL;
+					m_State		= BRICK_STATE::BRICK_NORMAL;
 				}
 				else {
-					m_BrickState = BRICK_STATE::BRICK_BOX;
+					m_State		= BRICK_STATE::BRICK_BOX;
 				}
 
 				m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING;
 			}
-			else if (m_BrickType == BRICK_TYPE::BRICK_NONE && this->m_BrickState == BRICK_STATE::BRICK_NORMAL){
+			else if (m_BrickType == BRICK_TYPE::BRICK_NONE && this->m_State == BRICK_STATE::BRICK_NORMAL){
 				if (CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::BIG ||
 					CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::FIRE ||
 					CPlayer::getInstance()->getPlayerTag() == PLAYERTAGS::UNDYING)
@@ -139,7 +139,7 @@ void CBrick::updateEntity(float deltaTime)
 
 			}
 		}
-		else if (m_BrickState == BRICK_STATE::BRICK_BOX) {
+		else if (m_State == BRICK_STATE::BRICK_BOX) {
 			m_Velocity.y = VEL_DEFAULT_Y;
 		}
 		break;
@@ -166,9 +166,9 @@ void CBrick::updateEntity(float deltaTime)
 	if (m_Position.y <= this->PrePos.y) {
 		m_Position.y = this->PrePos.y;
 
-		if ((m_BrickType == BRICK_TYPE::BRICK_STAR && m_BrickState == BRICK_STATE::BRICK_BOX) ||
+		if ((m_BrickType == BRICK_TYPE::BRICK_STAR && m_State == BRICK_STATE::BRICK_BOX) ||
 			(m_BrickType == BRICK_TYPE::BRICK_COIN) ||
-			(m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM && m_BrickState == BRICK_STATE::BRICK_BOX))
+			(m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM && m_State == BRICK_STATE::BRICK_BOX))
 		{
 			//m_Position.y = this->PrePos.y;
 			if (m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING)
@@ -179,17 +179,17 @@ void CBrick::updateEntity(float deltaTime)
 	if (m_BrickEvent == GIFTBOX_BRICK_EVENT::EVENT_DONE){
 		if (m_BrickType == BRICK_TYPE::BRICK_STAR)
 		{
-			m_Star = new CStar(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
+			m_Star			= new CStar(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
 			m_Star->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 2));
 			CMapManager::getInstance()->pushInFirst(m_Star);
-			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
-			m_BrickType = BRICK_TYPE::BRICK_NONE;
+			m_BrickEvent	= GIFTBOX_BRICK_EVENT::EVENT_NONE;
+			m_BrickType		= BRICK_TYPE::BRICK_NONE;
 		}
 		else if (m_BrickType == BRICK_TYPE::BRICK_COIN) {
-			m_Coin = new CCoinInBox(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
+			m_Coin			= new CCoinInBox(vector3d(this->m_Position.x, this->PrePos.y + ADD_POS_Y, 0));
 			m_Coin->setVelocity(vector2d(VEL_DEFAULT_X, VEL_DEFAULT_Y + 5));
 			CMapManager::getInstance()->pushInFirst(m_Coin);
-			m_BrickEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
+			m_BrickEvent	= GIFTBOX_BRICK_EVENT::EVENT_NONE;
 		}
 		else if (this->m_BrickType == BRICK_TYPE::BRICK_GREENMUSHROOM)
 		{
@@ -206,7 +206,7 @@ void CBrick::updateEntity(float deltaTime)
 
 void CBrick::drawEntity()
 {
-	this->m_listSprite.at(this->m_BrickState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	this->m_listSprite.at(this->m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CBrick::updateEntity(RECT* camera)
