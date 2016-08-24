@@ -3,19 +3,11 @@
 #include "Class\Mathematics\SweptAABB.h"
 #include "Class\Mathematics\Collision.h"
 #include "Class\Game\Utill\ResourceManager\BonusResource.h"
-#include"Class\Game\Entity\Map\MapManager.h"
+#include "Class\Game\Entity\Map\MapManager.h"
 #include "Class\Game\Scene\PopupInfo.h"
 
 CCoin::CCoin()
 {
-	this->initEntity();
-}
-
-CCoin::CCoin(vector2d pos)
-{
-	this->m_Position.x = pos.x;
-	this->m_Position.y = pos.y;
-
 	this->initEntity();
 }
 
@@ -25,6 +17,8 @@ CCoin::CCoin(vector2d newPosition)
 	m_Position.y	= newPosition.y;
 
 	m_State			= 0;
+
+	this->getBounding();
 	this->initEntity();
 }
 
@@ -50,7 +44,6 @@ bool CCoin::initEntity()
 {
 	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 	return true;
 }
 

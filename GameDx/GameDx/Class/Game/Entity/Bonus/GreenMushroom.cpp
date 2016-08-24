@@ -20,18 +20,6 @@ inline bool IsCollision_GreenMushRoom(CMovable* entity, vector<CBaseEntity*> lis
 	return false;
 }
 
-CGreenMushroom::CGreenMushroom()
-{
-	this->initEntity();
-}
-
-CGreenMushroom::CGreenMushroom(vector3d pos)
-{
-	this->m_Position = pos;
-	this->initEntity();
-	this->m_Pos_y_Max = this->m_Position.y + this->m_listSprite.at(0)->getFrameInfo().Height - ADD_POS_Y;
-}
-
 CGreenMushroom:: ~CGreenMushroom()
 {
 	SAFE_RELEASE(this->m_ResouceImage);
@@ -43,6 +31,19 @@ CGreenMushroom:: ~CGreenMushroom()
 	}
 }
 
+CGreenMushroom::CGreenMushroom()
+{
+	this->initEntity();
+}
+
+CGreenMushroom::CGreenMushroom(vector3d pos)
+{
+	this->m_Position		= pos;
+	this->initEntity();
+	this->m_Pos_y_Max		= this->m_Position.y + this->m_listSprite.at(0)->getFrameInfo().Height - ADD_POS_Y;
+}
+
+
 bool CGreenMushroom::loadSprite()
 {
 	this->m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TAGNODE::GREEN_MUSHROOM), 1, 1, 1, 0));
@@ -51,11 +52,16 @@ bool CGreenMushroom::loadSprite()
 
 bool CGreenMushroom::initEntity()
 {
-	this->m_TagNode = "GreenMushroom";
-	this->m_ResouceImage = new CBonusResource();
+	this->m_TagNode			= "GreenMushroom";
+	this->m_ResouceImage	= new CBonusResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(9.8, 9.8);
+
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->m_State			= 0;
+	this->m_Velocity		= vector2d(9.8, 9.8);
+
+	this->getBounding();
+
 	return true;
 }
 
@@ -66,6 +72,7 @@ void CGreenMushroom::updateEntity(CKeyBoard* device)
 
 void CGreenMushroom::updateEntity(float deltaTime)
 {
+
 	if (this->m_Position.y >= m_Pos_y_Max)
 	{
 		this->m_Velocity.y = VEL_DEFAULT_Y;
@@ -79,20 +86,23 @@ void CGreenMushroom::updateEntity(float deltaTime)
 			this->m_Velocity.y = 0;
 		}
 	}
-	for (int i = 0; i < CMapManager::getInstance()->getListRect().size(); i++)
+
+	vector<CBox2D*> listRect = CMapManager::getInstance()->getListRect();
+
+	for (int i = 0; i < listRect.size(); i++)
 	{
 		this->getBounding().setVelocity(this->getVelocity());
 
-		if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_TOP)
+		if (CCollision::CheckCollision(this->getBounding(), *listRect.at(i)) == COLDIRECTION::COLDIRECTION_TOP)
 		{
 			this->m_Velocity.x = VEL_DEFAULT_X + REDMUSHROOM_VELOCITY_MAX;
 			this->m_Velocity.y = VEL_DEFAULT_Y;
 		}
-		else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_LEFT) {
+		else if (CCollision::CheckCollision(this->getBounding(), *listRect.at(i)) == COLDIRECTION::COLDIRECTION_LEFT) {
 			// Change direction 
 			this->m_Velocity.x = CHANGE_DIRECTION(this->m_Velocity.x);
 		}
-		else if (CCollision::CheckCollision(this->getBounding(), *CMapManager::getInstance()->getListRect().at(i)) == COLDIRECTION::COLDIRECTION_NONE)
+		else if (CCollision::CheckCollision(this->getBounding(), *listRect.at(i)) == COLDIRECTION::COLDIRECTION_NONE)
 		{
 			if (this->getVelocity().x != VEL_DEFAULT_X &&
 				IsCollision_GreenMushRoom(this, CMapManager::getInstance()->getListBonus()) == false)

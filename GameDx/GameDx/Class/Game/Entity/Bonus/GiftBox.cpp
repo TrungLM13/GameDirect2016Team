@@ -55,18 +55,17 @@ bool CGiftBox::initEntity()
 	m_Coin = nullptr;
 
 	this->m_GiftBoxEvent = GIFTBOX_BRICK_EVENT::EVENT_NONE;
-	this->m_GiftBoxState = GIFTBOX_STATE::GIFTBOX_NORMAL;
+	this->m_State = GIFTBOX_STATE::GIFTBOX_NORMAL;
 
-	this->m_ResouceImage = new CBonusResource(MAP_NUM::MAP_1);
+	this->m_ResouceImage = new CBonusResource();
 	this->loadSprite();
+	this->getBounding();
 
 	return true;
 }
 
 void CGiftBox::updateEntity(CKeyBoard* device)
 {
-	// Map2
-	this->m_ResouceImage->m_TypeObject = MAP_NUM::MAP_2;
 }
 
 void CGiftBox::updateEntity(float deltaTime)
@@ -74,16 +73,12 @@ void CGiftBox::updateEntity(float deltaTime)
 	switch (CCollision::CheckCollision(CPlayer::getInstance(), this))
 	{
 	case COLDIRECTION::COLDIRECTION_BOTTOM:
-		if (this->m_GiftBoxState == GIFTBOX_STATE::GIFTBOX_NORMAL)
+		if (this->m_State == GIFTBOX_STATE::GIFTBOX_NORMAL)
 		{
 			m_Velocity.y = VEL_DEFAULT_Y + GIFTBOX_VELOCITY_MAX_Y;
 
 			this->m_GiftBoxEvent = GIFTBOX_BRICK_EVENT::EVENT_PROCCESSING;
-			this->m_GiftBoxState = GIFTBOX_STATE::GIFTBOX;
-		}
-		else if (this->m_GiftBoxState == GIFTBOX_STATE::GIFTBOX)
-		{
-
+			this->m_State = GIFTBOX_STATE::GIFTBOX;
 		}
 		break;
 	case COLDIRECTION::COLDIRECTION_TOP:
@@ -111,7 +106,7 @@ void CGiftBox::updateEntity(float deltaTime)
 	m_Position = vector3d(m_Position.x, m_Position.y + (m_Velocity.y + SIGN(m_Velocity.y) * GRAVITATION)* deltaTime / 100, 0);
 
 	if (this->m_Position.y <= GIFTBOX_PRE_POSITION_Y &&
-		this->m_GiftBoxState == GIFTBOX_STATE::GIFTBOX)
+		this->m_State == GIFTBOX_STATE::GIFTBOX)
 	{
 		this->m_Position.y = GIFTBOX_PRE_POSITION_Y;
 
@@ -146,7 +141,7 @@ void CGiftBox::updateEntity(float deltaTime)
 
 void CGiftBox::drawEntity()
 {
-	this->m_listSprite.at(this->m_GiftBoxState)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	this->m_listSprite.at(this->m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CGiftBox::updateEntity(RECT* camera)

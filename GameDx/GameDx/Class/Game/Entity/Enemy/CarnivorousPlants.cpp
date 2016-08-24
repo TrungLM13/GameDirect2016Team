@@ -6,6 +6,8 @@
 
 CCarnivorousPlants::CCarnivorousPlants()
 {
+	m_State				= CARNIVOROUS_PLANT_TYPE::GREEN_CARNIVOROUS_PLANT;
+
 	this->initEntity();
 }
 
@@ -13,7 +15,7 @@ CCarnivorousPlants::CCarnivorousPlants(vector2d pos, CARNIVOROUS_PLANT_TYPE type
 {
 	this->m_Position.x	= pos.x;
 	this->m_Position.y	= pos.y;
-	this->m_Type		= type;
+	this->m_State		= type;
 
 	this->initEntity();
 }
@@ -39,13 +41,15 @@ bool CCarnivorousPlants::loadSprite()
 
 bool CCarnivorousPlants::initEntity()
 {
-	m_Velocity = vector2d(0, -2.5);
+	m_Velocity				= vector2d(0, -2.5);
 
-	this->m_ResouceImage = new CEnermyResource();
+	this->m_ResouceImage	= new CEnermyResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	m_TagNode = "CarnivorousPlant";
-	m_Direction = -1;
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->getBounding();
+
+	this->m_TagNode			= "CarnivorousPlant";
+	this->m_Direction		= DIRECTION::DIRECTION_DOWN;
 	return true;
 }
 
@@ -76,7 +80,7 @@ void CCarnivorousPlants::updateEntity(float deltaTime)
 }
 void CCarnivorousPlants::drawEntity()
 {
-	this->m_listSprite.at(this->m_Type)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
+	this->m_listSprite.at(this->m_State)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Position.x), SIGN(m_Position.y)), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
 }
 
 void CCarnivorousPlants::updateEntity(RECT* camera)

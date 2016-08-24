@@ -32,7 +32,6 @@ inline bool getCollisionHandle(CMovable* entity) {
 	return false;
 }
 
-
 CIteminbox::CIteminbox()
 {
 	this->initEntity();
@@ -40,9 +39,9 @@ CIteminbox::CIteminbox()
 
 CIteminbox::CIteminbox(vector2d pos)
 {
+	this->m_Position.x		= pos.x;
+	this->m_Position.y		= pos.y;
 	this->initEntity();
-	this->m_Position.x = pos.x;
-	this->m_Position.y = pos.y;
 
 	this->ITEMINBOX_POSITION_Y_MAX = pos.y + this->m_listSprite.at(this->m_itemtype)->getFrameInfo().Height - ADD_POS_Y;
 }
@@ -70,9 +69,12 @@ bool CIteminbox::loadSprite()
 bool CIteminbox::initEntity()
 {
 	chkShowItem(CPlayer::getInstance());
-	this->m_ResouceImage = new CBonusResource();
+	this->m_ResouceImage		= new CBonusResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
+
+	this->m_Bounding			= new CBox2D(0, 0, 0, 0);
+	this->m_State				= 0;
+	this->getBounding();
 
 	/*if (this->m_itemtype == ITEMINBOX_TYPE::REDMUSHROOM)
 	{

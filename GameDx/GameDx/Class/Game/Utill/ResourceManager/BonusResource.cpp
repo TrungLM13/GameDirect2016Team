@@ -38,6 +38,7 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_xanh_0_cham_hoi.png";
 			}
 		}
+		break;
 	case TAGNODE::RED_MUSHROOM:
 		return L"Resource//Image//Game//Sprites//Mario//Bonus//nam_do_nho.png";
 	case TAGNODE::GREEN_MUSHROOM:
@@ -47,15 +48,16 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 	case TAGNODE::COININBOX:
 		return L"Resource//Image//Game//Sprites//Mario//Bonus//coin_xoay.png";
 	case TAGNODE::GIFT_BOX:
-			switch (state)
-			{
-			case GIFTBOX_STATE::GIFTBOX_NORMAL:
-				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_cham_hoi.png";
-			case GIFTBOX_STATE::GIFTBOX:
-				return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_mat_cham_hoi.png";
-			default:
-				break;
-			}
+		switch (state)
+		{
+		case GIFTBOX_STATE::GIFTBOX_NORMAL:
+			return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_cham_hoi.png";
+		case GIFTBOX_STATE::GIFTBOX:
+			return L"Resource//Image//Game//Sprites//Mario//Bonus//gach_mat_cham_hoi.png";
+		default:
+			break;
+		}
+		break;
 	case TAGNODE::FLOWER:
 		return L"Resource//Image//Game//Sprites//Mario//Bonus//hoa.png";
 	case TAGNODE::BRICKMINI:
@@ -82,6 +84,7 @@ wchar_t* CBonusResource::getImage(int tag, int state) {
 		default:
 			break;
 		}
+		break;
 	default:
 		break;
 	}

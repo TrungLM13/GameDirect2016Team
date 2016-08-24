@@ -8,7 +8,6 @@ CTiless::CTiless()
 	m_Bounding			= new CBox2D(m_Position.x, m_Position.y, 0, 0);
 
 	this->initEntity();
-	this->getBounding();
 }
 
 CTiless::CTiless(vector2d pos, int type)
@@ -17,10 +16,7 @@ CTiless::CTiless(vector2d pos, int type)
 	m_Position.y		= pos.y;
 	m_ID				= type;
 
-	m_Bounding			= new CBox2D();
-
 	this->initEntity();
-	this->getBounding();
 
 }
 CTiless::~CTiless()
@@ -122,8 +118,12 @@ bool	CTiless::loadSprite()
 bool	CTiless::initEntity()
 {
 	this->m_ResouceImage = new CTileResource();
-
 	this->loadSprite();
+
+	m_State = 0;
+	m_Bounding = new CBox2D();
+
+	this->getBounding();
 	return true;
 }
 

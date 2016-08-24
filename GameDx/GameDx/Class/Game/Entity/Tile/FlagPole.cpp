@@ -12,8 +12,8 @@ CFlagPole::CFlagPole()
 
 CFlagPole::CFlagPole(vector2d pos)
 {
-	this->m_Position.x = pos.x;
-	this->m_Position.y = pos.y - 16;
+	this->m_Position.x		= pos.x;
+	this->m_Position.y		= pos.y - 16;
 	this->initEntity();
 }
 
@@ -30,10 +30,15 @@ bool CFlagPole::loadSprite()
 
 bool CFlagPole::initEntity()
 {
-	this->m_ResouceImage = new CTileResource();
+	this->m_TagNode			= "FlagPole";
+
+	this->m_State			= 0;
+	this->m_ResouceImage	= new CTileResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	m_TagNode = "FlagPole";
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+
+	this->getBounding();
+
 	return true;
 }
 

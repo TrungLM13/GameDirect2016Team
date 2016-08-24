@@ -24,11 +24,11 @@ bool CCastle::loadSprite()
 
 bool CCastle::initEntity()
 {
-	m_Position = vector3d(180, 110, 0);
-	this->m_ResouceImage = new CTileResource();
+	m_Position				= vector3d(180, 110, 0);
+	this->m_ResouceImage	= new CTileResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	m_TagNode		= "Castle";
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	m_TagNode				= "Castle";
 	return true;
 }
 

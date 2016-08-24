@@ -70,7 +70,7 @@ bool CPlayer::initEntity()
 
 	m_UndyingTime = 0;
 	//m_Position = vector3d(50, 70, 0);
-	m_Position = vector3d(3100, 70, 0);
+	m_Position = vector3d(50, 70, 0);
 	m_PreJumpPos = vector3d(0, 0, 0);
 
 	m_State = PLAYERSTATES::STAND;

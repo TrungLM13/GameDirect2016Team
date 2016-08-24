@@ -7,7 +7,7 @@
 #define __ELEVATOR_H__
 
 
-class Elevator : public CMovable, public CSingleton<Elevator>
+class Elevator : public CMovable
 {
 public:
 	Elevator();
@@ -19,16 +19,12 @@ public:
 	virtual void			updateEntity(RECT* camera)								override;
 	virtual void			updateEntity(CKeyBoard *device)							override;
 	virtual void			drawEntity()											override;
-	virtual	vector3d		getPosition()											override;
 	virtual bool			loadSprite()											override;
 	virtual int				getTagNodeId()											override;
 	virtual int				getObjectType()											override;
 
-public:
-	void setPosition(vector3d position);
-	void setState(ELEVATOR_STATE state);
-	void setVelocity(vector2d velocity);
 protected:
 	vector2d				m_Acceleration;
+	int						m_Type;
 };
 #endif

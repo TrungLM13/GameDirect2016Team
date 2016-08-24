@@ -23,7 +23,7 @@ CBrick::CBrick()
 
 CBrick::CBrick(int map, vector2d position, BRICK_TYPE type)
 {
-	this->map			= CMapManager::getInstance()->getCurrentMapINT();
+	this->map			= map;
 	this->PrePos		= vector3d(position.x, position.y, 0);
 
 	this->m_Position.x	= position.x;

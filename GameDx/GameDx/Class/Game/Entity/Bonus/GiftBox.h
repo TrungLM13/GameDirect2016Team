@@ -20,7 +20,7 @@ public:
 	virtual int				getTagNodeId()									override;
 	virtual int				getObjectType()											override;
 public:
-	void  setPosition(vector3d);  
+	void  setPosition(vector3d);
 private:
 	GIFTBOX_TYPE			m_GiftBoxType;
 	GIFTBOX_BRICK_EVENT		m_GiftBoxEvent;

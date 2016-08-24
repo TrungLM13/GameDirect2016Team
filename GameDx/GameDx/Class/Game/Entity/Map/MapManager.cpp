@@ -164,8 +164,8 @@ bool CMapManager::loadEntityInMap()
 			m_listBonus.push_back(new Elevator(positionEntity,							ELEVATOR_STATE::DOWN));
 
 
-		/*if (type == TODI::TODI_MUSHROOM)
-			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));*/
+		if (type == TODI::TODI_MUSHROOM)
+			m_listEnemy.push_back(new CMushroom(positionEntity,							EnemyStyle::TOF_RED_MUSHROOM));
 		if (type == TODI::TODI_BLUE_CARNIVOROUSPLANTS)
 			m_listEnemy.push_back(new CCarnivorousPlants(positionEntity,				CARNIVOROUS_PLANT_TYPE::BLUE_CARNIVOROUS_PLANT));
 		if (type == TODI::TODI_GREEN_CARNIVOROUSPLANTS)

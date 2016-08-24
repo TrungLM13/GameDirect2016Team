@@ -29,10 +29,15 @@ bool CFlagPoleTail::loadSprite()
 
 bool CFlagPoleTail::initEntity()
 {
-	this->m_ResouceImage = new CTileResource();
+	this->m_TagNode				= "FlagPoleTail";
+	this->m_State				= 0;
+
+	this->m_ResouceImage		= new CTileResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	m_TagNode = "FlagPoleTail";
+
+	this->m_Bounding			= new CBox2D(0, 0, 0, 0);
+	this->getBounding();
+
 	return true;
 }
 

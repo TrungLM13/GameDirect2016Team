@@ -21,7 +21,6 @@ public:
 private:
 	int						m_Direction;
 	int						m_mapId;
-	CARNIVOROUS_PLANT_TYPE  m_Type;
 };
 
 #endif

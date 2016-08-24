@@ -13,10 +13,10 @@ CCoinInBox::CCoinInBox()
 
 CCoinInBox::CCoinInBox(vector3d pos)
 {
-	this->m_Position = pos;
+	this->m_Position	= pos;
 	this->initEntity();
-	this->m_Pos_y_Max = this->m_Position.y + 2* this->m_listSprite.at(0)->getFrameInfo().Height;
-	this->m_Pos_y_Min = this->m_Position.y + this->m_listSprite.at(0)->getFrameInfo().Height;
+	this->m_Pos_y_Max	= this->m_Position.y + 2* this->m_listSprite.at(0)->getFrameInfo().Height;
+	this->m_Pos_y_Min	= this->m_Position.y + this->m_listSprite.at(0)->getFrameInfo().Height;
 }
 
 CCoinInBox:: ~CCoinInBox()
@@ -39,12 +39,14 @@ bool CCoinInBox::loadSprite()
 
 bool CCoinInBox::initEntity()
 {
-	this->m_TagNode = "CoinInBox";
-	isDraw = true;
-	this->m_ResouceImage = new CBonusResource();
+	this->m_TagNode			= "CoinInBox";
+	this->m_ResouceImage	= new CBonusResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(0, 0);
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->m_State			= 0;
+	this->getBounding();
+	this->m_Velocity		= vector2d(0, 0);
+
 //	m_Sound = CAudio::getInstance()->LoadSound(L"Resource//Sound//smb_coin.wav");
 	return true;
 }

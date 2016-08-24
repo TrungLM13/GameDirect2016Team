@@ -13,8 +13,8 @@ CFlag::CFlag()
 
 CFlag::CFlag(vector2d pos)
 {
-	this->m_Position.x = pos.x;
-	this->m_Position.y = pos.y - 8;
+	this->m_Position.x	= pos.x;
+	this->m_Position.y	= pos.y - 8;
 	this->initEntity();
 }
 
@@ -31,11 +31,16 @@ bool CFlag::loadSprite()
 
 bool CFlag::initEntity()
 {
-	m_Velocity = vector2d(0, VEL_DEFAULT_Y);
-	this->m_ResouceImage = new CTileResource();
+	this->m_Velocity		= vector2d(0, VEL_DEFAULT_Y);
+	this->m_State			= 0;				// dont need state to implement logic
+
+	this->m_ResouceImage	= new CTileResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	m_TagNode = "Flag";
+
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->getBounding();
+	this->m_TagNode			= "Flag";
+
 	return true;
 }
 
@@ -46,11 +51,13 @@ void CFlag::updateEntity(CKeyBoard* device)
 
 void CFlag::updateEntity(float deltaTime)
 {
-	for (int i = 0; i < CMapManager::getInstance()->getListBonus().size(); ++i) {
-		if (CMapManager::getInstance()->getListBonus().at(i)->getTagNodeId() == TAGNODE::FLAG_POLE_TAIL){
-			if (CCollision::CheckCollision(this, CMapManager::getInstance()->getListBonus().at(i)) == COLDIRECTION::COLDIRECTION_TOP) {
+	vector<CBaseEntity*> listBonus = CMapManager::getInstance()->getListBonus();
+
+	for (int i = 0; i < listBonus.size(); ++i) {
+		if (listBonus.at(i)->getTagNodeId() == TAGNODE::FLAG_POLE_TAIL){
+			if (CCollision::CheckCollision(this, listBonus.at(i)) == COLDIRECTION::COLDIRECTION_TOP) {
 				m_IsEnable = true;
-				m_Position.y = CMapManager::getInstance()->getListBonus().at(i)->getPosition().y + this->getBounding().getHeight();
+				m_Position.y = listBonus.at(i)->getPosition().y + this->getBounding().getHeight();
 			}
 		}
 	}

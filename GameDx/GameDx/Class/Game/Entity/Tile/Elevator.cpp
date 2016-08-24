@@ -20,10 +20,10 @@ Elevator::~Elevator()
 
 Elevator::Elevator(vector2d pos, ELEVATOR_STATE ElevatorState)
 {
-	this->m_Position.x = pos.x;
-	this->m_Position.y = pos.y;
+	this->m_Position.x	= pos.x;
+	this->m_Position.y	= pos.y;
 
-	this->m_State = ElevatorState;
+	this->m_Type		= ElevatorState;
 
 	this->initEntity();
 
@@ -32,15 +32,16 @@ Elevator::Elevator(vector2d pos, ELEVATOR_STATE ElevatorState)
 bool Elevator::initEntity()
 {
 
-	m_TagNode = "Elevator";
+	this->m_TagNode			= "Elevator";
+	this->m_State			= 0;					// dont need state;
+	this->m_Velocity		= vector2d(ELEVATOR_VELOCITY_X, ELEVATOR_VELOCITY_Y);
 
-	m_Velocity = vector2d(ELEVATOR_VELOCITY_X, ELEVATOR_VELOCITY_Y);
-
-	this->m_ResouceImage = new CTileResource();
-
+	this->m_ResouceImage	= new CTileResource();
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
 
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->getBounding();
+	
 	return true;
 }
 
@@ -52,7 +53,7 @@ bool Elevator::loadSprite()
 
 void Elevator::updateEntity(float deltaTime)
 {
-	switch (m_State)
+	switch (m_Type)
 	{
 	case ELEVATOR_STATE::DOWN:
 		if (SIGN(this->m_Velocity.y) == DIRECTION::DIRECTION_UP)
@@ -108,23 +109,6 @@ void Elevator::updateEntity(CKeyBoard* input)
 void Elevator::drawEntity()
 {
 	m_listSprite.at(0)->Render(CCamera::setPositionEntity(m_Position), vector2d(SIGN(m_Velocity.x) * (-1), abs(m_Velocity.y / m_Velocity.y) * 1), 0, DRAWCENTER_MIDDLE_MIDDLE, true, 10);
-}
-
-void Elevator::setState(ELEVATOR_STATE state) {
-	m_State = state;
-}
-
-vector3d Elevator::getPosition()
-{
-	return m_Position;
-}
-
-void Elevator::setPosition(vector3d position) {
-	m_Position = position;
-}
-
-void Elevator::setVelocity(vector2d velocity) {
-	m_Velocity = velocity;
 }
 
 int	Elevator::getTagNodeId()

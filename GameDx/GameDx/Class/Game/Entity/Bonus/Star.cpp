@@ -51,13 +51,16 @@ bool CStar::loadSprite()
 
 bool CStar::initEntity()
 {
-	this->m_TagNode = "Star";
+	this->m_TagNode			= "Star";
 
-	this->m_ResouceImage = new CBonusResource();
+	this->m_ResouceImage	= new CBonusResource();
 
 	this->loadSprite();
-	this->m_Bounding = new CBox2D(0, 0, 0, 0);
-	this->m_Velocity = vector2d(0, 0);
+	this->m_Bounding		= new CBox2D(0, 0, 0, 0);
+	this->m_State			= 0;
+	this->getBounding();
+
+	this->m_Velocity		= vector2d(0, 0);
 	return true;
 }
 
