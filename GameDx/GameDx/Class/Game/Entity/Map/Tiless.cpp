@@ -108,6 +108,10 @@ bool	CTiless::loadSprite()
 
 	case TileStyle::TOF_MOUNTAIN_BIG:
 		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_MOUNTAIN_BIG)));
+		break;
+	case TileStyle::TOF_BRICK_TILE:
+		m_listSprite.push_back(new CSprite(this->m_ResouceImage->getImage(TYPEOFTILE::TOF_BRICK_TILE)));
+		break;
 	default:
 		return false;
 	}
@@ -161,5 +165,5 @@ int	CTiless::getTagNodeId() {
 }
 
 vector3d CTiless::getPosition() {
-	return vector3d(0, 0, 0);
+	return m_Position;
 }

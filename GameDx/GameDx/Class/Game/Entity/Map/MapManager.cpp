@@ -208,6 +208,8 @@ bool CMapManager::loadEntityInMap()
 		if (type == TODI::TODI_PIPE_BODY)
 			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_PIPE_BODY_DOWN));
 		
+		if (type == TODI::TODI_BRICK_TILE)
+			m_listBackground.push_back(new CTiless(positionEntity,						TileStyle::TOF_BRICK_TILE));
 
 		if (type == TODI::TODI_RECTANGLE)
 			m_listRectangeForCollision.push_back(new CBox2D(positionEntity.x, positionEntity.y - 16, size.x, size.y));

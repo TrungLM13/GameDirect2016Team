@@ -73,6 +73,8 @@ wchar_t* CTileResource::getImage(int tag, int state) {
 		return L"Resource//Image//Game//Sprites//Items//flag_pole.png";
 	case TYPEOFTILE::TOF_FLAG_POLE_TAIL:
 		return L"Resource//Image//Game//Sprites//Items//flag_pole_tail.png";
+	case TYPEOFTILE::TOF_BRICK_TILE:
+		return L"Resource//Image//Game//Tile//map-2//gach_xanh.png";
 	default:
 		return nullptr;
 		break;
